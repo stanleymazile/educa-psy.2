@@ -2,16 +2,18 @@ name: Deploy to Firebase Hosting
 on:
   push:
     branches:
-      - main # Vérifiez si votre branche s'appelle main ou master
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm ci && npm run build # À supprimer si vous n'avez pas de build (HTML pur)
+      
+      # On enlève les commandes npm si vous n'avez pas de build complexe
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_EDUCA_PSY }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EDUCA_PSY }}'
           channelId: live
           projectId: educa-psy
+
