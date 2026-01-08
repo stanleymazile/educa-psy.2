@@ -197,27 +197,26 @@ body { top: 0px !important; }
 /* Vérification du nouveau secret */
 
 
-/* Cache la barre de bannière Google en haut */
-.goog-te-banner-frame.skiptranslate {
-    display: none !important;
-}
+/* Copiez ceci exactement à la FIN de votre fichier style.css */
 
-/* Supprime la marge forcée en haut du body par Google */
-body {
-    top: 0px !important;
-}
-
-/* Cache l'infobulle qui apparaît au survol des textes traduits */
+.goog-te-banner-frame.skiptranslate, 
+.goog-te-banner-frame, 
+#goog-gt-tt, 
 .goog-te-balloon-frame {
     display: none !important;
+    visibility: hidden !important;
 }
-#goog-gt-tt, .goog-te-balloon-frame {
-    display: none !important;
+
+body {
+    top: 0px !important;
+    position: static !important;
 }
+
 .goog-text-highlight {
     background: none !important;
     box-shadow: none !important;
 }
+
 
 
 
