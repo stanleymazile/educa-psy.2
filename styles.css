@@ -192,4 +192,21 @@ body { top: 0px !important; }
 }
 
 /* Déclencheur pour le déploiement */
+
 /* Vérification du nouveau secret */
+
+
+/* Cache la barre de bannière Google en haut */
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+/* Supprime la marge forcée en haut du body par Google */
+body {
+    top: 0px !important;
+}
+
+/* Cache l'infobulle qui apparaît au survol des textes traduits */
+.goog-te-balloon-frame {
+    display: none !important;
+}
