@@ -8,23 +8,39 @@
 </head>
 <body>
     <header id="header">
-        <div class="header-ligne-haut">
-            <section id="logoTitre">
-                <img src="Logo 3.png" alt="Logo" id="logo"> 
-                <h2 id="titre">Educa-Psy</h2>
-            </section>
-        </div>
-        <div class="header-ligne-bas">
-            <section id="groupe-menu">
-                <nav id="liens-deroulants">
-                    <a href="index.html" class="item-menu">Accueil</a>
-                    <a href="presentation.html" class="item-menu">Présentation</a>
-                    <a href="services.html" class="item-menu">Services</a>
-                    <a href="contact.html" class="item-menu">Contact</a>
-                </nav>
-            </section>
-        </div>
-    </header>
+    <div class="header-ligne-haut">
+        <section id="logoTitre">
+            <img src="Logo 3.png" alt="Logo" id="logo"> 
+            <h2 id="titre">Educa-Psy</h2>
+        </section>
+        <section id="header-droite">
+            <select id="select-langue">
+                <option value="fr">FRANÇAIS</option>
+                <option value="ht">KREYÒL</option> 
+                <option value="en">ENGLISH</option>
+                <option value="es">ESPAÑOL</option>
+            </select>
+            <div id="google_translate_element" style="display:none;"></div>
+            <a href="don.html" id="btnDon">Don</a>
+        </section>
+    </div>
+    <div class="header-ligne-bas">
+        <section id="groupe-menu">
+            <button id="btnMenu">☰ Menu</button>
+            <nav id="liens-deroulants">
+                <a href="index.html" class="item-menu">Accueil</a>
+                <a href="presentation.html" class="item-menu">Présentation</a>
+                <a href="services.html" class="item-menu">Services</a>
+                <a href="contact.html" class="item-menu">Contact</a>
+            </nav>
+        </section>
+        <section id="menuRecherche" class="recherche">
+            <input type="text" id="recherche" placeholder="Rechercher...">
+            <button id="btnChercher">🔍</button>
+        </section>
+    </div>
+</header>
+
     <h1>Nos Services</h1>
     <p>Cette page est en cours de construction.</p>
 </body>
