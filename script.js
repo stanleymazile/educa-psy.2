@@ -58,3 +58,14 @@ window.onclick = function() {
 
 // Lancement sécurisé du script
 document.addEventListener('DOMContentLoaded', initialiserSite);
+
+
+// Force la suppression de l'espace blanc en haut du site
+document.body.style.top = "0px";
+
+// Supprime l'élément de la barre Google s'il existe
+const googleBarre = document.querySelector('.goog-te-banner-frame');
+if (googleBarre) {
+    googleBarre.style.display = 'none';
+}
+
