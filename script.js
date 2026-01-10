@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     });
 
-    // CHIFFRES ANIMÉS
+    // STATS
     const stats = document.querySelectorAll('.stat-number');
     stats.forEach(s => {
         const target = +s.dataset.target;
@@ -28,19 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         update();
     });
-
-    // CARROUSEL
-    const track = document.getElementById('carouselTrack');
-    const next = document.getElementById('nextBtn');
-    const prev = document.getElementById('prevBtn');
-    let idx = 0;
-
-    next.onclick = () => {
-        const items = track.children.length;
-        const visible = window.innerWidth > 768 ? 2 : 1;
-        if(idx < items - visible) idx++; else idx = 0;
-        track.style.transform = `translateX(${-idx * (100/visible)}%)`;
-    };
 
     window.onclick = () => { langList.classList.remove('show'); nav.classList.remove('active'); };
 });
