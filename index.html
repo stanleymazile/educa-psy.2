@@ -1,80 +1,121 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educa-Psy</title>
+    
+    <title>Educa-Psy | Santé Mentale et Éducation en Haïti</title>
+    <meta name="description" content="Soutien psychologique et éducatif pour les enfants en Haïti. Découvrez nos actions et notre équipe.">
+    <meta property="og:title" content="Educa-Psy | Santé Mentale Haïti">
+    <meta property="og:description" content="Travailler ensemble pour l'avenir des enfants.">
+    <meta property="og:image" content="Logo 3.png">
+    
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <header id="header">
-        <div class="header-ligne-haut">
-            <section id="logoTitre">
-                <img src="Logo 3.png" alt="Logo" id="logo"> 
-                <h2 id="titre">Educa-Psy</h2>
-            </section>
-
-
-            <section id="header-droite">
-    <select id="select-langue">
-        <option value="fr">FRANÇAIS</option>
-        <option value="ht">KREYÒL</option> 
-        <option value="en">ENGLISH</option>
-        <option value="es">ESPAÑOL</option>
-    </select>
-    
-    
-    
-    <a href="don.html" id="btnDon">Don</a>
-</section>
-            
+    <header id="main-header" class="header-container">
+        <div class="header-top">
+            <div id="site-branding" class="logo-group" onclick="window.location.href='index.html'">
+                <img src="Logo 3.png" alt="Logo Educa-Psy" class="logo-img"> 
+                <h2 class="logo-text">Educa-Psy</h2>
+            </div>
+            <div class="header-actions">
+                <select id="lang-selector" class="select-style">
+                    <option value="fr">FRANÇAIS</option>
+                    <option value="ht">KREYÒL</option> 
+                    <option value="en">ENGLISH</option>
+                    <option value="es">ESPAÑOL</option>
+                </select>
+                <a href="don.html" class="btn btn-primary">Don</a>
+            </div>
         </div>
-
-        <div class="header-ligne-bas">
-            <section id="groupe-menu">
-                <button id="btnMenu">☰ Menu</button>
-                <nav id="liens-deroulants">
-                    <a href="index.html" class="item-menu">Accueil</a>
-                    <a href="presentation.html" class="item-menu">Présentation</a>
-                    <a href="services.html" class="item-menu">Services</a>
-                    <a href="contact.html" class="item-menu">Contact</a>
+        <div class="header-bottom">
+            <div class="menu-wrapper">
+                <button id="menu-btn" class="btn-toggle">☰ Menu</button>
+                <nav id="main-nav" class="nav-list">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                    <a href="presentation.html" class="nav-link">Présentation</a>
+                    <a href="services.html" class="nav-link">Services</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
                 </nav>
-            </section>
-
-            <section id="menuRecherche" class="recherche">
-                <input type="text" id="recherche" placeholder="Rechercher...">
-                <button id="btnChercher">🔍</button>
-            </section>
+            </div>
+            <div id="search-container" class="search-box">
+                <input type="text" id="search-input" class="input-field" placeholder="Rechercher...">
+                <button id="search-btn" class="btn-icon">🔍</button>
+            </div>
         </div>
     </header>
 
-    <section id="hero">
-        <div id="hero-contenu">
-            <h1 id="hero-titre">L'éducation pour chaque enfant en Haïti</h1>
-            <a href="services.html" id="btnHero">Découvrir</a>
-        
+    <section id="hero-banner" class="hero-section">
+        <div class="hero-inner">
+            <h1 class="hero-title">L'éducation pour chaque enfant en Haïti</h1>
+            <a href="services.html" class="btn btn-large">Découvrir</a>
+        </div>
+    </section>
 
-<script src="script.js"></script>
+    <section id="impact-section" class="stats-container section-animate">
+        <div class="stat-card">
+            <h3 class="stat-val" data-target="500">0</h3>
+            <p class="stat-desc">Enfants aidés</p>
+        </div>
+        <div class="stat-card">
+            <h3 class="stat-val" data-target="10">0</h3>
+            <p class="stat-desc">Écoles partenaires</p>
+        </div>
+        <div class="stat-card">
+            <h3 class="stat-val" data-target="4">0</h3>
+            <p class="stat-desc">Départements</p>
+        </div>
+    </section>
 
+    <section class="team-section section-animate">
+        <h2 class="section-title">Notre Équipe</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="member-photo-placeholder"></div> <h4>Nom Prénom</h4>
+                <p>Psychologue</p>
+            </div>
+            <div class="team-card">
+                <div class="member-photo-placeholder"></div>
+                <h4>Nom Prénom</h4>
+                <p>Éducateur spécialisé</p>
+            </div>
+        </div>
+    </section>
 
+    <section class="partners-section section-animate">
+        <h2 class="section-title">Ils nous font confiance</h2>
+        <div class="partners-logos">
+            <div class="partner-logo-box">Logo 1</div> <div class="partner-logo-box">Logo 2</div>
+            <div class="partner-logo-box">Logo 3</div>
+        </div>
+    </section>
+
+    <footer id="main-footer" class="footer-area">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="Logo 3.png" alt="Logo" class="logo-img footer-logo">
+                <h4>Educa-Psy</h4>
+                <p>Travailler ensemble pour l'avenir des enfants.</p>
+            </div>
+            <div class="footer-links-group">
+                <h5>Navigation</h5>
+                <a href="index.html">Accueil</a>
+                <a href="presentation.html">À propos</a>
+            </div>
+            <div class="footer-social">
+                <h5>Suivez-nous</h5>
+                <div class="social-icons">
+                    <span>FB</span> <span>IG</span> <span>LI</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Educa-Psy - <a href="#">Mentions Légales</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
