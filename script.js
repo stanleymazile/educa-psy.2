@@ -1,71 +1,58 @@
-/**
- * Initialise toutes les fonctionnalités du site une fois que le HTML est chargé.
- */
-function initialiserSite() {
-    // Récupération des éléments du Header
-    const btnMenu = document.getElementById('btnMenu');
-    const menu = document.getElementById('liens-deroulants');
-    const selectLangue = document.getElementById('select-langue');
-    const btnChercher = document.getElementById('btnChercher');
-    const inputRecherche = document.getElementById('recherche');
+document.addEventListener('DOMContentLoaded', () => {
+    initialiserComposants();
+    activerAnimationsAuScroll();
+});
 
-    // --- 1. GESTION DU MENU DÉROULANT ---
-    if (btnMenu && menu) {
-        btnMenu.onclick = function(e) {
-            menu.classList.toggle('voir');
-            // Empêche le clic de se propager à la fenêtre (évite la fermeture immédiate)
+function initialiserComposants() {
+    // Menu Burger
+    const btnMenu = document.getElementById('menu-btn');
+    const nav = document.getElementById('main-nav');
+    if (btnMenu) {
+        btnMenu.onclick = (e) => {
+            nav.classList.toggle('voir');
             e.stopPropagation();
         };
     }
 
-    // --- 2. GESTION DE LA TRADUCTION GOOGLE ---
-    if (selectLangue) {
-        selectLangue.addEventListener('change', function() {
-            const langueChoisie = this.value;
-            const googleCombo = document.querySelector('.goog-te-combo');
-            
-            if (googleCombo) {
-                googleCombo.value = langueChoisie;
-                // Déclenche l'événement de changement pour que Google traduise
-                googleCombo.dispatchEvent(new Event('change'));
-            } else {
-                console.warn("Le moteur de traduction Google n'est pas encore prêt.");
+    // Fermeture menu au clic extérieur
+    window.onclick = () => { if (nav) nav.classList.remove('voir'); };
+}
+
+// ANIMATION DES CHIFFRES ET APPARITION DES SECTIONS
+function activerAnimationsAuScroll() {
+    const sections = document.querySelectorAll('.section-animate');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                
+                // Si c'est la section impact, on anime les compteurs
+                if (entry.target.id === 'impact-section') {
+                    animerCompteurs();
+                }
             }
         });
-    }
+    }, { threshold: 0.2 });
 
-    // --- 3. GESTION DE LA RECHERCHE (Préparation) ---
-    if (btnChercher && inputRecherche) {
-        btnChercher.onclick = function() {
-            const motCle = inputRecherche.value.trim();
-            if (motCle !== "") {
-                alert("Recherche en cours pour : " + motCle);
-                // Ici, nous pourrons ajouter la logique de filtrage plus tard
+    sections.forEach(section => observer.observe(section));
+}
+
+function animerCompteurs() {
+    const compteurs = document.querySelectorAll('.stat-val');
+    compteurs.forEach(compteur => {
+        const cible = +compteur.getAttribute('data-target');
+        const increment = cible / 100;
+        
+        const updateCompteur = () => {
+            const valeurActuelle = +compteur.innerText;
+            if (valeurActuelle < cible) {
+                compteur.innerText = Math.ceil(valeurActuelle + increment);
+                setTimeout(updateCompteur, 20);
+            } else {
+                compteur.innerText = cible + (cible > 100 ? "+" : "");
             }
         };
-    }
+        updateCompteur();
+    });
 }
-
-/**
- * Fermeture globale du menu si l'utilisateur clique en dehors.
- */
-window.onclick = function() {
-    const menu = document.getElementById('liens-deroulants');
-    if (menu && menu.classList.contains('voir')) {
-        menu.classList.remove('voir');
-    }
-};
-
-// Lancement sécurisé du script
-document.addEventListener('DOMContentLoaded', initialiserSite);
-
-
-// Force la suppression de l'espace blanc en haut du site
-document.body.style.top = "0px";
-
-// Supprime l'élément de la barre Google s'il existe
-const googleBarre = document.querySelector('.goog-te-banner-frame');
-if (googleBarre) {
-    googleBarre.style.display = 'none';
-}
-
