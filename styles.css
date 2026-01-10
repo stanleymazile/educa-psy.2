@@ -1,222 +1,44 @@
-/* --- CONFIGURATION DE BASE --- */
-body { 
-    margin: 0; 
-    font-family: 'Segoe UI', Arial, sans-serif; 
-    overflow-x: hidden; 
+:root {
+    --main-blue: #007bff;
+    --dark: #1a1a1a;
+    --light-bg: #f8fbff;
+    --white: #ffffff;
+    --transition: all 0.3s ease-in-out;
 }
 
-/* --- HEADER GLOBAL --- */
-#header {
-    background-color: white;
-    border-bottom: 2px solid #007bff;
-    display: flex;
-    flex-direction: column; /* Superpose la ligne 1 et la ligne 2 */
-    padding: 10px 4%; /* Marges sur les côtés */
-}
+body { margin: 0; font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; }
 
-/* --- LIGNE 1 : Logo à gauche, Don à droite --- */
-.header-ligne-haut {
-    display: flex;
-    justify-content: space-between; /* Écarte les éléments aux extrémités */
-    align-items: center;
-    width: 100%;
-    padding-bottom: 12px;
-}
+/* ANIMATIONS DE CHARGEMENT PROGRESSIF */
+.section-animate { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
+.section-animate.visible { opacity: 1; transform: translateY(0); }
 
-#logoTitre { 
-    display: flex; 
-    align-items: center; 
-}
+/* BOUTONS ET INTERACTIONS */
+.btn { cursor: pointer; border: none; transition: var(--transition); }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+.btn-primary { background: var(--main-blue); color: white; padding: 10px 20px; border-radius: 8px; }
+.btn-large { background: white; color: var(--main-blue); padding: 18px 40px; border-radius: 50px; font-weight: bold; font-size: 1.1rem; }
 
-#logo { 
-    width: 40px; 
-    height: 40px; 
-    margin-right: 10px; 
-    border-radius: 5px;
-}
+/* HEADER & NAV */
+.header-container { background: white; border-bottom: 2px solid var(--main-blue); padding: 15px 5%; position: sticky; top: 0; z-index: 1000; }
+.logo-img { width: 45px; transition: var(--transition); }
+.logo-img:hover { transform: rotate(5deg); }
 
-#titre { 
-    color: #007bff; 
-    margin: 0; 
-    font-size: 20px; 
-    font-weight: bold;
-}
+/* SECTIONS (Équipe & Partenaires) */
+.section-title { text-align: center; margin-bottom: 40px; font-size: 2rem; color: var(--dark); }
 
-/* Bloc Langue + Don */
-#header-droite { 
-    display: flex; 
-    align-items: center; 
-    gap: 8px; 
-}
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; padding: 0 10%; }
+.team-card { text-align: center; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.member-photo-placeholder { width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px; }
 
-#select-langue { 
-    padding: 4px; 
-    border-radius: 4px; 
-    border: 1px solid #ccc; 
-    font-size: 13px;
-    background: #f8f8f8;
-}
+.partners-section { background: var(--white); padding: 60px 10%; }
+.partners-logos { display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 40px; opacity: 0.6; }
+.partner-logo-box { padding: 20px; border: 1px dashed #ccc; border-radius: 10px; min-width: 120px; text-align: center; }
 
-#btnDon { 
-    background-color: #007bff; 
-    color: white; 
-    text-decoration: none; 
-    padding: 8px 14px; 
-    border-radius: 5px; 
-    font-weight: bold; 
-    font-size: 14px;
-}
-
-/* --- LIGNE 2 : Menu à gauche, Recherche à droite --- */
-.header-ligne-bas {
-    display: flex;
-    justify-content: space-between; /* Menu à gauche, barre à droite */
-    align-items: center;
-    width: 100%;
-    padding-top: 10px;
-    border-top: 1px solid #f2f2f2;
-    flex-wrap: nowrap; /* Empêche le retour à la ligne forcé */
-}
-
-/* Bouton Menu */
-#btnMenu { 
-    background-color: #f0f0f0; 
-    border: none; 
-    padding: 8px 12px; 
-    cursor: pointer; 
-    font-weight: bold; 
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-/* Barre de recherche (ID et Classe combinés) */
-#menuRecherche.recherche { 
-    display: flex; 
-    align-items: center; 
-    border: 1px solid #ccc; 
-    padding: 4px 12px; 
-    border-radius: 20px; 
-    background-color: #fafafa;
-    width: 60%; /* Prend la place restante à droite */
-    max-width: 300px;
-}
-
-#recherche { 
-    border: none; 
-    outline: none; 
-    width: 100%; 
-    background: transparent; 
-    font-size: 14px;
-}
-
-#btnChercher { 
-    background: none; 
-    border: none; 
-    cursor: pointer; 
-    font-size: 14px;
-}
-
-/* --- MENU DÉROULANT --- */
-#groupe-menu { position: relative; }
-#liens-deroulants { 
-    display: none; 
-    position: absolute; 
-    left: 0; 
-    top: 110%; 
-    background-color: white; 
-    border: 1px solid #ddd; 
-    width: 180px; 
-    z-index: 1000;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-#liens-deroulants.voir { display: block; }
-.item-menu { 
-    display: block; 
-    padding: 12px; 
-    text-decoration: none; 
-    color: #333; 
-    border-bottom: 1px solid #eee; 
-}
-.item-menu:hover { background-color: #f0faff; }
-
-/* --- SECTION HERO --- */
-#hero {
-    background-color: #007bff;
-    color: white;
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0 20px;
-}
-
-#hero-titre { 
-    font-size: 32px; 
-    margin-bottom: 25px; 
-    line-height: 1.2;
-}
-
-#btnHero {
-    background-color: white;
-    color: #007bff;
-    text-decoration: none;
-    padding: 15px 35px;
-    border-radius: 30px;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-/* --- AJUSTEMENTS SPECIFIQUES MOBILE --- */
-@media screen and (max-width: 480px) {
-    #titre { font-size: 18px; }
-    #logo { width: 35px; height: 35px; }
-    #btnDon { padding: 6px 10px; font-size: 13px; }
-    #menuRecherche.recherche { width: 55%; } /* Évite de pousser le bouton menu */
-    #hero-titre { font-size: 26px; }
-}
-
-/* --- TRADUCTION GOOGLE --- */
-.goog-te-banner-frame.skiptranslate { display: none !important; }
-body { top: 0px !important; }
-.goog-logo-link { display: none !important; }
-.goog-te-gadget { color: transparent !important; }
-
-#select-langue {
-    padding: 6px 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* Déclencheur pour le déploiement */
-
-/* Vérification du nouveau secret */
-
-
-/* Copiez ceci exactement à la FIN de votre fichier style.css */
-
-.goog-te-banner-frame.skiptranslate, 
-.goog-te-banner-frame, 
-#goog-gt-tt, 
-.goog-te-balloon-frame {
-    display: none !important;
-    visibility: hidden !important;
-}
-
-body {
-    top: 0px !important;
-    position: static !important;
-}
-
-.goog-text-highlight {
-    background: none !important;
-    box-shadow: none !important;
-}
-
-
-
+/* FOOTER PROFESSIONNEL */
+.footer-area { background: var(--dark); color: white; padding: 60px 5% 20px; margin-top: 80px; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; border-bottom: 1px solid #333; padding-bottom: 40px; }
+.footer-logo { filter: brightness(0) invert(1); margin-bottom: 15px; }
+.footer-social .social-icons { display: flex; gap: 15px; margin-top: 15px; cursor: pointer; }
+.footer-area a { color: #aaa; text-decoration: none; display: block; margin-bottom: 10px; }
+.footer-area a:hover { color: var(--main-blue); }
 
