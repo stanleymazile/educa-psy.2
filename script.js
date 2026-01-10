@@ -1,43 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Gestion du Menu Mobile
-    const menuBtn = document.getElementById('menu-btn');
-    const nav = document.getElementById('mobile-nav');
+    // 1. GESTION LANGUE
+    const langBtn = document.getElementById('lang-btn');
+    const langList = document.getElementById('lang-list');
+    langBtn.onclick = (e) => { langList.classList.toggle('show'); e.stopPropagation(); };
 
-    if (menuBtn && nav) {
-        menuBtn.addEventListener('click', (e) => {
-            nav.classList.toggle('active');
-            e.stopPropagation();
-        });
-    }
-
-    // Fermer le menu si on clique ailleurs sur la page
-    document.addEventListener('click', () => {
-        if (nav) nav.classList.remove('active');
+    langList.querySelectorAll('a').forEach(a => {
+        a.onclick = (e) => {
+            document.getElementById('current-flag').innerText = a.dataset.flag;
+            document.getElementById('current-text').innerText = a.dataset.lang.toUpperCase();
+            langList.classList.remove('show');
+        };
     });
 
-    // 2. Animation des compteurs (Chiffres)
-    const counters = document.querySelectorAll('.stat-number');
-    
-    const animateCounters = () => {
-        counters.forEach(counter => {
-            const target = +counter.getAttribute('data-target');
-            const speed = 100; // Plus c'est haut, plus c'est lent
-            
-            const updateCount = () => {
-                const count = +counter.innerText;
-                const inc = target / speed;
+    // 2. CHIFFRES ANIMÉS
+    const stats = document.querySelectorAll('.stat-number');
+    stats.forEach(s => {
+        const target = +s.dataset.target;
+        let count = 0;
+        const update = () => {
+            if(count < target) { count += target/50; s.innerText = Math.ceil(count); setTimeout(update, 30); }
+            else { s.innerText = target + "+"; }
+        };
+        update();
+    });
 
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(updateCount, 15);
-                } else {
-                    counter.innerText = target + "+";
-                }
-            };
-            updateCount();
-        });
+    // 3. MENU MOBILE
+    document.getElementById('menu-btn').onclick = (e) => {
+        document.getElementById('mobile-nav').classList.toggle('active');
+        e.stopPropagation();
     };
 
-    // Déclencher l'animation quand on arrive sur la section (Optionnel simple)
-    animateCounters();
+    window.onclick = () => { langList.classList.remove('show'); };
 });
