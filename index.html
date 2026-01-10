@@ -3,116 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Educa-Psy | Santé Mentale et Éducation en Haïti</title>
-    <meta name="description" content="Soutien psychologique et éducatif pour les enfants en Haïti. Découvrez nos actions et notre équipe.">
-    <meta property="og:title" content="Educa-Psy | Santé Mentale Haïti">
-    <meta property="og:description" content="Travailler ensemble pour l'avenir des enfants.">
-    <meta property="og:image" content="Logo 3.png">
+    
+    <meta name="description" content="Services psychologiques et éducatifs aux écoles et institutions en Haïti.">
+    <meta name="author" content="Educa-Psy">
     
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <header id="main-header" class="header-container">
+    <header class="main-header">
         <div class="header-top">
             <div id="site-branding" class="logo-group" onclick="window.location.href='index.html'">
-                <img src="Logo 3.png" alt="Logo Educa-Psy" class="logo-img"> 
-                <h2 class="logo-text">Educa-Psy</h2>
+                <img src="Logo 3.png" alt="Logo Educa-Psy" class="site-logo"> 
+                <h2 class="site-title">Educa-Psy</h2>
             </div>
-            <div class="header-actions">
-                <select id="lang-selector" class="select-style">
+            <div class="header-right">
+                <select id="lang-selector" class="lang-dropdown">
                     <option value="fr">FRANÇAIS</option>
-                    <option value="ht">KREYÒL</option> 
-                    <option value="en">ENGLISH</option>
-                    <option value="es">ESPAÑOL</option>
+                    <option value="ht">KREYÒL</option>
                 </select>
-                <a href="don.html" class="btn btn-primary">Don</a>
+                <a href="don.html" class="btn-don">Don</a>
             </div>
         </div>
+
         <div class="header-bottom">
-            <div class="menu-wrapper">
-                <button id="menu-btn" class="btn-toggle">☰ Menu</button>
-                <nav id="main-nav" class="nav-list">
-                    <a href="index.html" class="nav-link">Accueil</a>
-                    <a href="presentation.html" class="nav-link">Présentation</a>
-                    <a href="services.html" class="nav-link">Services</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
-                </nav>
-            </div>
-            <div id="search-container" class="search-box">
-                <input type="text" id="search-input" class="input-field" placeholder="Rechercher...">
-                <button id="search-btn" class="btn-icon">🔍</button>
+            <button id="menu-btn" class="btn-menu">☰ Menu</button>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Rechercher..." class="search-input">
+                <button id="search-btn" class="search-btn">🔍</button>
             </div>
         </div>
+
+        <nav id="mobile-nav" class="nav-links">
+            <a href="index.html">Accueil</a>
+            <a href="presentation.html">Présentation</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+        </nav>
     </header>
 
-    <section id="hero-banner" class="hero-section">
-        <div class="hero-inner">
-            <h1 class="hero-title">L'éducation pour chaque enfant en Haïti</h1>
-            <a href="services.html" class="btn btn-large">Découvrir</a>
-        </div>
-    </section>
-
-    <section id="impact-section" class="stats-container section-animate">
-        <div class="stat-card">
-            <h3 class="stat-val" data-target="500">0</h3>
-            <p class="stat-desc">Enfants aidés</p>
-        </div>
-        <div class="stat-card">
-            <h3 class="stat-val" data-target="10">0</h3>
-            <p class="stat-desc">Écoles partenaires</p>
-        </div>
-        <div class="stat-card">
-            <h3 class="stat-val" data-target="4">0</h3>
-            <p class="stat-desc">Départements</p>
-        </div>
-    </section>
-
-    <section class="team-section section-animate">
-        <h2 class="section-title">Notre Équipe</h2>
-        <div class="team-grid">
-            <div class="team-card">
-                <div class="member-photo-placeholder"></div> <h4>Nom Prénom</h4>
-                <p>Psychologue</p>
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>L'éducation pour chaque enfant en Haïti</h1>
+                <a href="services.html" class="btn-cta">Découvrir</a>
             </div>
-            <div class="team-card">
-                <div class="member-photo-placeholder"></div>
-                <h4>Nom Prénom</h4>
-                <p>Éducateur spécialisé</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="partners-section section-animate">
-        <h2 class="section-title">Ils nous font confiance</h2>
-        <div class="partners-logos">
-            <div class="partner-logo-box">Logo 1</div> <div class="partner-logo-box">Logo 2</div>
-            <div class="partner-logo-box">Logo 3</div>
-        </div>
-    </section>
-
-    <footer id="main-footer" class="footer-area">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <img src="Logo 3.png" alt="Logo" class="logo-img footer-logo">
-                <h4>Educa-Psy</h4>
-                <p>Travailler ensemble pour l'avenir des enfants.</p>
+        <section class="stats-grid">
+            <div class="stat-card">
+                <h3 class="stat-number" data-target="500">0</h3>
+                <p>Enfants aidés</p>
             </div>
-            <div class="footer-links-group">
-                <h5>Navigation</h5>
-                <a href="index.html">Accueil</a>
-                <a href="presentation.html">À propos</a>
+            <div class="stat-card">
+                <h3 class="stat-number" data-target="10">0</h3>
+                <p>Écoles partenaires</p>
+            </div>
+            <div class="stat-card">
+                <h3 class="stat-number" data-target="4">0</h3>
+                <p>Départements</p>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <h2 class="section-title">Notre Équipe</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="member-img"></div>
+                    <h4>Nom Prénom</h4>
+                    <p>Psychologue</p>
+                </div>
+                <div class="team-card">
+                    <div class="member-img"></div>
+                    <h4>Nom Prénom</h4>
+                    <p>Éducateur spécialisé</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding partners-bg">
+            <h2 class="section-title">Ils nous font confiance</h2>
+            <div class="partners-row">
+                <div class="partner-box">Logo 1</div>
+                <div class="partner-box">Logo 2</div>
+                <div class="partner-box">Logo 3</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <img src="Logo 3.png" alt="Logo" class="footer-logo">
+                <p>Educa-Psy : Travailler ensemble pour l'avenir des enfants.</p>
             </div>
             <div class="footer-social">
-                <h5>Suivez-nous</h5>
+                <h4>Suivez-nous</h4>
                 <div class="social-icons">
                     <span>FB</span> <span>IG</span> <span>LI</span>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 Educa-Psy - <a href="#">Mentions Légales</a></p>
+            <p>© 2026 Educa-Psy - Tous droits réservés.</p>
         </div>
     </footer>
 
