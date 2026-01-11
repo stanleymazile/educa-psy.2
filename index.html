@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,18 +9,17 @@
 <body>
 
     <header class="main-header">
-        <div class="header-top">
+        <div class="header-content">
             <div class="logo-group" onclick="window.location.href='index.html'">
-                <img src="Logo 3.png" alt="Logo Educa-Psy" class="site-logo">
-                <h2 class="site-title">Educa-Psy</h2>
+                <img src="Logo.webp" alt="Logo Educa-Psy" class="site-logo">
+                <h1 class="site-title">Educa-Psy</h1>
             </div>
 
             <div class="header-right">
                 <div class="lang-switcher">
-                    <button id="lang-btn" class="lang-current">
+                    <button id="lang-btn" class="lang-mini">
                         <span id="current-flag">🇫🇷</span>
-                        <span id="current-text">FR</span>
-                        <span class="arrow-icon">▼</span>
+                        <span class="arrow-mini">▾</span>
                     </button>
                     <div id="lang-list" class="lang-dropdown-list">
                         <a href="#" data-lang="fr" data-flag="🇫🇷">🇫🇷 FR</a>
@@ -30,16 +28,9 @@
                         <a href="#" data-lang="kr" data-flag="🇭🇹">🇭🇹 KR</a>
                     </div>
                 </div>
+                <button id="menu-btn" class="btn-menu">☰</button>
             </div>
         </div>
-
-        <div class="header-bottom">
-            <button id="menu-btn" class="btn-menu">☰ Menu</button>
-            <a href="don.html" class="btn-donation-compact">
-                <span class="heart-icon">❤️</span> Faire un Don
-            </a>
-        </div>
-
         <nav id="mobile-nav" class="nav-links">
             <a href="index.html">Accueil</a>
             <a href="presentation.html">Présentation</a>
@@ -49,14 +40,41 @@
     </header>
 
     <main>
-        <section class="main-hero">
+        <section class="main-hero" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('Art.webp');">
             <div class="hero-content">
-                <h1>Soutenir la santé mentale et l'éducation en Haïti</h1>
+                <h2>Soutenir la santé mentale et l'éducation en Haïti</h2>
                 <p>Ensemble, redonnons espoir et avenir aux enfants haïtiens.</p>
+                <a href="don.html" class="btn-hero-donation">
+                    <span class="heart-icon">❤️</span> Faire un Don
+                </a>
+            </div>
+        </section>
+
+        <section class="actions-preview">
+            <h2 class="section-title">Ce que nous faisons</h2>
+            <div class="actions-grid">
+                <div class="action-item">
+                    <span class="action-icon">🧠</span>
+                    <h4>Santé Mentale</h4>
+                    <p>Soutien psychologique et gestion du stress traumatique.</p>
+                </div>
+                <div class="action-item">
+                    <span class="action-icon">📚</span>
+                    <h4>Éducation de Qualité</h4>
+                    <p>Accès aux kits scolaires et renforcement pédagogique.</p>
+                </div>
+                <div class="action-item">
+                    <span class="action-icon">🤝</span>
+                    <h4>Protection</h4>
+                    <p>Espaces sûrs pour le développement des enfants.</p>
+                </div>
             </div>
         </section>
 
         <section class="stats-section">
+            <div class="stats-header">
+                <h2 class="section-title">Notre Impact en chiffres</h2>
+            </div>
             <div class="stats-container-centered">
                 <div class="stat-card">
                     <h3 class="stat-number" data-target="500">0</h3>
@@ -74,20 +92,45 @@
         </section>
 
         <section class="news-section">
-            <h2 class="section-title">Actualités & Impact</h2>
+            <h2 class="section-title">Dernières actualités</h2>
             <div class="carousel-container">
                 <div class="carousel-track" id="carouselTrack">
                     <div class="carousel-item">
                         <article class="news-card">
                             <div class="news-thumb">
                                 <span class="news-badge">Action</span>
-                                <div class="news-img-placeholder">IMAGE</div>
+                                <img src="Genre1.webp" class="news-img">
                             </div>
                             <div class="news-body">
-                                <span class="news-date">10 Janvier 2026</span>
-                                <h4>Distribution de kits scolaires</h4>
-                                <p>Soutien direct aux familles pour la rentrée.</p>
-                                <a href="#" class="news-link">Lire plus <span>→</span></a>
+                                <h4>Programmes Scolaires</h4>
+                                <p>Intervention directe dans les écoles de l'Artibonite.</p>
+                                <a href="#" class="news-read-more">Lire plus →</a>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="carousel-item">
+                        <article class="news-card">
+                            <div class="news-thumb">
+                                <span class="news-badge">Soutien</span>
+                                <img src="Genre2.webp" class="news-img">
+                            </div>
+                            <div class="news-body">
+                                <h4>Santé Mentale</h4>
+                                <p>Accompagnement psychologique pour les élèves.</p>
+                                <a href="#" class="news-read-more">Lire plus →</a>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="carousel-item">
+                        <article class="news-card">
+                            <div class="news-thumb">
+                                <span class="news-badge">Infrastructures</span>
+                                <img src="Local.webp" class="news-img">
+                            </div>
+                            <div class="news-body">
+                                <h4>Nos Espaces</h4>
+                                <p>Développement technique de nos bureaux locaux.</p>
+                                <a href="#" class="news-read-more">Lire plus →</a>
                             </div>
                         </article>
                     </div>
@@ -95,6 +138,7 @@
                 <button class="carousel-nav prev" id="prevBtn">❮</button>
                 <button class="carousel-nav next" id="nextBtn">❯</button>
             </div>
+            <div class="carousel-dots" id="carouselDots"></div>
         </section>
     </main>
 
@@ -102,26 +146,12 @@
         <div class="footer-container">
             <div class="footer-col">
                 <h2 class="footer-site-title">Educa-<span>Psy</span></h2>
-                <p class="footer-text">Organisation dédiée au renforcement de l'éducation et au soutien psychologique en Haïti.</p>
-                <div class="footer-socials">
-                    <a href="#" class="social-icon">FB</a>
-                    <a href="#" class="social-icon">IG</a>
-                    <a href="#" class="social-icon">WA</a>
-                </div>
+                <p class="footer-text">Engagement pour Haïti.</p>
             </div>
             <div class="footer-col">
-                <h4 class="footer-heading">L'Organisation</h4>
-                <ul class="footer-links">
-                    <li><a href="presentation.html">À propos de nous</a></li>
-                    <li><a href="services.html">Nos programmes</a></li>
-                    <li><a href="contact.html">Nous contacter</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4 class="footer-heading">Contact Direct</h4>
+                <h4 class="footer-heading">Contact</h4>
                 <ul class="footer-contact">
-                    <li>📍 Port-au-Prince, Haïti</li>
-                    <li>📞 +509 0000-0000</li>
+                    <li>📍 Haïti</li>
                     <li>✉️ contact@educapsy.org</li>
                 </ul>
             </div>
