@@ -1,15 +1,25 @@
+// Gestion du Menu Principal
 const btnMenu = document.getElementById('btnMenu');
-const menu = document.getElementById('liens-deroulants');
+const menuPrincipal = document.getElementById('liens-deroulants');
 
-// Ouverture/Fermeture du menu au clic sur le bouton
 btnMenu.onclick = function(e) {
-    menu.classList.toggle('voir');
+    menuPrincipal.classList.toggle('voir');
+    menuCompte.classList.remove('voir'); // Ferme l'autre menu
     e.stopPropagation();
 }
 
-// Fermeture automatique si on clique n'importe où ailleurs sur la page
+// Gestion du Menu Compte
+const btnCompte = document.getElementById('btnCompte');
+const menuCompte = document.getElementById('menu-compte');
+
+btnCompte.onclick = function(e) {
+    menuCompte.classList.toggle('voir');
+    menuPrincipal.classList.remove('voir'); // Ferme l'autre menu
+    e.stopPropagation();
+}
+
+// Fermeture au clic n'importe où
 window.onclick = function() {
-    if (menu.classList.contains('voir')) {
-        menu.classList.remove('voir');
-    }
+    menuPrincipal.classList.remove('voir');
+    menuCompte.classList.remove('voir');
 }
