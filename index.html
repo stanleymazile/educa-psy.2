@@ -15,21 +15,10 @@
                 <h2 id="titre">Educa-Psy</h2>
             </section>
 
-            <section id="header-droite">
-                <section id="menuRecherche" class="recherche">
-                    <input type="text" id="recherche" placeholder="Rechercher...">
-                    <button id="btnChercher">🔍</button>
-                </section>
-                
-                <div id="groupe-compte">
-                    <button id="btnCompte">
-                        <span class="icon-user"></span>
-                        Compte
-                    </button>
-                    <nav id="menu-compte" class="dropdown-content">
-                        <a href="connexion.html">Connexion</a>
-                        <a href="inscription.html">Inscription</a>
-                    </nav>
+            <section id="header-droite-haut">
+                <div class="search-box">
+                    <button class="btn-search">🔍</button>
+                    <input type="text" class="input-search" placeholder="Rechercher...">
                 </div>
                 
                 <select id="select-langue">
@@ -42,17 +31,30 @@
         </div>
 
         <div class="header-ligne-bas">
+            
             <section id="groupe-menu">
                 <button id="btnMenu">☰ Menu</button>
                 <nav id="liens-deroulants" class="dropdown-content">
-                    <a href="index.html" class="item-menu">Accueil</a>
-                    <a href="presentation.html" class="item-menu">Présentation</a>
-                    <a href="services.html" class="item-menu">Services</a>
-                    <a href="contact.html" class="item-menu">Contact</a>
+                    <a href="index.html">Accueil</a>
+                    <a href="presentation.html">Présentation</a>
+                    <a href="services.html">Services</a>
+                    <a href="contact.html">Contact</a>
                 </nav>
             </section>
 
-            <a href="don.html" id="btnDon">Don</a>
+            <a href="don.html" id="btnDon">Faire un Don</a>
+
+            <div id="groupe-compte">
+                <button id="btnCompte">
+                    <span class="icon-user"></span>
+                    Compte
+                </button>
+                <nav id="menu-compte" class="dropdown-content">
+                    <a href="connexion.html">Connexion</a>
+                    <a href="inscription.html">Inscription</a>
+                </nav>
+            </div>
+
         </div>
     </header>
 
