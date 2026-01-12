@@ -14,7 +14,6 @@ body {
     padding: 10px 4%; 
 }
 
-/* --- LIGNE 1 --- */
 .header-ligne-haut {
     display: flex;
     justify-content: space-between; 
@@ -27,28 +26,50 @@ body {
 #logo { width: 40px; height: 40px; margin-right: 10px; border-radius: 5px; }
 #titre { color: #007bff; margin: 0; font-size: 20px; font-weight: bold; }
 
-/* Bloc Langue + Don */
-#header-droite { display: flex; align-items: center; gap: 8px; }
+/* Bloc Droite : Langue + Don */
+#header-droite { display: flex; align-items: center; gap: 12px; }
 
-#select-langue { 
-    padding: 6px 10px; 
-    border-radius: 5px; 
-    border: 1px solid #ccc; 
-    background-color: white; 
-    font-weight: bold; 
+/* --- BOUTON LANGUE MODERNE AVEC GLOBE --- */
+#select-langue {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #f8f9fa;
+    /* Double icônes : Globe à gauche et Flèche à droite */
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484q-.121.12-.242.232c-.416.394-1.727 1.637-1.727 1.637 0 .062-.131.232-.131.232l-.4.3a.5.5 0 0 0-.175.445l.178 1.423c.034.274.268.484.544.484h.556a.5.5 0 0 0 .424-.236l.261-.41a.5.5 0 0 1 .424-.236h.547a.5.5 0 0 0 .394-.19l.522-.693a.5.5 0 0 1 .394-.19h.352a.5.5 0 0 0 .428-.242l.522-.87a.5.5 0 0 1 .428-.242H13a.5.5 0 0 0 .5-.5V9.083a.5.5 0 0 0-.146-.354l-1.208-1.208a.5.5 0 0 1-.146-.354V5.79a.5.5 0 0 0-.5-.5H10.5a.5.5 0 0 1-.5-.5V3.875a.5.5 0 0 0-.146-.354l-1.604-1.604A.5.5 0 0 0 7.896 1.79H6.974a.5.5 0 0 0-.353.146l-1.293 1.293a.5.5 0 0 1-.353.146H3.328a.5.5 0 0 0-.441.265L2.04 4.326z'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23007bff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C2.185 5.355 2.403 5 2.801 5h9.398c.398 0 .616.355.35.658l-4.796 5.482a.5.5 0 0 1-.708 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 12px center, right 12px center;
+    
+    color: #444;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 8px 30px 8px 35px; /* Espace pour le globe à gauche et flèche à droite */
+    font-size: 12px;
+    font-weight: 700;
     cursor: pointer;
-    font-size: 13px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+#select-langue:hover {
+    background-color: #fff;
+    border-color: #007bff;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
 }
 
 #btnDon { 
     background-color: #007bff; 
     color: white; 
     text-decoration: none; 
-    padding: 8px 14px; 
-    border-radius: 5px; 
+    padding: 9px 18px; 
+    border-radius: 10px; 
     font-weight: bold; 
     font-size: 14px;
+    transition: background 0.3s;
 }
+
+#btnDon:hover { background-color: #0056b3; }
 
 /* --- LIGNE 2 --- */
 .header-ligne-bas {
@@ -63,26 +84,25 @@ body {
 #btnMenu { 
     background-color: #f0f0f0; 
     border: none; 
-    padding: 8px 12px; 
+    padding: 8px 15px; 
     cursor: pointer; 
     font-weight: bold; 
-    border-radius: 5px;
-    font-size: 14px;
+    border-radius: 8px;
 }
 
 #menuRecherche.recherche { 
     display: flex; 
     align-items: center; 
-    border: 1px solid #ccc; 
-    padding: 4px 12px; 
-    border-radius: 20px; 
-    background-color: #fafafa;
-    width: 60%; 
-    max-width: 300px;
+    border: 1px solid #ddd; 
+    padding: 6px 15px; 
+    border-radius: 25px; 
+    background-color: #fcfcfc;
+    width: 50%; 
+    max-width: 250px;
 }
 
-#recherche { border: none; outline: none; width: 100%; background: transparent; font-size: 14px; }
-#btnChercher { background: none; border: none; cursor: pointer; font-size: 14px; }
+#recherche { border: none; outline: none; width: 100%; background: transparent; }
+#btnChercher { background: none; border: none; cursor: pointer; }
 
 /* --- MENU DÉROULANT --- */
 #groupe-menu { position: relative; }
@@ -90,38 +110,50 @@ body {
     display: none; 
     position: absolute; 
     left: 0; 
-    top: 110%; 
+    top: 120%; 
     background-color: white; 
-    border: 1px solid #ddd; 
-    width: 180px; 
+    border-radius: 8px;
+    width: 200px; 
     z-index: 1000;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    overflow: hidden;
 }
 #liens-deroulants.voir { display: block; }
-.item-menu { display: block; padding: 12px; text-decoration: none; color: #333; border-bottom: 1px solid #eee; }
-.item-menu:hover { background-color: #f0faff; }
+.item-menu { 
+    display: block; 
+    padding: 12px 20px; 
+    text-decoration: none; 
+    color: #333; 
+    border-bottom: 1px solid #f0f0f0; 
+}
+.item-menu:hover { background-color: #f0faff; color: #007bff; }
 
 /* --- SECTION HERO --- */
 #hero {
-    background-color: #007bff;
+    background: linear-gradient(rgba(0,123,255,0.8), rgba(0,123,255,0.8)), url('Images/hero-bg.jpg') center/cover;
     color: white;
-    height: 400px;
+    height: 450px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 0 20px;
 }
 
-#hero-titre { font-size: 32px; margin-bottom: 25px; line-height: 1.2; }
-#btnHero { background-color: white; color: #007bff; text-decoration: none; padding: 15px 35px; border-radius: 30px; font-weight: bold; font-size: 18px; }
+#hero-titre { font-size: 36px; margin-bottom: 30px; max-width: 600px; }
+#btnHero { 
+    background-color: white; 
+    color: #007bff; 
+    text-decoration: none; 
+    padding: 16px 40px; 
+    border-radius: 50px; 
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
 
 /* --- MOBILE --- */
 @media screen and (max-width: 480px) {
-    #titre { font-size: 18px; }
-    #logo { width: 35px; height: 35px; }
-    #btnDon { padding: 6px 10px; font-size: 13px; }
-    #menuRecherche.recherche { width: 55%; } 
-    #hero-titre { font-size: 26px; }
+    #header-droite { gap: 5px; }
+    #select-langue { padding: 8px 25px 8px 30px; font-size: 10px; }
+    #hero-titre { font-size: 24px; }
 }
