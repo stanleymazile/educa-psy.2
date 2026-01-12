@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+Document.addEventListener('DOMContentLoaded', () => {
     // MENU & LANGUE
     const menuBtn = document.getElementById('menu-btn');
     const nav = document.getElementById('mobile-nav');
@@ -32,9 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
             update();
         });
     };
-    animateStats();
+    
+    // Intersection Observer pour lancer l'animation au défilement
+    const observer = new IntersectionObserver((entries) => {
+        if(entries[0].isIntersecting) animateStats();
+    }, { threshold: 0.5 });
+    if(stats.length > 0) observer.observe(document.querySelector('.stats-section'));
 
-    // CARROUSEL MODERNE AVEC DOTS
+    // CARROUSEL
     const track = document.getElementById('carouselTrack');
     const nextBtn = document.getElementById('nextBtn');
     const prevBtn = document.getElementById('prevBtn');
@@ -65,20 +70,14 @@ document.addEventListener('DOMContentLoaded', () => {
         dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
     };
 
-    nextBtn.onclick = () => {
-        const visible = window.innerWidth > 768 ? 2 : 1;
-        if(currentIndex < items - visible) currentIndex++; else currentIndex = 0;
-        updateCarousel();
-    };
-
-    prevBtn.onclick = () => {
-        const visible = window.innerWidth > 768 ? 2 : 1;
-        if(currentIndex > 0) currentIndex--; else currentIndex = items - visible;
-        updateCarousel();
-    };
+    if(nextBtn) {
+        nextBtn.onclick = () => {
+            const visible = window.innerWidth > 768 ? 2 : 1;
+            if(currentIndex < items - visible) currentIndex++; else currentIndex = 0;
+            updateCarousel();
+        };
+    }
 
     createDots();
-    setInterval(nextBtn.onclick, 5000); // Auto-play toutes les 5s
-
     window.onclick = () => { langList.classList.remove('show'); nav.classList.remove('active'); };
 });
