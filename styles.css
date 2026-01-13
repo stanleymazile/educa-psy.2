@@ -3,6 +3,8 @@ body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
   overflow-x: hidden;
+  background-color: #fff;
+  color: #333;
 }
 
 /* --- ACCESSIBILITÉ --- */
@@ -53,12 +55,11 @@ body {
   width: 40px;
   height: 40px;
   margin-right: 10px;
-  border-radius: 15px;
+  border-radius: 8px;
   padding: 6px;
-  background-color: #e6f0ff; /* Bleu très clair */
+  background-color: #e6f0ff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   object-fit: contain;
-
 }
 #titre {
   color: #007bff;
@@ -191,26 +192,6 @@ body {
   transition: 0.3s ease;
 }
 
-/* --- RESPONSIVE --- */
-@media screen and (max-width: 480px) {
-  #titre {
-    font-size: 18px;
-  }
-  #logo {
-    width: 35px;
-    height: 35px;
-  }
-  #btnDon {
-    padding: 6px 10px;
-    font-size: 13px;
-  }
-  #menuRecherche.recherche {
-    width: 55%;
-  }
-  #hero-titre {
-    font-size: 26px;
-  }
-}
 /* --- FOOTER --- */
 #footer {
   background-color: #f8f9fa;
@@ -219,7 +200,7 @@ body {
   font-size: 14px;
   border-top: 1px solid #e0e0e0;
   max-width: 1200px;
-  margin: 0 auto; / centre le contenu /
+  margin: 0 auto;
 }
 
 .footer-contenu {
@@ -278,6 +259,22 @@ body {
   }
 }
 
-
-
-
+@media screen and (max-width: 480px) {
+  #titre {
+    font-size: 18px;
+  }
+  #logo {
+    width: 35px;
+    height: 35px;
+  }
+  #btnDon {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  #menuRecherche.recherche {
+    width: 55%;
+  }
+  #hero-titre {
+    font-size: 26px;
+  }
+}
