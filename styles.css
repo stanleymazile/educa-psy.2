@@ -12,22 +12,23 @@ body {
     padding: 0;
     width: 100%;
     overflow-x: hidden;
-    /* Police système moderne (style Apple) */
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
-    background-color: #fbfbfd; /* Gris ultra-léger pour faire ressortir les cartes */
+    background-color: #fbfbfd; /* Gris ultra-léger style minimaliste */
     color: #1d1d1f;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
 }
 
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+
 /* ==========================================================================
-   2. HEADER (Navigation & Padding)
+   2. HEADER (Navigation, Langues & Padding)
    ========================================================================== */
 #header {
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: 12px 25px; /* Padding généreux */
+    padding: 12px 25px;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -47,11 +48,7 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    text-decoration: none;
-    transition: opacity 0.2s;
 }
-
-#logoTitre:hover { opacity: 0.8; }
 
 #logo { width: 32px; height: 32px; object-fit: contain; }
 
@@ -69,7 +66,6 @@ body {
     gap: 18px;
 }
 
-/* Sélecteur de langue moderne */
 #select-langue {
     background: #f2f2f7;
     border: none;
@@ -82,7 +78,6 @@ body {
     outline: none;
 }
 
-/* Bouton Menu Hamburger */
 #btnMenu { 
     background: #f2f2f7; 
     border: none; 
@@ -96,9 +91,9 @@ body {
     gap: 4.5px; 
     cursor: pointer;
 }
+
 .barre { width: 20px; height: 1.5px; background: #000; transition: 0.3s; }
 
-/* Menu Déroulant */
 .dropdown-content { 
     display: none; 
     position: absolute; 
@@ -116,17 +111,14 @@ body {
 .menu-item { 
     display: block; 
     padding: 14px; 
-    text-decoration: none; 
-    color: #1d1d1f; 
     font-size: 15px; 
     border-radius: 12px; 
-    transition: 0.2s; 
 }
 .menu-item:hover { background: #f5f5f7; color: #007bff; }
 .signup-btn { background: #007bff; color: #fff !important; text-align: center; font-weight: 600; margin-top: 10px; }
 
 /* ==========================================================================
-   3. HERO PAGE (Le bleu sur toutes les pages)
+   3. HERO PAGE (Le style bleu persistant)
    ========================================================================== */
 .hero-page {
     height: 45vh;
@@ -157,7 +149,7 @@ body {
 }
 
 /* ==========================================================================
-   4. GRILLES, CARTES ET CONTENU
+   4. COMPOSANTS (Cartes & Boutons)
    ========================================================================== */
 .grid-container { 
     display: grid; 
@@ -185,11 +177,7 @@ body {
 }
 
 .card-title { font-size: 1.5rem; color: #007bff; margin-bottom: 15px; font-weight: 700; }
-.card-text { font-size: 1rem; color: #48484a; margin: 0; }
 
-/* ==========================================================================
-   5. BOUTON DON (Moderne & Centré)
-   ========================================================================== */
 .section-action { display: flex; justify-content: center; padding: 60px 20px; }
 
 .btn-don-moderne { 
@@ -200,11 +188,7 @@ body {
     font-weight: 700; 
     text-transform: uppercase; 
     font-size: 14px; 
-    letter-spacing: 0.5px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.08); 
-    transition: 0.3s; 
-    border: none; 
-    text-decoration: none;
 }
 
 .btn-don-moderne:hover { 
@@ -213,77 +197,60 @@ body {
 }
 
 /* ==========================================================================
-   6. FORMULAIRES (Contact, Connexion, Inscription)
+   5. FOOTER ENRICHI & MODERNE
    ========================================================================== */
-.contact-container { 
-    max-width: 550px; 
-    margin: -70px auto 80px; /* Chevauchement sur le Hero bleu */
-    padding: 0 20px; 
-    position: relative; 
-    z-index: 10; 
+#footer {
+    background-color: #f5f5f7;
+    padding: 80px 25px 40px;
+    border-top: 1px solid #e5e5e5;
 }
 
-.form-group { margin-bottom: 22px; text-align: left; }
-.form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #1d1d1f; }
-
-input, textarea { 
-    width: 100%; 
-    padding: 16px; 
-    border: 1px solid #d2d2d7; 
-    border-radius: 14px; 
-    background: #fbfbfd; 
-    font-size: 16px; 
-    transition: 0.2s; 
-    font-family: inherit;
+.footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
 }
 
-input:focus, textarea:focus { 
-    border-color: #007bff; 
-    background: #fff; 
-    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1); 
-    outline: none; 
+.footer-column { flex: 1; min-width: 250px; }
+
+.footer-logo { color: #007bff; font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; }
+
+.footer-column h4 { font-size: 16px; font-weight: 700; margin-bottom: 25px; }
+
+.footer-column ul { list-style: none; padding: 0; margin: 0; }
+
+.footer-column ul li { margin-bottom: 12px; }
+
+.footer-column ul li a { color: #6e6e73; font-size: 14px; }
+
+.footer-column ul li a:hover { color: #007bff; }
+
+.footer-socials { display: flex; gap: 15px; margin-top: 25px; }
+
+.footer-socials a {
+    width: 40px; height: 40px; background: #e8e8ed;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; font-size: 12px; font-weight: 700;
 }
 
-.btn-submit { 
-    width: 100%; 
-    background: #007bff; 
-    color: #fff; 
-    border: none; 
-    padding: 18px; 
-    border-radius: 14px; 
-    font-weight: 700; 
-    font-size: 16px;
-    cursor: pointer; 
-    transition: background 0.2s;
+.footer-socials a:hover { background: #007bff; color: #fff; transform: translateY(-3px); }
+
+.footer-btn-don {
+    display: inline-block; margin-top: 20px; padding: 10px 25px;
+    background-color: #007bff; color: white !important;
+    border-radius: 50px; font-size: 13px; font-weight: 600;
 }
 
-.btn-submit:hover { background: #0056b3; }
+.footer-bottom {
+    max-width: 1200px; margin: 60px auto 0; padding-top: 30px;
+    border-top: 1px solid #d2d2d7; text-align: center; font-size: 13px; color: #86868b;
+}
 
 /* ==========================================================================
-   7. FOOTER
-   ========================================================================== */
-#footer { background: #f5f5f7; padding: 80px 20px 40px; border-top: 1px solid #d2d2d7; }
-.footer-grid { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
-.footer-brand h3 { color: #007bff; font-weight: 800; font-size: 1.6rem; margin-bottom: 15px; }
-.footer-brand p { font-size: 14px; color: #6e6e73; max-width: 320px; margin-bottom: 20px; }
-.footer-socials { display: flex; gap: 15px; }
-.footer-socials a { 
-    background: #e2e2e7; 
-    width: 45px; 
-    height: 45px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    border-radius: 50%; 
-    color: #1d1d1f; 
-    font-weight: 700; 
-    text-decoration: none; 
-    font-size: 12px;
-}
-.footer-bottom { margin-top: 50px; text-align: center; font-size: 13px; color: #86868b; border-top: 1px solid #d2d2d7; padding-top: 30px; }
-
-/* ==========================================================================
-   8. ANIMATIONS ET RÉPONSIVITÉ
+   6. RESPONSIVITÉ
    ========================================================================== */
 @keyframes pop { 
     from { opacity: 0; transform: translateY(-10px) scale(0.95); } 
@@ -292,14 +259,11 @@ input:focus, textarea:focus {
 
 @media (max-width: 768px) {
     .hero-page h1 { font-size: 2.2rem; }
-    .grid-container { grid-template-columns: 1fr; padding: 40px 20px; }
-    .footer-grid { flex-direction: column; text-align: center; align-items: center; }
+    .footer-grid { flex-direction: column; text-align: center; }
+    .footer-socials { justify-content: center; }
 }
 
 @media (max-width: 480px) {
     #header { padding: 10px 15px; }
     #titre { font-size: 1.1rem; }
-    #header-droite { gap: 12px; }
-    .hero-page h1 { font-size: 1.8rem; }
-    .contact-container { margin-top: -40px; }
 }
