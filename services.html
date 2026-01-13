@@ -1,19 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-    <meta name="description" content="Découvrez nos services de soutien scolaire, psychologie et orientation en Haïti.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nos services : Tutorat, Psychologie, Orientation et Formation pour parents.">
     <title>Nos Services | Educa-Psy</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
-<main>
-    <section class="hero-page">
-        <h1>Nos Services</h1>
-        <p>Un accompagnement complet pour l'excellence académique et le bien-être.</p>
-    </section>
-    <div class="content-wrapper">
-        <div class="card-moderne">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
-                <article><h3>Tutorat</h3><p>Renforcement dans toutes les matières scolaires.</p></article>
-                <article><h3>Psychologie</h3><p>Soutien émotionnel et gestion du stress.</p></article>
-                <article><h3>Orientation</h3><p>Conseils pour le choix de carrière universitaire.</p></article>
+<body>
+    <header id="header">
+        <div class="header-container">
+            <a href="index.html" id="logoTitre"><img src="images/Logo.webp" id="logo"><h1 id="titre">Educa-Psy</h1></a>
+            <div id="header-droite">
+                <button id="btnMenu"><div class="barre"></div><div class="barre"></div><div class="barre"></div></button>
+                <nav id="menuDeroulant" class="dropdown-content">
+                    <a href="index.html" class="menu-item">Accueil</a>
+                    <a href="presentation.html" class="menu-item">Présentation</a>
+                    <a href="services.html" class="menu-item">Services</a>
+                    <a href="actualites.html" class="menu-item">Actualités</a>
+                    <a href="contact.html" class="menu-item">Contact</a>
+                    <a href="connexion.html" class="menu-item signup-btn">Connexion</a>
+                </nav>
             </div>
         </div>
-    </div>
-</main>
+    </header>
+
+    <main>
+        <section class="hero-page">
+            <h1>Nos Domaines d'Intervention</h1>
+            <p>Des solutions adaptées à chaque besoin éducatif et psychologique.</p>
+        </section>
+        <div class="content-wrapper">
+            <div class="card-moderne">
+                <div class="grid-services">
+                    <article style="border:1px solid #eee; border-radius:15px; padding:20px;">
+                        <h3>Tutorat Académique</h3>
+                        <p>Renforcement scolaire toutes matières.</p>
+                        <a href="service-tutorat.html" class="btn-style" style="padding:10px 20px; font-size:14px;">En savoir plus</a>
+                    </article>
+                    <article style="border:1px solid #eee; border-radius:15px; padding:20px;">
+                        <h3>Soutien Psychologique</h3>
+                        <p>Gestion du stress et confiance en soi.</p>
+                        <a href="service-psychologie.html" class="btn-style" style="padding:10px 20px; font-size:14px;">En savoir plus</a>
+                    </article>
+                    <article style="border:1px solid #eee; border-radius:15px; padding:20px;">
+                        <h3>Orientation</h3>
+                        <p>Trouver sa voie professionnelle.</p>
+                        <a href="service-orientation.html" class="btn-style" style="padding:10px 20px; font-size:14px;">En savoir plus</a>
+                    </article>
+                    <article style="border:1px solid #eee; border-radius:15px; padding:20px;">
+                        <h3>Formation Parents</h3>
+                        <p>Ateliers pour mieux accompagner vos enfants.</p>
+                        <a href="service-formation.html" class="btn-style" style="padding:10px 20px; font-size:14px;">En savoir plus</a>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer"><p>&copy; 2026 Educa-Psy Haïti.</p></footer>
+</body>
+</html>
