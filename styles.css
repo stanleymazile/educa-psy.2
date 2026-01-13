@@ -1,11 +1,11 @@
 /* --- CONFIGURATION GENERALE --- */
-body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; color: #333; line-height: 1.6; }
+body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: #333; }
 
-/* --- HEADER MINIMALISTE --- */
+/* --- HEADER SUR UNE SEULE LIGNE --- */
 #header {
-    background-color: white;
-    padding: 15px 5%;
-    border-bottom: 1px solid #f0f0f0;
+    background: #fff;
+    padding: 10px 5%;
+    border-bottom: 1px solid #f2f2f2;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -19,112 +19,105 @@ body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; color: #333; line-
     margin: 0 auto;
 }
 
-#logoTitre { display: flex; align-items: center; gap: 12px; }
-#logo { width: 35px; height: 35px; border-radius: 4px; }
-#titre { color: #007bff; margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+#logoTitre { display: flex; align-items: center; gap: 8px; }
+#logo { width: 30px; height: auto; }
+#titre { color: #007bff; margin: 0; font-size: 16px; font-weight: 700; letter-spacing: -0.3px; }
 
-#header-droite { display: flex; align-items: center; gap: 20px; }
+#header-droite { display: flex; align-items: center; gap: 15px; }
 
-/* LANGUE (Ultra-minimaliste) */
+/* Langue minimaliste */
 #select-langue {
     border: none;
     background: transparent;
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 700;
-    color: #666;
+    color: #888;
     cursor: pointer;
     outline: none;
+    text-transform: uppercase;
 }
 
-/* BOUTON MENU (À la place du compte) */
+/* Bouton Menu Minimaliste */
 #btnMenu {
-    background: #f8f9fa;
-    border: 1px solid #eee;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 13px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #333;
     cursor: pointer;
-    transition: 0.2s;
+    padding: 5px;
 }
-#btnMenu:hover { background: #007bff; color: white; border-color: #007bff; }
 
-/* MENU DÉROULANT */
+/* Dropdown Menu */
 #groupe-menu { position: relative; }
 .dropdown-content {
     display: none;
     position: absolute;
     right: 0;
-    top: 130%;
+    top: 40px;
     background: white;
-    min-width: 200px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    border-radius: 10px;
-    border: 1px solid #eee;
+    min-width: 180px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
     overflow: hidden;
 }
 .dropdown-content.voir { display: block; }
 .dropdown-content a {
     display: block;
-    padding: 12px 20px;
+    padding: 12px 18px;
     text-decoration: none;
     color: #444;
-    font-size: 14px;
+    font-size: 13px;
+    transition: background 0.2s;
 }
-.dropdown-content a:hover { background: #f0f7ff; color: #007bff; }
-.dropdown-content hr { border: 0; border-top: 1px solid #eee; margin: 0; }
+.dropdown-content a:hover { background: #f8faff; color: #007bff; }
+.dropdown-content hr { border: 0; border-top: 1px solid #f0f0f0; margin: 0; }
 
-/* --- SECTION HERO --- */
+/* --- HERO --- */
 #hero {
-    height: 450px;
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Images/hero-bg.jpg') center/cover;
+    height: 350px;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/hero-bg.jpg') center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: white;
 }
-#hero-titre { font-size: 36px; font-weight: 800; margin-bottom: 25px; padding: 0 20px; }
+#hero-titre { font-size: 28px; font-weight: 700; margin-bottom: 20px; }
 #btnHero {
-    display: inline-block;
     color: white;
     text-decoration: none;
-    border: 2px solid white;
-    padding: 12px 30px;
-    border-radius: 50px;
-    font-weight: 700;
+    border: 1.5px solid white;
+    padding: 8px 25px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
     transition: 0.3s;
 }
 #btnHero:hover { background: white; color: #007bff; }
 
-/* --- SECTION DON (APRES HERO) --- */
-#section-don-appel {
-    padding: 60px 5%;
-    background-color: #fff;
+/* --- BOUTON DON MINIMALISTE & MODERNE --- */
+#section-don {
+    padding: 40px 0;
     text-align: center;
 }
-.don-box p { font-size: 18px; color: #666; margin-bottom: 25px; }
-#btnDonFinal {
+
+#btnDonMinimal {
     display: inline-block;
-    background: #007bff;
-    color: white;
+    color: #007bff;
     text-decoration: none;
-    padding: 16px 45px;
-    border-radius: 50px;
-    font-weight: 800;
+    font-size: 13px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
-    transition: 0.3s;
-}
-#btnDonFinal:hover {
-    background: #0056b3;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+    letter-spacing: 1.5px;
+    padding: 12px 30px;
+    border: 1px solid #007bff;
+    border-radius: 2px; /* Style très architectural/minimaliste */
+    transition: all 0.4s ease;
 }
 
-/* RESPONSIVE */
-@media (max-width: 600px) {
-    #hero-titre { font-size: 28px; }
-    #btnDonFinal { width: 80%; padding: 15px 20px; }
+#btnDonMinimal:hover {
+    background: #007bff;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
 }
