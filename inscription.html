@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription | Educa-Psy</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
@@ -11,36 +11,23 @@
     <div id="header-part"></div>
 
     <main>
-        <div class="page-header">
-            <h1 class="title-main">Créer un compte</h1>
-            <p class="subtitle-main">Rejoignez la communauté Educa-Psy dès aujourd'hui.</p>
-        </div>
+        <section class="hero-page">
+            <h1>Rejoignez-nous</h1>
+            <p>Créez votre compte pour suivre nos actualités et services.</p>
+        </section>
 
-        <section class="contact-container">
-            <div class="card-moderne">
-                <form id="register-form">
-                    <div class="form-group">
-                        <label>Nom complet</label>
-                        <input type="text" placeholder="Prénom et Nom" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" placeholder="votre@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Mot de passe</label>
-                        <input type="password" placeholder="Minimum 8 caractères" required>
-                    </div>
-                    <button type="submit" class="btn-submit">Créer mon compte</button>
-                    <p style="text-align: center; font-size: 13px; margin-top: 20px;">
-                        Déjà inscrit ? <a href="connexion.html" style="color: #007bff; text-decoration: none; font-weight: 600;">Se connecter</a>
-                    </p>
+        <div class="content-wrapper">
+            <div class="card-moderne form-moderne">
+                <form id="signup-form">
+                    <input type="text" placeholder="Nom complet" required>
+                    <input type="email" placeholder="Adresse email" required>
+                    <input type="password" placeholder="Créer un mot de passe" required>
+                    <button type="submit" class="btn-submit-moderne">Créer mon compte</button>
                 </form>
             </div>
-        </section>
+        </div>
     </main>
 
     <div id="footer-part"></div>
 </body>
 </html>
-
