@@ -1,40 +1,31 @@
 /* ==========================================================================
-   1. VARIABLES DE THÈME (SEO & MAINTENANCE FACILE)
+   1. VARIABLES & RESET (ANTI-DÉBORDEMENT)
    ========================================================================== */
 :root {
-    --primary: #007bff;      /* Bleu Principal */
-    --secondary: #0056b3;    /* Bleu Foncé */
-    --bg-body: #f4f4f4;      /* Fond des pages */
+    --primary: #007bff;
+    --secondary: #0056b3;
+    --bg-light: #f4f4f4;
     --white: #ffffff;
     --dark: #333333;
     --shadow: rgba(0, 0, 0, 0.1);
 }
 
-/* ==========================================================================
-   2. RESET COMPLET (FIX DÉBORDEMENT & MARGES)
-   ========================================================================== */
-html {
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-}
-
-*, *:before, *:after {
-    box-sizing: inherit; /* Empêche le padding de faire déborder les blocs */
-}
+html { box-sizing: border-box; scroll-behavior: smooth; }
+*, *:before, *:after { box-sizing: inherit; }
 
 body {
     margin: 0;
     padding: 0;
     width: 100%;
-    overflow-x: hidden; /* Sécurité anti-scroll horizontal */
-    background-color: var(--bg-body);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden; /* Sécurité totale contre le scroll horizontal */
+    background-color: var(--bg-light);
+    font-family: 'Segoe UI', Arial, sans-serif;
     color: var(--dark);
     line-height: 1.6;
 }
 
 /* ==========================================================================
-   3. HEADER & FOOTER ORIGINAUX (CONSERVÉS)
+   2. HEADER ORIGINAL RESTAURÉ
    ========================================================================== */
 #header {
     background-color: var(--white);
@@ -43,6 +34,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
+    width: 100%;
 }
 
 .header-container {
@@ -53,19 +45,16 @@ body {
     margin: 0 auto;
 }
 
-#titre { color: var(--primary); font-size: 22px; margin: 0; }
+#logoTitre { display: flex; align-items: center; gap: 10px; text-decoration: none; }
 #logo { width: 40px; height: auto; }
+#titre { color: var(--primary); font-size: 22px; margin: 0; font-weight: bold; }
 
-#footer {
-    background-color: var(--dark);
-    color: var(--white);
-    padding: 40px 20px;
-    text-align: center;
-    width: 100%;
-}
+#header-droite { display: flex; align-items: center; gap: 15px; }
+#btnMenu { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
+.barre { width: 25px; height: 3px; background-color: var(--dark); }
 
 /* ==========================================================================
-   4. STRUCTURE MODERNE (HERO & CARTES)
+   3. STRUCTURE DES PAGES (HERO & CARTES)
    ========================================================================== */
 .hero-page {
     width: 100%;
@@ -80,19 +69,8 @@ body {
     color: var(--white);
 }
 
-.hero-page h1 {
-    font-size: 2.8rem;
-    font-weight: 800;
-    margin-bottom: 15px;
-    color: var(--white) !important;
-}
-
-.hero-page p {
-    font-size: 1.2rem;
-    max-width: 800px;
-    opacity: 0.95;
-    color: var(--white) !important;
-}
+.hero-page h1 { font-size: 2.8rem; margin: 0 0 15px 0; color: var(--white) !important; font-weight: 800; }
+.hero-page p { font-size: 1.2rem; max-width: 800px; color: var(--white) !important; opacity: 0.95; }
 
 .content-wrapper {
     max-width: 1100px;
@@ -109,36 +87,43 @@ body {
     box-shadow: 0 15px 35px var(--shadow);
 }
 
-/* ==========================================================================
-   5. FORMULAIRES & BOUTONS SEO-FRIENDLY
-   ========================================================================== */
+/* Formulaires */
 .input-style {
     width: 100%;
     padding: 15px;
-    margin: 10px 0 20px;
+    margin: 8px 0 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
     font-size: 16px;
-    display: block;
 }
 
 .btn-style {
     width: 100%;
     padding: 16px;
-    background-color: var(--primary);
+    background: var(--primary);
     color: var(--white);
     border: none;
     border-radius: 10px;
     font-weight: bold;
-    font-size: 16px;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: 0.3s;
 }
 
-.btn-style:hover { background-color: var(--secondary); transform: translateY(-2px); }
+.btn-style:hover { background: var(--secondary); transform: translateY(-2px); }
 
 /* ==========================================================================
-   6. RESPONSIVE (ADAPTATION MOBILE)
+   4. FOOTER ORIGINAL
+   ========================================================================== */
+#footer {
+    background-color: var(--dark);
+    color: var(--white);
+    padding: 40px 20px;
+    text-align: center;
+    width: 100%;
+}
+
+/* ==========================================================================
+   5. RÉPONSIVITÉ
    ========================================================================== */
 @media (max-width: 768px) {
     .hero-page h1 { font-size: 2.1rem; }
