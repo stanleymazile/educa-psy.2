@@ -1,112 +1,91 @@
-/* --- OPTIMISATION MOBILE & RESET --- */
-* { 
-    box-sizing: border-box; 
-    scroll-behavior: smooth; 
-    -webkit-tap-highlight-color: transparent; 
-}
+/* --- BASE & OPTIMISATION --- */
+* { box-sizing: border-box; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+body { margin: 0; font-family: -apple-system, system-ui, sans-serif; background: #fff; color: #1d1d1f; }
 
-body { 
-    margin: 0; 
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-    background-color: #ffffff; 
-    color: #1d1d1f;
-    line-height: 1.4;
-}
-
-/* --- HEADER MOBILE-FIRST --- */
+/* --- HEADER --- */
 #header {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: saturate(180%) blur(20px); /* Effet verre dépoli */
-    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(15px);
+    padding: 10px 15px;
     position: sticky; top: 0; z-index: 1000;
-    border-bottom: 0.5px solid rgba(0,0,0,0.1);
+    border-bottom: 0.5px solid rgba(0,0,0,0.08);
 }
+.header-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+#logo { width: 24px; height: 24px; }
+#titre { color: #007bff; font-size: 1rem; font-weight: 800; margin: 0; }
 
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1000px;
-    margin: 0 auto;
-}
+#header-droite { display: flex; align-items: center; gap: 12px; }
+#select-langue { background: none; border: none; font-size: 11px; font-weight: 700; cursor: pointer; text-transform: uppercase; }
 
-#logoTitre { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-#logo { width: 24px; height: 24px; object-fit: contain; }
-#titre { color: #007bff; margin: 0; font-size: 1rem; font-weight: 700; letter-spacing: -0.02em; }
-
-#header-droite { display: flex; align-items: center; gap: 10px; }
-
-/* --- LANGUE SANS BACKGROUND --- */
-#select-langue {
-    background: none;
-    border: none;
-    font-size: 11px;
-    font-weight: 700;
-    color: #333;
-    cursor: pointer;
-    padding: 4px;
-    outline: none;
-    text-transform: uppercase;
-    /* La flèche de défilement native est conservée ici */
-}
-
-/* --- BOUTON MENU ROND (STYLE APP) --- */
+/* BOUTON MENU 3 BARRES */
 #btnMenu {
-    background: #f2f2f7; 
-    border: none; 
-    width: 36px; height: 36px;
-    border-radius: 50%; 
-    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 3.5px;
-    cursor: pointer;
+    background: #f2f2f7; border: none; width: 38px; height: 38px;
+    border-radius: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px;
 }
-.barre { width: 15px; height: 1.5px; background: #000; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.barre { width: 18px; height: 1.5px; background: #000; transition: 0.3s; }
 
-/* DROPDOWN */
+/* DROPDOWN (Arrondi presque carré) */
 .dropdown-content {
-    display: none; position: absolute; right: 0; top: 45px;
-    width: 190px; background: white; border-radius: 14px;
-    padding: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 0.5px solid #eee;
+    display: none; position: absolute; right: 0; top: 48px;
+    width: 200px; background: white; 
+    border-radius: 8px; /* Presque carré mais doux */
+    padding: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 1px solid #eee;
 }
-.dropdown-content.voir { display: block; animation: popIn 0.2s ease-out; }
+.dropdown-content.voir { display: block; }
+.menu-item { display: block; padding: 12px; text-decoration: none; color: #333; font-size: 14px; border-radius: 6px; }
+.signup-btn { background: #007bff; color: #fff !important; text-align: center; }
 
-.menu-item { display: block; padding: 12px; text-decoration: none; color: #000; font-size: 14px; border-radius: 10px; }
-.menu-item:hover { background: #f5f5f7; }
-.menu-divider { height: 0.5px; background: #eee; margin: 6px 0; }
-.signup-btn { background: #007bff; color: #fff !important; text-align: center; font-weight: 600; }
-
-/* --- HERO COMPACT (35% de la vue) --- */
+/* --- HERO PLUS LONG --- */
 #hero {
-    height: 35vh; 
-    min-height: 260px;
-    background: #007bff; 
-    display: flex; align-items: center; justify-content: center; 
-    text-align: center; color: white; padding: 15px;
+    height: 60vh; /* Augmentation de la longueur */
+    min-height: 400px;
+    background: #007bff;
+    display: flex; align-items: center; justify-content: center; text-align: center; color: white; padding: 20px;
 }
-#hero-titre { font-size: 1.6rem; font-weight: 800; margin: 0 0 10px 0; line-height: 1.1; }
+#hero-titre { font-size: 2rem; font-weight: 800; margin-bottom: 15px; }
 #hero-titre span { color: rgba(255,255,255,0.7); }
-.hero-soustitre { font-size: 0.9rem; margin-bottom: 20px; opacity: 0.9; }
+.hero-soustitre { font-size: 1rem; max-width: 450px; margin: 0 auto 25px; opacity: 0.9; }
 #btnHero {
     display: inline-block; color: white; text-decoration: none;
-    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
-    padding: 10px 22px; border-radius: 25px; font-size: 12px; font-weight: 600;
+    background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4);
+    padding: 12px 25px; border-radius: 50px; font-size: 13px; font-weight: 600;
 }
 
-/* --- BOUTON DON OPTIMISÉ --- */
-#section-don { padding: 25px 0; display: flex; justify-content: center; }
+/* --- SECTION DON --- */
+#section-don { padding: 40px 0; text-align: center; }
 #btnDonMinimal {
-    display: inline-block;
-    background: #007bff;
-    color: white; padding: 12px 30px; text-decoration: none;
-    border-radius: 25px; font-size: 13px; font-weight: 700;
-    letter-spacing: 0.3px;
-    box-shadow: 0 4px 12px rgba(0,123,255,0.15);
+    display: inline-block; background: #007bff; color: white; 
+    padding: 14px 35px; text-decoration: none; border-radius: 50px; 
+    font-size: 13px; font-weight: 700; text-transform: uppercase;
 }
 
-/* ANIMATIONS */
-@keyframes popIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+/* --- FOOTER MODERNE --- */
+#footer {
+    background: #f9f9fb;
+    padding: 50px 20px 20px;
+    border-top: 1px solid #eee;
+}
+.footer-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 30px;
+}
+.footer-brand h3 { color: #007bff; margin: 0 0 10px; }
+.footer-brand p { font-size: 14px; color: #666; max-width: 250px; }
+.footer-socials { display: flex; gap: 15px; }
+.footer-socials a { 
+    text-decoration: none; color: #333; font-size: 12px; font-weight: 700;
+    width: 35px; height: 35px; background: #eee; 
+    display: flex; align-items: center; justify-content: center; border-radius: 50%;
+}
+.footer-bottom {
+    max-width: 1200px; margin: 40px auto 0;
+    padding-top: 20px; border-top: 1px solid #eee;
+    text-align: center; font-size: 12px; color: #999;
+}
 
-/* RESPONSIVE */
-@media (max-width: 380px) {
-    #titre { font-size: 0.85rem; }
-    #hero-titre { font-size: 1.4rem; }
+/* MOBILE */
+@media (max-width: 480px) {
+    #hero-titre { font-size: 1.7rem; }
+    .footer-grid { flex-direction: column; text-align: center; align-items: center; }
 }
