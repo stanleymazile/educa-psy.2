@@ -1,17 +1,28 @@
 const btnMenu = document.getElementById('btnMenu');
-const menuNav = document.getElementById('liens-deroulants');
+const nav = document.getElementById('liens-deroulants');
+const btnLangue = document.getElementById('btnLangue');
+const menuLangue = document.getElementById('menuLangue');
 
-// Gérer l'ouverture/fermeture du menu mobile
-if (btnMenu && menuNav) {
+// Gestion du menu burger mobile
+if (btnMenu && nav) {
     btnMenu.onclick = function(e) {
-        menuNav.classList.toggle('voir');
+        nav.classList.toggle('voir');
+        if (menuLangue) menuLangue.classList.remove('active');
         e.stopPropagation();
     };
 }
 
-// Fermer le menu si l'utilisateur clique en dehors
+// Gestion du bouton de langue
+if (btnLangue && menuLangue) {
+    btnLangue.onclick = function(e) {
+        menuLangue.classList.toggle('active');
+        if (nav) nav.classList.remove('voir');
+        e.stopPropagation();
+    };
+}
+
+// Fermeture globale au clic n'importe où ailleurs
 window.onclick = function() {
-    if (menuNav && menuNav.classList.contains('voir')) {
-        menuNav.classList.remove('voir');
-    }
+    if (nav) nav.classList.remove('voir');
+    if (menuLangue) menuLangue.classList.remove('active');
 };
