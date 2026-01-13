@@ -1,17 +1,15 @@
-// CHARGEMENT DES COMPOSANTS
 async function chargerComposants() {
     try {
         const hRes = await fetch('header.html');
         document.getElementById('header-part').innerHTML = await hRes.text();
-
+        
         const fRes = await fetch('footer.html');
         document.getElementById('footer-part').innerHTML = await fRes.text();
-
+        
         activerMenu();
-    } catch (e) { console.error("Erreur de chargement:", e); }
+    } catch (e) { console.error("Erreur de chargement", e); }
 }
 
-// LOGIQUE DU MENU HAMBURGER
 function activerMenu() {
     const btn = document.getElementById('btnMenu');
     const menu = document.getElementById('liens-deroulants');
@@ -37,5 +35,4 @@ function activerMenu() {
         });
     }
 }
-
 chargerComposants();
