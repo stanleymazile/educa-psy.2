@@ -1,11 +1,12 @@
-/* --- CONFIGURATION DE BASE --- */
+## **styles.css**
+
+```css
 body { 
     margin: 0; 
     font-family: 'Segoe UI', Arial, sans-serif; 
     overflow-x: hidden; 
 }
 
-/* --- HEADER GLOBAL --- */
 #header {
     background-color: white;
     border-bottom: 2px solid #007bff;
@@ -14,7 +15,6 @@ body {
     padding: 10px 4%;
 }
 
-/* --- LIGNE 1 --- */
 .header-ligne-haut {
     display: flex;
     justify-content: space-between;
@@ -23,19 +23,41 @@ body {
     padding-bottom: 12px;
 }
 
-#logoTitre { display: flex; align-items: center; }
-#logo { width: 40px; height: 40px; margin-right: 10px; border-radius: 5px; }
-#titre { color: #007bff; margin: 0; font-size: 20px; font-weight: bold; }
+#logoTitre { 
+    display: flex; 
+    align-items: center; 
+}
 
-#header-droite { display: flex; align-items: center; gap: 8px; }
+#logo { 
+    width: 40px; 
+    height: 40px; 
+    margin-right: 10px; 
+    border-radius: 5px;
+}
+
+#titre { 
+    color: #007bff; 
+    margin: 0; 
+    font-size: 20px; 
+    font-weight: bold;
+}
+
+#header-droite { 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+}
+
 #select-langue { 
     padding: 6px 10px; 
     border-radius: 5px; 
     border: 1px solid #ccc; 
-    background-color: white; 
-    font-weight: bold; 
+    font-size: 13px;
+    background: white;
+    font-weight: bold;
     cursor: pointer;
 }
+
 #btnDon { 
     background-color: #007bff; 
     color: white; 
@@ -46,7 +68,6 @@ body {
     font-size: 14px;
 }
 
-/* --- LIGNE 2 --- */
 .header-ligne-bas {
     display: flex;
     justify-content: space-between;
@@ -73,14 +94,29 @@ body {
     padding: 4px 12px; 
     border-radius: 20px; 
     background-color: #fafafa;
-    width: 60%; 
+    width: 60%;
     max-width: 300px;
 }
-#recherche { border: none; outline: none; width: 100%; background: transparent; font-size: 14px; }
-#btnChercher { background: none; border: none; cursor: pointer; font-size: 14px; }
 
-/* --- MENU DÉROULANT --- */
-#groupe-menu { position: relative; }
+#recherche { 
+    border: none; 
+    outline: none; 
+    width: 100%; 
+    background: transparent; 
+    font-size: 14px;
+}
+
+#btnChercher { 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 14px;
+}
+
+#groupe-menu { 
+    position: relative; 
+}
+
 #liens-deroulants { 
     display: none; 
     position: absolute; 
@@ -92,11 +128,23 @@ body {
     z-index: 1000;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-#liens-deroulants.voir { display: block; }
-.item-menu { display: block; padding: 12px; text-decoration: none; color: #333; border-bottom: 1px solid #eee; }
-.item-menu:hover { background-color: #f0faff; }
 
-/* --- HERO --- */
+#liens-deroulants.voir { 
+    display: block; 
+}
+
+.item-menu { 
+    display: block; 
+    padding: 12px; 
+    text-decoration: none; 
+    color: #333; 
+    border-bottom: 1px solid #eee; 
+}
+
+.item-menu:hover { 
+    background-color: #f0faff; 
+}
+
 #hero {
     background-color: #007bff;
     color: white;
@@ -108,7 +156,13 @@ body {
     text-align: center;
     padding: 0 20px;
 }
-#hero-titre { font-size: 32px; margin-bottom: 25px; line-height: 1.2; }
+
+#hero-titre { 
+    font-size: 32px; 
+    margin-bottom: 25px; 
+    line-height: 1.2;
+}
+
 #btnHero {
     background-color: white;
     color: #007bff;
@@ -118,13 +172,24 @@ body {
     font-weight: bold;
     font-size: 18px;
 }
-#btnHero:hover { background-color: #0056b3; color: white; transition: 0.3s ease; }
 
-/* --- MOBILE --- */
 @media screen and (max-width: 480px) {
-    #titre { font-size: 18px; }
-    #logo { width: 35px; height: 35px; }
-    #btnDon { padding: 6px 10px; font-size: 13px; }
-    #menuRecherche.recherche { width: 55%; }
-    #hero-titre { font-size: 26px; }
+    #titre { 
+        font-size: 18px; 
+    }
+    #logo { 
+        width: 35px; 
+        height: 35px; 
+    }
+    #btnDon { 
+        padding: 6px 10px; 
+        font-size: 13px; 
+    }
+    #menuRecherche.recherche { 
+        width: 55%; 
+    }
+    #hero-titre { 
+        font-size: 26px; 
+    }
 }
+```
