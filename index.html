@@ -3,50 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educa-Psy | Éducation et Psychologie</title>
+    <title>Educa-Psy | Éducation et Psychologie en Haïti</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <header id="header">
-        <div class="header-ligne-haut">
+        <div class="header-contenu">
             <section class="logo-titre">
-                <img src="Logo 3.png" alt="Logo" class="logo-img"> 
+                <img src="Logo 3.png" alt="Logo Educa-Psy" class="logo-img"> 
                 <h2 class="site-titre">Educa-Psy</h2>
             </section>
 
             <section class="header-droite">
-                <div class="langue-dropdown">
-                    <button class="btn-langue" id="btnLangue">
-                        <span class="icon-monde">🌐</span>
-                        <span class="lang-code">FR</span>
-                        <span class="chevron">▼</span>
-                    </button>
-                    <ul class="langue-options" id="langueOptions">
-                        <li><a href="#" data-lang="fr">Français</a></li>
-                        <li><a href="#" data-lang="ht">Kreyòl</a></li>
-                        <li><a href="#" data-lang="en">English</a></li>
-                        <li><a href="#" data-lang="es">Español</a></li>
-                    </ul>
-                </div>
-                <a href="don.html" class="btn-don">Don</a>
-            </section>
-        </div>
-
-        <div class="header-ligne-bas">
-            <section class="groupe-menu">
-                <button id="btnMenu" class="btn-menu">☰ Menu</button>
-                <nav id="liens-deroulants" class="menu-navigation">
-                    <a href="index.html" class="item-menu">Accueil</a>
-                    <a href="presentation.html" class="item-menu">Présentation</a>
-                    <a href="services.html" class="item-menu">Services</a>
-                    <a href="contact.html" class="item-menu">Contact</a>
+                <nav id="liens-deroulants" class="nav-principale">
+                    <a href="index.html" class="nav-item">Accueil</a>
+                    <a href="presentation.html" class="nav-item">Présentation</a>
+                    <a href="services.html" class="nav-item">Services</a>
+                    <a href="contact.html" class="nav-item">Contact</a>
                 </nav>
-            </section>
-
-            <section class="menu-recherche recherche">
-                <input type="text" class="recherche-input" placeholder="Rechercher...">
-                <button class="btn-chercher">🔍</button>
+                <button id="btnMenu" class="menu-toggle" aria-label="Ouvrir le menu">
+                    <span class="barre"></span>
+                    <span class="barre"></span>
+                    <span class="barre"></span>
+                </button>
             </section>
         </div>
     </header>
@@ -55,33 +35,36 @@
         <section id="hero">
             <div class="hero-contenu">
                 <h1 class="hero-titre">L'éducation pour chaque enfant en Haïti</h1>
-                <a href="services.html" class="btn-hero">Découvrir</a>
+                <div class="hero-actions">
+                    <a href="services.html" class="btn-hero-outline">Découvrir</a>
+                    <a href="don.html" class="btn-don-body">Faire un Don</a>
+                </div>
             </div>
         </section>
     </main>
 
     <footer id="footer">
-        <div class="footer-contenu">
-            <div class="footer-section">
-                <h3>Educa-Psy</h3>
-                <p>Soutenir l'éducation et le bien-être psychologique des enfants en Haïti.</p>
+        <div class="footer-container">
+            <div class="footer-column branding">
+                <h3 class="footer-logo">Educa-Psy</h3>
+                <p>Engagés pour l'épanouissement éducatif et psychologique des enfants en Haïti. Ensemble, bâtissons l'avenir.</p>
             </div>
-            <div class="footer-section">
+            <div class="footer-column">
                 <h4>Navigation</h4>
-                <ul>
+                <ul class="footer-links">
                     <li><a href="index.html">Accueil</a></li>
-                    <li><a href="services.html">Services</a></li>
+                    <li><a href="presentation.html">À propos</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
-            <div class="footer-section">
+            <div class="footer-column">
                 <h4>Contact</h4>
                 <p>📧 contact@educapsy.ht</p>
                 <p>📍 Port-au-Prince, Haïti</p>
             </div>
         </div>
-        <div class="footer-bas">
-            <p>&copy; 2026 Educa-Psy. Tous droits réservés.</p>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Educa-Psy — Tous droits réservés.</p>
         </div>
     </footer>
 
