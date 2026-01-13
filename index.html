@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educa-Psy</title>
+    <title>Educa-Psy | Accueil</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <header id="header">
-        <div class="header-ligne-haut">
+        <div class="header-container">
             <section id="logoTitre">
-                <img src="images/Logo.webp" alt="Logo" id="logo"> 
+                <img src="Images/Logo.webp" alt="Logo" id="logo"> 
                 <h2 id="titre">Educa-Psy</h2>
             </section>
 
-            <section id="header-droite-haut">
+            <section id="header-droite">
                 <select id="select-langue">
                     <option value="fr">FR</option>
                     <option value="ht">HT</option> 
@@ -23,31 +23,19 @@
                     <option value="es">ES</option>
                 </select>
 
-                <div id="groupe-compte">
-                    <button id="btnCompte">
-                        <span class="icon-user"></span>
-                        Compte
-                    </button>
-                    <nav id="menu-compte" class="dropdown-content">
+                <div id="groupe-menu">
+                    <button id="btnMenu">☰ Menu</button>
+                    <nav id="liens-deroulants" class="dropdown-content">
+                        <a href="index.html">Accueil</a>
+                        <a href="presentation.html">Présentation</a>
+                        <a href="services.html">Services</a>
+                        <a href="contact.html">Contact</a>
+                        <hr>
                         <a href="connexion.html">Connexion</a>
                         <a href="inscription.html">Inscription</a>
                     </nav>
                 </div>
             </section>
-        </div>
-
-        <div class="header-ligne-bas">
-            <section id="groupe-menu">
-                <button id="btnMenu">☰ Menu</button>
-                <nav id="liens-deroulants" class="dropdown-content">
-                    <a href="index.html">Accueil</a>
-                    <a href="presentation.html">Présentation</a>
-                    <a href="services.html">Services</a>
-                    <a href="contact.html">Contact</a>
-                </nav>
-            </section>
-
-            <a href="don.html" id="btnDonNav">Faire un Don</a>
         </div>
     </header>
 
@@ -58,7 +46,13 @@
         </div>
     </section>
 
+    <section id="section-don-appel">
+        <div class="don-box">
+            <p>Votre générosité transforme des vies.</p>
+            <a href="don.html" id="btnDonFinal">Faire un Don</a>
+        </div>
+    </section>
+
     <script src="script.js"></script>
 </body>
 </html>
-
