@@ -1,256 +1,100 @@
-/* ================= BASE ================= */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background-color: #f9f9f9;
+/* --- CONFIGURATION GÉNÉRALE --- */
+body { 
+    margin: 0; 
+    font-family: 'Segoe UI', Arial, sans-serif; 
+    overflow-x: hidden; 
+    color: #333;
 }
 
-/* ================= HEADER ================= */
-.header {
-  background: white;
-  border-bottom: 2px solid #007bff;
-  padding: 10px 4%;
+/* --- HEADER --- */
+#header {
+    background-color: white;
+    border-bottom: 2px solid #007bff;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 4%;
 }
 
-/* Ligne flex */
-.header-ligne {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.header-ligne-haut, .header-ligne-bas {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
-/* Ligne haut */
-.header-ligne-haut {
-  padding-bottom: 12px;
-}
+.logo-titre { display: flex; align-items: center; }
+.logo-img { width: 40px; height: 40px; margin-right: 10px; border-radius: 5px; }
+.site-titre { color: #007bff; margin: 0; font-size: 20px; }
 
-/* Ligne bas */
-.header-ligne-bas {
-  padding-top: 10px;
-  border-top: 1px solid #eee;
-}
+.header-droite { display: flex; align-items: center; gap: 15px; }
 
-/* ================= LOGO ================= */
-.logo-titre {
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-}
-
-.titre-site {
-  color: #007bff;
-  font-size: 20px;
-  font-weight: bold;
-  margin: 0;
-}
-
-/* ================= DROITE ================= */
-.header-droite {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Bouton Don */
-.btn-don {
-  background: #007bff;
-  color: white;
-  padding: 8px 14px;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 14px;
-  transition: all 0.3s ease;
-}
-
-.btn-don:hover {
-  transform: scale(1.05);
-}
-
-/* ================= MENU ================= */
-.groupe-menu {
-  position: relative;
-}
-
-.btn-menu {
-  background: #f0f0f0;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.menu-deroulant {
-  display: none;
-  position: absolute;
-  top: 110%;
-  left: 0;
-  background: white;
-  border: 1px solid #ddd;
-  width: 180px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  z-index: 1000;
-}
-
-.menu-deroulant.voir {
-  display: block;
-}
-
-.item-menu {
-  display: block;
-  padding: 12px;
-  text-decoration: none;
-  color: #333;
-  font-size: 14px;
-}
-
-.item-menu:hover {
-  background: #f0faff;
-}
-
-/* ================= RECHERCHE ================= */
-.recherche {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  padding: 4px 10px;
-  background-color: #fafafa;
-}
-
-.recherche input {
-  border: none;
-  outline: none;
-  background: transparent;
-  font-size: 14px;
-}
-
-.recherche button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-/* ================= BOUTON LANGUE ================= */
-.langue-wrapper {
-  position: relative;
-}
-
+/* --- BOUTON LANGUE MODERNE --- */
+.langue-dropdown { position: relative; }
 .btn-langue {
-  background: #f8f9fa;
-  border: 1px solid #ddd;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
 }
+.langue-options {
+    display: none;
+    position: absolute;
+    right: 0; top: 110%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    list-style: none;
+    padding: 8px 0;
+    width: 130px;
+    z-index: 1000;
+}
+.langue-options.active { display: block; }
+.langue-options li a { display: block; padding: 10px 15px; text-decoration: none; color: #333; }
+.langue-options li a:hover { background: #f0f7ff; color: #007bff; }
 
-.btn-langue:hover {
-  background-color: #007bff;
-  color: white;
-  transform: scale(1.05);
-}
+/* --- BOUTONS ET RECHERCHE --- */
+.btn-don { background: #007bff; color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; font-weight: bold; }
+.btn-menu { background: #f0f0f0; border: none; padding: 8px 12px; cursor: pointer; border-radius: 5px; }
 
-/* Menu langue */
-.menu-langue {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 120%;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  min-width: 140px;
+.recherche { 
+    display: flex; 
+    border: 1px solid #ccc; 
+    padding: 4px 12px; 
+    border-radius: 20px; 
+    width: 60%; 
+    max-width: 300px; 
 }
+.recherche-input { border: none; outline: none; width: 100%; background: transparent; }
 
-.menu-langue span {
-  display: block;
-  padding: 10px 14px;
-  cursor: pointer;
-  font-size: 14px;
+/* --- MENU DÉROULANT --- */
+.menu-navigation { 
+    display: none; 
+    position: absolute; 
+    background: white; 
+    border: 1px solid #ddd; 
+    width: 180px; 
+    z-index: 1000; 
 }
+.menu-navigation.voir { display: block; }
+.item-menu { display: block; padding: 12px; text-decoration: none; color: #333; border-bottom: 1px solid #eee; }
 
-.menu-langue span:hover {
-  background-color: #f0faff;
+/* --- HERO & FOOTER --- */
+#hero {
+    background: #007bff;
+    color: white;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
+.btn-hero { background: white; color: #007bff; padding: 15px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; }
 
-/* Affichage menu langue au hover */
-.langue-wrapper:hover .menu-langue {
-  display: block;
-}
-
-/* ================= HERO ================= */
-.hero {
-  height: 400px;
-  background: #007bff;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 20px;
-}
-
-.hero-titre {
-  font-size: 32px;
-  margin-bottom: 25px;
-  line-height: 1.2;
-}
-
-.btn-hero {
-  background: white;
-  color: #007bff;
-  text-decoration: none;
-  padding: 15px 35px;
-  border-radius: 30px;
-  font-weight: bold;
-  font-size: 18px;
-  transition: all 0.3s ease;
-}
-
-.btn-hero:hover {
-  transform: scale(1.05);
-}
-
-/* ================= FOOTER ================= */
-.footer {
-  text-align: center;
-  padding: 15px 0;
-  background: #f0f0f0;
-  color: #333;
-  font-size: 14px;
-}
-
-/* ================= RESPONSIVE ================= */
-@media screen and (max-width: 480px) {
-  .titre-site {
-    font-size: 18px;
-  }
-  .logo {
-    width: 35px;
-    height: 35px;
-  }
-  .btn-don {
-    padding: 6px 10px;
-    font-size: 13px;
-  }
-  .recherche {
-    width: 55%;
-  }
-  .hero-titre {
-    font-size: 26px;
-  }
-  .btn-hero {
-    padding: 12px 25px;
-    font-size: 16px;
-  }
-}
+#footer { background: #2c3e50; color: white; padding: 40px 4% 20px; margin-top: 50px; }
+.footer-contenu { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+.footer-bas { text-align: center; border-top: 1px solid #3e4f5f; margin-top: 30px; padding-top: 20px; font-size: 14px; }
