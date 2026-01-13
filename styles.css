@@ -1,11 +1,17 @@
 /* --- CONFIGURATION GENERALE --- */
-body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: #333; }
+body { 
+    margin: 0; 
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    color: #333;
+    background-color: #f9fbfd; /* Fond doux qui ne fatigue pas les yeux */
+    overflow-x: hidden;
+}
 
-/* --- HEADER SUR UNE SEULE LIGNE --- */
+/* --- HEADER COMPACT (Une seule ligne) --- */
 #header {
-    background: #fff;
+    background: #ffffff;
     padding: 10px 5%;
-    border-bottom: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f0f0f0;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -20,34 +26,31 @@ body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-
 }
 
 #logoTitre { display: flex; align-items: center; gap: 8px; }
-#logo { width: 30px; height: auto; }
-#titre { color: #007bff; margin: 0; font-size: 16px; font-weight: 700; letter-spacing: -0.3px; }
+#logo { width: 28px; height: auto; }
+#titre { color: #007bff; margin: 0; font-size: 16px; font-weight: 700; }
 
 #header-droite { display: flex; align-items: center; gap: 15px; }
 
-/* Langue minimaliste */
 #select-langue {
     border: none;
     background: transparent;
     font-size: 11px;
     font-weight: 700;
-    color: #888;
+    color: #777;
     cursor: pointer;
     outline: none;
-    text-transform: uppercase;
 }
 
-/* Bouton Menu Minimaliste */
 #btnMenu {
     background: none;
     border: none;
-    font-size: 18px;
+    font-size: 20px;
     color: #333;
     cursor: pointer;
-    padding: 5px;
+    padding: 0;
 }
 
-/* Dropdown Menu */
+/* MENU DÉROULANT */
 #groupe-menu { position: relative; }
 .dropdown-content {
     display: none;
@@ -56,10 +59,9 @@ body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-
     top: 40px;
     background: white;
     min-width: 180px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     border-radius: 8px;
-    border: 1px solid #f0f0f0;
-    overflow: hidden;
+    z-index: 1001;
 }
 .dropdown-content.voir { display: block; }
 .dropdown-content a {
@@ -67,57 +69,64 @@ body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-
     padding: 12px 18px;
     text-decoration: none;
     color: #444;
-    font-size: 13px;
-    transition: background 0.2s;
+    font-size: 14px;
 }
-.dropdown-content a:hover { background: #f8faff; color: #007bff; }
 .dropdown-content hr { border: 0; border-top: 1px solid #f0f0f0; margin: 0; }
 
-/* --- HERO --- */
+/* --- HERO (ADAPTÉ MOBILE) --- */
 #hero {
-    height: 350px;
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/hero-bg.jpg') center/cover;
+    height: 320px;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/hero-bg.jpg') center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: white;
+    padding: 0 15px;
 }
-#hero-titre { font-size: 28px; font-weight: 700; margin-bottom: 20px; }
+#hero-titre { font-size: 24px; font-weight: 700; margin-bottom: 20px; }
 #btnHero {
     color: white;
     text-decoration: none;
-    border: 1.5px solid white;
-    padding: 8px 25px;
-    border-radius: 4px;
+    border: 2px solid white;
+    padding: 10px 25px;
+    border-radius: 5px;
     font-size: 13px;
     font-weight: 600;
-    transition: 0.3s;
 }
-#btnHero:hover { background: white; color: #007bff; }
 
-/* --- BOUTON DON MINIMALISTE & MODERNE --- */
+/* --- BOUTON DON CENTRÉ ET MODERNISÉ --- */
 #section-don {
-    padding: 40px 0;
-    text-align: center;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
 }
 
 #btnDonMinimal {
     display: inline-block;
-    color: #007bff;
+    background-color: #007bff; /* Couleur de fond bleue */
+    color: white;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    padding: 12px 30px;
-    border: 1px solid #007bff;
-    border-radius: 2px; /* Style très architectural/minimaliste */
-    transition: all 0.4s ease;
+    letter-spacing: 1px;
+    padding: 15px 45px;
+    border-radius: 50px; /* Style pilule moderne */
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    transition: all 0.3s ease;
+    text-align: center;
 }
 
 #btnDonMinimal:hover {
-    background: #007bff;
-    color: white;
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+    background-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 480px) {
+    #titre { font-size: 15px; }
+    #hero-titre { font-size: 20px; }
+    #btnDonMinimal { width: 80%; }
 }
