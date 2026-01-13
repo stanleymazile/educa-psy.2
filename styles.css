@@ -1,86 +1,12 @@
 /* ==========================================================================
-   1. VARIABLES & CONFIGURATION GLOBALE
+   STYLE DES PAGES UNIQUEMENT (HERO & CONTENU)
    ========================================================================== */
-:root {
-    --bleu-principal: #007bff;
-    --bleu-fonce: #0056b3;
-    --gris-fond: #fbfbfd;
-    --texte-sombre: #1d1d1f;
-    --texte-gris: #6e6e73;
-    --radius: 24px;
-    --shadow: 0 20px 40px rgba(0,0,0,0.06);
-}
 
-* { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
-    background-color: var(--gris-fond);
-    color: var(--texte-sombre);
-    line-height: 1.6;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-}
-
-/* ==========================================================================
-   2. HEADER (Sticky & Blur)
-   ========================================================================== */
-#header {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 12px 25px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 0.5px solid rgba(0,0,0,0.1);
-}
-
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-#logoTitre {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-}
-
-#logo { width: 32px; height: 32px; object-fit: contain; }
-
-#titre { 
-    color: var(--bleu-principal); 
-    font-size: 1.3rem; 
-    font-weight: 800; 
-    letter-spacing: -0.5px;
-}
-
-#select-langue {
-    background: #f2f2f7;
-    border: none;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 8px 12px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-/* ==========================================================================
-   3. SECTION HERO (Bannière Bleue)
-   ========================================================================== */
+/* Bannière Bleue pour le haut des pages */
 .hero-page {
     height: 45vh;
     min-height: 350px;
-    background: linear-gradient(135deg, var(--bleu-principal) 0%, var(--bleu-fonce) 100%);
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -88,6 +14,7 @@ body {
     text-align: center;
     color: white;
     padding: 0 20px;
+    width: 100%;
 }
 
 .hero-page h1 {
@@ -95,135 +22,68 @@ body {
     font-weight: 800;
     margin-bottom: 15px;
     letter-spacing: -1.5px;
+    color: white; /* Force la couleur blanche pour le titre hero */
 }
 
 .hero-page p {
     font-size: 1.2rem;
     max-width: 750px;
-    opacity: 0.9;
+    opacity: 0.95;
+    margin: 0;
+    color: white;
 }
 
-/* ==========================================================================
-   4. CONTENU & CARTES (Effet Overlap)
-   ========================================================================== */
+/* Zone de contenu avec effet de chevauchement */
 .content-wrapper {
     max-width: 1100px;
-    margin: -70px auto 80px; /* Chevauchement sur le Hero */
+    margin: -70px auto 80px; 
     padding: 0 20px;
     position: relative;
     z-index: 10;
 }
 
+/* Carte blanche pour vos textes et formulaires */
 .card-moderne {
-    background: white;
-    border-radius: var(--radius);
+    background: #ffffff;
+    border-radius: 28px;
     padding: 50px;
-    box-shadow: var(--shadow);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.06);
     border: 1px solid rgba(0,0,0,0.03);
 }
 
+/* Style des titres dans vos contenus */
 .card-moderne h2 {
-    color: var(--bleu-principal);
-    margin-bottom: 20px;
+    color: #007bff;
     font-size: 1.8rem;
+    margin-bottom: 20px;
 }
 
-/* Style spécifique pour Actualités */
-.news-date {
-    display: block;
-    color: var(--bleu-principal);
-    font-weight: 700;
-    font-size: 0.9rem;
-    margin-bottom: 5px;
-}
-
-/* ==========================================================================
-   5. FORMULAIRES (Contact, Connexion, Inscription)
-   ========================================================================== */
-.form-moderne {
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.form-moderne input, 
-.form-moderne textarea {
+/* Style moderne pour les formulaires (Pages Contact, Connexion, Inscription) */
+.form-moderne-input {
     width: 100%;
-    padding: 16px;
+    padding: 15px;
     margin-bottom: 20px;
     border: 1px solid #d2d2d7;
-    border-radius: 14px;
+    border-radius: 12px;
     background-color: #fbfbfd;
     font-size: 16px;
-    font-family: inherit;
-    transition: 0.2s ease;
 }
 
-.form-moderne input:focus, 
-.form-moderne textarea:focus {
-    border-color: var(--bleu-principal);
-    background-color: #fff;
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
-}
-
-.btn-submit-moderne {
+.btn-moderne-submit {
     width: 100%;
-    background: var(--bleu-principal);
+    background: #007bff;
     color: white;
     border: none;
-    padding: 18px;
-    border-radius: 14px;
+    padding: 16px;
+    border-radius: 12px;
     font-weight: 700;
-    font-size: 16px;
     cursor: pointer;
-    transition: background 0.3s ease;
 }
 
-.btn-submit-moderne:hover {
-    background: var(--bleu-fonce);
-}
-
-/* ==========================================================================
-   6. FOOTER
-   ========================================================================== */
-#footer {
-    background-color: #f5f5f7;
-    padding: 80px 25px 40px;
-    border-top: 1px solid #d2d2d7;
-}
-
-.footer-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 40px;
-}
-
-.footer-column h4 {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.footer-column ul { list-style: none; }
-.footer-column ul li { margin-bottom: 12px; }
-
-.footer-column a {
-    text-decoration: none;
-    color: var(--texte-gris);
-    font-size: 14px;
-    transition: color 0.2s;
-}
-
-.footer-column a:hover { color: var(--bleu-principal); }
-
-/* ==========================================================================
-   7. RESPONSIVITÉ
-   ========================================================================== */
+/* Responsivité */
 @media (max-width: 768px) {
     .hero-page h1 { font-size: 2.2rem; }
     .content-wrapper { margin-top: -40px; }
     .card-moderne { padding: 30px 20px; }
-    .footer-grid { text-align: center; }
 }
+
