@@ -1,21 +1,27 @@
-const btnMenu = document.getElementById('btnMenu');
-const nav = document.getElementById('liens-deroulants');
-const btnLangue = document.getElementById('btnLangue');
-const menuLangue = document.getElementById('menuLangue');
+// Changement de couleur de la navbar au scroll
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.style.padding = '10px 8%';
+        navbar.style.background = '#ffffff';
+    } else {
+        navbar.style.padding = '20px 8%';
+    }
+});
 
-btnMenu.onclick = (e) => {
-    nav.classList.toggle('voir');
-    menuLangue.classList.remove('active');
-    e.stopPropagation();
-};
+// Animation simple pour les cartes de service
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+});
 
-btnLangue.onclick = (e) => {
-    menuLangue.classList.toggle('active');
-    nav.classList.remove('voir');
-    e.stopPropagation();
-};
-
-window.onclick = () => {
-    nav.classList.remove('voir');
-    menuLangue.classList.remove('active');
-};
+document.querySelectorAll('.service-card').forEach((card) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = 'all 0.6s ease-out';
+    observer.observe(card);
+});
