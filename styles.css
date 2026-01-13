@@ -1,104 +1,130 @@
-/* --- BASE --- */
-body { margin: 0; font-family: 'Segoe UI', Roboto, sans-serif; }
+/* --- CONFIGURATION GENERALE --- */
+body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; color: #333; line-height: 1.6; }
 
-/* --- HEADER --- */
-#header { padding: 10px 4%; border-bottom: 1px solid #f0f0f0; }
+/* --- HEADER MINIMALISTE --- */
+#header {
+    background-color: white;
+    padding: 15px 5%;
+    border-bottom: 1px solid #f0f0f0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-.header-ligne-haut { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-#logoTitre { display: flex; align-items: center; gap: 10px; }
-#logo { width: 35px; height: 35px; }
-#titre { color: #007bff; margin: 0; font-size: 1.2rem; }
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-#header-droite-haut { display: flex; align-items: center; gap: 15px; }
+#logoTitre { display: flex; align-items: center; gap: 12px; }
+#logo { width: 35px; height: 35px; border-radius: 4px; }
+#titre { color: #007bff; margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
 
-/* --- LANGUE ULTRA-MINIMALISTE --- */
+#header-droite { display: flex; align-items: center; gap: 20px; }
+
+/* LANGUE (Ultra-minimaliste) */
 #select-langue {
     border: none;
     background: transparent;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
-    color: #555;
+    color: #666;
     cursor: pointer;
     outline: none;
-    padding-right: 10px;
 }
 
-/* --- BOUTON COMPTE MODERNE --- */
-#btnCompte {
+/* BOUTON MENU (À la place du compte) */
+#btnMenu {
     background: #f8f9fa;
     border: 1px solid #eee;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
     cursor: pointer;
+    transition: 0.2s;
+}
+#btnMenu:hover { background: #007bff; color: white; border-color: #007bff; }
+
+/* MENU DÉROULANT */
+#groupe-menu { position: relative; }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 130%;
+    background: white;
+    min-width: 200px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    border: 1px solid #eee;
+    overflow: hidden;
+}
+.dropdown-content.voir { display: block; }
+.dropdown-content a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #444;
+    font-size: 14px;
+}
+.dropdown-content a:hover { background: #f0f7ff; color: #007bff; }
+.dropdown-content hr { border: 0; border-top: 1px solid #eee; margin: 0; }
+
+/* --- SECTION HERO --- */
+#hero {
+    height: 450px;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Images/hero-bg.jpg') center/cover;
     display: flex;
     align-items: center;
-    gap: 5px;
+    justify-content: center;
+    text-align: center;
+    color: white;
 }
-
-/* --- LIGNE BAS (MENU + DON) --- */
-.header-ligne-bas { 
-    display: flex; 
-    align-items: center; 
-    gap: 20px; /* Espace entre Menu et Don */
+#hero-titre { font-size: 36px; font-weight: 800; margin-bottom: 25px; padding: 0 20px; }
+#btnHero {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    border: 2px solid white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    transition: 0.3s;
 }
+#btnHero:hover { background: white; color: #007bff; }
 
-#btnMenu { 
-    background: none; 
-    border: none; 
-    font-weight: 700; 
-    font-size: 13px; 
-    cursor: pointer; 
-    padding: 5px 0;
+/* --- SECTION DON (APRES HERO) --- */
+#section-don-appel {
+    padding: 60px 5%;
+    background-color: #fff;
+    text-align: center;
 }
-
-/* BOUTON DON MODERNE DANS LA NAV */
-#btnDonNav {
+.don-box p { font-size: 18px; color: #666; margin-bottom: 25px; }
+#btnDonFinal {
+    display: inline-block;
     background: #007bff;
     color: white;
     text-decoration: none;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 8px 18px;
-    border-radius: 20px;
-    transition: 0.3s ease;
+    padding: 16px 45px;
+    border-radius: 50px;
+    font-weight: 800;
     text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    transition: 0.3s;
 }
-
-#btnDonNav:hover {
+#btnDonFinal:hover {
     background: #0056b3;
-    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
 }
 
-/* --- HERO --- */
-#hero { 
-    height: 400px; 
-    background: #007bff; 
-    color: white; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    #hero-titre { font-size: 28px; }
+    #btnDonFinal { width: 80%; padding: 15px 20px; }
 }
-
-#btnHero { 
-    margin-top: 20px;
-    color: white; 
-    border: 1px solid white; 
-    padding: 10px 20px; 
-    text-decoration: none; 
-    border-radius: 5px; 
-}
-
-/* Dropdowns */
-.dropdown-content { 
-    display: none; 
-    position: absolute; 
-    background: white; 
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1); 
-    border-radius: 4px;
-    z-index: 10;
-}
-.dropdown-content.voir { display: block; }
-.dropdown-content a { display: block; padding: 10px 20px; text-decoration: none; color: #333; font-size: 13px; }
