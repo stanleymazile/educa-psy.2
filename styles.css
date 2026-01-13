@@ -1,21 +1,28 @@
 /* ==========================================================================
-   1. BASE ET TYPOGRAPHIE
+   1. RESET & GESTION DU BOX-MODEL (Anti-débordement)
    ========================================================================== */
-* {
+html {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Empêche tout scroll horizontal */
     background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
+    font-family: Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* ==========================================================================
-   2. HEADER ORIGINAL (Restauration complète)
+   2. HEADER ORIGINAL (Restauration exacte)
    ========================================================================== */
 #header {
     background-color: white;
@@ -24,6 +31,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
+    width: 100%;
 }
 
 .header-container {
@@ -41,10 +49,7 @@ body {
     text-decoration: none;
 }
 
-#logo {
-    width: 40px;
-    height: auto;
-}
+#logo { width: 40px; height: auto; }
 
 #titre {
     color: #007bff;
@@ -80,7 +85,6 @@ body {
     background-color: #333;
 }
 
-/* Menu Déroulant Original */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -93,9 +97,7 @@ body {
     z-index: 1001;
 }
 
-.dropdown-content.voir {
-    display: block;
-}
+.dropdown-content.voir { display: block; }
 
 .menu-item {
     display: block;
@@ -104,19 +106,11 @@ body {
     color: #333;
 }
 
-.menu-item:hover {
-    background-color: #f1f1f1;
-}
-
-.signup-btn {
-    color: #007bff;
-    font-weight: bold;
-}
-
 /* ==========================================================================
-   3. STYLE MODERNE DES PAGES (Hero & Cartes)
+   3. DESIGN DES PAGES (Hero & Cartes)
    ========================================================================== */
 .hero-page {
+    width: 100%;
     height: 400px;
     background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
     display: flex;
@@ -125,27 +119,28 @@ body {
     justify-content: center;
     text-align: center;
     padding: 0 20px;
-    width: 100%;
-    color: white;
+    margin: 0;
 }
 
 .hero-page h1 {
     font-size: 3rem;
     font-weight: 800;
-    margin-bottom: 10px;
-    color: white;
+    color: white !important;
+    margin: 0 0 10px 0;
 }
 
 .hero-page p {
     font-size: 1.2rem;
+    color: white !important;
     opacity: 0.9;
     max-width: 800px;
-    color: white;
+    margin: 0;
 }
 
 .content-wrapper {
+    width: 100%;
     max-width: 1100px;
-    margin: -60px auto 80px; /* Effet de chevauchement moderne */
+    margin: -60px auto 80px; /* Chevauchement et centrage */
     padding: 0 20px;
     position: relative;
     z-index: 5;
@@ -156,61 +151,55 @@ body {
     border-radius: 20px;
     padding: 40px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 100%;
 }
 
-/* Éléments de formulaire pour Contact/Connexion */
+/* ==========================================================================
+   4. FORMULAIRES (Contact, Connexion, Inscription)
+   ========================================================================== */
 .input-style {
     width: 100%;
     padding: 14px;
-    margin: 10px 0;
+    margin: 5px 0 20px 0;
     border: 1px solid #ddd;
     border-radius: 10px;
     font-size: 16px;
+    display: block;
 }
 
 .btn-style {
     width: 100%;
-    padding: 14px;
+    padding: 16px;
     background: #007bff;
     color: white;
     border: none;
     border-radius: 10px;
-    cursor: pointer;
     font-weight: bold;
     font-size: 16px;
+    cursor: pointer;
     transition: background 0.3s;
 }
 
-.btn-style:hover {
-    background: #0056b3;
-}
+.btn-style:hover { background: #0056b3; }
 
 /* ==========================================================================
-   4. FOOTER ORIGINAL
+   5. FOOTER ORIGINAL
    ========================================================================== */
 #footer {
     background-color: #333;
     color: white;
     padding: 40px 20px;
     text-align: center;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
+    margin-top: auto;
 }
 
 /* ==========================================================================
-   5. RÉPONSIVITÉ
+   6. RESPONSIVITÉ
    ========================================================================== */
 @media (max-width: 768px) {
-    .hero-page h1 {
-        font-size: 2.2rem;
-    }
-    .content-wrapper {
-        margin-top: -40px;
-    }
-    .card-moderne {
-        padding: 30px 20px;
-    }
+    .hero-page h1 { font-size: 2.2rem; }
+    .hero-page { height: 350px; }
+    .content-wrapper { margin-top: -40px; padding: 0 15px; }
+    .card-moderne { padding: 30px 15px; }
 }
