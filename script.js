@@ -1,20 +1,30 @@
-const btnMenu = document.getElementById('btnMenu');
-const menu = document.getElementById('liens-deroulants');
+/* ================= MENU DÉROULANT ================= */
+const btnMenu = document.getElementById("btnMenu");
+const menu = document.getElementById("menuDeroulant");
 
-// Ouvrir/fermer le menu
 btnMenu.onclick = function (e) {
-  menu.classList.toggle('voir');
+  menu.classList.toggle("voir");
   e.stopPropagation();
 };
 
-// Fermer le menu si clic en dehors
-document.addEventListener('click', function () {
-  menu.classList.remove('voir');
+window.onclick = function () {
+  menu.classList.remove("voir");
+};
+
+/* ================= BOUTON LANGUE ================= */
+/* Ici le menu langue est purement UI, aucun JS n’est nécessaire */
+/* Si tu veux un clic pour ouvrir au lieu du hover, tu peux décommenter ce bloc : */
+
+/*
+const btnLangue = document.querySelector(".btn-langue");
+const menuLangue = document.querySelector(".menu-langue");
+
+btnLangue.addEventListener("click", function(e){
+    menuLangue.classList.toggle("actif");
+    e.stopPropagation();
 });
 
-// Redirection multilingue
-document.getElementById('select-langue').addEventListener('change', function () {
-  const lang = this.value;
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  window.location.href = `/${lang}/${currentPage}`;
+window.addEventListener("click", function(){
+    menuLangue.classList.remove("actif");
 });
+*/
