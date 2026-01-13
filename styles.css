@@ -218,18 +218,20 @@ body {
   padding: 40px 4% 20px;
   font-size: 14px;
   border-top: 1px solid #e0e0e0;
+  max-width: 1200px;
+  margin: 0 auto; / centre le contenu /
 }
 
 .footer-contenu {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 30px;
+  justify-content: flex-start;
+  gap: 40px;
   margin-bottom: 20px;
 }
 
 .footer-col {
-  flex: 1 1 200px;
+  flex: 0 0 250px;
   min-width: 180px;
 }
 
@@ -275,5 +277,6 @@ body {
     align-items: flex-start;
   }
 }
+
 
 
