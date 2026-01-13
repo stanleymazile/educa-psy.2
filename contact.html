@@ -3,31 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contactez l'équipe d'Educa-Psy.">
     <title>Contact | Educa-Psy</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="header-part"></div>
+    <header id="header">
+        <div class="header-container">
+            <a href="index.html" id="logoTitre"><img src="images/Logo.webp" id="logo"><h1 id="titre">Educa-Psy</h1></a>
+            <div id="header-droite">
+                <button id="btnMenu"><div class="barre"></div><div class="barre"></div><div class="barre"></div></button>
+                <nav id="menuDeroulant" class="dropdown-content">
+                    <a href="index.html" class="menu-item">Accueil</a>
+                    <a href="presentation.html" class="menu-item">Présentation</a>
+                    <a href="services.html" class="menu-item">Services</a>
+                    <a href="actualites.html" class="menu-item">Actualités</a>
+                    <a href="contact.html" class="menu-item">Contact</a>
+                    <a href="connexion.html" class="menu-item signup-btn">Connexion</a>
+                </nav>
+            </div>
+        </div>
+    </header>
 
     <main>
         <section class="hero-page">
             <h1>Contactez-nous</h1>
-            <p>Une question ou une demande de partenariat ? Écrivez-nous.</p>
+            <p>Nous sommes à votre écoute.</p>
         </section>
-
         <div class="content-wrapper">
-            <div class="card-moderne form-moderne">
-                <form id="contact-form">
-                    <input type="text" placeholder="Nom complet" required>
-                    <input type="email" placeholder="Adresse email" required>
-                    <textarea placeholder="Votre message" rows="5" required></textarea>
-                    <button type="submit" class="btn-submit-moderne">Envoyer le message</button>
+            <div class="card-moderne" style="max-width: 600px; margin-left:auto; margin-right:auto;">
+                <form>
+                    <label>Nom complet</label>
+                    <input type="text" class="input-style" required>
+                    <label>Email</label>
+                    <input type="email" class="input-style" required>
+                    <label>Message</label>
+                    <textarea class="input-style" rows="5"></textarea>
+                    <button class="btn-style">Envoyer</button>
                 </form>
             </div>
         </div>
     </main>
 
-    <div id="footer-part"></div>
+    <footer id="footer"><p>&copy; 2026 Educa-Psy Haïti.</p></footer>
 </body>
 </html>
