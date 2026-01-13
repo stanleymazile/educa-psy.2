@@ -2,32 +2,32 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Educa-Psy</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
 <body>
-
     <div id="header-part"></div>
 
-    <main id="contact-page">
-        <section class="page-intro">
+    <main>
+        <section class="hero-page">
             <h1>Contactez-nous</h1>
-            <p>Nous sommes à votre écoute pour toute question.</p>
+            <p>Une question ou une demande de partenariat ? Écrivez-nous.</p>
         </section>
 
-        <section class="contact-container">
-            <form id="contact-form">
-                <input type="text" placeholder="Votre Nom" required>
-                <input type="email" placeholder="Votre Email" required>
-                <textarea placeholder="Votre Message" rows="5"></textarea>
-                <button type="submit" class="btn-submit">Envoyer</button>
-            </form>
-        </section>
+        <div class="content-wrapper">
+            <div class="card-moderne form-moderne">
+                <form id="contact-form">
+                    <input type="text" placeholder="Nom complet" required>
+                    <input type="email" placeholder="Adresse email" required>
+                    <textarea placeholder="Votre message" rows="5" required></textarea>
+                    <button type="submit" class="btn-submit-moderne">Envoyer le message</button>
+                </form>
+            </div>
+        </div>
     </main>
 
     <div id="footer-part"></div>
-
 </body>
 </html>
