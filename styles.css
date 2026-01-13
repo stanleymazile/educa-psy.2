@@ -1,99 +1,112 @@
-/* --- BASE & CONFIG --- */
-* { box-sizing: border-box; scroll-behavior: smooth; }
-body { 
-    margin: 0; 
-    font-family: 'Inter', -apple-system, sans-serif; 
-    background-color: #f4f7fa; 
-    overflow-x: hidden;
+/* --- OPTIMISATION MOBILE & RESET --- */
+* { 
+    box-sizing: border-box; 
+    scroll-behavior: smooth; 
+    -webkit-tap-highlight-color: transparent; 
 }
 
-/* --- HEADER SUR UNE LIGNE --- */
+body { 
+    margin: 0; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+    background-color: #ffffff; 
+    color: #1d1d1f;
+    line-height: 1.4;
+}
+
+/* --- HEADER MOBILE-FIRST --- */
 #header {
-    background: white;
-    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: saturate(180%) blur(20px); /* Effet verre dépoli */
+    padding: 8px 15px;
     position: sticky; top: 0; z-index: 1000;
-    border-bottom: 1px solid #eee;
+    border-bottom: 0.5px solid rgba(0,0,0,0.1);
 }
 
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
-    width: 100%;
 }
 
 #logoTitre { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-#logo { width: 22px; height: auto; }
-#titre { color: #007bff; margin: 0; font-size: 0.95rem; font-weight: 800; }
+#logo { width: 24px; height: 24px; object-fit: contain; }
+#titre { color: #007bff; margin: 0; font-size: 1rem; font-weight: 700; letter-spacing: -0.02em; }
 
-#header-droite { 
-    display: flex; 
-    align-items: center; 
-    gap: 10px; 
-}
+#header-droite { display: flex; align-items: center; gap: 10px; }
 
-/* LANGUE MINIATURISÉE */
+/* --- LANGUE SANS BACKGROUND --- */
 #select-langue {
-    width: 50px; 
-    height: 30px;
-    border: 1px solid #e2e8f0; 
-    background: #f8fafc;
-    font-size: 10px; font-weight: 700; color: #475569;
-    border-radius: 6px;
+    background: none;
+    border: none;
+    font-size: 11px;
+    font-weight: 700;
+    color: #333;
     cursor: pointer;
-    text-align: center;
-    -webkit-appearance: none;
+    padding: 4px;
+    outline: none;
+    text-transform: uppercase;
+    /* La flèche de défilement native est conservée ici */
 }
 
-/* MENU HAMBURGER */
+/* --- BOUTON MENU ROND (STYLE APP) --- */
 #btnMenu {
-    background: #f0f4f8; border: none; width: 34px; height: 34px;
-    border-radius: 8px; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; gap: 3px;
+    background: #f2f2f7; 
+    border: none; 
+    width: 36px; height: 36px;
+    border-radius: 50%; 
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 3.5px;
+    cursor: pointer;
 }
-.barre { width: 16px; height: 2px; background: #333; transition: 0.3s; }
+.barre { width: 15px; height: 1.5px; background: #000; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 
-/* MENU DÉROULANT */
+/* DROPDOWN */
 .dropdown-content {
     display: none; position: absolute; right: 0; top: 45px;
-    width: 200px; background: white; border-radius: 12px;
-    padding: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 1px solid #eee;
+    width: 190px; background: white; border-radius: 14px;
+    padding: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 0.5px solid #eee;
 }
-.dropdown-content.voir { display: block; }
-.menu-item { display: block; padding: 10px; text-decoration: none; color: #444; font-size: 13px; border-radius: 8px; }
-.signup-btn { background: #007bff; color: white !important; text-align: center; }
+.dropdown-content.voir { display: block; animation: popIn 0.2s ease-out; }
 
-/* --- HERO COMPACT --- */
+.menu-item { display: block; padding: 12px; text-decoration: none; color: #000; font-size: 14px; border-radius: 10px; }
+.menu-item:hover { background: #f5f5f7; }
+.menu-divider { height: 0.5px; background: #eee; margin: 6px 0; }
+.signup-btn { background: #007bff; color: #fff !important; text-align: center; font-weight: 600; }
+
+/* --- HERO COMPACT (35% de la vue) --- */
 #hero {
-    height: 40vh; min-height: 280px;
-    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-    display: flex; align-items: center; justify-content: center; text-align: center; color: white; padding: 20px;
+    height: 35vh; 
+    min-height: 260px;
+    background: #007bff; 
+    display: flex; align-items: center; justify-content: center; 
+    text-align: center; color: white; padding: 15px;
 }
-#hero-titre { font-size: 1.6rem; font-weight: 800; line-height: 1.2; margin-bottom: 8px; }
-#hero-titre span { color: #4db8ff; }
-.hero-soustitre { font-size: 0.85rem; margin-bottom: 15px; opacity: 0.9; }
+#hero-titre { font-size: 1.6rem; font-weight: 800; margin: 0 0 10px 0; line-height: 1.1; }
+#hero-titre span { color: rgba(255,255,255,0.7); }
+.hero-soustitre { font-size: 0.9rem; margin-bottom: 20px; opacity: 0.9; }
 #btnHero {
     display: inline-block; color: white; text-decoration: none;
-    background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4);
-    padding: 8px 20px; border-radius: 50px; font-size: 12px;
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+    padding: 10px 22px; border-radius: 25px; font-size: 12px; font-weight: 600;
 }
 
-/* --- BOUTON DON AJUSTÉ --- */
+/* --- BOUTON DON OPTIMISÉ --- */
 #section-don { padding: 25px 0; display: flex; justify-content: center; }
 #btnDonMinimal {
     display: inline-block;
-    background: linear-gradient(135deg, #007bff, #0056b3);
-    color: white; padding: 10px 28px; text-decoration: none;
-    border-radius: 50px; font-size: 12px; font-weight: 700; 
-    text-transform: uppercase; letter-spacing: 0.5px;
-    box-shadow: 0 4px 12px rgba(0,123,255,0.2); transition: 0.3s;
+    background: #007bff;
+    color: white; padding: 12px 30px; text-decoration: none;
+    border-radius: 25px; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 12px rgba(0,123,255,0.15);
 }
-#btnDonMinimal:hover { transform: translateY(-2px); }
 
-/* MOBILE */
-@media (max-width: 480px) {
+/* ANIMATIONS */
+@keyframes popIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+/* RESPONSIVE */
+@media (max-width: 380px) {
     #titre { font-size: 0.85rem; }
     #hero-titre { font-size: 1.4rem; }
 }
