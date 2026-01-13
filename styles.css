@@ -1,184 +1,118 @@
-/* ==========================================================================
-   1. BASE ET CONFIGURATION (Global)
-   ========================================================================== */
-* { 
-    box-sizing: border-box; 
-    scroll-behavior: smooth; 
-    -webkit-tap-highlight-color: transparent; 
-}
+/* --- CONFIGURATION GLOBALE --- */
+* { box-sizing: border-box; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
 
-html, body { 
-    margin: 0; 
-    padding: 0; 
-    width: 100%; 
-    overflow-x: hidden; 
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-    background-color: #ffffff; 
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    background-color: #fbfbfd; /* Gris Apple ultra-léger */
     color: #1d1d1f;
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
 
-a { text-decoration: none; color: inherit; }
+/* --- LE HERO BLEU UNIFIÉ --- */
+.hero-page {
+    height: 45vh;
+    min-height: 350px;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+    width: 100%;
+}
 
-/* ==========================================================================
-   2. HEADER & NAVIGATION (Structure Modulaire)
-   ========================================================================== */
+.hero-page h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+}
+
+.hero-page p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    opacity: 0.95;
+}
+
+/* --- HEADER MODERNE --- */
 #header {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(15px);
-    padding: 10px 15px;
-    position: sticky; 
-    top: 0; 
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 12px 20px;
+    position: sticky;
+    top: 0;
     z-index: 1000;
     border-bottom: 0.5px solid rgba(0,0,0,0.1);
 }
 
-.header-container {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    max-width: 1200px; 
-    margin: 0 auto;
-}
+.header-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
 
-#logoTitre { display: flex; align-items: center; gap: 8px; }
-#logo { width: 28px; height: 28px; }
-#titre { color: #007bff; font-size: 1.2rem; font-weight: 800; margin: 0; cursor: pointer; }
+#logoTitre { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+#logo { width: 30px; height: 30px; }
+#titre { color: #007bff; font-size: 1.3rem; font-weight: 800; margin: 0; }
 
-#header-droite { display: flex; align-items: center; gap: 15px; }
-
-/* Sélecteur de langue épuré */
-#select-langue { 
-    background: none; border: none; font-size: 11px; font-weight: 700; 
-    cursor: pointer; text-transform: uppercase; color: #333; outline: none;
-}
-
-/* Bouton Menu 3 Barres */
 #btnMenu { 
-    background: #f2f2f7; border: none; width: 40px; height: 40px; 
+    background: #f2f2f7; border: none; width: 42px; height: 42px; 
     border-radius: 12px; display: flex; flex-direction: column; 
     justify-content: center; align-items: center; gap: 4px; cursor: pointer;
 }
 .barre { width: 20px; height: 1.5px; background: #000; transition: 0.3s; }
 
-/* Menu Déroulant */
 .dropdown-content { 
-    display: none; position: absolute; right: 15px; top: 60px; 
-    width: 220px; background: white; border-radius: 12px; padding: 10px; 
-    box-shadow: 0 15px 40px rgba(0,0,0,0.12); border: 1px solid #eee; 
+    display: none; position: absolute; right: 20px; top: 65px; 
+    width: 240px; background: white; border-radius: 16px; padding: 12px; 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 1px solid rgba(0,0,0,0.05); 
 }
-.dropdown-content.voir { display: block; animation: pop 0.2s ease-out; }
-.menu-item { display: block; padding: 12px; font-size: 14px; border-radius: 8px; transition: 0.2s; }
+.dropdown-content.voir { display: block; animation: pop 0.25s ease-out; }
+.menu-item { display: block; padding: 14px; text-decoration: none; color: #1d1d1f; font-size: 15px; border-radius: 10px; transition: 0.2s; }
 .menu-item:hover { background: #f5f5f7; color: #007bff; }
-.menu-divider { height: 1px; background: #eee; margin: 5px 0; }
-.signup-btn { background: #007bff; color: #fff !important; text-align: center; font-weight: 600; }
+.signup-btn { background: #007bff; color: #fff !important; text-align: center; font-weight: 600; margin-top: 8px; }
 
-/* ==========================================================================
-   3. TYPOGRAPHIE ET TITRES (Modernes)
-   ========================================================================== */
-.page-header { text-align: center; padding: 60px 20px 30px; }
-.title-main { font-size: 2.5rem; font-weight: 800; color: #1d1d1f; margin-bottom: 10px; letter-spacing: -0.5px; }
-.subtitle-main { font-size: 1.1rem; color: #6e6e73; max-width: 650px; margin: 0 auto; }
-
-/* ==========================================================================
-   4. COMPOSANTS DE GRILLE ET CARTES (Services, Actualités, Mission)
-   ========================================================================== */
+/* --- GRILLES ET CARTES --- */
 .grid-container { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 25px; padding: 20px; max-width: 1200px; margin: 0 auto; 
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px; padding: 60px 20px; max-width: 1200px; margin: 0 auto; 
 }
 
 .card-moderne { 
-    background: #ffffff; padding: 30px; border-radius: 20px; border: 1px solid #f2f2f7; 
-    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); display: flex; flex-direction: column; height: 100%; 
+    background: #ffffff; padding: 35px; border-radius: 24px; 
+    border: 1px solid rgba(0,0,0,0.03); transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+    display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
 }
-.card-moderne:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.06); border-color: #d1d1d6; }
-.card-title { font-size: 1.4rem; color: #007bff; margin-bottom: 12px; font-weight: 700; }
-.card-text { font-size: 0.95rem; color: #48484a; margin: 0; }
+.card-moderne:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.08); }
+.card-title { font-size: 1.5rem; color: #007bff; margin-bottom: 15px; font-weight: 700; }
 
-/* ==========================================================================
-   5. BOUTON DON (Moderne et Centré)
-   ========================================================================== */
-.section-action { display: flex; justify-content: center; padding: 50px 20px; }
+/* --- BOUTON DON MODERNE --- */
+.section-action { display: flex; justify-content: center; padding: 60px 20px; }
 .btn-don-moderne { 
-    background: linear-gradient(135deg, #007bff, #00c6ff); 
-    color: white; padding: 18px 45px; border-radius: 50px; 
-    font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px;
-    box-shadow: 0 10px 25px rgba(0, 123, 255, 0.3); transition: 0.3s; border: none; cursor: pointer;
+    background: #ffffff; color: #007bff; padding: 18px 50px; border-radius: 50px; 
+    font-weight: 700; text-transform: uppercase; font-size: 14px; letter-spacing: 0.5px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: 0.3s; border: none; cursor: pointer;
 }
-.btn-don-moderne:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0, 123, 255, 0.4); filter: brightness(1.05); }
+.btn-don-moderne:hover { transform: scale(1.05); box-shadow: 0 15px 35px rgba(0,0,0,0.12); }
 
-/* ==========================================================================
-   6. FORMULAIRES (Connexion, Inscription, Contact)
-   ========================================================================== */
-.contact-container { max-width: 500px; margin: 0 auto 60px; padding: 0 20px; }
-.form-group { margin-bottom: 20px; text-align: left; }
-.form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #1d1d1f; }
-
+/* --- FORMULAIRES --- */
+.contact-container { max-width: 550px; margin: -60px auto 80px; padding: 0 20px; position: relative; z-index: 10; }
 input, textarea { 
-    width: 100%; padding: 14px; border: 1px solid #d2d2d7; border-radius: 10px; 
-    font-family: inherit; font-size: 16px; background-color: #fbfbfd; transition: 0.2s; 
+    width: 100%; padding: 16px; margin-bottom: 20px; border: 1px solid #d2d2d7; 
+    border-radius: 14px; background: #fbfbfd; font-size: 16px; transition: 0.2s; 
 }
-input:focus, textarea:focus { 
-    outline: none; border-color: #007bff; background-color: #fff; 
-    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1); 
-}
+input:focus { border-color: #007bff; background: #fff; box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1); outline: none; }
+.btn-submit { width: 100%; background: #007bff; color: #fff; border: none; padding: 18px; border-radius: 14px; font-weight: 700; cursor: pointer; }
 
-.btn-submit { 
-    width: 100%; background: #007bff; color: white; border: none; 
-    padding: 16px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; 
-}
-.btn-submit:hover { background: #0056b3; }
-
-/* ==========================================================================
-   7. HERO (Page d'accueil)
-   ========================================================================== */
-#hero { 
-    height: 60vh; min-height: 400px; 
-    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%); 
-    display: flex; align-items: center; justify-content: center; text-align: center; color: white; padding: 20px; 
-}
-#hero-titre { font-size: 2.8rem; font-weight: 800; margin-bottom: 15px; line-height: 1.1; letter-spacing: -1px; }
-#hero-titre span { color: #00c6ff; }
-.hero-soustitre { font-size: 1.1rem; max-width: 550px; margin: 0 auto 30px; opacity: 0.9; }
-#btnHero { 
-    display: inline-block; color: white; background: rgba(255,255,255,0.15); 
-    border: 1px solid rgba(255,255,255,0.3); padding: 12px 30px; border-radius: 50px; font-size: 14px; font-weight: 600; 
-}
-
-/* ==========================================================================
-   8. FOOTER (Pied de page)
-   ========================================================================== */
-#footer { background: #f5f5f7; padding: 60px 20px 30px; border-top: 1px solid #e5e5e5; }
+/* --- FOOTER --- */
+#footer { background: #f5f5f7; padding: 80px 20px 40px; border-top: 1px solid #d2d2d7; }
 .footer-grid { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
-.footer-brand h3 { color: #007bff; font-size: 1.5rem; margin-bottom: 15px; font-weight: 800; }
-.footer-brand p { font-size: 14px; color: #6e6e73; max-width: 320px; }
-.footer-socials { display: flex; gap: 12px; }
-.footer-socials a { 
-    background: #e2e2e7; width: 40px; height: 40px; display: flex; 
-    align-items: center; justify-content: center; border-radius: 50%; 
-    color: #1d1d1f; font-weight: 700; font-size: 11px; transition: 0.2s;
-}
-.footer-socials a:hover { background: #d2d2d7; }
-.footer-bottom { margin-top: 50px; text-align: center; font-size: 12px; color: #86868b; border-top: 1px solid #e5e5e5; padding-top: 30px; }
+.footer-brand h3 { color: #007bff; font-weight: 800; font-size: 1.6rem; margin-bottom: 15px; }
+.footer-socials a { background: #e2e2e7; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #1d1d1f; font-weight: 700; text-decoration: none; }
 
-/* ==========================================================================
-   9. ANIMATIONS ET MOBILE
-   ========================================================================== */
-@keyframes pop { 
-    from { opacity: 0; transform: scale(0.96); } 
-    to { opacity: 1; transform: scale(1); } 
-}
-
-@media (max-width: 768px) {
-    .title-main { font-size: 2rem; }
-    #hero-titre { font-size: 2.2rem; }
-    .grid-container { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 480px) {
-    .header-container { padding: 0 5px; }
-    #titre { font-size: 1rem; }
-    .footer-grid { flex-direction: column; text-align: center; align-items: center; }
-}
+@keyframes pop { from { opacity: 0; transform: translateY(-10px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@media (max-width: 768px) { .hero-page h1 { font-size: 2.2rem; } .footer-grid { flex-direction: column; text-align: center; align-items: center; } }
