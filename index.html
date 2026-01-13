@@ -11,28 +11,25 @@
   <header id="header">
     <div class="header-ligne-haut">
       <section id="logoTitre">
-        <img src="../logo.png" alt="Logo" id="logo" />
+        <img src="../logo.png" alt="Logo Educa-Psy" id="logo" />
         <h2 id="titre">Educa-Psy</h2>
       </section>
 
       <section id="header-droite">
-        <div class="langue-wrapper">
-          <span class="langue-icone">🌐</span>
-          <select id="select-langue" aria-label="Choisir la langue">
-            <option value="fr">Français</option>
-            <option value="ht">Kreyòl</option>
-            <option value="en">English</option>
-            <option value="es">Español</option>
-          </select>
-        </div>
+        <select id="select-langue" aria-label="Langue">
+          <option value="fr">FR</option>
+          <option value="ht">HT</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+        </select>
         <a href="don.html" id="btnDon">Don</a>
       </section>
     </div>
 
     <div class="header-ligne-bas">
       <section id="groupe-menu">
-        <button id="btnMenu">☰ Menu</button>
-        <nav id="liens-deroulants">
+        <button id="btnMenu" aria-label="Ouvrir le menu" aria-expanded="false">☰ Menu</button>
+        <nav id="liens-deroulants" role="navigation">
           <a href="index.html" class="item-menu">Accueil</a>
           <a href="presentation.html" class="item-menu">Présentation</a>
           <a href="services.html" class="item-menu">Services</a>
