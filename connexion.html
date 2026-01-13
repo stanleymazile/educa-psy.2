@@ -8,28 +8,43 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="header-part"></div>
+    <header id="header">
+        <div class="header-container">
+            <a href="index.html" id="logoTitre"><img src="images/Logo.webp" id="logo"><h1 id="titre">Educa-Psy</h1></a>
+            <div id="header-droite">
+                <button id="btnMenu"><div class="barre"></div><div class="barre"></div><div class="barre"></div></button>
+                <nav id="menuDeroulant" class="dropdown-content">
+                    <a href="index.html" class="menu-item">Accueil</a>
+                    <a href="presentation.html" class="menu-item">Présentation</a>
+                    <a href="services.html" class="menu-item">Services</a>
+                    <a href="actualites.html" class="menu-item">Actualités</a>
+                    <a href="contact.html" class="menu-item">Contact</a>
+                    <a href="connexion.html" class="menu-item signup-btn">Connexion</a>
+                </nav>
+            </div>
+        </div>
+    </header>
 
     <main>
         <section class="hero-page">
-            <h1>Bon retour</h1>
-            <p>Connectez-vous à votre espace personnel.</p>
+            <h1>Espace Membre</h1>
+            <p>Connectez-vous pour suivre votre dossier.</p>
         </section>
-
-        <div class="content-wrapper">
-            <div class="card-moderne form-moderne">
-                <form id="login-form">
-                    <input type="email" placeholder="Identifiant (Email)" required>
-                    <input type="password" placeholder="Mot de passe" required>
-                    <button type="submit" class="btn-submit-moderne">Se connecter</button>
-                    <p style="text-align:center; margin-top:20px; font-size:14px; color:#6e6e73;">
-                        Pas de compte ? <a href="inscription.html" style="color:#007bff; font-weight:600;">S'inscrire</a>
-                    </p>
+        <div class="content-wrapper" style="max-width: 500px; margin-left:auto; margin-right:auto;">
+            <div class="card-moderne">
+                <form>
+                    <label>Email</label>
+                    <input type="email" class="input-style" required>
+                    <label>Mot de passe</label>
+                    <input type="password" class="input-style" required>
+                    <button class="btn-style">Se connecter</button>
                 </form>
+                <p style="text-align:center; margin-top:20px;">
+                    Pas encore de compte ? <a href="inscription.html" style="color:var(--primary);">S'inscrire</a>
+                </p>
             </div>
         </div>
     </main>
-
-    <div id="footer-part"></div>
+    <footer id="footer"><p>&copy; 2026 Educa-Psy Haïti.</p></footer>
 </body>
 </html>
