@@ -1,82 +1,87 @@
-/* --- RESET --- */
-body { margin: 0; font-family: 'Segoe UI', sans-serif; }
+:root {
+    --primary: #2c3e50; /* Bleu pro */
+    --secondary: #27ae60; /* Vert éducation */
+    --light: #f4f7f6;
+    --white: #ffffff;
+    --dark: #1a1a1a;
+}
 
-/* --- HEADER PÂLE & ORDONNÉ --- */
-#header {
-    background-color: #f8fafc; /* Couleur pâle */
-    padding: 10px 5%;
-    border-bottom: 1px solid #e2e8f0;
-    position: sticky;
-    top: 0;
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+html { scroll-behavior: smooth; }
+
+/* Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
     z-index: 1000;
 }
 
-.header-contenu {
-    display: flex;
-    justify-content: space-between; /* Écarte les deux blocs */
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+.logo { font-size: 24px; font-weight: bold; color: var(--primary); }
+.logo span { color: var(--secondary); }
 
-.header-gauche {
-    display: flex;
-    align-items: center;
-}
+.nav-links { display: flex; list-style: none; }
+.nav-links li { margin-left: 30px; }
+.nav-links a { text-decoration: none; color: var(--primary); font-weight: 500; transition: 0.3s; }
+.nav-links a:hover { color: var(--secondary); }
 
-.logo-img { height: 45px; margin-right: 12px; }
-.site-titre { color: #0047AB; font-size: 22px; font-weight: 700; margin: 0; }
+.btn-contact { background: var(--secondary); color: white !important; padding: 10px 20px; border-radius: 25px; }
 
-.header-droite {
-    display: flex;
-    align-items: center;
-    gap: 20px; /* Espace entre les éléments de droite */
-}
-
-/* --- NAVIGATION BUREAU --- */
-.nav-principale { display: flex; gap: 20px; }
-.nav-item { text-decoration: none; color: #475569; font-weight: 600; font-size: 15px; }
-.nav-item:hover { color: #0047AB; }
-
-/* --- HERO BLEU ROYAL --- */
-#hero {
-    background: #0047AB; /* Bleu Royal */
-    height: 450px;
+/* Hero Section */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: white;
 }
-.hero-titre { font-size: 32px; font-weight: 800; max-width: 700px; margin-bottom: 30px; }
 
-/* --- BOUTONS MODERNES --- */
-.hero-actions { display: flex; gap: 15px; justify-content: center; }
-.btn-mod-don, .btn-mod-outline {
-    padding: 12px 25px; border-radius: 50px; font-weight: 700; text-decoration: none; transition: 0.3s;
-}
-.btn-mod-don { background: #FFD700; color: #0047AB; }
-.btn-mod-outline { border: 2px solid white; color: white; }
+.hero-content h1 { font-size: 3.5rem; margin-bottom: 20px; }
+.hero-content p { font-size: 1.2rem; margin-bottom: 30px; }
 
-/* --- MOBILE --- */
-.menu-burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
-.barre { width: 25px; height: 3px; background-color: #0047AB; }
+.btn-main { padding: 15px 30px; background: var(--secondary); color: white; text-decoration: none; border-radius: 5px; margin-right: 15px; }
+.btn-sub { padding: 15px 30px; border: 2px solid white; color: white; text-decoration: none; border-radius: 5px; }
 
-@media screen and (max-width: 768px) {
-    .menu-burger { display: flex; }
-    .nav-principale {
-        display: none; position: absolute; top: 65px; right: 5%;
-        background: white; width: 180px; flex-direction: column;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-radius: 10px;
-    }
-    .nav-principale.voir { display: flex; }
-    .nav-item { padding: 15px; border-bottom: 1px solid #f1f5f9; }
-    .hero-actions { flex-direction: column; align-items: center; }
+/* Services */
+.services { padding: 80px 8%; background: var(--light); text-align: center; }
+.section-title { margin-bottom: 50px; font-size: 2.5rem; color: var(--primary); }
+
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
 }
 
-/* --- DROPDOWN LANGUE --- */
-.langue-container { position: relative; }
-.btn-langue-simple { background: white; border: 1px solid #ddd; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-.langue-dropdown { display: none; position: absolute; right: 0; background: white; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); list-style: none; padding: 0; z-index: 100; }
-.langue-dropdown.active { display: block; }
-.langue-dropdown li a { display: block; padding: 10px 15px; text-decoration: none; color: #333; }
+.service-card {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    transition: transform 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.service-card:hover { transform: translateY(-10px); }
+.service-card i { font-size: 3rem; color: var(--secondary); margin-bottom: 20px; }
+
+/* Contact */
+.contact { padding: 80px 8%; display: flex; justify-content: center; }
+.contact-box { background: var(--primary); color: white; padding: 40px; border-radius: 15px; width: 100%; max-width: 600px; }
+form input, form textarea { width: 100%; padding: 12px; margin: 10px 0; border: none; border-radius: 5px; }
+.btn-submit { width: 100%; padding: 15px; background: var(--secondary); border: none; color: white; font-size: 1rem; cursor: pointer; }
+
+footer { text-align: center; padding: 40px; background: var(--dark); color: white; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+}
