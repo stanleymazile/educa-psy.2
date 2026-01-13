@@ -1,30 +1,23 @@
-/* ================= MENU DÉROULANT ================= */
-const btnMenu = document.getElementById("btnMenu");
-const menu = document.getElementById("menuDeroulant");
+// Éléments
+const btnMenu = document.getElementById('btnMenu');
+const menuNav = document.getElementById('liens-deroulants');
+const btnLangue = document.getElementById('btnLangue');
+const optionsLangue = document.getElementById('langueOptions');
 
-btnMenu.onclick = function (e) {
-  menu.classList.toggle("voir");
-  e.stopPropagation();
-};
-
-window.onclick = function () {
-  menu.classList.remove("voir");
-};
-
-/* ================= BOUTON LANGUE ================= */
-/* Ici le menu langue est purement UI, aucun JS n’est nécessaire */
-/* Si tu veux un clic pour ouvrir au lieu du hover, tu peux décommenter ce bloc : */
-
-/*
-const btnLangue = document.querySelector(".btn-langue");
-const menuLangue = document.querySelector(".menu-langue");
-
-btnLangue.addEventListener("click", function(e){
-    menuLangue.classList.toggle("actif");
+// Menu Mobile
+btnMenu.onclick = function(e) {
+    menuNav.classList.toggle('voir');
     e.stopPropagation();
-});
+}
 
-window.addEventListener("click", function(){
-    menuLangue.classList.remove("actif");
-});
-*/
+// Menu Langue
+btnLangue.onclick = function(e) {
+    optionsLangue.classList.toggle('active');
+    e.stopPropagation();
+}
+
+// Fermeture des menus au clic extérieur
+window.onclick = function() {
+    menuNav.classList.remove('voir');
+    optionsLangue.classList.remove('active');
+}
