@@ -18,23 +18,23 @@
 
 
 
-    <header id="header">
+    <header class ="header">
 
-        <div class="header-ligne-haut">
+        <div class="headerHaut">
 
-            <section id="logoTitre">
+            <section class="logoTitre">
 
-                <img src="Logo 3.png" alt="Logo" id="logo"> 
+                <img src="images/Logo.webp" alt="Logo" id="logo"> 
 
-                <h2 id="titre">Educa-Psy</h2>
+                <h2 id="titre">
+  <a href="index.html">Educa-Psy</a>
+                </h2>
 
             </section>
 
 
 
-
-
-            <section id="header-droite">
+            <section id="headerDroite">
 
     <select id="select-langue">
 
@@ -48,23 +48,13 @@
 
     </select>
 
-    
-
-    <div id="google_translate_element" style="display:none;"></div>
-
-    
-
-    <a href="don.html" id="btnDon">Don</a>
-
 </section>
-
-            
 
         </div>
 
 
 
-        <div class="header-ligne-bas">
+        <div class="headerBas">
 
             <section id="groupe-menu">
 
@@ -84,64 +74,53 @@
 
             </section>
 
-
-
-            <section id="menuRecherche" class="recherche">
-
-                <input type="text" id="recherche" placeholder="Rechercher...">
-
-                <button id="btnChercher">🔍</button>
-
-            </section>
-
         </div>
 
     </header>
 
 
 
-    <section id="hero">
+    <section class ="hero">
 
-        <div id="hero-contenu">
+        <div class ="hero-contenu">
 
-            <h1 id="hero-titre">L'éducation pour chaque enfant en Haïti</h1>
+            <h1 class ="hero-titre">L'éducation pour chaque enfant en Haïti</h1>
 
             <a href="services.html" id="btnHero">Découvrir</a>
 
         </div>
 
     </section>
+    
+    <a href="don.html" class ="btnDon"> Faire un Don </a>
 
+<footer class ="footer">
+  <div class="footerHaut">
+    <h3>Educa-Psy</h3>
+    <p>Apprendre la psychologie et le bien-être au quotidien.</p>
+  </div>
 
+  <div class="footerMilieu">
+    <h3>Liens</h3>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <div class="footerBas">
+    <h3>Contact</h3>
+    <p>Email: educapsyhaiti@gmail.com </p>
+    <p>Tél: +509 3685-9684 </p>
+  </div>
+
+  <p>&copy; 2026 Educa-Psy. Tous droits réservés.</p>
+</footer>
 
     <script src="script.js"></script>
-
-    <script type="text/javascript">
-
-    function googleTranslateElementInit() {
-
-        new google.translate.TranslateElement({
-
-            pageLanguage: 'fr',
-
-            includedLanguages: 'fr,ht,en,es',
-
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-
-            autoDisplay: false
-
-        }, 'google_translate_element');
-
-    }
-
-    
-
-</script>
-
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-
 
 </body>
 
 </html>
+
