@@ -1,24 +1,24 @@
-/* --- LANGUE MINIMALISTE --- */
-#select-langue {
-  appearance: none;
-  background: transparent;
-  border: none;
-  font-size: 14px;
-  font-weight: bold;
-  color: #007bff;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: color 0.3s ease;
+/* --- BASE --- */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  overflow-x: hidden;
 }
 
-#select-langue:hover,
-#select-langue:focus {
-  color: #0056b3;
-  outline: none;
+/* --- ACCESSIBILITÉ --- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-/* --- CONTENEUR HEADER --- */
+/* --- HEADER --- */
 #header {
   background-color: white;
   border-bottom: 2px solid #007bff;
@@ -60,6 +60,24 @@
   margin: 0;
   font-size: 20px;
   font-weight: bold;
+}
+
+/* --- LANGUE MINIMALISTE --- */
+#select-langue {
+  appearance: none;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #007bff;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+#select-langue:hover,
+#select-langue:focus {
+  color: #0056b3;
+  outline: none;
 }
 
 /* --- BOUTON DON --- */
@@ -136,6 +154,38 @@
   font-size: 14px;
 }
 
+/* --- HERO --- */
+#hero {
+  background-color: #007bff;
+  color: white;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+}
+#hero-titre {
+  font-size: 32px;
+  margin-bottom: 25px;
+  line-height: 1.2;
+}
+#btnHero {
+  background-color: white;
+  color: #007bff;
+  text-decoration: none;
+  padding: 15px 35px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 18px;
+}
+#btnHero:hover {
+  background-color: #0056b3;
+  color: white;
+  transition: 0.3s ease;
+}
+
 /* --- RESPONSIVE --- */
 @media screen and (max-width: 480px) {
   #titre {
@@ -151,5 +201,8 @@
   }
   #menuRecherche.recherche {
     width: 55%;
+  }
+  #hero-titre {
+    font-size: 26px;
   }
 }
