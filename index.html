@@ -5,73 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Educa-Psy | Accueil</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
+    <div id="header-part"></div>
 
-    <header id="header">
-        <div class="header-container">
-            <section id="logoTitre">
-                <img src="images/Logo.webp" alt="Logo" id="logo"> 
-                <h1 id="titre">Educa-Psy</h1>
-            </section>
-
-            <section id="header-droite">
-                <select id="select-langue">
-                    <option value="fr">FR</option>
-                    <option value="ht">HT</option> 
-                    <option value="en">EN</option>
-                    <option value="es">ES</option>
-                </select>
-
-                <div id="groupe-menu">
-                    <button id="btnMenu" aria-label="Menu">
-                        <span class="barre"></span>
-                        <span class="barre"></span>
-                        <span class="barre"></span>
-                    </button>
-                    <nav id="liens-deroulants" class="dropdown-content">
-                        <a href="index.html" class="menu-item">Accueil</a>
-                        <a href="presentation.html" class="menu-item">Présentation</a>
-                        <a href="services.html" class="menu-item">Services</a>
-                        <a href="contact.html" class="menu-item">Contact</a>
-                        <div class="menu-divider"></div>
-                        <a href="connexion.html" class="menu-item">Connexion</a>
-                        <a href="inscription.html" class="menu-item signup-btn">S'inscrire</a>
-                    </nav>
-                </div>
-            </section>
-        </div>
-    </header>
-
-    <section id="hero">
-        <div id="hero-contenu">
-            <h2 id="hero-titre">L'éducation pour <br><span>chaque enfant</span></h2>
-            <p class="hero-soustitre">Accompagner, éduquer et bâtir un avenir durable pour la jeunesse en Haïti.</p>
-            <a href="#section-don" id="btnHero">En savoir plus</a>
-        </div>
-    </section>
-
-    <section id="section-don">
-        <a href="don.html" id="btnDonMinimal">Faire un don</a>
-    </section>
-
-    <footer id="footer">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <h3>Educa-Psy</h3>
-                <p>Vers une éducation accessible à tous.</p>
+    <main>
+        <section id="hero">
+            <div id="hero-contenu">
+                <h2 id="hero-titre">L'éducation pour <br><span>chaque enfant</span></h2>
+                <p class="hero-soustitre">Ensemble, bâtissons un avenir plus juste.</p>
+                <a href="#section-don" id="btnHero">En savoir plus</a>
             </div>
-            <div class="footer-socials">
-                <a href="#">FB</a>
-                <a href="#">IG</a>
-                <a href="#">LN</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Educa-Psy. Tous droits réservés.</p>
-        </div>
-    </footer>
+        </section>
 
-    <script src="script.js"></script>
+        <section id="section-don">
+            <a href="don.html" id="btnDonMinimal">Faire un don</a>
+        </section>
+    </main>
+
+    <div id="footer-part"></div>
 </body>
 </html>
