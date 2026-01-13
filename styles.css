@@ -1,10 +1,24 @@
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  overflow-x: hidden;
+/* --- LANGUE MINIMALISTE --- */
+#select-langue {
+  appearance: none;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  color: #007bff;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: color 0.3s ease;
 }
 
-/* HEADER */
+#select-langue:hover,
+#select-langue:focus {
+  color: #0056b3;
+  outline: none;
+}
+
+/* --- CONTENEUR HEADER --- */
 #header {
   background-color: white;
   border-bottom: 2px solid #007bff;
@@ -13,13 +27,24 @@ body {
   padding: 10px 4%;
 }
 
-.header-ligne-haut {
+.header-ligne-haut,
+.header-ligne-bas {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+}
+
+.header-ligne-haut {
   padding-bottom: 12px;
 }
 
+.header-ligne-bas {
+  padding-top: 10px;
+  border-top: 1px solid #f2f2f2;
+}
+
+/* --- LOGO ET TITRE --- */
 #logoTitre {
   display: flex;
   align-items: center;
@@ -37,49 +62,7 @@ body {
   font-weight: bold;
 }
 
-#header-droite {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* LANGUE MODERNE */
-.langue-wrapper {
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 30px;
-  padding: 6px 12px;
-  font-weight: bold;
-  font-size: 14px;
-  color: #007bff;
-  cursor: pointer;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.langue-wrapper:hover {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-}
-.langue-icone {
-  margin-right: 8px;
-  font-size: 16px;
-}
-#select-langue {
-  appearance: none;
-  border: none;
-  background: transparent;
-  font-weight: bold;
-  font-size: 14px;
-  color: #007bff;
-  cursor: pointer;
-  padding-right: 20px;
-}
-#select-langue:focus {
-  outline: none;
-}
-
-/* DON */
+/* --- BOUTON DON --- */
 #btnDon {
   background-color: #007bff;
   color: white;
@@ -90,14 +73,7 @@ body {
   font-size: 14px;
 }
 
-/* MENU */
-.header-ligne-bas {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 10px;
-  border-top: 1px solid #f2f2f2;
-}
+/* --- MENU --- */
 #btnMenu {
   background-color: #f0f0f0;
   border: none;
@@ -135,7 +111,7 @@ body {
   background-color: #f0faff;
 }
 
-/* RECHERCHE */
+/* --- RECHERCHE --- */
 #menuRecherche.recherche {
   display: flex;
   align-items: center;
@@ -160,39 +136,7 @@ body {
   font-size: 14px;
 }
 
-/* HERO */
-#hero {
-  background-color: #007bff;
-  color: white;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 20px;
-}
-#hero-titre {
-  font-size: 32px;
-  margin-bottom: 25px;
-  line-height: 1.2;
-}
-#btnHero {
-  background-color: white;
-  color: #007bff;
-  text-decoration: none;
-  padding: 15px 35px;
-  border-radius: 30px;
-  font-weight: bold;
-  font-size: 18px;
-}
-#btnHero:hover {
-  background-color: #0056b3;
-  color: white;
-  transition: 0.3s ease;
-}
-
-/* MOBILE */
+/* --- RESPONSIVE --- */
 @media screen and (max-width: 480px) {
   #titre {
     font-size: 18px;
@@ -207,8 +151,5 @@ body {
   }
   #menuRecherche.recherche {
     width: 55%;
-  }
-  #hero-titre {
-    font-size: 26px;
   }
 }
