@@ -1,27 +1,43 @@
-// Changement de couleur de la navbar au scroll
-window.addEventListener('scroll', function() {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.style.padding = '10px 8%';
-        navbar.style.background = '#ffffff';
-    } else {
-        navbar.style.padding = '20px 8%';
+const btnMenu = document.getElementById('btnMenu');
+
+const menu = document.getElementById('liens-deroulants');
+
+
+
+btnMenu.onclick = function(e) {
+
+    menu.classList.toggle('voir');
+
+    e.stopPropagation();
+
+}
+
+
+
+window.onclick = function() {
+
+    menu.classList.remove('voir');
+
+}
+
+
+
+// Détecte le changement dans votre menu et ordonne la traduction intégrale
+
+document.getElementById('select-langue').addEventListener('change', function() {
+
+    var lang = this.value;
+
+    var googleCombo = document.querySelector('.goog-te-combo');
+
+    
+
+    if (googleCombo) {
+
+        googleCombo.value = lang;
+
+        googleCombo.dispatchEvent(new Event('change'));
+
     }
-});
 
-// Animation simple pour les cartes de service
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-});
-
-document.querySelectorAll('.service-card').forEach((card) => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = 'all 0.6s ease-out';
-    observer.observe(card);
 });
