@@ -1,17 +1,20 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const btnMenu = document.getElementById('btnMenu');
-    const menuDeroulant = document.getElementById('menuDeroulant');
+## **script.js**
 
-    if (btnMenu && menuDeroulant) {
-        btnMenu.addEventListener('click', function(e) {
-            e.stopPropagation();
-            menuDeroulant.classList.toggle('show');
-        });
+```javascript
+const btnMenu = document.getElementById('btnMenu');
+const menu = document.getElementById('liens-deroulants');
 
-        document.addEventListener('click', function(e) {
-            if (!menuDeroulant.contains(e.target) && !btnMenu.contains(e.target)) {
-                menuDeroulant.classList.remove('show');
-            }
-        });
-    }
+btnMenu.onclick = function(e) {
+    menu.classList.toggle('voir');
+    e.stopPropagation();
+}
+
+window.onclick = function() {
+    menu.classList.remove('voir');
+}
+
+document.getElementById('select-langue').addEventListener('change', function() {
+    var lang = this.value;
+    console.log('Langue sélectionnée:', lang);
 });
+```
