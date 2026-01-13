@@ -1,14 +1,13 @@
-// Sélection des éléments
 const btnMenu = document.getElementById('btnMenu');
 const menuPrincipal = document.getElementById('liens-deroulants');
 
-// Gestion de l'ouverture du menu
+// Toggle Menu
 btnMenu.addEventListener('click', (e) => {
     menuPrincipal.classList.toggle('voir');
-    e.stopPropagation(); // Empêche la fermeture immédiate via le clic fenêtre
+    e.stopPropagation();
 });
 
-// Fermer le menu si on clique n'importe où ailleurs
+// Fermer au clic extérieur
 window.addEventListener('click', () => {
     if (menuPrincipal.classList.contains('voir')) {
         menuPrincipal.classList.remove('voir');
