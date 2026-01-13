@@ -3,23 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Découvrez la mission d'Educa-Psy : transformer l'éducation en Haïti par le soutien psychopédagogique.">
-    <title>Présentation | Educa-Psy</title>
+    <meta name="description" content="Découvrez Educa-Psy : notre mission, notre vision et notre engagement pour l'éducation en Haïti.">
+    <title>Qui sommes-nous ? | Educa-Psy</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="header-part"></div> <main>
+    <header id="header">
+        <div class="header-container">
+            <a href="index.html" id="logoTitre">
+                <img src="images/Logo.webp" alt="Logo" id="logo">
+                <h1 id="titre">Educa-Psy</h1>
+            </a>
+            <div id="header-droite">
+                <button id="btnMenu"><div class="barre"></div><div class="barre"></div><div class="barre"></div></button>
+                <nav id="menuDeroulant" class="dropdown-content">
+                    <a href="index.html" class="menu-item">Accueil</a>
+                    <a href="presentation.html" class="menu-item">Présentation</a>
+                    <a href="services.html" class="menu-item">Services</a>
+                    <a href="actualites.html" class="menu-item">Actualités</a>
+                    <a href="contact.html" class="menu-item">Contact</a>
+                    <a href="connexion.html" class="menu-item signup-btn">Connexion</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
         <section class="hero-page">
             <h1>Notre Vision</h1>
-            <p>Educa-Psy s'engage pour une éducation de qualité alliant psychologie et pédagogie.</p>
+            <p>Révolutionner l'approche éducative par la psychopédagogie.</p>
         </section>
         <div class="content-wrapper">
             <div class="card-moderne">
-                <h2>Qui sommes-nous ?</h2>
-                <p>Educa-Psy est né d'une volonté de soutenir la jeunesse haïtienne dans ses défis académiques et émotionnels...</p>
+                <h2>À propos de nous</h2>
+                <p>Educa-Psy est une organisation dédiée au bien-être des élèves et étudiants haïtiens. Nous croyons que la réussite scolaire ne peut se faire sans un équilibre mental sain.</p>
+                <br>
+                <h3>Notre Mission</h3>
+                <p>Offrir des outils concrets aux écoles, aux parents et aux jeunes pour surmonter les obstacles à l'apprentissage.</p>
             </div>
         </div>
     </main>
-    <div id="footer-part"></div>
+
+    <footer id="footer"><p>&copy; 2026 Educa-Psy Haïti. Tous droits réservés.</p></footer>
 </body>
 </html>
