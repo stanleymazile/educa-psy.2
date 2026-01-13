@@ -1,87 +1,94 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Educa-Psy</title>
-  <link rel="stylesheet" href="../styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Educa-Psy – Éducation, psychologie et santé mentale">
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-  <header id="header">
-    <div class="header-ligne-haut">
-      <section id="logoTitre">
-        <img src="images/Logo2.webp" alt="Logo Educa-Psy" id="logo" />
-        <h2 id="titre">Educa-Psy</h2>
-      </section>
+<!-- ================= HEADER ================= -->
+<header class="header">
 
-      <section id="header-droite">
-        <label for="select-langue" class="visually-hidden">Langue</label>
-        <select id="select-langue" aria-label="Langue">
-          <option value="fr">FR</option>
-          <option value="ht">HT</option>
-          <option value="en">EN</option>
-          <option value="es">ES</option>
-        </select>
-        <a href="don.html" id="btnDon">Don</a>
-      </section>
-    </div>
+  <!-- ===== LIGNE HAUT ===== -->
+  <div class="header-ligne header-ligne-haut">
 
-    <div class="header-ligne-bas">
-      <section id="groupe-menu">
-        <button id="btnMenu" aria-label="Ouvrir le menu" aria-expanded="false">☰ Menu</button>
-        <nav id="liens-deroulants" role="navigation">
-          <a href="index.html" class="item-menu">Accueil</a>
-          <a href="presentation.html" class="item-menu">Présentation</a>
-          <a href="services.html" class="item-menu">Services</a>
-          <a href="contact.html" class="item-menu">Contact</a>
-        </nav>
-      </section>
+    <!-- Logo + Titre -->
+    <section class="logo-titre">
+      <img src="images/logo-educa-psy.png" alt="Logo Educa-Psy" class="logo">
+      <h2 class="titre-site">Educa-Psy</h2>
+    </section>
 
-      <section id="menuRecherche" class="recherche">
-        <input type="text" id="recherche" placeholder="Rechercher..." />
-        <button id="btnChercher">🔍</button>
-      </section>
-    </div>
-  </header>
+    <!-- Droite -->
+    <section class="header-droite">
 
-  <section id="hero">
-    <div id="hero-contenu">
-      <h1 id="hero-titre">L'éducation pour chaque enfant en Haïti</h1>
-      <a href="services.html" id="btnHero">Découvrir</a>
+      <!-- Bouton Langue (UI seulement) -->
+      <div class="langue-wrapper">
+        <button class="btn-langue">🌐 FR</button>
+        <div class="menu-langue">
+          <span>Français</span>
+          <span>Kreyòl</span>
+          <span>English</span>
+          <span>Español</span>
+        </div>
+      </div>
+
+      <!-- Don -->
+      <a href="don.html" class="btn-don">Don</a>
+
+    </section>
+  </div>
+
+  <!-- ===== LIGNE BAS ===== -->
+  <div class="header-ligne header-ligne-bas">
+
+    <!-- Menu -->
+    <section class="groupe-menu">
+      <button id="btnMenu" class="btn-menu">☰ Menu</button>
+
+      <!-- id conservé pour JS -->
+      <nav id="menuDeroulant" class="menu-deroulant">
+        <a href="index.html" class="item-menu">Accueil</a>
+        <a href="presentation.html" class="item-menu">Présentation</a>
+        <a href="services.html" class="item-menu">Services</a>
+        <a href="contact.html" class="item-menu">Contact</a>
+      </nav>
+    </section>
+
+    <!-- Recherche -->
+    <section class="recherche">
+      <input type="text" placeholder="Rechercher...">
+      <button>🔍</button>
+    </section>
+
+  </div>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-contenu">
+      <h1 class="hero-titre">
+        Éducation, psychologie et santé mentale pour tous
+      </h1>
+      <a href="services.html" class="btn-hero">Découvrir</a>
     </div>
   </section>
-<footer id="footer">
-  <div class="footer-contenu">
-    <div class="footer-col">
-      <h3>Educa-Psy</h3>
-      <p>Ensemble pour le bien-être et l’éducation des enfants en Haïti.</p>
-    </div>
 
-    <div class="footer-col">
-      <h4>Navigation</h4>
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="presentation.html">Présentation</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
+</main>
 
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <p>Email : <a href="mailto:contact@educapsy.ht">contact@educapsy.ht</a></p>
-      <p>Téléphone : +509 1234 5678</p>
-    </div>
-  </div>
-
-  <div class="footer-bas">
-    <p>&copy; 2026 Educa-Psy Haïti. Tous droits réservés.</p>
-  </div>
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <p>© 2026 Educa-Psy – Tous droits réservés</p>
 </footer>
-  <script src="../script.js"></script>
+
+<!-- ================= SCRIPT ================= -->
+<script src="script.js"></script>
+
 </body>
 </html>
-
-
-
