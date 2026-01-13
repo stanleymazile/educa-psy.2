@@ -3,39 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educa-Psy | Accueil</title>
+    <title>Educa-Psy</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="header-part"></div>
 
-    <main>
-        <section class="hero-page">
-            <h1>L'éducation pour chaque enfant</h1>
-            <p>Bâtissons ensemble un avenir où chaque jeune haïtien a les clés de sa réussite scolaire et émotionnelle.</p>
-        </section>
+    <header id="header">
+        <div class="header-ligne-haut">
+            <section id="logoTitre">
+                <img src="logo.png" alt="Logo" id="logo"> 
+                <h2 id="titre">Educa-Psy</h2>
+            </section>
 
-        <section class="grid-container">
-            <div class="card-moderne">
-                <h3 class="card-title">Soutien Scolaire</h3>
-                <p>Nous fournissons les manuels et les cours de rattrapage nécessaires pour briser le cycle de l'échec.</p>
-            </div>
-            <div class="card-moderne">
-                <h3 class="card-title">Suivi Psychologique</h3>
-                <p>Un accompagnement professionnel pour aider les enfants à surmonter les traumatismes et stress locaux.</p>
-            </div>
-            <div class="card-moderne">
-                <h3 class="card-title">Engagement</h3>
-                <p>Une présence constante sur le terrain avec les familles pour une transformation durable.</p>
-            </div>
-        </section>
+            <section id="header-droite">
+                <select id="select-langue">
+                    <option value="fr">FRANÇAIS</option>
+                    <option value="ht">KREYÒL</option> 
+                    <option value="en">ENGLISH</option>
+                    <option value="es">ESPAÑOL</option>
+                </select>
+                <a href="don.html" id="btnDon">Don</a>
+            </section>
+        </div>
 
-        <section class="section-action">
-            <a href="don.html" class="btn-don-moderne">Soutenir notre mission</a>
-        </section>
-    </main>
+        <div class="header-ligne-bas">
+            <section id="groupe-menu">
+                <button id="btnMenu">☰ Menu</button>
+                <nav id="liens-deroulants">
+                    <a href="index.html" class="item-menu">Accueil</a>
+                    <a href="presentation.html" class="item-menu">Présentation</a>
+                    <a href="services.html" class="item-menu">Services</a>
+                    <a href="contact.html" class="item-menu">Contact</a>
+                </nav>
+            </section>
 
-    <div id="footer-part"></div>
+            <section id="menuRecherche" class="recherche">
+                <input type="text" id="recherche" placeholder="Rechercher...">
+                <button id="btnChercher">🔍</button>
+            </section>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div id="hero-contenu">
+            <h1 id="hero-titre">L'éducation pour chaque enfant en Haïti</h1>
+            <a href="services.html" id="btnHero">Découvrir</a>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
