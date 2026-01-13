@@ -1,19 +1,133 @@
-/* --- CONFIGURATION GLOBALE --- */
-* { box-sizing: border-box; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+/* ==========================================================================
+   1. CONFIGURATION GLOBALE & MODERNISATION BODY
+   ========================================================================== */
+* { 
+    box-sizing: border-box; 
+    scroll-behavior: smooth; 
+    -webkit-tap-highlight-color: transparent; 
+}
 
 body {
     margin: 0;
     padding: 0;
     width: 100%;
     overflow-x: hidden;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-    background-color: #fbfbfd; /* Gris Apple ultra-léger */
+    /* Police système moderne (style Apple) */
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    background-color: #fbfbfd; /* Gris ultra-léger pour faire ressortir les cartes */
     color: #1d1d1f;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
 }
 
-/* --- LE HERO BLEU UNIFIÉ --- */
+/* ==========================================================================
+   2. HEADER (Navigation & Padding)
+   ========================================================================== */
+#header {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 12px 25px; /* Padding généreux */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 0.5px solid rgba(0,0,0,0.1);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+#logoTitre {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+#logoTitre:hover { opacity: 0.8; }
+
+#logo { width: 32px; height: 32px; object-fit: contain; }
+
+#titre { 
+    color: #007bff; 
+    font-size: 1.3rem; 
+    font-weight: 800; 
+    margin: 0; 
+    letter-spacing: -0.5px;
+}
+
+#header-droite {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+/* Sélecteur de langue moderne */
+#select-langue {
+    background: #f2f2f7;
+    border: none;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #1d1d1f;
+    padding: 8px 12px;
+    border-radius: 10px;
+    outline: none;
+}
+
+/* Bouton Menu Hamburger */
+#btnMenu { 
+    background: #f2f2f7; 
+    border: none; 
+    width: 42px; 
+    height: 42px; 
+    border-radius: 12px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 4.5px; 
+    cursor: pointer;
+}
+.barre { width: 20px; height: 1.5px; background: #000; transition: 0.3s; }
+
+/* Menu Déroulant */
+.dropdown-content { 
+    display: none; 
+    position: absolute; 
+    right: 25px; 
+    top: 70px; 
+    width: 250px; 
+    background: white; 
+    border-radius: 18px; 
+    padding: 12px; 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
+    border: 1px solid rgba(0,0,0,0.05); 
+}
+.dropdown-content.voir { display: block; animation: pop 0.25s ease-out; }
+
+.menu-item { 
+    display: block; 
+    padding: 14px; 
+    text-decoration: none; 
+    color: #1d1d1f; 
+    font-size: 15px; 
+    border-radius: 12px; 
+    transition: 0.2s; 
+}
+.menu-item:hover { background: #f5f5f7; color: #007bff; }
+.signup-btn { background: #007bff; color: #fff !important; text-align: center; font-weight: 600; margin-top: 10px; }
+
+/* ==========================================================================
+   3. HERO PAGE (Le bleu sur toutes les pages)
+   ========================================================================== */
 .hero-page {
     height: 45vh;
     min-height: 350px;
@@ -29,90 +143,163 @@ body {
 }
 
 .hero-page h1 {
-    font-size: 2.8rem;
+    font-size: 3rem;
     font-weight: 800;
     margin-bottom: 15px;
-    letter-spacing: -1px;
+    letter-spacing: -1.5px;
 }
 
 .hero-page p {
-    font-size: 1.1rem;
-    max-width: 600px;
-    opacity: 0.95;
+    font-size: 1.15rem;
+    max-width: 650px;
+    opacity: 0.9;
+    margin: 0;
 }
 
-/* --- HEADER MODERNE --- */
-#header {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 12px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 0.5px solid rgba(0,0,0,0.1);
-}
-
-.header-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
-
-#logoTitre { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-#logo { width: 30px; height: 30px; }
-#titre { color: #007bff; font-size: 1.3rem; font-weight: 800; margin: 0; }
-
-#btnMenu { 
-    background: #f2f2f7; border: none; width: 42px; height: 42px; 
-    border-radius: 12px; display: flex; flex-direction: column; 
-    justify-content: center; align-items: center; gap: 4px; cursor: pointer;
-}
-.barre { width: 20px; height: 1.5px; background: #000; transition: 0.3s; }
-
-.dropdown-content { 
-    display: none; position: absolute; right: 20px; top: 65px; 
-    width: 240px; background: white; border-radius: 16px; padding: 12px; 
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 1px solid rgba(0,0,0,0.05); 
-}
-.dropdown-content.voir { display: block; animation: pop 0.25s ease-out; }
-.menu-item { display: block; padding: 14px; text-decoration: none; color: #1d1d1f; font-size: 15px; border-radius: 10px; transition: 0.2s; }
-.menu-item:hover { background: #f5f5f7; color: #007bff; }
-.signup-btn { background: #007bff; color: #fff !important; text-align: center; font-weight: 600; margin-top: 8px; }
-
-/* --- GRILLES ET CARTES --- */
+/* ==========================================================================
+   4. GRILLES, CARTES ET CONTENU
+   ========================================================================== */
 .grid-container { 
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 30px; padding: 60px 20px; max-width: 1200px; margin: 0 auto; 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px; 
+    padding: 60px 20px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
 }
 
 .card-moderne { 
-    background: #ffffff; padding: 35px; border-radius: 24px; 
-    border: 1px solid rgba(0,0,0,0.03); transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
-    display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    background: #ffffff; 
+    padding: 35px; 
+    border-radius: 24px; 
+    border: 1px solid rgba(0,0,0,0.03); 
+    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+    display: flex; 
+    flex-direction: column; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
 }
-.card-moderne:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.08); }
+
+.card-moderne:hover { 
+    transform: translateY(-10px); 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.08); 
+}
+
 .card-title { font-size: 1.5rem; color: #007bff; margin-bottom: 15px; font-weight: 700; }
+.card-text { font-size: 1rem; color: #48484a; margin: 0; }
 
-/* --- BOUTON DON MODERNE --- */
+/* ==========================================================================
+   5. BOUTON DON (Moderne & Centré)
+   ========================================================================== */
 .section-action { display: flex; justify-content: center; padding: 60px 20px; }
+
 .btn-don-moderne { 
-    background: #ffffff; color: #007bff; padding: 18px 50px; border-radius: 50px; 
-    font-weight: 700; text-transform: uppercase; font-size: 14px; letter-spacing: 0.5px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: 0.3s; border: none; cursor: pointer;
+    background: #ffffff; 
+    color: #007bff; 
+    padding: 18px 50px; 
+    border-radius: 50px; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    font-size: 14px; 
+    letter-spacing: 0.5px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08); 
+    transition: 0.3s; 
+    border: none; 
+    text-decoration: none;
 }
-.btn-don-moderne:hover { transform: scale(1.05); box-shadow: 0 15px 35px rgba(0,0,0,0.12); }
 
-/* --- FORMULAIRES --- */
-.contact-container { max-width: 550px; margin: -60px auto 80px; padding: 0 20px; position: relative; z-index: 10; }
+.btn-don-moderne:hover { 
+    transform: scale(1.05); 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12); 
+}
+
+/* ==========================================================================
+   6. FORMULAIRES (Contact, Connexion, Inscription)
+   ========================================================================== */
+.contact-container { 
+    max-width: 550px; 
+    margin: -70px auto 80px; /* Chevauchement sur le Hero bleu */
+    padding: 0 20px; 
+    position: relative; 
+    z-index: 10; 
+}
+
+.form-group { margin-bottom: 22px; text-align: left; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #1d1d1f; }
+
 input, textarea { 
-    width: 100%; padding: 16px; margin-bottom: 20px; border: 1px solid #d2d2d7; 
-    border-radius: 14px; background: #fbfbfd; font-size: 16px; transition: 0.2s; 
+    width: 100%; 
+    padding: 16px; 
+    border: 1px solid #d2d2d7; 
+    border-radius: 14px; 
+    background: #fbfbfd; 
+    font-size: 16px; 
+    transition: 0.2s; 
+    font-family: inherit;
 }
-input:focus { border-color: #007bff; background: #fff; box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1); outline: none; }
-.btn-submit { width: 100%; background: #007bff; color: #fff; border: none; padding: 18px; border-radius: 14px; font-weight: 700; cursor: pointer; }
 
-/* --- FOOTER --- */
+input:focus, textarea:focus { 
+    border-color: #007bff; 
+    background: #fff; 
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1); 
+    outline: none; 
+}
+
+.btn-submit { 
+    width: 100%; 
+    background: #007bff; 
+    color: #fff; 
+    border: none; 
+    padding: 18px; 
+    border-radius: 14px; 
+    font-weight: 700; 
+    font-size: 16px;
+    cursor: pointer; 
+    transition: background 0.2s;
+}
+
+.btn-submit:hover { background: #0056b3; }
+
+/* ==========================================================================
+   7. FOOTER
+   ========================================================================== */
 #footer { background: #f5f5f7; padding: 80px 20px 40px; border-top: 1px solid #d2d2d7; }
 .footer-grid { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
 .footer-brand h3 { color: #007bff; font-weight: 800; font-size: 1.6rem; margin-bottom: 15px; }
-.footer-socials a { background: #e2e2e7; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #1d1d1f; font-weight: 700; text-decoration: none; }
+.footer-brand p { font-size: 14px; color: #6e6e73; max-width: 320px; margin-bottom: 20px; }
+.footer-socials { display: flex; gap: 15px; }
+.footer-socials a { 
+    background: #e2e2e7; 
+    width: 45px; 
+    height: 45px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 50%; 
+    color: #1d1d1f; 
+    font-weight: 700; 
+    text-decoration: none; 
+    font-size: 12px;
+}
+.footer-bottom { margin-top: 50px; text-align: center; font-size: 13px; color: #86868b; border-top: 1px solid #d2d2d7; padding-top: 30px; }
 
-@keyframes pop { from { opacity: 0; transform: translateY(-10px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
-@media (max-width: 768px) { .hero-page h1 { font-size: 2.2rem; } .footer-grid { flex-direction: column; text-align: center; align-items: center; } }
+/* ==========================================================================
+   8. ANIMATIONS ET RÉPONSIVITÉ
+   ========================================================================== */
+@keyframes pop { 
+    from { opacity: 0; transform: translateY(-10px) scale(0.95); } 
+    to { opacity: 1; transform: translateY(0) scale(1); } 
+}
+
+@media (max-width: 768px) {
+    .hero-page h1 { font-size: 2.2rem; }
+    .grid-container { grid-template-columns: 1fr; padding: 40px 20px; }
+    .footer-grid { flex-direction: column; text-align: center; align-items: center; }
+}
+
+@media (max-width: 480px) {
+    #header { padding: 10px 15px; }
+    #titre { font-size: 1.1rem; }
+    #header-droite { gap: 12px; }
+    .hero-page h1 { font-size: 1.8rem; }
+    .contact-container { margin-top: -40px; }
+}
