@@ -54,6 +54,11 @@ body {
   height: 40px;
   margin-right: 10px;
   border-radius: 5px;
+  padding: 6px;
+  background-color: #e6f0ff; /* Bleu très clair */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  object-fit: contain;
+
 }
 #titre {
   color: #007bff;
@@ -270,4 +275,5 @@ body {
     align-items: flex-start;
   }
 }
+
 
