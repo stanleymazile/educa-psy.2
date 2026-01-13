@@ -3,32 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Les dernières nouvelles et projets d'Educa-Psy.">
     <title>Actualités | Educa-Psy</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="header-part"></div>
+    <header id="header">
+        <div class="header-container">
+            <a href="index.html" id="logoTitre"><img src="images/Logo.webp" id="logo"><h1 id="titre">Educa-Psy</h1></a>
+            <div id="header-droite">
+                <button id="btnMenu"><div class="barre"></div><div class="barre"></div><div class="barre"></div></button>
+                <nav id="menuDeroulant" class="dropdown-content">
+                    <a href="index.html" class="menu-item">Accueil</a>
+                    <a href="presentation.html" class="menu-item">Présentation</a>
+                    <a href="services.html" class="menu-item">Services</a>
+                    <a href="actualites.html" class="menu-item">Actualités</a>
+                    <a href="contact.html" class="menu-item">Contact</a>
+                    <a href="connexion.html" class="menu-item signup-btn">Connexion</a>
+                </nav>
+            </div>
+        </div>
+    </header>
 
     <main>
         <section class="hero-page">
             <h1>Actualités</h1>
-            <p>Restez informés de nos derniers projets et impacts sur le terrain.</p>
+            <p>Nos actions récentes sur le terrain.</p>
         </section>
-
         <div class="content-wrapper">
             <div class="card-moderne">
-                <span class="news-date">Janvier 2026</span>
-                <h3>Lancement du nouveau centre</h3>
-                <p>Nous sommes fiers d'ouvrir nos portes à Port-au-Prince pour accueillir encore plus de jeunes.</p>
-                <br>
-                <span class="news-date">Décembre 2025</span>
-                <h3>Bilan de l'année scolaire</h3>
-                <p>Grâce à votre soutien, plus de 500 enfants ont bénéficié de nos programmes cette année.</p>
+                <article style="margin-bottom:30px; border-bottom:1px solid #eee; padding-bottom:20px;">
+                    <span style="color:var(--primary); font-weight:bold;">12 Janvier 2026</span>
+                    <h2>Lancement des cliniques mobiles</h2>
+                    <p>Nous apportons le soutien psychologique directement dans les écoles partenaires.</p>
+                </article>
+                <article>
+                    <span style="color:var(--primary); font-weight:bold;">05 Décembre 2025</span>
+                    <h2>Succès du programme de tutorat</h2>
+                    <p>Plus de 200 élèves ont amélioré leur moyenne grâce à nos tuteurs.</p>
+                </article>
             </div>
         </div>
     </main>
 
-    <div id="footer-part"></div>
+    <footer id="footer"><p>&copy; 2026 Educa-Psy Haïti.</p></footer>
 </body>
 </html>
