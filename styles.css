@@ -1,89 +1,216 @@
 /* ==========================================================================
-   STYLE DES PAGES UNIQUEMENT (HERO & CONTENU)
+   1. BASE ET TYPOGRAPHIE
    ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-/* Bannière Bleue pour le haut des pages */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   2. HEADER ORIGINAL (Restauration complète)
+   ========================================================================== */
+#header {
+    background-color: white;
+    padding: 10px 20px;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#logoTitre {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+#logo {
+    width: 40px;
+    height: auto;
+}
+
+#titre {
+    color: #007bff;
+    font-size: 22px;
+    margin: 0;
+}
+
+#header-droite {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#select-langue {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+#btnMenu {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.barre {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+}
+
+/* Menu Déroulant Original */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    width: 200px;
+    z-index: 1001;
+}
+
+.dropdown-content.voir {
+    display: block;
+}
+
+.menu-item {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #333;
+}
+
+.menu-item:hover {
+    background-color: #f1f1f1;
+}
+
+.signup-btn {
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   3. STYLE MODERNE DES PAGES (Hero & Cartes)
+   ========================================================================== */
 .hero-page {
-    height: 45vh;
-    min-height: 350px;
+    height: 400px;
     background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: white;
     padding: 0 20px;
     width: 100%;
+    color: white;
 }
 
 .hero-page h1 {
     font-size: 3rem;
     font-weight: 800;
-    margin-bottom: 15px;
-    letter-spacing: -1.5px;
-    color: white; /* Force la couleur blanche pour le titre hero */
+    margin-bottom: 10px;
+    color: white;
 }
 
 .hero-page p {
     font-size: 1.2rem;
-    max-width: 750px;
-    opacity: 0.95;
-    margin: 0;
+    opacity: 0.9;
+    max-width: 800px;
     color: white;
 }
 
-/* Zone de contenu avec effet de chevauchement */
 .content-wrapper {
     max-width: 1100px;
-    margin: -70px auto 80px; 
+    margin: -60px auto 80px; /* Effet de chevauchement moderne */
     padding: 0 20px;
     position: relative;
-    z-index: 10;
+    z-index: 5;
 }
 
-/* Carte blanche pour vos textes et formulaires */
 .card-moderne {
     background: #ffffff;
-    border-radius: 28px;
-    padding: 50px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-    border: 1px solid rgba(0,0,0,0.03);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* Style des titres dans vos contenus */
-.card-moderne h2 {
-    color: #007bff;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-}
-
-/* Style moderne pour les formulaires (Pages Contact, Connexion, Inscription) */
-.form-moderne-input {
+/* Éléments de formulaire pour Contact/Connexion */
+.input-style {
     width: 100%;
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid #d2d2d7;
-    border-radius: 12px;
-    background-color: #fbfbfd;
+    padding: 14px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
     font-size: 16px;
 }
 
-.btn-moderne-submit {
+.btn-style {
     width: 100%;
+    padding: 14px;
     background: #007bff;
     color: white;
     border: none;
-    padding: 16px;
-    border-radius: 12px;
-    font-weight: 700;
+    border-radius: 10px;
     cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background 0.3s;
 }
 
-/* Responsivité */
+.btn-style:hover {
+    background: #0056b3;
+}
+
+/* ==========================================================================
+   4. FOOTER ORIGINAL
+   ========================================================================== */
+#footer {
+    background-color: #333;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   5. RÉPONSIVITÉ
+   ========================================================================== */
 @media (max-width: 768px) {
-    .hero-page h1 { font-size: 2.2rem; }
-    .content-wrapper { margin-top: -40px; }
-    .card-moderne { padding: 30px 20px; }
+    .hero-page h1 {
+        font-size: 2.2rem;
+    }
+    .content-wrapper {
+        margin-top: -40px;
+    }
+    .card-moderne {
+        padding: 30px 20px;
+    }
 }
-
