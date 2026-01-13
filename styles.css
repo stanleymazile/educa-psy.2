@@ -1,170 +1,197 @@
-/* --- BASE --- */
+/* ================= BASE ================= */
 body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
-  overflow-x: hidden;
-  background-color: #fff;
-  color: #333;
+  background-color: #f9f9f9;
 }
 
-/* --- ACCESSIBILITÉ --- */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* --- HEADER --- */
-#header {
-  background-color: white;
+/* ================= HEADER ================= */
+.header {
+  background: white;
   border-bottom: 2px solid #007bff;
-  display: flex;
-  flex-direction: column;
   padding: 10px 4%;
 }
 
-.header-ligne-haut,
-.header-ligne-bas {
+/* Ligne flex */
+.header-ligne {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
 }
 
+/* Ligne haut */
 .header-ligne-haut {
   padding-bottom: 12px;
 }
 
+/* Ligne bas */
 .header-ligne-bas {
   padding-top: 10px;
-  border-top: 1px solid #f2f2f2;
+  border-top: 1px solid #eee;
 }
 
-/* --- LOGO ET TITRE --- */
-#logoTitre {
+/* ================= LOGO ================= */
+.logo-titre {
   display: flex;
   align-items: center;
 }
-#logo {
+
+.logo {
   width: 40px;
   height: 40px;
   margin-right: 10px;
-  border-radius: 8px;
-  padding: 6px;
-  background-color: #e6f0ff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  object-fit: contain;
 }
-#titre {
+
+.titre-site {
   color: #007bff;
-  margin: 0;
   font-size: 20px;
   font-weight: bold;
+  margin: 0;
 }
 
-/* --- LANGUE MINIMALISTE --- */
-#select-langue {
-  appearance: none;
-  background: transparent;
-  border: none;
-  font-size: 14px;
-  font-weight: 600;
-  color: #007bff;
-  padding: 4px 8px;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-#select-langue:hover,
-#select-langue:focus {
-  color: #0056b3;
-  outline: none;
+/* ================= DROITE ================= */
+.header-droite {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* --- BOUTON DON --- */
-#btnDon {
-  background-color: #007bff;
+/* Bouton Don */
+.btn-don {
+  background: #007bff;
   color: white;
-  text-decoration: none;
   padding: 8px 14px;
-  border-radius: 5px;
+  text-decoration: none;
+  border-radius: 6px;
   font-weight: bold;
   font-size: 14px;
+  transition: all 0.3s ease;
 }
 
-/* --- MENU --- */
-#btnMenu {
-  background-color: #f0f0f0;
-  border: none;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-weight: bold;
-  border-radius: 5px;
-  font-size: 14px;
+.btn-don:hover {
+  transform: scale(1.05);
 }
-#groupe-menu {
+
+/* ================= MENU ================= */
+.groupe-menu {
   position: relative;
 }
-#liens-deroulants {
+
+.btn-menu {
+  background: #f0f0f0;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.menu-deroulant {
   display: none;
   position: absolute;
-  left: 0;
   top: 110%;
-  background-color: white;
+  left: 0;
+  background: white;
   border: 1px solid #ddd;
   width: 180px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-#liens-deroulants.voir {
+
+.menu-deroulant.voir {
   display: block;
 }
+
 .item-menu {
   display: block;
   padding: 12px;
   text-decoration: none;
   color: #333;
-  border-bottom: 1px solid #eee;
-}
-.item-menu:hover {
-  background-color: #f0faff;
+  font-size: 14px;
 }
 
-/* --- RECHERCHE --- */
-#menuRecherche.recherche {
+.item-menu:hover {
+  background: #f0faff;
+}
+
+/* ================= RECHERCHE ================= */
+.recherche {
   display: flex;
   align-items: center;
   border: 1px solid #ccc;
-  padding: 4px 12px;
   border-radius: 20px;
+  padding: 4px 10px;
   background-color: #fafafa;
-  width: 60%;
-  max-width: 300px;
 }
-#recherche {
+
+.recherche input {
   border: none;
   outline: none;
-  width: 100%;
   background: transparent;
   font-size: 14px;
 }
-#btnChercher {
+
+.recherche button {
   background: none;
   border: none;
   cursor: pointer;
   font-size: 14px;
 }
 
-/* --- HERO --- */
-#hero {
+/* ================= BOUTON LANGUE ================= */
+.langue-wrapper {
+  position: relative;
+}
+
+.btn-langue {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-langue:hover {
   background-color: #007bff;
   color: white;
+  transform: scale(1.05);
+}
+
+/* Menu langue */
+.menu-langue {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 120%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  min-width: 140px;
+}
+
+.menu-langue span {
+  display: block;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.menu-langue span:hover {
+  background-color: #f0faff;
+}
+
+/* Affichage menu langue au hover */
+.langue-wrapper:hover .menu-langue {
+  display: block;
+}
+
+/* ================= HERO ================= */
+.hero {
   height: 400px;
+  background: #007bff;
+  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -172,109 +199,58 @@ body {
   text-align: center;
   padding: 0 20px;
 }
-#hero-titre {
+
+.hero-titre {
   font-size: 32px;
   margin-bottom: 25px;
   line-height: 1.2;
 }
-#btnHero {
-  background-color: white;
+
+.btn-hero {
+  background: white;
   color: #007bff;
   text-decoration: none;
   padding: 15px 35px;
   border-radius: 30px;
   font-weight: bold;
   font-size: 18px;
-}
-#btnHero:hover {
-  background-color: #0056b3;
-  color: white;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-/* --- FOOTER --- */
-#footer {
-  background-color: #f8f9fa;
-  color: #333;
-  padding: 40px 4% 20px;
-  font-size: 14px;
-  border-top: 1px solid #e0e0e0;
-  max-width: 1200px;
-  margin: 0 auto;
+.btn-hero:hover {
+  transform: scale(1.05);
 }
 
-.footer-contenu {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 40px;
-  margin-bottom: 20px;
-}
-
-.footer-col {
-  flex: 0 0 250px;
-  min-width: 180px;
-}
-
-.footer-col h3,
-.footer-col h4 {
-  margin-bottom: 12px;
-  color: #007bff;
-}
-
-.footer-col p,
-.footer-col li {
-  margin: 6px 0;
-}
-
-.footer-col ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-col a {
-  text-decoration: none;
-  color: #333;
-  transition: color 0.3s ease;
-}
-
-.footer-col a:hover {
-  color: #007bff;
-}
-
-.footer-bas {
+/* ================= FOOTER ================= */
+.footer {
   text-align: center;
-  border-top: 1px solid #ddd;
-  padding-top: 15px;
-  font-size: 13px;
-  color: #666;
+  padding: 15px 0;
+  background: #f0f0f0;
+  color: #333;
+  font-size: 14px;
 }
 
-/* --- RESPONSIVE --- */
-@media screen and (max-width: 600px) {
-  .footer-contenu {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
+/* ================= RESPONSIVE ================= */
 @media screen and (max-width: 480px) {
-  #titre {
+  .titre-site {
     font-size: 18px;
   }
-  #logo {
+  .logo {
     width: 35px;
     height: 35px;
   }
-  #btnDon {
+  .btn-don {
     padding: 6px 10px;
     font-size: 13px;
   }
-  #menuRecherche.recherche {
+  .recherche {
     width: 55%;
   }
-  #hero-titre {
+  .hero-titre {
     font-size: 26px;
+  }
+  .btn-hero {
+    padding: 12px 25px;
+    font-size: 16px;
   }
 }
