@@ -1,15 +1,18 @@
 /* ==========================================================================
-   1. VARIABLES & RESET (ANTI-DÉBORDEMENT)
+   1. CONFIGURATION (Variables)
    ========================================================================== */
 :root {
-    --primary: #007bff;
-    --secondary: #0056b3;
-    --bg-light: #f4f4f4;
+    --primary: #007bff;      /* Bleu Educa-Psy */
+    --secondary: #0056b3;    /* Bleu Foncé */
+    --bg-light: #f4f4f4;     /* Fond Gris clair */
     --white: #ffffff;
     --dark: #333333;
-    --shadow: rgba(0, 0, 0, 0.1);
+    --shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
+/* ==========================================================================
+   2. RESET (Anti-Débordement & Bases)
+   ========================================================================== */
 html { box-sizing: border-box; scroll-behavior: smooth; }
 *, *:before, *:after { box-sizing: inherit; }
 
@@ -17,7 +20,7 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    overflow-x: hidden; /* Sécurité totale contre le scroll horizontal */
+    overflow-x: hidden; /* CRUCIAL : Empêche le scroll horizontal */
     background-color: var(--bg-light);
     font-family: 'Segoe UI', Arial, sans-serif;
     color: var(--dark);
@@ -25,7 +28,7 @@ body {
 }
 
 /* ==========================================================================
-   2. HEADER ORIGINAL RESTAURÉ
+   3. HEADER (Style Original)
    ========================================================================== */
 #header {
     background-color: var(--white);
@@ -46,35 +49,72 @@ body {
 }
 
 #logoTitre { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-#logo { width: 40px; height: auto; }
-#titre { color: var(--primary); font-size: 22px; margin: 0; font-weight: bold; }
+#logo { width: 40px; height: auto; object-fit: contain; }
+#titre { color: var(--primary); font-size: 22px; margin: 0; font-weight: 800; }
 
-#header-droite { display: flex; align-items: center; gap: 15px; }
-#btnMenu { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
-.barre { width: 25px; height: 3px; background-color: var(--dark); }
+#header-droite { display: flex; align-items: center; gap: 15px; position: relative; }
+
+/* Menu Hamburger */
+#btnMenu {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+}
+.barre { width: 25px; height: 3px; background-color: var(--dark); transition: 0.3s; }
+
+/* Menu Déroulant */
+.dropdown-content {
+    display: none; /* Caché par défaut */
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: var(--white);
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    z-index: 1001;
+    overflow: hidden;
+}
+
+/* Classe ajoutée par JS pour afficher le menu */
+.dropdown-content.show { display: block; }
+
+.menu-item {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    color: var(--dark);
+    transition: background 0.2s;
+}
+.menu-item:hover { background-color: #f1f1f1; color: var(--primary); }
+.signup-btn { font-weight: bold; color: var(--primary); }
 
 /* ==========================================================================
-   3. STRUCTURE DES PAGES (HERO & CARTES)
+   4. CONTENU MODERNE (Hero & Cards)
    ========================================================================== */
 .hero-page {
     width: 100%;
-    min-height: 380px;
+    min-height: 380px; /* Hauteur minimale garantie */
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 40px 20px;
+    padding: 40px 20px 80px 20px; /* 80px en bas pour l'espace du chevauchement */
     color: var(--white);
 }
 
-.hero-page h1 { font-size: 2.8rem; margin: 0 0 15px 0; color: var(--white) !important; font-weight: 800; }
-.hero-page p { font-size: 1.2rem; max-width: 800px; color: var(--white) !important; opacity: 0.95; }
+.hero-page h1 { font-size: 2.8rem; margin: 0 0 15px 0; color: var(--white); }
+.hero-page p { font-size: 1.2rem; max-width: 800px; color: var(--white); opacity: 0.95; margin: 0; }
 
 .content-wrapper {
     max-width: 1100px;
-    margin: -70px auto 60px; /* Effet de chevauchement */
+    margin: -60px auto 60px; /* Le chevauchement magique */
     padding: 0 20px;
     position: relative;
     z-index: 10;
@@ -83,18 +123,29 @@ body {
 .card-moderne {
     background: var(--white);
     border-radius: 20px;
-    padding: 45px;
-    box-shadow: 0 15px 35px var(--shadow);
+    padding: 40px;
+    box-shadow: var(--shadow);
+    width: 100%;
 }
 
-/* Formulaires */
+/* Grilles pour Services */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* ==========================================================================
+   5. FORMULAIRES & FOOTER
+   ========================================================================== */
 .input-style {
     width: 100%;
     padding: 15px;
     margin: 8px 0 20px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 10px;
     font-size: 16px;
+    display: block;
 }
 
 .btn-style {
@@ -106,27 +157,24 @@ body {
     border-radius: 10px;
     font-weight: bold;
     cursor: pointer;
+    font-size: 16px;
     transition: 0.3s;
 }
+.btn-style:hover { background: var(--secondary); }
 
-.btn-style:hover { background: var(--secondary); transform: translateY(-2px); }
-
-/* ==========================================================================
-   4. FOOTER ORIGINAL
-   ========================================================================== */
 #footer {
     background-color: var(--dark);
     color: var(--white);
     padding: 40px 20px;
     text-align: center;
-    width: 100%;
+    margin-top: auto;
 }
 
 /* ==========================================================================
-   5. RÉPONSIVITÉ
+   6. MOBILE
    ========================================================================== */
 @media (max-width: 768px) {
-    .hero-page h1 { font-size: 2.1rem; }
-    .content-wrapper { margin-top: -40px; }
+    .hero-page h1 { font-size: 2rem; }
+    .content-wrapper { margin-top: -40px; padding: 0 15px; }
     .card-moderne { padding: 30px 20px; }
 }
