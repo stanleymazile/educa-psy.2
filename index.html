@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Educa-Psy | Accueil</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -24,15 +24,21 @@
                 </select>
 
                 <div id="groupe-menu">
-                    <button id="btnMenu">☰</button>
+                    <button id="btnMenu" aria-label="Ouvrir le menu">
+                        <span class="barre"></span>
+                        <span class="barre"></span>
+                    </button>
                     <nav id="liens-deroulants" class="dropdown-content">
-                        <a href="index.html">Accueil</a>
-                        <a href="presentation.html">Présentation</a>
-                        <a href="services.html">Services</a>
-                        <a href="contact.html">Contact</a>
-                        <hr>
-                        <a href="connexion.html">Connexion</a>
-                        <a href="inscription.html">Inscription</a>
+                        <div class="menu-label">Navigation</div>
+                        <a href="index.html" class="menu-item">Accueil</a>
+                        <a href="presentation.html" class="menu-item">Présentation</a>
+                        <a href="services.html" class="menu-item">Services</a>
+                        <a href="contact.html" class="menu-item">Contact</a>
+                        
+                        <div class="menu-divider"></div>
+                        
+                        <a href="connexion.html" class="menu-item">Connexion</a>
+                        <a href="inscription.html" class="menu-item signup-btn">S'inscrire</a>
                     </nav>
                 </div>
             </section>
@@ -41,14 +47,20 @@
 
     <section id="hero">
         <div id="hero-contenu">
-            <h2 id="hero-titre">L'éducation pour chaque enfant en Haïti</h2>
-            <a href="services.html" id="btnHero">Découvrir</a>
+            <span class="hero-badge">Action Humanitaire</span>
+            <h2 id="hero-titre">L'éducation pour <br><span>chaque enfant</span> en Haïti</h2>
+            <p class="hero-soustitre">Ensemble, bâtissons un avenir plus juste par le savoir et l'accompagnement.</p>
+            <div id="hero-actions">
+                <a href="#section-don" id="btnHero">Découvrir nos projets</a>
+            </div>
         </div>
     </section>
 
     <section id="section-don">
         <div class="don-container">
-            <a href="don.html" id="btnDonMinimal">Faire un don</a>
+            <a href="don.html" id="btnDonMinimal">
+                <span>❤</span> Faire un don
+            </a>
         </div>
     </section>
 
