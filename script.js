@@ -5,7 +5,6 @@ const barres = document.querySelectorAll('.barre');
 btnMenu.addEventListener('click', (e) => {
     menuPrincipal.classList.toggle('voir');
     
-    // Animation de l'icône à 3 barres
     if(menuPrincipal.classList.contains('voir')) {
         barres[0].style.transform = "translateY(5.5px) rotate(45deg)";
         barres[1].style.opacity = "0";
