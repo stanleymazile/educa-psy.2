@@ -3,59 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educa-Psy | Accueil</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Educa-Psy | Santé Mentale & Éducation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <header id="header">
-        <div class="header-contenu">
-            <div class="header-gauche">
-                <img src="Logo 3.png" alt="Logo Educa-Psy" class="logo-img"> 
-                <h2 class="site-titre">Educa-Psy</h2>
-            </div>
+    <nav class="navbar">
+        <div class="logo">EDUCA-<span>PSY</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Accueil</a></li>
+            <li><a href="#about">À Propos</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projets">Projets</a></li>
+            <li><a href="#contact" class="btn-contact">Contact</a></li>
+        </ul>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
 
-            <div class="header-droite">
-                <div class="langue-container">
-                    <button id="btnLangue" class="btn-langue-simple">🌐 FR</button>
-                    <ul id="menuLangue" class="langue-dropdown">
-                        <li><a href="#">Français</a></li>
-                        <li><a href="#">Kreyòl</a></li>
-                    </ul>
-                </div>
-
-                <nav id="liens-deroulants" class="nav-principale">
-                    <a href="index.html" class="nav-item">Accueil</a>
-                    <a href="presentation.html" class="nav-item">Présentation</a>
-                    <a href="services.html" class="nav-item">Services</a>
-                    <a href="contact.html" class="nav-item">Contact</a>
-                </nav>
-
-                <button id="btnMenu" class="menu-burger">
-                    <span class="barre"></span>
-                    <span class="barre"></span>
-                    <span class="barre"></span>
-                </button>
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <h1>L'esprit au cœur de l'apprentissage</h1>
+            <p>Accompagnement psychologique, formation et soutien aux écoles en Haïti.</p>
+            <div class="hero-btns">
+                <a href="#services" class="btn-main">Nos Services</a>
+                <a href="#projets" class="btn-sub">Découvrir nos Projets</a>
             </div>
         </div>
     </header>
 
-    <main>
-        <section id="hero">
-            <div class="hero-contenu">
-                <h1 class="hero-titre">L'éducation pour chaque enfant en Haïti</h1>
-                <div class="hero-actions">
-                    <a href="services.html" class="btn-mod-outline">Découvrir</a>
-                    <a href="don.html" class="btn-mod-don">Faire un Don</a>
-                </div>
+    <section class="services" id="services">
+        <h2 class="section-title">Nos Domaines d'Expertise</h2>
+        <div class="services-container">
+            <div class="service-card">
+                <i class="fas fa-user-graduate"></i>
+                <h3>Soutien Scolaire</h3>
+                <p>Prise en charge des élèves en difficulté d'apprentissage et bilan psychologique.</p>
             </div>
-        </section>
-    </main>
-
-    <footer id="footer">
-        <div class="footer-container">
-            <p>&copy; 2026 Educa-Psy — Tous droits réservés.</p>
+            <div class="service-card">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h3>Formations</h3>
+                <p>Sensibilisation pour parents et professeurs sur la santé mentale en milieu scolaire.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-hands-helping"></i>
+                <h3>VBG & Résilience</h3>
+                <p>Lutte contre les violences basées sur le genre et autonomisation des femmes.</p>
+            </div>
         </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-box">
+            <h2>Parlons de votre projet</h2>
+            <form>
+                <input type="text" placeholder="Votre Nom" required>
+                <input type="email" placeholder="Votre Email" required>
+                <textarea placeholder="Comment pouvons-nous vous aider ?"></textarea>
+                <button type="submit" class="btn-submit">Envoyer</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Educa-Psy - Siège social : Cayes / Grand-Goâve, Haïti</p>
     </footer>
 
     <script src="script.js"></script>
