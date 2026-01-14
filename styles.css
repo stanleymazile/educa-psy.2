@@ -1,6 +1,6 @@
 /* RESET */
 * {
-  padding: 10px 0;
+  padding: 0;
   background-color: pale blue;
 }
   
@@ -39,7 +39,7 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px 0;
 }
 .logoTitre {
   display: flex;
@@ -68,6 +68,7 @@ p {
     gap: 10px;
     width: 100%;
 }
+
 
 
 
