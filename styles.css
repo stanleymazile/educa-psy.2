@@ -1,6 +1,6 @@
 /* RESET */
 * {
-  padding: 10px 10px;
+  padding: 10px 5px;
   background-color: pale blue;
 }
   
@@ -46,6 +46,7 @@ p {
   align-items: center;
   gap: 10px;
 }
+
 
 
 
