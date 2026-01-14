@@ -61,15 +61,19 @@ p {
   .headerHaut {
     align-items: flex-start;
   }
+
+#groupe-menu {
+  position: relative; /* pour le dropdown si tu veux */
 }
 
 #liens-deroulants {
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
+  display: flex;
+  flex-direction: column; /* liens empilés verticalement */
+  gap: 10px;
+  margin-top: 5px;       /* espace sous le bouton */
+  width: 100%;
 }
-
-
+}
 
 
 
