@@ -1,51 +1,256 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contactez l'équipe d'Educa-Psy.">
-    <title>Contact | Educa-Psy</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contactez Educa-Psy pour toute question ou demande d'information sur nos services">
+  <meta name="keywords" content="contact, Educa-Psy, Haïti, rendez-vous, information">
+  <title>Contact - Educa-Psy</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <header id="header">
-        <div class="header-container">
-            <a href="index.html" id="logoTitre"><img src="images/Logo.webp" id="logo"><h1 id="titre">Educa-Psy</h1></a>
-            <div id="header-droite">
-                <button id="btnMenu"><div class="barre"></div><div class="barre"></div><div class="barre"></div></button>
-                <nav id="menuDeroulant" class="dropdown-content">
-                    <a href="index.html" class="menu-item">Accueil</a>
-                    <a href="presentation.html" class="menu-item">Présentation</a>
-                    <a href="services.html" class="menu-item">Services</a>
-                    <a href="actualites.html" class="menu-item">Actualités</a>
-                    <a href="contact.html" class="menu-item">Contact</a>
-                    <a href="connexion.html" class="menu-item signup-btn">Connexion</a>
-                </nav>
-            </div>
-        </div>
-    </header>
 
-    <main>
-        <section class="hero-page">
-            <h1>Contactez-nous</h1>
-            <p>Nous sommes à votre écoute.</p>
-        </section>
-        <div class="content-wrapper">
-            <div class="card-moderne" style="max-width: 600px; margin-left:auto; margin-right:auto;">
-                <form>
-                    <label>Nom complet</label>
-                    <input type="text" class="input-style" required>
-                    <label>Email</label>
-                    <input type="email" class="input-style" required>
-                    <label>Message</label>
-                    <textarea class="input-style" rows="5"></textarea>
-                    <button class="btn-style">Envoyer</button>
-                </form>
-            </div>
-        </div>
-    </main>
+  <header id="header">
+    <div id="logoTitre">
+      <img src="images/Logo.webp" alt="Logo Educa-Psy - Éducation et psychologie en Haïti" id="logo"> 
+      <h2 id="titre">
+        <a href="index.html">Educa-Psy</a>
+      </h2>
+    </div>
 
-    <footer id="footer"><p>&copy; 2026 Educa-Psy Haïti.</p></footer>
+    <div id="langueMenu">
+      <select id="select-langue" aria-label="Sélectionner la langue">
+        <option value="fr">FR</option>
+        <option value="ht">KR</option> 
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+      </select>
+      
+      <div id="menuContainer">
+        <button id="btnMenu" aria-label="Menu de navigation" aria-expanded="false">☰</button>
+        <nav id="liens-deroulants" aria-label="Navigation principale">
+          <a href="index.html" class="item-menu">Accueil</a>
+          <a href="presentation.html" class="item-menu">Présentation</a>
+          <a href="services.html" class="item-menu">Services</a>
+          <a href="contact.html" class="item-menu">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero-contact">
+      <h1 class="hero-titre">Contactez-Nous</h1>
+      <p class="hero-description">Nous sommes à votre écoute pour répondre à toutes vos questions</p>
+    </section>
+
+    <section class="section-contact-intro">
+      <div class="container">
+        <p class="contact-intro-text">Notre équipe est disponible pour vous renseigner sur nos services, prendre rendez-vous ou simplement échanger sur les besoins de votre enfant. N'hésitez pas à nous contacter !</p>
+      </div>
+    </section>
+
+    <section class="section-contact-content">
+      <div class="container">
+        <div class="contact-grid">
+          
+          <div class="contact-info">
+            <h2>Nos Coordonnées</h2>
+            
+            <div class="info-item">
+              <div class="info-icone">📧</div>
+              <div class="info-details">
+                <h3>Email</h3>
+                <a href="mailto:educapsyhaiti@gmail.com">educapsyhaiti@gmail.com</a>
+                <p class="info-note">Nous répondons sous 24-48h</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icone">📱</div>
+              <div class="info-details">
+                <h3>Téléphone</h3>
+                <a href="tel:+50936859684">+509 3685-9684</a>
+                <p class="info-note">Lun-Ven: 8h-17h | Sam: 9h-13h</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icone">📍</div>
+              <div class="info-details">
+                <h3>Adresse</h3>
+                <p>Port-au-Prince, Haïti</p>
+                <p class="info-note">Consultations sur rendez-vous</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icone">🕐</div>
+              <div class="info-details">
+                <h3>Horaires</h3>
+                <p>Lundi - Vendredi: 8h00 - 17h00</p>
+                <p>Samedi: 9h00 - 13h00</p>
+                <p>Dimanche: Fermé</p>
+              </div>
+            </div>
+
+            <div class="reseaux-sociaux">
+              <h3>Suivez-nous</h3>
+              <div class="social-links">
+                <a href="#" class="social-link" aria-label="Facebook">📘 Facebook</a>
+                <a href="#" class="social-link" aria-label="Instagram">📷 Instagram</a>
+                <a href="#" class="social-link" aria-label="WhatsApp">💬 WhatsApp</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form-container">
+            <h2>Envoyez-nous un message</h2>
+            <form class="contact-form" id="contactForm">
+              
+              <div class="form-group">
+                <label for="nom">Nom complet *</label>
+                <input type="text" id="nom" name="nom" required placeholder="Votre nom">
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required placeholder="votre@email.com">
+              </div>
+
+              <div class="form-group">
+                <label for="telephone">Téléphone *</label>
+                <input type="tel" id="telephone" name="telephone" required placeholder="+509 XXXX-XXXX">
+              </div>
+
+              <div class="form-group">
+                <label for="sujet">Sujet *</label>
+                <select id="sujet" name="sujet" required>
+                  <option value="">Sélectionnez un sujet</option>
+                  <option value="information">Demande d'information</option>
+                  <option value="rendez-vous">Prise de rendez-vous</option>
+                  <option value="partenariat">Partenariat</option>
+                  <option value="don">Don et soutien</option>
+                  <option value="autre">Autre</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" rows="6" required placeholder="Décrivez votre demande..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-submit">Envoyer le message</button>
+              
+              <p class="form-note">* Champs obligatoires</p>
+            </form>
+
+            <div id="formMessage" class="form-message"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section-faq">
+      <div class="container">
+        <h2>Questions Fréquentes</h2>
+        
+        <div class="faq-list">
+          <div class="faq-item">
+            <h3>Comment prendre rendez-vous ?</h3>
+            <p>Vous pouvez nous contacter par téléphone au +509 3685-9684 ou remplir le formulaire ci-dessus. Nous vous recontacterons dans les 24-48h pour fixer un rendez-vous.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Quels sont vos tarifs ?</h3>
+            <p>Nos tarifs sont modulables selon les revenus des familles. Les consultations individuelles démarrent à partir de 500 HTG. Nous offrons également des possibilités de gratuité pour les familles en difficulté.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Où se déroulent les consultations ?</h3>
+            <p>Nos consultations se déroulent dans nos locaux à Port-au-Prince. Nous intervenons également dans certaines écoles partenaires.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Acceptez-vous les enfants de tous âges ?</h3>
+            <p>Oui, nous accompagnons les enfants de 3 à 18 ans avec des services adaptés à chaque tranche d'âge.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Proposez-vous des consultations en créole ?</h3>
+            <p>Oui, nos professionnels parlent créole, français et anglais pour s'adapter aux besoins de chaque famille.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-urgence">
+      <div class="container">
+        <div class="urgence-box">
+          <h2>⚠️ En cas d'urgence</h2>
+          <p>Si votre enfant est en situation de détresse psychologique aiguë, contactez immédiatement :</p>
+          <p class="urgence-numero"><strong>Ligne d'urgence : +509 XXXX-XXXX</strong></p>
+          <p class="urgence-note">Disponible 24h/24, 7j/7</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footerHaut">
+        <h3>Educa-Psy</h3>
+        <p>Promouvoir l'éducation et le bien-être psychologique pour chaque enfant en Haïti.</p>
+      </div>
+
+      <div class="footerMilieu">
+        <h3>Liens rapides</h3>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="presentation.html">Présentation</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="don.html">Faire un don</a></li>
+        </ul>
+      </div>
+
+      <div class="footerBas">
+        <h3>Contact</h3>
+        <p>Email: <a href="mailto:educapsyhaiti@gmail.com">educapsyhaiti@gmail.com</a></p>
+        <p>Tél: <a href="tel:+50936859684">+509 3685-9684</a></p>
+      </div>
+    </div>
+
+    <div class="footer-copyright">
+      <p>&copy; 2026 Educa-Psy. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Gestion du formulaire de contact
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formMessage = document.getElementById('formMessage');
+      
+      // Simulation d'envoi (à remplacer par une vraie intégration)
+      formMessage.innerHTML = '<p class="success-message">✅ Merci pour votre message ! Nous vous contacterons dans les plus brefs délais.</p>';
+      formMessage.style.display = 'block';
+      
+      // Réinitialiser le formulaire
+      this.reset();
+      
+      // Masquer le message après 5 secondes
+      setTimeout(() => {
+        formMessage.style.display = 'none';
+      }, 5000);
+    });
+  </script>
+
 </body>
 </html>
