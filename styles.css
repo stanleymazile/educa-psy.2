@@ -141,19 +141,20 @@ p {
   }
 }
 
-.hero {
+hero {
   align-items : center ;
   background-color : blue ;
   font-size: 15px;
   padding: 10px ;
   background : 20px; 
 }
-.footer {
+footer {
   background-color: pale black;
   color: white;
   width: 100%;
-  padding: 20px 0;
+  padding-bottom: 500px;
 }
+
 
 
 
