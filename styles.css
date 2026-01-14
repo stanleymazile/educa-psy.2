@@ -21,7 +21,7 @@ body {
 }
 
 h1, h2, h3 {
-  color: blue;
+  color: white;
   font-weight: bold;
 }
 
@@ -134,7 +134,14 @@ p {
   }
 }
 
-
+.hero {
+  align-items : center ;
+  background-color : blue ;
+}
+.footer {
+  align-items : center ;
+  background-color :  pale black;
+}
 
 
 
