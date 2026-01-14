@@ -80,7 +80,12 @@ p {
   margin-top: 5px;       /* espace sous le bouton */
   width: 100%;
 }
+  #btnMenu.active + #liens-deroulants {
+  display: flex;
+  }
+  
 }
+
 
 
 
