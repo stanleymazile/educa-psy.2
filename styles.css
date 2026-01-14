@@ -1,10 +1,14 @@
 /* RESET */
 * {
   padding: 10px 10px;
-  background-color: lightblue;
+  background-color: blue;
 }
   
 body { 
   line-height: 1.5;  
 }
+h1, h2, h3 {
+  color: blue;
+}
+
 
