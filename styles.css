@@ -110,40 +110,27 @@ p {
 
 .btnDon {
   /* Couleurs et aspect général */
-  background-color: #3174d1; /* Le bleu de votre logo */
-  color: #ffffff !important;   /* Texte blanc */
-  padding: 15px 35px;         /* Espace autour du texte */
-  border-radius: 10px;        /* Coins arrondis modernes */
-  
-  /* Texte */
-  font-family: 'Arial', sans-serif;
+  background-color: bleu;
+  color: white;
+  padding: 15px 15px;         
+  border-radius: 10px;        
   font-weight: bold;
   font-size: 1.1rem;
-  text-decoration: none;      /* Enlever le soulignement bleu */
-  
-  /* Alignement */
+  text-decoration: none;   
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  
-  /* Ombre portée pour donner du relief */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  
-  /* Transition fluide pour l'animation */
   transition: all 0.3s ease;
   border: none;
   cursor: pointer;
 }
-
-/* Effet au survol (souris) */
-.btn-don:hover {
-  background-color: #2659a1; /* Un bleu un peu plus foncé */
-  transform: translateY(-3px); /* Le bouton monte légèrement */
+.btnDon:hover {
+  background-color: blue; 
+  transform: translateY(-3px); 
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
-
-/* Effet au clic */
-.btn-don:active {
+.btnDon:active {
   transform: translateY(-1px);
 }
 
@@ -194,6 +181,7 @@ footer {
   width: 100%;
   padding-bottom: 500px;
 }
+
 
 
 
