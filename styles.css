@@ -55,6 +55,19 @@ p {
 
 
 
+@media (max-width: 768px) {
+
+  /* Header haut */
+  .headerHaut {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logoTitre {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
 
 
 
