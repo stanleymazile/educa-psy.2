@@ -138,12 +138,15 @@ p {
   align-items : center ;
   background-color : blue ;
   font-size: 15px;
-  padding : 10px, 10px;
+  padding: 10px ;
+  background : 20px; 
 }
 .footer {
   align-items : center ;
-  background-color :  pale black;
+  background-color :  black;
+  margin-bottom : 0px; 
 }
+
 
 
 
