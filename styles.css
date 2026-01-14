@@ -99,7 +99,8 @@ p {
     flex-direction: row !important; /* Force l'alignement horizontal */
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
+    padding: 5px 15px;
+    background-color : white ;
   }
 
   /* On s'assure que le logo et le titre restent l'un à côté de l'autre */
@@ -123,3 +124,4 @@ p {
     font-size: 14px;
   }
 }
+
