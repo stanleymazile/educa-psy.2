@@ -38,7 +38,7 @@ a {
 
 #logo {
   width: auto;
-  height: auto;
+  height: 50px;
 }
 
 #titre a {
@@ -173,6 +173,7 @@ a {
     width: 100%;
   }
 }
+
 
 
 
