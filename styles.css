@@ -47,11 +47,19 @@ p {
   gap: 10px;
 }
 
+/* Style général du select */
 #select-langue {
-  border-radius: 10 px;
-  font-size:10 px;
+  padding: 5px 10px;          /* réduit la taille intérieure */
+  font-size: 14px;             /* taille du texte */
+  border: 1px solid #ccc;      /* bordure légère */
+  border-radius: 5px;          /* coins arrondis */
+  background-color: #fff;      /* fond blanc */
+  color: #2c3e50;              /* texte couleur foncée */
+  appearance: none;            /* supprime le style par défaut du navigateur */
+  -webkit-appearance: none;    /* pour Safari/Chrome */
+  -moz-appearance: none;       /* pour Firefox */
+  cursor: pointer;             /* curseur main */
 }
-
 
 
 @media (max-width: 768px) {
@@ -73,6 +81,7 @@ p {
   width: 100%;
 }
 }
+
 
 
 
