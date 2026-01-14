@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Educa-Psy</title>
+  <meta name="description" content="Educa-Psy - Éducation et psychologie pour chaque enfant en Haïti">
+  <meta name="keywords" content="éducation, psychologie, Haïti, enfants, bien-être">
+  <title>Educa-Psy - L'éducation pour tous en Haïti</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -11,69 +14,114 @@
 
   <header id="header">
     <div id="logoTitre">
-      <img src="images/Logo.webp" alt="Logo" id="logo"> 
+      <img src="images/Logo.webp" alt="Logo Educa-Psy - Éducation et psychologie en Haïti" id="logo"> 
       <h2 id="titre">
         <a href="index.html">Educa-Psy</a>
       </h2>
     </div>
 
     <div id="langueMenu">
-      <select id="select-langue">
+      <select id="select-langue" aria-label="Sélectionner la langue">
         <option value="fr">FR</option>
         <option value="ht">KR</option> 
         <option value="en">EN</option>
         <option value="es">ES</option>
       </select>
-    </div>
-
-    <div id="menuContainer">
-      <button id="btnMenu">☰</button>
-      <nav id="liens-deroulants">
-        <a href="index.html" class="item-menu">Accueil</a>
-        <a href="presentation.html" class="item-menu">Présentation</a>
-        <a href="services.html" class="item-menu">Services</a>
-        <a href="contact.html" class="item-menu">Contact</a>
-      </nav>
+      
+      <div id="menuContainer">
+        <button id="btnMenu" aria-label="Menu de navigation" aria-expanded="false">☰</button>
+        <nav id="liens-deroulants" aria-label="Navigation principale">
+          <a href="index.html" class="item-menu">Accueil</a>
+          <a href="presentation.html" class="item-menu">Présentation</a>
+          <a href="services.html" class="item-menu">Services</a>
+          <a href="contact.html" class="item-menu">Contact</a>
+        </nav>
+      </div>
     </div>
   </header>
 
-  <div class="hero">
-    <h1 class="hero-titre">L'éducation pour chaque enfant en Haïti</h1>
-    <br>
-    <a href="services.html" class="btnHero">Découvrir</a>
-  </div>
+  <main>
+    <section class="hero">
+      <h1 class="hero-titre">L'éducation pour chaque enfant en Haïti</h1>
+      <p class="hero-description">Accompagner la réussite scolaire et le bien-être psychologique des enfants haïtiens</p>
+      <a href="services.html" class="btnHero">Découvrir nos services</a>
+    </section>
 
-  <br>
-  <br> 
-    
-  <div class="btnDon">
-    <a href="don.html">Faire un Don</a>
-  </div>
-    
-  <br>
-    
+    <section class="section-apropos">
+      <h2>Notre Mission</h2>
+      <p>Educa-Psy s'engage à fournir un soutien éducatif et psychologique de qualité aux enfants haïtiens. Nous croyons que chaque enfant mérite d'avoir accès à l'éducation et au bien-être mental.</p>
+      
+      <div class="valeurs">
+        <div class="valeur-item">
+          <h3>📚 Éducation</h3>
+          <p>Programmes d'apprentissage adaptés aux besoins de chaque enfant</p>
+        </div>
+        <div class="valeur-item">
+          <h3>💙 Bien-être</h3>
+          <p>Accompagnement psychologique pour un développement harmonieux</p>
+        </div>
+        <div class="valeur-item">
+          <h3>🤝 Communauté</h3>
+          <p>Travail en collaboration avec les familles et les écoles</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-impact">
+      <h2>Notre Impact</h2>
+      <div class="statistiques">
+        <div class="stat-item">
+          <span class="stat-nombre">500+</span>
+          <span class="stat-label">Enfants accompagnés</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-nombre">20+</span>
+          <span class="stat-label">Écoles partenaires</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-nombre">15</span>
+          <span class="stat-label">Professionnels dévoués</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-don">
+      <h2>Soutenez notre mission</h2>
+      <p>Votre contribution nous aide à offrir une éducation de qualité et un soutien psychologique aux enfants qui en ont besoin.</p>
+      <div class="btnDon">
+        <a href="don.html">Faire un Don</a>
+      </div>
+    </section>
+  </main>
+
   <footer class="footer">
-    <div class="footerHaut">
-      <h3>Educa-Psy</h3>
-      <p>Apprendre la psychologie et le bien-être au quotidien.</p>
+    <div class="footer-content">
+      <div class="footerHaut">
+        <h3>Educa-Psy</h3>
+        <p>Promouvoir l'éducation et le bien-être psychologique pour chaque enfant en Haïti.</p>
+      </div>
+
+      <div class="footerMilieu">
+        <h3>Liens rapides</h3>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="presentation.html">Présentation</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="don.html">Faire un don</a></li>
+        </ul>
+      </div>
+
+      <div class="footerBas">
+        <h3>Contact</h3>
+        <p>Email: <a href="mailto:educapsyhaiti@gmail.com">educapsyhaiti@gmail.com</a></p>
+        <p>Tél: <a href="tel:+50936859684">+509 3685-9684</a></p>
+      </div>
     </div>
 
-    <div class="footerMilieu">
-      <h3>Liens</h3>
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+    <div class="footer-copyright">
+      <p>&copy; 2026 Educa-Psy. Tous droits réservés.</p>
     </div>
-
-    <div class="footerBas">
-      <h3>Contact</h3>
-      <p>Email: educapsyhaiti@gmail.com</p>
-      <p>Tél: +509 3685-9684</p>
-    </div>
-
-    <p>&copy; 2026 Educa-Psy. Tous droits réservés.</p>
   </footer>
 
   <script src="script.js"></script>
