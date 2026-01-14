@@ -1,11 +1,4 @@
 
-#header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px;
-}
-
 body { 
   line-height: 1.5;
   background-color: white ;
@@ -15,6 +8,34 @@ body {
 }
 
 
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+#logoTitre {
+    display: flex !important;
+    flex-direction: row !important; 
+    align-items: center;
+    gap: 8px; /* Espace réduit pour mobile */
+  }
+  #langueMenu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+
+  
+  #titre a {
+    font-size: 14px;
+    font-weight: bold;
+    color: blue;
+  }
+
 
 #logo {
   height: 30px;
@@ -22,10 +43,6 @@ body {
   display: flex;
 }
 
-#titre a {
-  font-weight: bold;
-  color: blue;
-}
 
 /* Select langue */
 #select-langue {
@@ -67,8 +84,17 @@ body {
   font-weight: bold;
 }
 
+.hero hero-titre btnHero a {
+  align-items: center ;
+  background-color: blue ;
+  font-size: 15px;
+  padding: 15px 16px;
+  text-align: center ;
+  height: 20px; 
+  width: 100%; 
+}
 
-.btnDon {
+.btnDon a {
   color: blue;        
   border-radius: 10px;        
   font-weight: bold;
@@ -87,7 +113,7 @@ body {
   margin-bottom: 10px;
   
 }
-.btnDon:hover {
+.btnDon a:hover {
   background-color: pale blue; 
   transform: translateY(-3px); 
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
@@ -96,42 +122,17 @@ body {
 
 @media (max-width: 768px) {
 
-  .logoTitre {
-    display: flex !important;
-    flex-direction: row !important; 
-    align-items: center;
-    gap: 8px; /* Espace réduit pour mobile */
-  }
-
-  /* On s'assure que la langue et le menu restent l'un à côté de l'autre */
-  .langueMenu {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-  }
-
-  /* Réduction de la taille du titre sur mobile pour gagner de la place */
-  #titre a {
-    font-size: 14px;
-  }
+  
 }
 
-.hero {
-  align-items: center ;
-  background-color: blue ;
-  font-size: 15px;
-  padding: 15px 16px;
-  text-align: center ;
-  height: 20px; 
-  width: 100%; 
-}
-.footer {
+
+.footer footerHaut footerMilieu footerBas{
   background: pale black;
   color: white;
   padding: 24px 16px;
   font-size: 15px;
 }
+
 
 
 
