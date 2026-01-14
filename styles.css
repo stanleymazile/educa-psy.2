@@ -83,19 +83,13 @@ p {
 
 
 .btnDon {
-  /* Couleurs et aspect général */
-  background-color: bleu;
-  color: blue;
-  padding: 10px 20px;         
+  color: blue;        
   border-radius: 10px;        
   font-weight: bold;
   font-size: 1.5 ;
   text-decoration: none;   
-  display: inline-block;
-  justify-content: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
-  border: 10px;
   cursor: pointer; 
   width: fit-content;
   justify-content: center;
@@ -143,6 +137,7 @@ footer {
   padding: 24px 16px;
   font-size: 15px;
 }
+
 
 
 
