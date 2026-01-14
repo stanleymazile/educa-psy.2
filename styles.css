@@ -28,8 +28,7 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  flex-wrap: wrap; /* permet de passer en colonne sur mobile */
+  padding: 10px 0;
   background-color: #f5f5f5;
 }
 
@@ -48,13 +47,13 @@ p {
 #titre a {
   font-weight: bold;
   font-size: 22px;
-  color: #2c3e50;
+  color: blue;
 }
 
 /* Select langue */
 #select-langue {
-  padding: 5px 10px;
-  font-size: 14px;
+  padding: 5px 5px;
+  font-size: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
   appearance: none;
@@ -66,13 +65,13 @@ p {
 }
 
 #btnMenu {
-  background: #2c3e50;
-  color: #fff;
+  background: blue;
+  color: white;
   padding: 8px 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 10px;
 }
 
 #btnMenu:hover {
@@ -121,3 +120,4 @@ p {
     margin-top: 5px;
   }
 }
+
