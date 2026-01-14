@@ -29,15 +29,19 @@ p {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #f5f5f5;
-  margin: 10, 10, 10, 10px; 
+  background-color: #f5f5f5; 
 }
 
 /* Logo et titre */
 .logoTitre {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
+}
+.langueMenu {
+  display: flex;
+  align-items: center;
+  gap: 10px;                     /* Espace entre le bouton Français et Menu */
 }
 
 #logo {
@@ -121,6 +125,7 @@ p {
     margin-top: 5px;
   }
 }
+
 
 
 
