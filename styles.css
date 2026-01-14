@@ -1,7 +1,7 @@
 /* RESET */
 * {
   padding: 10px 10px;
-  background-color: light blue;
+  background-color: pale blue;
 }
   
 body { 
@@ -19,7 +19,7 @@ a {
 }
 
 p {
-  color: pale blue;
+  color: white;
   font-weight: bold;
 }
 
@@ -31,4 +31,5 @@ p {
   height: 50px;
   width: auto; 
 }
+
 
