@@ -1,7 +1,10 @@
 /* RESET */
 * {
-  padding: 20px;
-  box-sizing: border-box;
+  padding: 10px 10px;
+  background-color: lightblue;
 }
   
+body { 
+  line-height: 1.5;  
+}
 
