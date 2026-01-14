@@ -66,7 +66,7 @@ p {
   border-radius: 5px;
   cursor: pointer;
   font-size: 10px;
-  padding: 10px 10px;
+  padding: 5px 5px;
 }
 
 #btnMenu:hover {
@@ -130,6 +130,7 @@ p {
     font-size: 14px;
   }
 }
+
 
 
 
