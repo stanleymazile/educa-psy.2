@@ -57,6 +57,7 @@ p {
   font-size: 15px;
   padding: 5px 10px;
   display: block ;
+
 }
 
 #btnMenu:hover {
@@ -95,8 +96,9 @@ p {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
   border: 10px;
-  cursor: pointer;
-  width: auto; 
+  cursor: pointer; 
+  width: fit-content;
+  justify-content: center;
 }
 .btnDon:hover {
   background-color: pale blue; 
@@ -141,6 +143,7 @@ footer {
   padding: 24px 16px;
   font-size: 15px;
 }
+
 
 
 
