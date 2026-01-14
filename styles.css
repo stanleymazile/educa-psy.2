@@ -52,6 +52,7 @@ p {
   appearance: none;
   padding: 5px 5px;
   background: none;
+  border: none;
 }
 
 /* Menu bouton + liens */
@@ -130,6 +131,7 @@ p {
     font-size: 14px;
   }
 }
+
 
 
 
