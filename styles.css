@@ -32,12 +32,13 @@ p {
   width: auto; 
 }
 #titre {
-  font-size: 10px;
+  font-size: 15px;
 }
 
 .headerHaut {
   display: flex;
 }
+
 
 
 
