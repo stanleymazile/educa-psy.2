@@ -10,8 +10,13 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 5%;
+  padding: 12px 16px;
   width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  z-index: 1000;
 }
 
 body { 
@@ -22,6 +27,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  margin: 0;
+  padding-top: 70px;
 }
 .content-wrapper {
   flex: 1; 
@@ -47,6 +54,9 @@ p {
 #logo {
   height: 30px;
   width: auto;
+  display: flex;
+  width: 40px;
+  height: 40px;
 }
 
 #titre a {
@@ -172,15 +182,17 @@ hero {
   align-items : center ;
   background-color : blue ;
   font-size: 15px;
-  padding: 10px ;
+  padding: 40px 16px;
   background : 20px; 
+  text-align : center ;
 }
 footer {
-  background-color: pale black;
+  background: pale black;
   color: white;
-  width: 100%;
-  padding-bottom: 500px;
+  padding: 24px 16px;
+  font-size: 15px;
 }
+
 
 
 
