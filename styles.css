@@ -95,7 +95,7 @@ p {
     flex-direction: row !important; /* Force l'alignement horizontal */
     justify-content: space-between;
     align-items: center;
-    padding: 15px 5px;
+    padding: 15px 10px;
     background-color: white ;
   }
 
@@ -120,6 +120,7 @@ p {
     font-size: 14px;
   }
 }
+
 
 
 
