@@ -19,7 +19,7 @@ a {
 }
 
 p {
-  color: white;
+  color: black;
   font-weight: bold;
 }
 
@@ -28,8 +28,9 @@ p {
 }
 
 #logo {
-  height: 50px;
+  height: 30px;
   width: auto; 
 }
+
 
 
