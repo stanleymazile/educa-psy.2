@@ -62,10 +62,9 @@ p {
 }
 
 #btnMenu {
-  background: white;
-  color: black;
+  background-color: white, bold;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 15px;
   padding: 5px 10px;
@@ -132,6 +131,7 @@ p {
     font-size: 14px;
   }
 }
+
 
 
 
