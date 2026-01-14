@@ -23,76 +23,101 @@ p {
   font-weight: bold;
 }
 
+/* Header général */
 .header {
-  background-color: white;
-}
-
-#logo {
-  height: 40px;
-  width: auto; 
-}
-#titre {
-  font-size: 15px;
-}
-
-.headerHaut {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
+  padding: 10px 20px;
+  flex-wrap: wrap; /* permet de passer en colonne sur mobile */
+  background-color: #f5f5f5;
 }
+
+/* Logo et titre */
 .logoTitre {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* Style général du select */
-#select-langue {
-  padding: 5px 10px;          /* réduit la taille intérieure */
-  font-size: 14px;             /* taille du texte */
-  border: 1px solid #ccc;      /* bordure légère */
-  border-radius: 5px;          /* coins arrondis */
-  background-color: #fff;      /* fond blanc */
-  color: #2c3e50;              /* texte couleur foncée */
-  appearance: none;            /* supprime le style par défaut du navigateur */
-  -webkit-appearance: none;    /* pour Safari/Chrome */
-  -moz-appearance: none;       /* pour Firefox */
-  cursor: pointer;             /* curseur main */
+#logo {
+  height: 50px;
+  width: auto;
 }
 
+#titre a {
+  font-weight: bold;
+  font-size: 22px;
+  color: #2c3e50;
+}
 
-@media (max-width: 768px) {
+/* Select langue */
+#select-langue {
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  appearance: none;
+}
 
-  /* Header haut */
-  .headerHaut {
-    align-items: flex-start;
-  }
+/* Menu bouton + liens */
+.menuContainer {
+  position: relative;
+}
 
-#groupe-menu {
-  position: relative; /* pour le dropdown si tu veux */
+#btnMenu {
+  background: #2c3e50;
+  color: #fff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+#btnMenu:hover {
+  background: #1a2a38;
 }
 
 #liens-deroulants {
-  display: flex;
-  flex-direction: column; /* liens empilés verticalement */
+  display: none;
+  flex-direction: column;
   gap: 10px;
-  margin-top: 5px;       /* espace sous le bouton */
-  width: 100%;
+  background-color: #2c3e50;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  top: 100%; /* sous le bouton */
+  right: 0;
+  min-width: 150px;
+  z-index: 100;
 }
-  #btnMenu.active + #liens-deroulants {
+
+#liens-deroulants a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Menu actif */
+#btnMenu.active + #liens-deroulants {
   display: flex;
-  }
-  
 }
 
+/* Responsive mobile */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
 
+  .logoTitre {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-
-
-
-
-
-
-
-
+  #select-langue {
+    margin-top: 5px;
+  }
+}
