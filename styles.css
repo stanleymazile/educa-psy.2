@@ -30,7 +30,7 @@ p {
 
 
 #logo {
-  height: 35px;
+  height: 30px;
   width: auto;
 }
 
@@ -99,7 +99,7 @@ p {
     flex-direction: row !important; /* Force l'alignement horizontal */
     justify-content: space-between;
     align-items: center;
-    padding: 5px 15px;
+    padding: 20px 20px;
     background-color : white ;
   }
 
@@ -124,4 +124,5 @@ p {
     font-size: 14px;
   }
 }
+
 
