@@ -137,11 +137,14 @@ p {
 .hero {
   align-items : center ;
   background-color : blue ;
+  font-size: 15px;
+  padding : 10px, 10px;
 }
 .footer {
   align-items : center ;
   background-color :  pale black;
 }
+
 
 
 
