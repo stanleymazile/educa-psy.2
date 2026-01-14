@@ -1,11 +1,17 @@
-/* RESET */
+
+/* RESET PROPRE */
 * {
-  background-color: pale blue;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-  
+
 body { 
-  line-height: 1.5;  
+  line-height: 1.5;
+  background-color: #e3f2fd; /* Un bleu très clair (équivalent à pale blue) */
+  font-family: Arial, sans-serif;
 }
+
 h1, h2, h3 {
   color: blue;
   font-weight: bold;
@@ -22,26 +28,6 @@ p {
   font-weight: bold;
 }
 
-/* Header général */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0;
-  background-color: #f5f5f5; 
-}
-
-/* Logo et titre */
-.logoTitre {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-.langueMenu {
-  display: flex;
-  align-items: center;
-  gap: 10px;                     /* Espace entre le bouton Français et Menu */
-}
 
 #logo {
   height: 35px;
@@ -50,7 +36,6 @@ p {
 
 #titre a {
   font-weight: bold;
-  font-size: 15px;
   color: blue;
 }
 
@@ -107,27 +92,34 @@ p {
   display: flex;
 }
 
-/* Responsive mobile */
+/* Responsive mobile corrigé */
 @media (max-width: 768px) {
   .header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    display: flex !important;
+    flex-direction: row !important; /* Force l'alignement horizontal */
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
   }
 
+  /* On s'assure que le logo et le titre restent l'un à côté de l'autre */
   .logoTitre {
-    flex-direction: column;
-    align-items: flex-start;
+    display: flex !important;
+    flex-direction: row !important; 
+    align-items: center;
+    gap: 8px; /* Espace réduit pour mobile */
   }
 
-  #select-langue {
-    margin-top: 5px;
+  /* On s'assure que la langue et le menu restent l'un à côté de l'autre */
+  .langueMenu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Réduction de la taille du titre sur mobile pour gagner de la place */
+  #titre a {
+    font-size: 14px;
   }
 }
-
-
-
-
-
-
-
