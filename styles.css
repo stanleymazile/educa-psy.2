@@ -1,6 +1,5 @@
 /* RESET */
 * {
-  padding: 0;
   background-color: pale blue;
 }
   
@@ -45,7 +44,7 @@ p {
 }
 
 #logo {
-  height: 50px;
+  height: 35px;
   width: auto;
 }
 
@@ -125,6 +124,7 @@ p {
     margin-top: 5px;
   }
 }
+
 
 
 
