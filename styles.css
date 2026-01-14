@@ -1,12 +1,12 @@
-
 body { 
   line-height: 1.5;
-  background-color: white ;
+  background-color: white;
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
+  margin: 0;
+  padding: 0;
 }
-
 
 #header {
   display: flex;
@@ -16,26 +16,25 @@ body {
 }
 
 #logoTitre {
-    display: flex !important;
-    flex-direction: row !important; 
-    align-items: center;
-    gap: 8px; /* Espace réduit pour mobile */
-  }
-  #langueMenu {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-  }
+  display: flex !important;
+  flex-direction: row !important; 
+  align-items: center;
+  gap: 8px;
+}
 
+#langueMenu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
 
-  
-  #titre a {
-    font-size: 14px;
-    font-weight: bold;
-    color: blue;
-  }
-
+#titre a {
+  font-size: 14px;
+  font-weight: bold;
+  color: blue;
+  text-decoration: none;
+}
 
 #logo {
   height: 30px;
@@ -43,28 +42,28 @@ body {
   display: flex;
 }
 
-
 /* Select langue */
 #select-langue {
   font-size: 10px;
   padding: 5px 5px;
   background: none;
   border: none;
+  cursor: pointer;
 }
 
 #btnMenu {
-  background-color: white, bold;
-  border: none;
+  background-color: white;
+  font-weight: bold;
+  border: 2px solid #ddd;
   border-radius: 10px;
   cursor: pointer;
   font-size: 15px;
   padding: 5px 10px;
-  display: block ;
-
+  display: block;
 }
 
 #btnMenu:hover {
-  background: pale blue;
+  background: lightblue;
   border-radius: 10px;
   padding: 5px 10px;
 }
@@ -79,100 +78,124 @@ body {
 }
 
 #liens-deroulants a {
-  color: bleu;
+  color: blue;
   text-decoration: none;
   font-weight: bold;
 }
 
-.hero hero-titre btnHero a {
-  align-items: center ;
-  background-color: blue ;
+#liens-deroulants a:hover {
+  color: darkblue;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: lightblue;
+  padding: 40px 16px;
+  text-align: center;
+}
+
+.hero-titre {
+  font-size: 24px;
+  color: blue;
+  margin-bottom: 20px;
+}
+
+.btnHero {
+  background-color: blue;
+  color: white;
   font-size: 15px;
-  padding: 15px 16px;
-  text-align: center ;
-  height: 20px; 
-  width: 100%; 
+  padding: 15px 30px;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.btnHero:hover {
+  background-color: darkblue;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .btnDon a {
-  color: blue;        
-  border-radius: 10px;        
+  color: blue;
+  background-color: white;
+  border: 2px solid blue;
+  border-radius: 10px;
   font-weight: bold;
-  font-size: 1.5 ;
-  text-decoration: none;   
+  font-size: 1.5rem;
+  text-decoration: none;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
   cursor: pointer; 
   width: fit-content;
-  justify-content: center;
-  padding: 10px 10px; 
-  display: block;          /* Permet d'utiliser les marges auto */
-  margin-left: auto;       /* Pousse le bouton depuis la gauche */
-  margin-right: auto;      /* Pousse le bouton depuis la droite */
-  margin-top: 10px;
-  margin-bottom: 10px;
-  
+  padding: 10px 20px;
+  display: block;
+  margin: 10px auto;
 }
+
 .btnDon a:hover {
-  background-color: pale blue; 
-  transform: translateY(-3px); 
+  background-color: lightblue;
+  color: darkblue;
+  transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
-
 @media (max-width: 768px) {
-
+  #header {
+    flex-wrap: wrap;
+  }
   
+  .hero-titre {
+    font-size: 20px;
+  }
 }
 
-
-.footer footerHaut footerMilieu footerBas{
-  background: pale black;
+.footer {
+  background: #333;
   color: white;
   padding: 24px 16px;
   font-size: 15px;
+  margin-top: auto;
 }
 
+.footerHaut,
+.footerMilieu,
+.footerBas {
+  margin-bottom: 20px;
+}
 
+.footerHaut h3,
+.footerMilieu h3,
+.footerBas h3 {
+  color: lightblue;
+  margin-bottom: 10px;
+}
 
+.footerMilieu ul {
+  list-style: none;
+  padding: 0;
+}
 
+.footerMilieu ul li {
+  margin-bottom: 8px;
+}
 
+.footerMilieu a {
+  color: white;
+  text-decoration: none;
+}
 
+.footerMilieu a:hover {
+  color: lightblue;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.footer p:last-child {
+  text-align: center;
+  margin-top: 20px;
+  border-top: 1px solid #555;
+  padding-top: 15px;
+}
