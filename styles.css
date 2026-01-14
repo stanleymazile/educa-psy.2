@@ -41,8 +41,9 @@ p {
 
 /* Select langue */
 #select-langue {
-  font-size: 10px;
+  font-size: 5px;
   appearance: none;
+  padding: 5px 5px;
 }
 
 /* Menu bouton + liens */
@@ -120,6 +121,7 @@ p {
     font-size: 14px;
   }
 }
+
 
 
 
