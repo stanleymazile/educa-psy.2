@@ -47,6 +47,11 @@ p {
   gap: 10px;
 }
 
+#select-langue {
+  padding: 6px 10px;
+  border-radius: 10 px;
+  font-size:10 px;
+}
 
 
 
