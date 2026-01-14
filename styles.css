@@ -4,7 +4,6 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
-  position: fixed;
 }
 
 body { 
@@ -106,7 +105,7 @@ p {
 
 @media (max-width: 768px) {
 
-  .logoTitre 
+  .logoTitre {
     display: flex !important;
     flex-direction: row !important; 
     align-items: center;
@@ -140,6 +139,7 @@ footer {
   padding: 24px 16px;
   font-size: 15px;
 }
+
 
 
 
