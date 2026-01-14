@@ -72,6 +72,8 @@ p {
 
 #btnMenu:hover {
   background: pale blue;
+  border-radius: 10px;
+  padding: 5px 10px;
 }
 
 #liens-deroulants {
@@ -131,6 +133,7 @@ p {
     font-size: 14px;
   }
 }
+
 
 
 
