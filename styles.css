@@ -37,7 +37,7 @@ a {
 }
 
 #logo {
-  width: 50px;
+  width: auto;
   height: auto;
 }
 
@@ -173,5 +173,6 @@ a {
     width: 100%;
   }
 }
+
 
 
