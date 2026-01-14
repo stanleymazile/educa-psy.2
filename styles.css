@@ -1,7 +1,7 @@
 /* RESET */
 * {
   padding: 10px 10px;
-  background-color: blue;
+  background-color: light blue;
 }
   
 body { 
@@ -10,5 +10,6 @@ body {
 h1, h2, h3 {
   color: blue;
 }
+
 
 
