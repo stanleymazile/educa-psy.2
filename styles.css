@@ -79,7 +79,7 @@ p {
   display: none;
   flex-direction: column;
   gap: 10px;
-  background-color: blue;
+  background-color: white;
   padding: 10px;
   border-radius: 5px;
   position: absolute;
@@ -90,7 +90,7 @@ p {
 }
 
 #liens-deroulants a {
-  color: #fff;
+  color: bleu;
   text-decoration: none;
   font-weight: bold;
 }
@@ -132,6 +132,7 @@ p {
     font-size: 14px;
   }
 }
+
 
 
 
