@@ -54,7 +54,7 @@ a {
 
 /* MENU */
 .headerBas {
-  background: #2c3e50;
+  background: white;
   padding: 10px 20px;
 }
 
@@ -173,4 +173,5 @@ a {
     width: 100%;
   }
 }
+
 
