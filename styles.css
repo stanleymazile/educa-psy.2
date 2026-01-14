@@ -48,10 +48,10 @@ p {
 
 /* Select langue */
 #select-langue {
-  font-size: 5px;
+  font-size: 10px;
   appearance: none;
   padding: 5px 5px;
-  background: 10px;
+  background: none;
 }
 
 /* Menu bouton + liens */
@@ -130,6 +130,7 @@ p {
     font-size: 14px;
   }
 }
+
 
 
 
