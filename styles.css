@@ -79,10 +79,10 @@ p {
 #liens-deroulants {
   display: none;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   background-color: white;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 5px;
+  border-radius: 10px;
   position: absolute;
   top: 100%; /* sous le bouton */
   right: 0;
@@ -133,6 +133,7 @@ p {
     font-size: 14px;
   }
 }
+
 
 
 
