@@ -19,8 +19,8 @@ a {
 
 /* HEADER */
 .header {
-  background: #ffffff;
-  border-bottom: 1px solid #ddd;
+  background: lightblue;
+  border-bottom: 1px solid blue;
 }
 
 .headerHaut {
@@ -173,3 +173,4 @@ a {
     width: 100%;
   }
 }
+
