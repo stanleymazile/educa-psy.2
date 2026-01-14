@@ -27,4 +27,8 @@ p {
   background-color: white;
 }
 
+#logo {
+  height: 50px;
+  width: auto; 
+}
 
