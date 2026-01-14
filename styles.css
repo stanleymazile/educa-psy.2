@@ -138,12 +138,13 @@ p {
   height: 20px; 
   width: 100%; 
 }
-footer {
+.footer {
   background: pale black;
   color: white;
   padding: 24px 16px;
   font-size: 15px;
 }
+
 
 
 
