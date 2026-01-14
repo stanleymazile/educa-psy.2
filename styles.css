@@ -1,41 +1,22 @@
 
-/* RESET PROPRE */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
-  width: 100%;
   position: fixed;
-  top: 0;
-  left: 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  z-index: 1000;
 }
 
 body { 
   line-height: 1.5;
-  background-color: #e3f2fd; /* Un bleu très clair (équivalent à pale blue) */
+  background-color: white ;
   font-family: Arial, sans-serif;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-  padding-top: 70px;
-}
-.content-wrapper {
-  flex: 1; 
 }
 
 h1, h2, h3 {
-  color: white;
+  color: blue;
   font-weight: bold;
 }
 
@@ -46,8 +27,7 @@ a {
 }
 
 p {
-  color: black;
-  font-weight: bold;
+  color: pale blue ;
 }
 
 
@@ -55,7 +35,6 @@ p {
   height: 30px;
   width: auto;
   display: flex;
-  width: 40px;
 }
 
 #titre a {
@@ -66,15 +45,9 @@ p {
 /* Select langue */
 #select-langue {
   font-size: 10px;
-  appearance: none;
   padding: 5px 5px;
   background: none;
   border: none;
-}
-
-/* Menu bouton + liens */
-.menuContainer {
-  position: relative;
 }
 
 #btnMenu {
@@ -99,11 +72,6 @@ p {
   background-color: white;
   padding: 5px;
   border-radius: 10px;
-  position: absolute;
-  top: 100%; /* sous le bouton */
-  right: 0;
-  min-width: 150px;
-  z-index: 100;
 }
 
 #liens-deroulants a {
@@ -112,10 +80,6 @@ p {
   font-weight: bold;
 }
 
-/* Menu actif */
-#btnMenu.active + #liens-deroulants {
-  display: flex;
-}
 
 .btnDon {
   /* Couleurs et aspect général */
@@ -124,14 +88,13 @@ p {
   padding: 15px 15px;         
   border-radius: 10px;        
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.5 ;
   text-decoration: none;   
   display: inline-flex;
-  align-items: center;
   justify-content: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
-  border: none;
+  border: 10px;
   cursor: pointer;
 }
 .btnDon:hover {
@@ -139,17 +102,11 @@ p {
   transform: translateY(-3px); 
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
-.btnDon:active {
-  transform: translateY(-1px);
-}
 
 
-/* Responsive mobile corrigé */
 @media (max-width: 768px) {
 
-
-  /* On s'assure que le logo et le titre restent l'un à côté de l'autre */
-  .logoTitre {
+  .logoTitre 
     display: flex !important;
     flex-direction: row !important; 
     align-items: center;
@@ -174,8 +131,7 @@ hero {
   align-items : center ;
   background-color : blue ;
   font-size: 15px;
-  padding: 40px 16px;
-  background : 20px; 
+  padding: 15px 16px;
   text-align : center ;
 }
 footer {
@@ -184,6 +140,7 @@ footer {
   padding: 24px 16px;
   font-size: 15px;
 }
+
 
 
 
