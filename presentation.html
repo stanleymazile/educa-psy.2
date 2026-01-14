@@ -1,50 +1,228 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Découvrez Educa-Psy : notre mission, notre vision et notre engagement pour l'éducation en Haïti.">
-    <title>Qui sommes-nous ? | Educa-Psy</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Découvrez l'histoire, la mission et l'équipe d'Educa-Psy, organisation dédiée à l'éducation en Haïti">
+  <meta name="keywords" content="présentation, Educa-Psy, mission, vision, équipe, Haïti">
+  <title>Présentation - Educa-Psy</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <header id="header">
-        <div class="header-container">
-            <a href="index.html" id="logoTitre">
-                <img src="images/Logo.webp" alt="Logo" id="logo">
-                <h1 id="titre">Educa-Psy</h1>
-            </a>
-            <div id="header-droite">
-                <button id="btnMenu"><div class="barre"></div><div class="barre"></div><div class="barre"></div></button>
-                <nav id="menuDeroulant" class="dropdown-content">
-                    <a href="index.html" class="menu-item">Accueil</a>
-                    <a href="presentation.html" class="menu-item">Présentation</a>
-                    <a href="services.html" class="menu-item">Services</a>
-                    <a href="actualites.html" class="menu-item">Actualités</a>
-                    <a href="contact.html" class="menu-item">Contact</a>
-                    <a href="connexion.html" class="menu-item signup-btn">Connexion</a>
-                </nav>
-            </div>
-        </div>
-    </header>
 
-    <main>
-        <section class="hero-page">
-            <h1>Notre Vision</h1>
-            <p>Révolutionner l'approche éducative par la psychopédagogie.</p>
-        </section>
-        <div class="content-wrapper">
-            <div class="card-moderne">
-                <h2>À propos de nous</h2>
-                <p>Educa-Psy est une organisation dédiée au bien-être des élèves et étudiants haïtiens. Nous croyons que la réussite scolaire ne peut se faire sans un équilibre mental sain.</p>
-                <br>
-                <h3>Notre Mission</h3>
-                <p>Offrir des outils concrets aux écoles, aux parents et aux jeunes pour surmonter les obstacles à l'apprentissage.</p>
-            </div>
-        </div>
-    </main>
+  <header id="header">
+    <div id="logoTitre">
+      <img src="images/Logo.webp" alt="Logo Educa-Psy - Éducation et psychologie en Haïti" id="logo"> 
+      <h2 id="titre">
+        <a href="index.html">Educa-Psy</a>
+      </h2>
+    </div>
 
-    <footer id="footer"><p>&copy; 2026 Educa-Psy Haïti. Tous droits réservés.</p></footer>
+    <div id="langueMenu">
+      <select id="select-langue" aria-label="Sélectionner la langue">
+        <option value="fr">FR</option>
+        <option value="ht">KR</option> 
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+      </select>
+      
+      <div id="menuContainer">
+        <button id="btnMenu" aria-label="Menu de navigation" aria-expanded="false">☰</button>
+        <nav id="liens-deroulants" aria-label="Navigation principale">
+          <a href="index.html" class="item-menu">Accueil</a>
+          <a href="presentation.html" class="item-menu">Présentation</a>
+          <a href="services.html" class="item-menu">Services</a>
+          <a href="contact.html" class="item-menu">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero-presentation">
+      <h1 class="hero-titre">Qui Sommes-Nous ?</h1>
+      <p class="hero-description">Une organisation engagée pour l'avenir des enfants haïtiens</p>
+    </section>
+
+    <section class="section-histoire">
+      <div class="container">
+        <h2>Notre Histoire</h2>
+        <div class="histoire-content">
+          <p>Educa-Psy a été fondée en 2020 avec une vision claire : offrir à chaque enfant haïtien l'accès à une éducation de qualité et à un soutien psychologique adapté. Face aux défis éducatifs du pays, nous avons décidé d'agir concrètement.</p>
+          <p>Depuis nos débuts, nous avons accompagné plus de 500 enfants et collaboré avec plus de 20 écoles à travers le pays. Notre approche holistique combine éducation et bien-être psychologique pour garantir un développement harmonieux de chaque enfant.</p>
+          <p>Aujourd'hui, Educa-Psy est reconnue comme une organisation de référence dans le domaine de l'éducation et de la psychologie infantile en Haïti.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-mission-vision">
+      <div class="container">
+        <div class="mission-vision-grid">
+          <div class="mission-card">
+            <h2>🎯 Notre Mission</h2>
+            <p>Promouvoir l'éducation de qualité et le bien-être psychologique des enfants haïtiens en offrant des services accessibles, adaptés et professionnels. Nous croyons fermement que chaque enfant a droit à l'éducation et au soutien nécessaire pour réaliser son plein potentiel.</p>
+          </div>
+
+          <div class="vision-card">
+            <h2>🌟 Notre Vision</h2>
+            <p>Construire une Haïti où chaque enfant, quel que soit son milieu d'origine, a accès à une éducation de qualité et au soutien psychologique nécessaire pour devenir un adulte épanoui, confiant et contributif à la société.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-valeurs">
+      <div class="container">
+        <h2>Nos Valeurs</h2>
+        <div class="valeurs-grid">
+          <div class="valeur-box">
+            <div class="valeur-icone">💙</div>
+            <h3>Bienveillance</h3>
+            <p>Nous accueillons chaque enfant et chaque famille avec empathie, respect et sans jugement.</p>
+          </div>
+
+          <div class="valeur-box">
+            <div class="valeur-icone">⭐</div>
+            <h3>Excellence</h3>
+            <p>Nous nous engageons à fournir des services de la plus haute qualité grâce à des professionnels qualifiés.</p>
+          </div>
+
+          <div class="valeur-box">
+            <div class="valeur-icone">🤝</div>
+            <h3>Accessibilité</h3>
+            <p>Nous adaptons nos tarifs pour rendre nos services accessibles à toutes les familles.</p>
+          </div>
+
+          <div class="valeur-box">
+            <div class="valeur-icone">🌱</div>
+            <h3>Développement</h3>
+            <p>Nous croyons au potentiel de chaque enfant et travaillons pour le révéler.</p>
+          </div>
+
+          <div class="valeur-box">
+            <div class="valeur-icone">🔗</div>
+            <h3>Collaboration</h3>
+            <p>Nous travaillons en partenariat avec les familles, les écoles et la communauté.</p>
+          </div>
+
+          <div class="valeur-box">
+            <div class="valeur-icone">🎓</div>
+            <h3>Innovation</h3>
+            <p>Nous adoptons des approches modernes et adaptées au contexte haïtien.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-equipe">
+      <div class="container">
+        <h2>Notre Équipe</h2>
+        <p class="equipe-intro">Une équipe multidisciplinaire de professionnels passionnés et engagés pour la réussite de chaque enfant.</p>
+        
+        <div class="equipe-grid">
+          <div class="membre-card">
+            <div class="membre-photo">👨‍⚕️</div>
+            <h3>Dr. Jean-Baptiste Pierre</h3>
+            <p class="membre-role">Psychologue Clinicien</p>
+            <p class="membre-bio">15 ans d'expérience en psychologie infantile. Spécialiste des troubles d'apprentissage.</p>
+          </div>
+
+          <div class="membre-card">
+            <div class="membre-photo">👩‍🏫</div>
+            <h3>Marie-Claire Joseph</h3>
+            <p class="membre-role">Coordinatrice Pédagogique</p>
+            <p class="membre-bio">Experte en sciences de l'éducation avec 12 ans d'expérience dans l'enseignement.</p>
+          </div>
+
+          <div class="membre-card">
+            <div class="membre-photo">👨‍💼</div>
+            <h3>Paul Augustin</h3>
+            <p class="membre-role">Directeur Général</p>
+            <p class="membre-bio">Fondateur d'Educa-Psy, passionné par l'éducation et le développement social.</p>
+          </div>
+
+          <div class="membre-card">
+            <div class="membre-photo">👩‍⚕️</div>
+            <h3>Dr. Sophie Charlot</h3>
+            <p class="membre-role">Psychologue pour Enfants</p>
+            <p class="membre-bio">Spécialisée en thérapie comportementale et émotionnelle des enfants.</p>
+          </div>
+
+          <div class="membre-card">
+            <div class="membre-photo">👨‍🏫</div>
+            <h3>Jacques Mentor</h3>
+            <p class="membre-role">Éducateur Spécialisé</p>
+            <p class="membre-bio">Expert en pédagogie différenciée et accompagnement des élèves en difficulté.</p>
+          </div>
+
+          <div class="membre-card">
+            <div class="membre-photo">👩‍💼</div>
+            <h3>Anne-Marie Beauvoir</h3>
+            <p class="membre-role">Responsable Partenariats</p>
+            <p class="membre-bio">Développe les collaborations avec les écoles et organisations partenaires.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-partenaires">
+      <div class="container">
+        <h2>Nos Partenaires</h2>
+        <p>Educa-Psy collabore avec de nombreuses écoles, organisations et institutions pour maximiser son impact :</p>
+        <div class="partenaires-liste">
+          <div class="partenaire-item">🏫 Plus de 20 écoles primaires et secondaires</div>
+          <div class="partenaire-item">🏥 Centres de santé communautaires</div>
+          <div class="partenaire-item">🎓 Universités locales pour la formation</div>
+          <div class="partenaire-item">🤝 ONG internationales de développement</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-cta">
+      <div class="container">
+        <h2>Rejoignez Notre Mission</h2>
+        <p>Ensemble, construisons un avenir meilleur pour les enfants d'Haïti</p>
+        <div class="cta-buttons">
+          <a href="don.html" class="btn-primary">Faire un don</a>
+          <a href="contact.html" class="btn-secondary">Nous contacter</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footerHaut">
+        <h3>Educa-Psy</h3>
+        <p>Promouvoir l'éducation et le bien-être psychologique pour chaque enfant en Haïti.</p>
+      </div>
+
+      <div class="footerMilieu">
+        <h3>Liens rapides</h3>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="presentation.html">Présentation</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="don.html">Faire un don</a></li>
+        </ul>
+      </div>
+
+      <div class="footerBas">
+        <h3>Contact</h3>
+        <p>Email: <a href="mailto:educapsyhaiti@gmail.com">educapsyhaiti@gmail.com</a></p>
+        <p>Tél: <a href="tel:+50936859684">+509 3685-9684</a></p>
+      </div>
+    </div>
+
+    <div class="footer-copyright">
+      <p>&copy; 2026 Educa-Psy. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
 </body>
 </html>
