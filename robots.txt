@@ -1,0 +1,25 @@
+# robots.txt pour Educa-Psy
+
+User-agent: *
+Allow: /
+
+# Pages à ne pas indexer (si nécessaire)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# Sitemap
+Sitemap: https://www.educapsy.ht/sitemap.xml
+
+# Crawl-delay pour éviter la surcharge du serveur
+Crawl-delay: 10
+
+# Règles spécifiques pour les principaux moteurs de recherche
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
