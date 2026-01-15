@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Espace membre Educa-Psy - Accédez à votre espace personnel">
+  <title>Espace Membre - Educa-Psy</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <header id="header">
+    <div id="logoTitre">
+      <img src="images/Logo.webp" alt="Logo Educa-Psy" id="logo"> 
+      <h2 id="titre">
+        <a href="index.html">Educa-Psy</a>
+      </h2>
+    </div>
+
+    <div id="langueMenu">
+      <select id="select-langue" aria-label="Sélectionner la langue">
+        <option value="fr">FR</option>
+        <option value="ht">KR</option> 
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+      </select>
+      
+      <div id="menuContainer">
+        <button id="btnMenu" aria-label="Menu de navigation" aria-expanded="false">☰</button>
+        <nav id="liens-deroulants" aria-label="Navigation principale">
+          <a href="index.html" class="item-menu">Accueil</a>
+          <a href="presentation.html" class="item-menu">Présentation</a>
+          <a href="services.html" class="item-menu">Services</a>
+          <a href="contact.html" class="item-menu">Contact</a>
+          <a href="espace-membre.html" class="item-menu">Espace Membre</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page de connexion (affichée par défaut) -->
+    <section id="login-section" class="section-auth">
+      <div class="container-auth">
+        <div class="auth-card">
+          <h1>🔐 Connexion</h1>
+          <p class="auth-subtitle">Accédez à votre espace personnel</p>
+
+          <form id="loginForm" class="auth-form">
+            <div class="form-group">
+              <label for="loginEmail">Email</label>
+              <input type="email" id="loginEmail" required placeholder="votre@email.com">
+            </div>
+
+            <div class="form-group">
+              <label for="loginPassword">Mot de passe</label>
+              <input type="password" id="loginPassword" required placeholder="••••••••">
+            </div>
+
+            <div class="form-options">
+              <label class="checkbox-label">
+                <input type="checkbox" id="rememberMe">
+                <span>Se souvenir de moi</span>
+              </label>
+              <a href="#" id="forgotPasswordLink" class="link-text">Mot de passe oublié ?</a>
+            </div>
+
+            <button type="submit" class="btn-auth">Se connecter</button>
+
+            <p class="auth-switch">
+              Pas encore de compte ? 
+              <a href="#" id="showRegisterLink">Créer un compte</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page d'inscription (cachée par défaut) -->
+    <section id="register-section" class="section-auth" style="display: none;">
+      <div class="container-auth">
+        <div class="auth-card">
+          <h1>📝 Inscription</h1>
+          <p class="auth-subtitle">Créez votre compte gratuitement</p>
+
+          <form id="registerForm" class="auth-form">
+            <div class="form-group">
+              <label for="registerNom">Nom complet</label>
+              <input type="text" id="registerNom" required placeholder="Jean Dupont">
+            </div>
+
+            <div class="form-group">
+              <label for="registerEmail">Email</label>
+              <input type="email" id="registerEmail" required placeholder="votre@email.com">
+            </div>
+
+            <div class="form-group">
+              <label for="registerTelephone">Téléphone</label>
+              <input type="tel" id="registerTelephone" placeholder="+509 XXXX-XXXX">
+            </div>
+
+            <div class="form-group">
+              <label for="registerPassword">Mot de passe</label>
+              <input type="password" id="registerPassword" required placeholder="••••••••" minlength="8">
+              <small class="form-hint">Minimum 8 caractères</small>
+            </div>
+
+            <div class="form-group">
+              <label for="registerPasswordConfirm">Confirmer le mot de passe</label>
+              <input type="password" id="registerPasswordConfirm" required placeholder="••••••••">
+            </div>
+
+            <div class="form-group checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="acceptTerms" required>
+                <span>J'accepte les <a href="mentions-legales.html" target="_blank">conditions d'utilisation</a></span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-auth">Créer mon compte</button>
+
+            <p class="auth-switch">
+              Déjà inscrit ? 
+              <a href="#" id="showLoginLink">Se connecter</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Espace membre (caché par défaut, affiché après connexion) -->
+    <section id="member-space" class="section-member-space" style="display: none;">
+      <div class="container">
+        
+        <!-- En-tête membre -->
+        <div class="member-header">
+          <div class="member-welcome">
+            <h1>Bonjour <span id="memberName">Utilisateur</span> 👋</h1>
+            <p>Bienvenue dans votre espace personnel</p>
+          </div>
+          <button id="logoutBtn" class="btn-logout">Déconnexion</button>
+        </div>
+
+        <!-- Navigation onglets -->
+        <div class="member-tabs">
+          <button class="member-tab active" data-tab="dashboard">Tableau de bord</button>
+          <button class="member-tab" data-tab="dossier">Mon dossier</button>
+          <button class="member-tab" data-tab="enfants">Mes enfants</button>
+          <button class="member-tab" data-tab="rendez-vous">Rendez-vous</button>
+          <button class="member-tab" data-tab="documents">Documents</button>
+          <button class="member-tab" data-tab="profil">Mon profil</button>
+        </div>
+
+        <!-- Contenu des onglets -->
+        <div class="member-content">
+          
+          <!-- Onglet Dashboard -->
+          <div id="tab-dashboard" class="tab-content active">
+            <div class="dashboard-grid">
+              
+              <div class="dashboard-card">
+                <h3>📊 Statistiques</h3>
+                <div class="stats-list">
+                  <div class="stat-item">
+                    <span class="stat-label">Consultations:</span>
+                    <span class="stat-value">12</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-label">Enfants inscrits:</span>
+                    <span class="stat-value">2</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-label">Documents:</span>
+                    <span class="stat-value">5</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="dashboard-card">
+                <h3>📅 Prochain rendez-vous</h3>
+                <div class="next-appointment">
+                  <p class="appointment-date">Mardi 20 janvier 2026</p>
+                  <p class="appointment-time">14:00 - 15:00</p>
+                  <p class="appointment-type">Consultation psychologique</p>
+                  <button class="btn-small">Modifier</button>
+                </div>
+              </div>
+
+              <div class="dashboard-card">
+                <h3>📢 Dernières actualités</h3>
+                <ul class="news-list">
+                  <li>Nouvel atelier parent le 25 janvier</li>
+                  <li>Vacances scolaires : 15-28 février</li>
+                  <li>Nouvelle psychologue dans l'équipe</li>
+                </ul>
+              </div>
+
+              <div class="dashboard-card">
+                <h3>💬 Messages récents</h3>
+                <p class="no-messages">Aucun nouveau message</p>
+                <button class="btn-small">Envoyer un message</button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Onglet Mon dossier -->
+          <div id="tab-dossier" class="tab-content">
+            <h2>📋 Mon Dossier</h2>
+            <div class="dossier-info">
+              <div class="info-row">
+                <span class="info-label">Numéro de dossier:</span>
+                <span class="info-value">#EP-2026-0123</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Date d'inscription:</span>
+                <span class="info-value">15 décembre 2025</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Statut:</span>
+                <span class="info-value badge-active">Actif</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Tarif appliqué:</span>
+                <span class="info-value">Tarif social (500 HTG/séance)</span>
+              </div>
+            </div>
+
+            <h3>Historique des consultations</h3>
+            <table class="member-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Professionnel</th>
+                  <th>Statut</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>10 janvier 2026</td>
+                  <td>Soutien scolaire</td>
+                  <td>Marie-Claire Joseph</td>
+                  <td><span class="badge-completed">Complété</span></td>
+                </tr>
+                <tr>
+                  <td>5 janvier 2026</td>
+                  <td>Consultation psycho</td>
+                  <td>Dr. Sophie Charlot</td>
+                  <td><span class="badge-completed">Complété</span></td>
+                </tr>
+                <tr>
+                  <td>20 janvier 2026</td>
+                  <td>Consultation psycho</td>
+                  <td>Dr. Sophie Charlot</td>
+                  <td><span class="badge-upcoming">À venir</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Onglet Mes enfants -->
+          <div id="tab-enfants" class="tab-content">
+            <div class="section-header">
+              <h2>👶 Mes Enfants</h2>
+              <button class="btn-small">+ Ajouter un enfant</button>
+            </div>
+
+            <div class="children-grid">
+              <div class="child-card">
+                <img src="images/Enfant1.webp" alt="Photo enfant" class="child-photo">
+                <h3>Jean Dupont</h3>
+                <p class="child-info">10 ans - 5ème année</p>
+                <p class="child-school">École Nationale de Port-au-Prince</p>
+                <div class="child-progress">
+                  <span class="progress-label">Progrès:</span>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%;"></div>
+                  </div>
+                  <span class="progress-percent">75%</span>
+                </div>
+                <button class="btn-small">Voir le profil</button>
+              </div>
+
+              <div class="child-card">
+                <img src="images/Enfant2.webp" alt="Photo enfant" class="child-photo">
+                <h3>Marie Dupont</h3>
+                <p class="child-info">8 ans - 3ème année</p>
+                <p class="child-school">École Nationale de Port-au-Prince</p>
+                <div class="child-progress">
+                  <span class="progress-label">Progrès:</span>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%;"></div>
+                  </div>
+                  <span class="progress-percent">85%</span>
+                </div>
+                <button class="btn-small">Voir le profil</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Onglet Rendez-vous -->
+          <div id="tab-rendez-vous" class="tab-content">
+            <div class="section-header">
+              <h2>📅 Mes Rendez-vous</h2>
+              <button class="btn-small">+ Prendre rendez-vous</button>
+            </div>
+
+            <div class="appointments-list">
+              <div class="appointment-card upcoming">
+                <div class="appointment-date-badge">
+                  <span class="date-day">20</span>
+                  <span class="date-month">JAN</span>
+                </div>
+                <div class="appointment-details">
+                  <h3>Consultation psychologique</h3>
+                  <p>Dr. Sophie Charlot</p>
+                  <p class="appointment-time-slot">14:00 - 15:00</p>
+                </div>
+                <div class="appointment-actions">
+                  <button class="btn-icon">✏️</button>
+                  <button class="btn-icon">❌</button>
+                </div>
+              </div>
+
+              <div class="appointment-card">
+                <div class="appointment-date-badge past">
+                  <span class="date-day">10</span>
+                  <span class="date-month">JAN</span>
+                </div>
+                <div class="appointment-details">
+                  <h3>Soutien scolaire</h3>
+                  <p>Marie-Claire Joseph</p>
+                  <p class="appointment-time-slot">10:00 - 11:00</p>
+                  <span class="badge-completed">Complété</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Onglet Documents -->
+          <div id="tab-documents" class="tab-content">
+            <div class="section-header">
+              <h2>📄 Mes Documents</h2>
+              <button class="btn-small">+ Télécharger un document</button>
+            </div>
+
+            <div class="documents-list">
+              <div class="document-item">
+                <span class="document-icon">📄</span>
+                <div class="document-info">
+                  <h4>Rapport de consultation - Janvier 2026</h4>
+                  <p class="document-meta">PDF - 245 KB - 15 janvier 2026</p>
+                </div>
+                <button class="btn-download">⬇️ Télécharger</button>
+              </div>
+
+              <div class="document-item">
+                <span class="document-icon">📄</span>
+                <div class="document-info">
+                  <h4>Bulletin scolaire T1 - 2025</h4>
+                  <p class="document-meta">PDF - 182 KB - 20 décembre 2025</p>
+                </div>
+                <button class="btn-download">⬇️ Télécharger</button>
+              </div>
+
+              <div class="document-item">
+                <span class="document-icon">📄</span>
+                <div class="document-info">
+                  <h4>Plan d'intervention personnalisé</h4>
+                  <p class="document-meta">PDF - 320 KB - 10 décembre 2025</p>
+                </div>
+                <button class="btn-download">⬇️ Télécharger</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Onglet Profil -->
+          <div id="tab-profil" class="tab-content">
+            <h2>👤 Mon Profil</h2>
+            
+            <form id="profileForm" class="profile-form">
+              <div class="form-group">
+                <label for="profileNom">Nom complet</label>
+                <input type="text" id="profileNom" value="Jean Dupont">
+              </div>
+
+              <div class="form-group">
+                <label for="profileEmail">Email</label>
+                <input type="email" id="profileEmail" value="jean.dupont@example.com">
+              </div>
+
+              <div class="form-group">
+                <label for="profileTelephone">Téléphone</label>
+                <input type="tel" id="profileTelephone" value="+509 3685-9684">
+              </div>
+
+              <div class="form-group">
+                <label for="profileAdresse">Adresse</label>
+                <input type="text" id="profileAdresse" value="Port-au-Prince, Haïti">
+              </div>
+
+              <h3>Changer le mot de passe</h3>
+              
+              <div class="form-group">
+                <label for="currentPassword">Mot de passe actuel</label>
+                <input type="password" id="currentPassword">
+              </div>
+
+              <div class="form-group">
+                <label for="newPassword">Nouveau mot de passe</label>
+                <input type="password" id="newPassword">
+              </div>
+
+              <div class="form-group">
+                <label for="confirmNewPassword">Confirmer le nouveau mot de passe</label>
+                <input type="password" id="confirmNewPassword">
+              </div>
+
+              <button type="submit" class="btn-auth">Enregistrer les modifications</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footerHaut">
+        <h3>Educa-Psy</h3>
+        <p>Promouvoir l'éducation et le bien-être psychologique pour chaque enfant en Haïti.</p>
+      </div>
+
+      <div class="footerMilieu">
+        <h3>Liens rapides</h3>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="presentation.html">Présentation</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="don.html">Faire un don</a></li>
+        </ul>
+      </div>
+
+      <div class="footerBas">
+        <h3>Contact</h3>
+        <p>Email: <a href="mailto:educapsyhaiti@gmail.com">educapsyhaiti@gmail.com</a></p>
+        <p>Tél: <a href="tel:+50936859684">+509 3685-9684</a></p>
+      </div>
+    </div>
+
+    <div class="footer-copyright">
+      <p>&copy; 2026 Educa-Psy. Tous droits réservés. | <a href="mentions-legales.html">Mentions légales</a> | <a href="politique-confidentialite.html">Politique de confidentialité</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="cookies.js"></script>
+  <script src="membre.js"></script>
+
+</body>
+</html>
