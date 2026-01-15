@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Actualités, conseils et articles sur l'éducation et la psychologie infantile en Haïti">
+  <meta name="keywords" content="blog, actualités, éducation, psychologie, conseils, Haïti">
+  <title>Blog et Actualités - Educa-Psy</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <header id="header">
+    <div id="logoTitre">
+      <img src="images/Logo.webp" alt="Logo Educa-Psy" id="logo"> 
+      <h2 id="titre">
+        <a href="index.html">Educa-Psy</a>
+      </h2>
+    </div>
+
+    <div id="langueMenu">
+      <select id="select-langue" aria-label="Sélectionner la langue">
+        <option value="fr">FR</option>
+        <option value="ht">KR</option> 
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+      </select>
+      
+      <div id="menuContainer">
+        <button id="btnMenu" aria-label="Menu de navigation" aria-expanded="false">☰</button>
+        <nav id="liens-deroulants" aria-label="Navigation principale">
+          <a href="index.html" class="item-menu">Accueil</a>
+          <a href="presentation.html" class="item-menu">Présentation</a>
+          <a href="services.html" class="item-menu">Services</a>
+          <a href="blog.html" class="item-menu">Blog</a>
+          <a href="contact.html" class="item-menu">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero-blog">
+      <h1 class="hero-titre">Blog & Actualités</h1>
+      <p class="hero-description">Conseils, témoignages et nouvelles d'Educa-Psy</p>
+    </section>
+
+    <section class="section-blog-filters">
+      <div class="container">
+        <div class="blog-filters">
+          <button class="filter-btn active" data-category="tous">Tous</button>
+          <button class="filter-btn" data-category="conseils">Conseils</button>
+          <button class="filter-btn" data-category="actualites">Actualités</button>
+          <button class="filter-btn" data-category="temoignages">Témoignages</button>
+          <button class="filter-btn" data-category="education">Éducation</button>
+          <button class="filter-btn" data-category="psychologie">Psychologie</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-blog-content">
+      <div class="container">
+        <div class="blog-grid">
+          
+          <article class="blog-card" data-category="actualites">
+            <img src="images/Blog1.webp" alt="Nouvelle école partenaire" class="blog-image">
+            <div class="blog-content">
+              <span class="blog-category">Actualités</span>
+              <span class="blog-date">15 janvier 2026</span>
+              <h3>Nouvelle école partenaire à Carrefour</h3>
+              <p>Nous sommes heureux d'annoncer notre partenariat avec l'École Nationale de Carrefour pour offrir nos services à 200 élèves supplémentaires...</p>
+              <a href="#" class="blog-link">Lire la suite →</a>
+            </div>
+          </article>
+
+          <article class="blog-card" data-category="conseils">
+            <img src="images/Blog2.webp" alt="Conseils pour parents" class="blog-image">
+            <div class="blog-content">
+              <span class="blog-category">Conseils</span>
+              <span class="blog-date">12 janvier 2026</span>
+              <h3>5 conseils pour aider votre enfant à réussir</h3>
+              <p>Découvrez nos recommandations pour créer un environnement propice à l'apprentissage et soutenir la réussite scolaire de votre enfant...</p>
+              <a href="#" class="blog-link">Lire la suite →</a>
+            </div>
+          </article>
+
+          <article class="blog-card" data-category="temoignages">
+            <img src="images/Blog3.webp" alt="Témoignage parent" class="blog-image">
+            <div class="blog-content">
+              <span class="blog-category">Témoignages</span>
+              <span class="blog-date">10 janvier 2026</span>
+              <h3>L'histoire de Marie : un parcours inspirant</h3>
+              <p>Marie, 12 ans, était en grande difficulté scolaire. Grâce à notre accompagnement, elle a retrouvé confiance et motivation. Voici son histoire...</p>
+              <a href="#" class="blog-link">Lire la suite →</a>
+            </div>
+          </article>
+
+          <article class="blog-card" data-category="psychologie">
+            <img src="images/Blog4.webp" alt="Gestion du stress" class="blog-image">
+            <div class="blog-content">
+              <span class="blog-category">Psychologie</span>
+              <span class="blog-date">8 janvier 2026</span>
+              <h3>Comment gérer le stress des examens ?</h3>
+              <p>Les périodes d'examens peuvent être source d'anxiété. Nos psychologues partagent des techniques pour aider les enfants à mieux gérer leur stress...</p>
+              <a href="#" class="blog-link">Lire la suite →</a>
+            </div>
+          </article>
+
+          <article class="blog-card" data-category="education">
+            <img src="images/Blog5.webp" alt="Méthodes d'apprentissage" class="blog-image">
+            <div class="blog-content">
+              <span class="blog-category">Éducation</span>
+              <span class="blog-date">5 janvier 2026</span>
+              <h3>Les meilleures méthodes d'apprentissage</h3>
+              <p>Chaque enfant a son propre style d'apprentissage. Découvrez comment identifier et optimiser la méthode qui convient à votre enfant...</p>
+              <a href="#" class="blog-link">Lire la suite →</a>
+            </div>
+          </article>
+
+          <article class="blog-card" data-category="actualites">
+            <img src="images/Blog6.webp" alt="Atelier parents" class="blog-image">
+            <div class="blog-content">
+              <span class="blog-category">Actualités</span>
+              <span class="blog-date">3 janvier 2026</span>
+              <h3>Atelier gratuit pour parents : 20 janvier</h3>
+              <p>Rejoignez-nous pour un atelier sur la communication parent-enfant. Places limitées, inscription obligatoire...</p>
+              <a href="#" class="blog-link">Lire la suite →</a>
+            </div>
+          </article>
+
+          <article class="blog-card" data-category="conseils">
+            <img src="images/Blog7.webp" alt="Devoirs à la maison" class="blog-image">
+            <div class="blog-content">
+              <span class="blog-category">Conseils</span>
+              <span class="blog-date">29 décembre 2025</span>
+              <h3>Créer une routine de devoirs efficace</h3>
+              <p>Une bonne routine de devoirs peut transformer l'expérience d'apprentissage. Voici nos recommandations pour établir des habitudes positives...</p>
+              <a href="#" class="blog-link">Lire la suite →</a>
+            </div>
+          </article>
+
+          <article class="blog-card" data-category="psychologie">
+            <img src="images/Blog8.webp" alt="Confiance en soi" class="blog-image">
+            <div class="blog-content">
+              <span class="blog-category">Psychologie</span>
+              <span class="blog-date">27 décembre 2025</span>
+              <h3>Développer la confiance en soi chez l'enfant</h3>
+              <p>La confiance en soi est essentielle à l'épanouissement. Découvrez des exercices pratiques pour renforcer l'estime de soi de votre enfant...</p>
+              <a href="#" class="blog-link">Lire la suite →</a>
+            </div>
+          </article>
+
+          <article class="blog-card" data-category="temoignages">
+            <img src="images/Blog9.webp" alt="Succès collectif" class="blog-image">
+            <div class="blog-content">
+              <span class="blog-category">Témoignages</span>
+              <span class="blog-date">22 décembre 2025</span>
+              <h3>Bilan 2025 : 500 enfants accompagnés</h3>
+              <p>Retour sur une année exceptionnelle où nous avons pu accompagner plus de 500 enfants grâce à votre soutien. Merci à tous nos partenaires...</p>
+              <a href="#" class="blog-link">Lire la suite →</a>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="blog-pagination">
+          <button class="pagination-btn" disabled>← Précédent</button>
+          <span class="pagination-info">Page 1 sur 3</span>
+          <button class="pagination-btn">Suivant →</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-newsletter">
+      <div class="container">
+        <div class="newsletter-box">
+          <h2>📧 Restez Informé</h2>
+          <p>Recevez nos derniers articles et actualités directement dans votre boîte mail</p>
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" placeholder="Votre adresse email" required>
+            <button type="submit">S'inscrire</button>
+          </form>
+          <p class="newsletter-note">Pas de spam, désabonnement à tout moment</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footerHaut">
+        <h3>Educa-Psy</h3>
+        <p>Promouvoir l'éducation et le bien-être psychologique pour chaque enfant en Haïti.</p>
+      </div>
+
+      <div class="footerMilieu">
+        <h3>Liens rapides</h3>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="presentation.html">Présentation</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="don.html">Faire un don</a></li>
+        </ul>
+      </div>
+
+      <div class="footerBas">
+        <h3>Contact</h3>
+        <p>Email: <a href="mailto:educapsyhaiti@gmail.com">educapsyhaiti@gmail.com</a></p>
+        <p>Tél: <a href="tel:+50936859684">+509 3685-9684</a></p>
+      </div>
+    </div>
+
+    <div class="footer-copyright">
+      <p>&copy; 2026 Educa-Psy. Tous droits réservés. | <a href="mentions-legales.html">Mentions légales</a> | <a href="politique-confidentialite.html">Politique de confidentialité</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="blog.js"></script>
+
+</body>
+</html>
