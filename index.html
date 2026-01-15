@@ -192,7 +192,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </footer>
 
-  <script src="script.js"></script>
   <script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/service-worker.js')
@@ -200,9 +199,11 @@ if ('serviceWorker' in navigator) {
     .catch(err => console.log('SW error', err));
 }
   </script>
-
+<script src="chat.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
