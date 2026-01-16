@@ -1,62 +1,50 @@
-// Système de gestion des cookies - cookies.js
-// À inclure dans TOUTES les pages HTML avec <script src="cookies.js"></script>
+/**
+ * COOKIES.JS - Système de gestion des cookies conforme RGPD
+ * Dépendances: utils.js
+ */
 
 (function() {
   'use strict';
 
   const CookieConsent = {
-    // Configuration
+    initialized: false,
     config: {
       cookieName: 'educapsy_cookie_consent',
-      cookieExpiry: 365, // jours
-      position: 'bottom', // 'bottom' ou 'top'
+      cookieExpiry: 365,
+      position: 'bottom',
+      gaTrackingId: 'G-XXXXXXXXXX', // À remplacer par votre ID
     },
 
-    // Initialisation
+    /**
+     * Initialiser le système de cookies
+     */
     init: function() {
+      if (this.initialized) {
+        console.warn('CookieConsent déjà initialisé');
+        return;
+      }
+
+      this.initialized = true;
+      this.injectStyles();
+
       if (!this.hasConsent()) {
         this.showBanner();
       } else {
         this.loadAcceptedCookies();
       }
+
       this.setupPreferencesButton();
+      window.EducaPsy.Utils.log('CookieConsent initialisé');
     },
 
-    // Vérifier si le consentement existe
-    hasConsent: function() {
-      return this.getCookie(this.config.cookieName) !== null;
-    },
+    /**
+     * Injecter les styles CSS
+     */
+    injectStyles: function() {
+      if (document.getElementById('cookie-consent-styles')) return;
 
-    // Afficher la bannière de cookies
-    showBanner: function() {
-      const banner = document.createElement('div');
-      banner.id = 'cookie-consent-banner';
-      banner.className = 'cookie-banner';
-      banner.innerHTML = `
-        <div class="cookie-banner-content">
-          <div class="cookie-banner-text">
-            <h3>🍪 Nous utilisons des cookies</h3>
-            <p>Nous utilisons des cookies pour améliorer votre expérience sur notre site. En continuant, vous acceptez notre utilisation des cookies.</p>
-            <a href="politique-confidentialite.html" target="_blank">En savoir plus</a>
-          </div>
-          <div class="cookie-banner-actions">
-            <button id="cookie-accept-all" class="cookie-btn cookie-btn-primary">
-              Accepter tout
-            </button>
-            <button id="cookie-preferences" class="cookie-btn cookie-btn-secondary">
-              Personnaliser
-            </button>
-            <button id="cookie-reject" class="cookie-btn cookie-btn-tertiary">
-              Refuser
-            </button>
-          </div>
-        </div>
-      `;
-
-      document.body.appendChild(banner);
-
-      // Styles inline pour s'assurer que la bannière s'affiche correctement
       const style = document.createElement('style');
+      style.id = 'cookie-consent-styles';
       style.textContent = `
         .cookie-banner {
           position: fixed;
@@ -74,6 +62,11 @@
         @keyframes slideUp {
           from { transform: translateY(100%); opacity: 0; }
           to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideDown {
+          from { transform: translateY(0); opacity: 1; }
+          to { transform: translateY(100%); opacity: 0; }
         }
 
         .cookie-banner-content {
@@ -128,6 +121,7 @@
           cursor: pointer;
           transition: all 0.3s ease;
           white-space: nowrap;
+          min-height: 44px;
         }
 
         .cookie-btn-primary {
@@ -135,7 +129,8 @@
           color: white;
         }
 
-        .cookie-btn-primary:hover {
+        .cookie-btn-primary:hover,
+        .cookie-btn-primary:focus {
           background-color: #004999;
           transform: translateY(-2px);
         }
@@ -145,7 +140,8 @@
           color: #333;
         }
 
-        .cookie-btn-secondary:hover {
+        .cookie-btn-secondary:hover,
+        .cookie-btn-secondary:focus {
           background-color: #f0f0f0;
         }
 
@@ -155,25 +151,9 @@
           border: 2px solid white;
         }
 
-        .cookie-btn-tertiary:hover {
+        .cookie-btn-tertiary:hover,
+        .cookie-btn-tertiary:focus {
           background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        @media (max-width: 768px) {
-          .cookie-banner-content {
-            flex-direction: column;
-            text-align: center;
-          }
-
-          .cookie-banner-actions {
-            width: 100%;
-            justify-content: center;
-          }
-
-          .cookie-btn {
-            flex: 1;
-            min-width: 120px;
-          }
         }
 
         /* Modal de préférences */
@@ -204,10 +184,6 @@
           max-height: 80vh;
           overflow-y: auto;
           width: 90%;
-        }
-
-        .cookie-preferences-header {
-          margin-bottom: 24px;
         }
 
         .cookie-preferences-header h2 {
@@ -300,7 +276,6 @@
           flex: 1;
         }
 
-        /* Bouton de gestion des cookies (footer) */
         .cookie-settings-btn {
           background: none;
           border: none;
@@ -314,34 +289,98 @@
         .cookie-settings-btn:hover {
           opacity: 0.8;
         }
+
+        @media (max-width: 768px) {
+          .cookie-banner-content {
+            flex-direction: column;
+            text-align: center;
+          }
+
+          .cookie-banner-actions {
+            width: 100%;
+            justify-content: center;
+          }
+
+          .cookie-btn {
+            flex: 1;
+            min-width: 120px;
+          }
+        }
       `;
       document.head.appendChild(style);
-
-      // Event listeners
-      document.getElementById('cookie-accept-all').addEventListener('click', () => {
-        this.acceptAll();
-      });
-
-      document.getElementById('cookie-preferences').addEventListener('click', () => {
-        this.showPreferencesModal();
-      });
-
-      document.getElementById('cookie-reject').addEventListener('click', () => {
-        this.rejectAll();
-      });
     },
 
-    // Modal de préférences
+    /**
+     * Vérifier si le consentement existe
+     */
+    hasConsent: function() {
+      return window.EducaPsy.Utils.getCookie(this.config.cookieName) !== null;
+    },
+
+    /**
+     * Afficher la bannière de cookies
+     */
+    showBanner: function() {
+      if (document.getElementById('cookie-consent-banner')) return;
+
+      const banner = document.createElement('div');
+      banner.id = 'cookie-consent-banner';
+      banner.className = 'cookie-banner';
+      banner.setAttribute('role', 'dialog');
+      banner.setAttribute('aria-labelledby', 'cookie-title');
+      banner.setAttribute('aria-describedby', 'cookie-description');
+
+      banner.innerHTML = `
+        <div class="cookie-banner-content">
+          <div class="cookie-banner-text">
+            <h3 id="cookie-title">🍪 Nous utilisons des cookies</h3>
+            <p id="cookie-description">Nous utilisons des cookies pour améliorer votre expérience sur notre site. En continuant, vous acceptez notre utilisation des cookies.</p>
+            <a href="politique-confidentialite.html" target="_blank" rel="noopener">En savoir plus</a>
+          </div>
+          <div class="cookie-banner-actions">
+            <button id="cookie-accept-all" class="cookie-btn cookie-btn-primary" aria-label="Accepter tous les cookies">
+              Accepter tout
+            </button>
+            <button id="cookie-preferences" class="cookie-btn cookie-btn-secondary">
+              Personnaliser
+            </button>
+            <button id="cookie-reject" class="cookie-btn cookie-btn-tertiary">
+              Refuser
+            </button>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(banner);
+
+      // Event listeners
+      document.getElementById('cookie-accept-all').addEventListener('click', () => this.acceptAll());
+      document.getElementById('cookie-preferences').addEventListener('click', () => this.showPreferencesModal());
+      document.getElementById('cookie-reject').addEventListener('click', () => this.rejectAll());
+
+      // Focus automatique pour l'accessibilité
+      setTimeout(() => {
+        document.getElementById('cookie-accept-all').focus();
+      }, 100);
+    },
+
+    /**
+     * Afficher le modal de préférences
+     */
     showPreferencesModal: function() {
       const currentPrefs = this.getPreferences();
       
       const modal = document.createElement('div');
       modal.id = 'cookie-preferences-modal';
       modal.className = 'cookie-preferences-modal';
+      modal.setAttribute('role', 'dialog');
+      modal.setAttribute('aria-modal', 'true');
+      modal.setAttribute('aria-labelledby', 'prefs-title');
+
       modal.innerHTML = `
         <div class="cookie-preferences-content">
           <div class="cookie-preferences-header">
-            <h2>🍪 Gestion des cookies</h2>
+            <h2 id="prefs-title">🍪 Gestion des cookies</h2>
             <p>Choisissez les cookies que vous souhaitez autoriser</p>
           </div>
 
@@ -385,7 +424,7 @@
           </div>
 
           <div class="cookie-preferences-actions">
-            <button class="cookie-btn cookie-btn-secondary" id="cookie-save-prefs">
+            <button class="cookie-btn cookie-btn-primary" id="cookie-save-prefs">
               Enregistrer mes préférences
             </button>
             <button class="cookie-btn cookie-btn-tertiary" id="cookie-cancel-prefs">
@@ -408,19 +447,54 @@
         this.removeBanner();
       });
 
-      document.getElementById('cookie-cancel-prefs').addEventListener('click', () => {
-        modal.remove();
-      });
+      document.getElementById('cookie-cancel-prefs').addEventListener('click', () => modal.remove());
+
+      // Fermer avec Escape
+      const escapeHandler = (e) => {
+        if (e.key === 'Escape') {
+          modal.remove();
+          document.removeEventListener('keydown', escapeHandler);
+        }
+      };
+      document.addEventListener('keydown', escapeHandler);
 
       // Fermer en cliquant à l'extérieur
       modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.remove();
+        if (e.target === modal) modal.remove();
+      });
+
+      // Trap focus
+      this.trapFocus(modal);
+    },
+
+    /**
+     * Trap focus dans le modal
+     */
+    trapFocus: function(container) {
+      const focusableElements = container.querySelectorAll(
+        'button, input[type="checkbox"], a[href]'
+      );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      firstElement.focus();
+
+      container.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+          if (e.shiftKey && document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          } else if (!e.shiftKey && document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
         }
       });
     },
 
-    // Accepter tous les cookies
+    /**
+     * Accepter tous les cookies
+     */
     acceptAll: function() {
       this.savePreferences({
         necessary: true,
@@ -428,9 +502,12 @@
         marketing: true
       });
       this.removeBanner();
+      window.EducaPsy.Utils.trackEvent('cookies_accepted_all');
     },
 
-    // Refuser tous les cookies (sauf nécessaires)
+    /**
+     * Refuser tous les cookies (sauf nécessaires)
+     */
     rejectAll: function() {
       this.savePreferences({
         necessary: true,
@@ -438,128 +515,134 @@
         marketing: false
       });
       this.removeBanner();
+      window.EducaPsy.Utils.trackEvent('cookies_rejected');
     },
 
-    // Sauvegarder les préférences
+    /**
+     * Sauvegarder les préférences
+     */
     savePreferences: function(prefs) {
-      this.setCookie(this.config.cookieName, JSON.stringify(prefs), this.config.cookieExpiry);
+      const data = {
+        prefs: prefs,
+        timestamp: Date.now()
+      };
+      window.EducaPsy.Utils.setCookie(this.config.cookieName, JSON.stringify(data), this.config.cookieExpiry);
       this.loadAcceptedCookies();
     },
 
-    // Obtenir les préférences
+    /**
+     * Obtenir les préférences
+     */
     getPreferences: function() {
-      const cookie = this.getCookie(this.config.cookieName);
+      const cookie = window.EducaPsy.Utils.getCookie(this.config.cookieName);
       if (cookie) {
         try {
-          return JSON.parse(cookie);
+          const data = JSON.parse(cookie);
+          if (typeof data.prefs === 'object' && data.prefs !== null) {
+            return {
+              necessary: true,
+              analytics: Boolean(data.prefs.analytics),
+              marketing: Boolean(data.prefs.marketing)
+            };
+          }
         } catch (e) {
-          return { necessary: true, analytics: false, marketing: false };
+          console.warn('Cookie invalide détecté:', e);
         }
       }
       return { necessary: true, analytics: false, marketing: false };
     },
 
-    // Charger les cookies acceptés
+    /**
+     * Charger les cookies acceptés
+     */
     loadAcceptedCookies: function() {
       const prefs = this.getPreferences();
 
-      // Cookies analytiques (Google Analytics, etc.)
       if (prefs.analytics) {
         this.loadAnalytics();
       }
 
-      // Cookies marketing
       if (prefs.marketing) {
         this.loadMarketing();
       }
     },
 
-    // Charger Google Analytics
+    /**
+     * Charger Google Analytics
+     */
     loadAnalytics: function() {
-      // Remplacer 'GA_MEASUREMENT_ID' par votre vrai ID
+      if (!this.config.gaTrackingId || this.config.gaTrackingId === 'G-XXXXXXXXXX') {
+        console.warn('Google Analytics non configuré');
+        return;
+      }
+
+      if (window.gtag) {
+        console.log('Google Analytics déjà chargé');
+        return;
+      }
+
       const script = document.createElement('script');
       script.async = true;
-      script.src = 'https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID';
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${this.config.gaTrackingId}`;
       document.head.appendChild(script);
 
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
       gtag('js', new Date());
-      gtag('config', 'GA_MEASUREMENT_ID');
+      gtag('config', this.config.gaTrackingId, {
+        'anonymize_ip': true,
+        'cookie_flags': 'SameSite=Lax;Secure'
+      });
+
+      console.log('Google Analytics chargé');
     },
 
-    // Charger cookies marketing
+    /**
+     * Charger cookies marketing
+     */
     loadMarketing: function() {
-      // Ajouter ici les scripts de marketing (Facebook Pixel, etc.)
       console.log('Marketing cookies loaded');
     },
 
-    // Bouton de gestion dans le footer
+    /**
+     * Ajouter un bouton dans le footer
+     */
     setupPreferencesButton: function() {
-      // Ajouter un bouton dans le footer pour rouvrir les préférences
-      const footerCopyright = document.querySelector('.footer-copyright');
+      const footerCopyright = document.querySelector('.footer-copyright p');
       if (footerCopyright) {
+        const separator = document.createTextNode(' | ');
         const settingsBtn = document.createElement('button');
         settingsBtn.className = 'cookie-settings-btn';
         settingsBtn.textContent = 'Gestion des cookies';
-        settingsBtn.addEventListener('click', () => {
-          this.showPreferencesModal();
-        });
+        settingsBtn.addEventListener('click', () => this.showPreferencesModal());
         
-        const separator = document.createTextNode(' | ');
-        footerCopyright.querySelector('p').appendChild(separator);
-        footerCopyright.querySelector('p').appendChild(settingsBtn);
+        footerCopyright.appendChild(separator);
+        footerCopyright.appendChild(settingsBtn);
       }
     },
 
-    // Supprimer la bannière
+    /**
+     * Supprimer la bannière
+     */
     removeBanner: function() {
       const banner = document.getElementById('cookie-consent-banner');
       if (banner) {
         banner.style.animation = 'slideDown 0.4s ease-out';
         setTimeout(() => banner.remove(), 400);
       }
-    },
-
-    // Utilitaires cookies
-    setCookie: function(name, value, days) {
-      const date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      const expires = "expires=" + date.toUTCString();
-      document.cookie = name + "=" + value + ";" + expires + ";path=/;SameSite=Lax";
-    },
-
-    getCookie: function(name) {
-      const nameEQ = name + "=";
-      const ca = document.cookie.split(';');
-      for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-      }
-      return null;
-    },
-
-    deleteCookie: function(name) {
-      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;";
     }
   };
 
-  // Initialiser au chargement de la page
+  // Initialiser au chargement
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => CookieConsent.init());
   } else {
     CookieConsent.init();
   }
 
-  // Animation de sortie
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes slideDown {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(100%); opacity: 0; }
-    }
-  `;
-  document.head.appendChild(style);
+  // Exposer globalement
+  window.EducaPsy = window.EducaPsy || {};
+  window.EducaPsy.CookieConsent = CookieConsent;
 
 })();
