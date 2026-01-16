@@ -1,277 +1,313 @@
-# educa-psy.2
-# 🎓 Educa-Psy - Site Web
+# 📚 Educa-Psy - Documentation Technique
 
-Site web officiel d'Educa-Psy, organisation haïtienne dédiée à l'éducation et au bien-être psychologique des enfants.
-
-## 📋 Table des Matières
-
-- [Description](#description)
-- [Fonctionnalités](#fonctionnalités)
-- [Structure du Projet](#structure-du-projet)
-- [Installation](#installation)
-- [Images Requises](#images-requises)
-- [Technologies Utilisées](#technologies-utilisées)
-- [Pages du Site](#pages-du-site)
-- [SEO et Optimisation](#seo-et-optimisation)
-- [Responsive Design](#responsive-design)
-- [Support Navigateurs](#support-navigateurs)
-- [Maintenance](#maintenance)
-- [Contact](#contact)
-
-## 📖 Description
-
-Educa-Psy est une plateforme web complète dédiée à promouvoir l'éducation de qualité et le bien-être psychologique des enfants haïtiens. Le site offre des informations sur nos services, permet les dons, et partage des conseils éducatifs et psychologiques.
-
-## ✨ Fonctionnalités
-
-### 🎯 Fonctionnalités Principales
-- **Site multipage** avec navigation fluide
-- **Formulaire de don** avec plusieurs modes de paiement (MonCash, NatCash, PayPal, Virement)
-- **Formulaire de contact** fonctionnel
-- **Blog/Actualités** avec système de filtres
-- **Newsletter** avec inscription
-- **Design responsive** (mobile, tablette, desktop)
-- **Menu déroulant** interactif
-- **Animations** au scroll
-
-### 🔐 Sécurité et Légal
-- Pages de mentions légales
-- Politique de confidentialité conforme
-- Protection des données personnelles
-- Paiements sécurisés
-
-### 🌐 SEO
-- Balises Open Graph (Facebook)
-- Balises Twitter Card
-- Schema.org markup
-- Sitemap.xml
-- Robots.txt
-- Canonical URLs
-
-## 📁 Structure du Projet
+## 🏗️ Structure du Projet
 
 ```
 educa-psy/
-├── index.html                    # Page d'accueil
-├── presentation.html             # Page qui sommes-nous
-├── services.html                 # Page services
-├── contact.html                  # Page contact
-├── don.html                      # Page dons
-├── blog.html                     # Page blog/actualités
-├── mentions-legales.html         # Mentions légales
-├── politique-confidentialite.html # Politique de confidentialité
-├── styles.css                    # Fichier CSS principal
-├── script.js                     # JavaScript général
-├── don.js                        # JavaScript page don
-├── blog.js                       # JavaScript page blog
-├── sitemap.xml                   # Plan du site pour SEO
-├── robots.txt                    # Instructions pour robots
-└── images/                       # Dossier images
-    ├── Logo.webp                 # Logo principal
-    ├── favicon.ico               # Icône du site
-    ├── Don1.webp à Don4.webp     # Images page don
-    ├── Equipe1.webp à Equipe6.webp # Photos équipe
-    ├── Blog1.webp à Blog9.webp   # Images blog
-    ├── Benevolat.webp            # Image bénévolat
-    ├── Partenariat.webp          # Image partenariat
-    ├── Materiel.webp             # Image don matériel
-    ├── Donateur1.webp à Donateur3.webp # Photos donateurs
-    ├── Moncash.webp              # Logo MonCash
-    ├── Natcash.webp              # Logo NatCash
-    └── Paypal.webp               # Logo PayPal
+├── index.html
+├── presentation.html
+├── services.html
+├── videos.html
+├── blog.html
+├── contact.html
+├── don.html
+├── espace-membre.html
+├── manifest.json
+├── service-worker.js
+│
+├── css/
+│   ├── base.css              # Variables, reset, typographie
+│   ├── layout.css            # Header, footer, structure
+│   ├── components.css        # Composants réutilisables
+│   └── pages/
+│       ├── home.css          # Page d'accueil
+│       ├── services.css      # Page services
+│       ├── blog.css          # Page blog
+│       ├── videos.css        # Page vidéos
+│       ├── contact.css       # Page contact
+│       ├── membre.css        # Espace membre
+│       └── legal.css         # Pages légales
+│
+├── js/
+│   ├── utils.js              # Fonctions utilitaires (CHARGER EN PREMIER)
+│   ├── navigation.js         # Gestion du menu
+│   ├── animations.js         # Animations au scroll
+│   ├── cookies.js            # Gestion RGPD
+│   └── chat.js               # Chat en direct
+│
+└── images/
+    ├── Logo.webp
+    ├── favicon.ico
+    └── icon-192x192.png
 ```
 
-## 🚀 Installation
+## 📦 Ordre de Chargement des Scripts
 
-### Prérequis
-- Navigateur web moderne (Chrome, Firefox, Safari, Edge)
-- Serveur web (Apache, Nginx, ou serveur de développement)
+**IMPORTANT** : Respecter cet ordre dans toutes les pages HTML :
 
-### Étapes d'installation
+```html
+<!-- 1. Utilitaires (doit être chargé en premier) -->
+<script src="js/utils.js"></script>
 
-1. **Télécharger les fichiers**
-   ```bash
-   # Cloner ou télécharger tous les fichiers du projet
-   ```
+<!-- 2. Navigation -->
+<script src="js/navigation.js"></script>
 
-2. **Organiser les images**
-   - Créer un dossier `images/`
-   - Ajouter toutes les images listées ci-dessous
+<!-- 3. Animations -->
+<script src="js/animations.js"></script>
 
-3. **Configuration du serveur**
-   - Placer tous les fichiers à la racine de votre serveur web
-   - S'assurer que les fichiers HTML sont accessibles
+<!-- 4. Cookies (RGPD) -->
+<script src="js/cookies.js"></script>
 
-4. **Tester localement**
-   - Ouvrir `index.html` dans un navigateur
-   - Vérifier que toutes les pages fonctionnent
+<!-- 5. Chat en direct -->
+<script src="js/chat.js"></script>
+```
 
-## 🖼️ Images Requises
+## 🎨 Ordre de Chargement des CSS
 
-### Images Obligatoires
-| Fichier | Description | Dimensions recommandées |
-|---------|-------------|------------------------|
-| `Logo.webp` | Logo principal | 200x200px |
-| `favicon.ico` | Icône du site | 32x32px |
+```html
+<!-- 1. Base (variables, reset) -->
+<link rel="stylesheet" href="css/base.css">
 
-### Page Don (4 images)
-- `Don1.webp` - Soutien scolaire
-- `Don2.webp` - Consultation psychologique
-- `Don3.webp` - Matériel scolaire
-- `Don4.webp` - Programme complet
-- **Dimensions**: 400x300px
+<!-- 2. Layout (header, footer) -->
+<link rel="stylesheet" href="css/layout.css">
 
-### Page Équipe (6 images)
-- `Equipe1.webp` à `Equipe6.webp` - Photos membres équipe
-- **Format**: Portraits professionnels
-- **Dimensions**: 300x300px (carré)
+<!-- 3. Composants réutilisables -->
+<link rel="stylesheet" href="css/components.css">
 
-### Page Blog (9 images)
-- `Blog1.webp` à `Blog9.webp` - Illustrations articles
-- **Dimensions**: 600x400px
+<!-- 4. Page spécifique (exemple: home) -->
+<link rel="stylesheet" href="css/pages/home.css">
+```
 
-### Autres Images
-- `Benevolat.webp`, `Partenariat.webp`, `Materiel.webp` (400x300px)
-- `Donateur1.webp` à `Donateur3.webp` (150x150px, carré)
-- `Moncash.webp`, `Natcash.webp`, `Paypal.webp` (logos paiement)
+## ⚙️ Fonctionnalités Implémentées
 
-## 🛠️ Technologies Utilisées
+### ✅ Sécurité
+- ✅ Protection XSS (échappement HTML)
+- ✅ Validation RGPD des cookies
+- ✅ localStorage utilisé de manière sécurisée
+- ✅ Focus trap dans les modals
 
-- **HTML5** - Structure sémantique
-- **CSS3** - Design et animations
-  - CSS Grid & Flexbox
-  - CSS Variables
-  - Transitions et animations
-- **JavaScript (Vanilla)** - Interactivité
-  - DOM Manipulation
-  - Event Listeners
-  - Local Storage (optionnel)
-- **WebP** - Format d'image optimisé
-- **Responsive Design** - Mobile-first approach
+### ✅ Accessibilité
+- ✅ Attributs ARIA
+- ✅ Navigation au clavier
+- ✅ Focus visible
+- ✅ Touche Escape pour fermer les modals
+- ✅ Skip to main content (à ajouter)
 
-## 📄 Pages du Site
+### ✅ Performance
+- ✅ Debounce/Throttle pour les événements
+- ✅ Intersection Observer pour les animations
+- ✅ requestAnimationFrame pour les compteurs
+- ✅ Lazy loading possible
 
-### 1. **Page d'Accueil** (`index.html`)
-- Hero section
-- Mission et valeurs
-- Statistiques d'impact
-- Bouton de don
+### ✅ Responsive
+- ✅ Mobile-first design
+- ✅ Media queries optimisées
+- ✅ Touch-friendly (min 44px)
 
-### 2. **Présentation** (`presentation.html`)
-- Histoire de l'organisation
-- Mission et vision
-- Valeurs
-- Équipe (6 membres)
-- Partenaires
+### ✅ SEO
+- ✅ Schema.org markup
+- ✅ Open Graph tags
+- ✅ Canonical URLs
+- ✅ Semantic HTML
 
-### 3. **Services** (`services.html`)
-- 6 services détaillés :
-  - Soutien scolaire
-  - Consultation psychologique
-  - Accompagnement familial
-  - Orientation scolaire
-  - Ateliers de groupe
-  - Partenariats scolaires
-- Tarifs
+## 🔧 Variables CSS Personnalisables
 
-### 4. **Contact** (`contact.html`)
-- Coordonnées complètes
-- Formulaire de contact
-- FAQ
-- Section urgence
+Dans `css/base.css` :
 
-### 5. **Don** (`don.html`)
-- Impact des dons
-- Formulaire de don avec :
-  - Don unique/mensuel
-  - Montants prédéfinis
-  - Choix du mode de paiement
-- Autres moyens de contribuer
-- Témoignages donateurs
+```css
+:root {
+  /* Couleurs principales */
+  --bleu-principal: #0066CC;
+  --bleu-fonce: #004999;
+  --bleu-clair: #E6F2FF;
+  
+  /* Couleurs d'état */
+  --success: #28a745;
+  --error: #dc3545;
+  
+  /* Espacements */
+  --padding-mobile: 16px;
+  --padding-tablet: 24px;
+  --padding-desktop: 32px;
+}
+```
 
-### 6. **Blog** (`blog.html`)
-- Articles avec filtres par catégorie
-- Newsletter
-- Pagination
+## 🎯 Configuration des Scripts
 
-### 7. **Pages Légales**
-- Mentions légales
-- Politique de confidentialité
+### Google Analytics
 
-## 🔍 SEO et Optimisation
+Dans `js/cookies.js`, ligne 15 :
+```javascript
+gaTrackingId: 'G-XXXXXXXXXX', // ⚠️ Remplacer par votre ID
+```
 
-### Optimisations Implémentées
-- ✅ Meta descriptions sur toutes les pages
-- ✅ Balises Open Graph (partage réseaux sociaux)
-- ✅ Schema.org markup (données structurées)
-- ✅ Sitemap.xml généré
-- ✅ Robots.txt configuré
-- ✅ URLs canoniques
-- ✅ Images WebP optimisées
-- ✅ Chargement lazy des images (à implémenter)
+### Google Tag Manager
 
-### Recommandations Futures
-- [ ] Certificat SSL (HTTPS)
-- [ ] Compression Gzip
+Dans `index.html`, ligne 25 :
+```javascript
+'GTM-T757VLNM' // ⚠️ Remplacer par votre ID
+```
+
+### Horaires du Chat
+
+Dans `js/chat.js`, ligne 10 :
+```javascript
+availableHours: {
+  start: 8,  // 8h00
+  end: 17    // 17h00
+}
+```
+
+## 📱 PWA (Progressive Web App)
+
+Le site est configuré comme PWA :
+- ✅ `manifest.json` présent
+- ✅ Service Worker configuré
+- ✅ Icons 192x192 et 512x512
+- ✅ Mode hors ligne possible
+
+## 🚀 Déploiement
+
+### Firebase Hosting (Recommandé)
+
+```bash
+# Installer Firebase CLI
+npm install -g firebase-tools
+
+# Se connecter
+firebase login
+
+# Initialiser le projet
+firebase init hosting
+
+# Déployer
+firebase deploy
+```
+
+### GitHub Pages
+
+```bash
+# Pousser vers GitHub
+git add .
+git commit -m "Deploy website"
+git push origin main
+
+# Activer GitHub Pages dans Settings > Pages
+```
+
+## 🧪 Tests à Effectuer
+
+### Checklist de Test
+
+- [ ] Navigation : Menu fonctionne sur mobile/desktop
+- [ ] Formulaires : Validation et envoi
+- [ ] Cookies : Bannière s'affiche, choix sauvegardés
+- [ ] Chat : Messages envoyés, historique sauvegardé
+- [ ] Animations : Sections apparaissent au scroll
+- [ ] Compteurs : Nombres s'animent
+- [ ] Responsive : Test sur mobile, tablet, desktop
+- [ ] Accessibilité : Navigation clavier, lecteur d'écran
+- [ ] Performance : Lighthouse score > 90
+- [ ] SEO : Vérifier avec Lighthouse
+
+## 🐛 Débogage
+
+### Console JavaScript
+
+```javascript
+// Vérifier le namespace global
+console.log(window.EducaPsy);
+
+// Debug des cookies
+window.EducaPsy.CookieConsent.getPreferences();
+
+// Debug du chat
+window.EducaPsy.LiveChat.messageHistory;
+
+// Voir les utilitaires
+window.EducaPsy.Utils.log('Test', { data: 'exemple' });
+```
+
+## 📈 Optimisations Futures
+
+### Performance
 - [ ] Minification CSS/JS
-- [ ] CDN pour images
-- [ ] Service Worker (PWA)
-- [ ] Preload des ressources critiques
+- [ ] Compression images (WebP)
+- [ ] CDN pour assets statiques
+- [ ] Code splitting
 
-## 📱 Responsive Design
+### Fonctionnalités
+- [ ] Traduction multilingue complète
+- [ ] Backend pour le chat (WebSocket)
+- [ ] Paiement en ligne (Stripe/Moncash)
+- [ ] Dashboard admin
 
-Le site est entièrement responsive avec 3 breakpoints :
+### SEO
+- [ ] Sitemap XML
+- [ ] robots.txt
+- [ ] Rich snippets
+- [ ] AMP pages
 
-- **Mobile** : < 768px
-- **Tablette** : 768px - 1024px
-- **Desktop** : > 1024px
+## 🔒 Sécurité
 
-### Points d'attention mobile
-- Menu hamburger
-- Formulaires optimisés
-- Images adaptatives
-- Touch-friendly (boutons > 44px)
+### Headers Recommandés
 
-## 🌐 Support Navigateurs
+Configurer dans votre serveur :
 
-### Navigateurs Supportés
-- Chrome (dernières 2 versions)
-- Firefox (dernières 2 versions)
-- Safari (dernières 2 versions)
-- Edge (dernières 2 versions)
+```
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com;
+X-Frame-Options: DENY
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+```
 
-### Compatibilité Mobile
-- iOS Safari 12+
-- Chrome Mobile
-- Samsung Internet
+## 📞 Support
 
-## 🔧 Maintenance
-
-### Mises à Jour Régulières
-- [ ] Actualiser le blog hebdomadairement
-- [ ] Vérifier les formulaires mensuellement
-- [ ] Mettre à jour les statistiques trimestriellement
-- [ ] Renouveler le certificat SSL annuellement
-- [ ] Auditer le SEO semestriellement
-
-### Monitoring
-- Google Analytics (à installer)
-- Google Search Console
-- Uptime monitoring
-
-## 📞 Contact
-
-**Educa-Psy**
-- 📧 Email : educapsyhaiti@gmail.com
-- 📱 Téléphone : +509 3685-9684
-- 🌐 Site Web : https://www.educapsy.ht (à adapter)
-- 📍 Adresse : Port-au-Prince, Haïti
+Pour toute question technique :
+- Email : educapsyhaiti@gmail.com
+- Tél : +509 3685-9684
 
 ## 📄 Licence
 
-© 2026 Educa-Psy. Tous droits réservés.
+Copyright © 2026 Educa-Psy. Tous droits réservés.
 
 ---
 
+## 🎉 Améliorations Apportées
+
+### Depuis la Version Originale
+
+1. **Sécurité**
+   - ✅ Protection XSS dans tous les scripts
+   - ✅ Validation des données cookies
+   - ✅ Échappement HTML systématique
+
+2. **Performance**
+   - ✅ Code JavaScript optimisé
+   - ✅ CSS modulaire et réutilisable
+   - ✅ Pas de duplication de code
+   - ✅ Event delegation
+
+3. **Accessibilité**
+   - ✅ ARIA complet
+   - ✅ Navigation clavier
+   - ✅ Focus trap dans modals
+   - ✅ Touches Escape fonctionnelles
+
+4. **Maintenabilité**
+   - ✅ Code bien commenté
+   - ✅ Structure modulaire
+   - ✅ Namespace global évite les conflits
+   - ✅ Fonctions réutilisables
+
+5. **UX**
+   - ✅ Animations fluides
+   - ✅ Feedback utilisateur
+   - ✅ Notifications toast
+   - ✅ Persistance des données
+
+---
+
+**Version** : 2.0  
 **Dernière mise à jour** : Janvier 2026  
-**Version** : 1.0.0Education et Psychologie
+**Auteur** : Équipe Educa-Psy
