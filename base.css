@@ -1,0 +1,268 @@
+/* ====================================
+   BASE.CSS - Variables, Reset & Typographie
+   ==================================== */
+
+/* Variables CSS */
+:root {
+  /* Couleurs principales */
+  --bleu-principal: #0066CC;
+  --bleu-fonce: #004999;
+  --bleu-clair: #E6F2FF;
+  --gris-fonce: #333333;
+  --gris-moyen: #666666;
+  --blanc: #FFFFFF;
+  
+  /* Couleurs d'état */
+  --success: #28a745;
+  --warning: #ffc107;
+  --error: #dc3545;
+  --info: #17a2b8;
+  
+  /* Espacements */
+  --padding-mobile: 16px;
+  --padding-tablet: 24px;
+  --padding-desktop: 32px;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.6s ease;
+  
+  /* Ombres */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 8px 40px rgba(0, 0, 0, 0.3);
+  
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 50px;
+  
+  /* Z-index layers */
+  --z-dropdown: 1000;
+  --z-sticky: 1000;
+  --z-modal: 9999;
+  --z-chat: 10000;
+}
+
+/* Reset CSS */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* HTML & Body */
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body { 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
+  line-height: 1.6;
+  background-color: var(--blanc);
+  color: var(--gris-fonce);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Typographie */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+}
+
+h1 { font-size: 2rem; }      /* 32px */
+h2 { font-size: 1.75rem; }   /* 28px */
+h3 { font-size: 1.5rem; }    /* 24px */
+h4 { font-size: 1.25rem; }   /* 20px */
+h5 { font-size: 1.125rem; }  /* 18px */
+h6 { font-size: 1rem; }      /* 16px */
+
+p {
+  margin-bottom: 1em;
+}
+
+/* Liens */
+a {
+  color: var(--bleu-principal);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--bleu-fonce);
+}
+
+a:focus-visible {
+  outline: 3px solid var(--bleu-principal);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Listes */
+ul, ol {
+  list-style-position: inside;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Boutons */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: inherit;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--bleu-principal);
+  outline-offset: 2px;
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--bleu-principal);
+  outline-offset: 2px;
+}
+
+/* Accessibilité - Skip to main content */
+.skip-to-main {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 1em;
+  background-color: var(--bleu-principal);
+  color: var(--blanc);
+  text-decoration: none;
+}
+
+.skip-to-main:focus {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Utility classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--padding-mobile);
+  width: 100%;
+}
+
+/* Responsive typography */
+@media (min-width: 768px) {
+  :root {
+    --padding-mobile: var(--padding-tablet);
+  }
+  
+  h1 { font-size: 2.5rem; }    /* 40px */
+  h2 { font-size: 2rem; }      /* 32px */
+  h3 { font-size: 1.75rem; }   /* 28px */
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --padding-mobile: var(--padding-desktop);
+  }
+  
+  h1 { font-size: 3rem; }      /* 48px */
+  h2 { font-size: 2.25rem; }   /* 36px */
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Dark mode support (optionnel) */
+@media (prefers-color-scheme: dark) {
+  /* Décommenter si vous voulez supporter le mode sombre
+  :root {
+    --blanc: #1a1a1a;
+    --gris-fonce: #e0e0e0;
+    --gris-moyen: #b0b0b0;
+    --bleu-clair: rgba(0, 102, 204, 0.2);
+  }
+  
+  body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+  }
+  */
+}
+
+/* Print styles */
+@media print {
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+  
+  img {
+    page-break-inside: avoid;
+  }
+  
+  h2, h3 {
+    page-break-after: avoid;
+  }
+}
