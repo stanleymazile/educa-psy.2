@@ -6,15 +6,75 @@
   <meta name="description" content="Découvrez l'histoire, la mission et l'équipe d'Educa-Psy, organisation dédiée à l'éducation en Haïti">
   <meta name="keywords" content="présentation, Educa-Psy, mission, vision, équipe, Haïti">
   <title>Présentation - Educa-Psy</title>
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.educa-psy.web.app/presentation.html">
+  <meta property="og:title" content="Présentation - Educa-Psy">
+  <meta property="og:description" content="Une organisation engagée pour l'avenir des enfants haïtiens">
+  <meta property="og:image" content="https://www.educa-psy.web.app/images/Logo.webp">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.educa-psy.web.app/presentation.html">
+  
+  <!-- Favicon & PWA -->
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0066CC">
+  <link rel="apple-touch-icon" href="/images/icon-192x192.png">
+  
+  <!-- CSS - Fichiers séparés et optimisés -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/presentation.css">
+  
+  <!-- Schema.org markup pour l'organisation -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NGO",
+    "name": "Educa-Psy",
+    "foundingDate": "2020",
+    "description": "Organisation dédiée à l'éducation et au bien-être psychologique des enfants en Haïti",
+    "url": "https://www.educa-psy.web.app",
+    "logo": "https://www.educa-psy.web.app/images/Logo.webp",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Port-au-Prince",
+      "addressCountry": "HT"
+    },
+    "employee": [
+      {
+        "@type": "Person",
+        "name": "Dr. Jean-Baptiste Pierre",
+        "jobTitle": "Psychologue Clinicien"
+      },
+      {
+        "@type": "Person",
+        "name": "Marie-Claire Joseph",
+        "jobTitle": "Coordinatrice Pédagogique"
+      },
+      {
+        "@type": "Person",
+        "name": "Paul Augustin",
+        "jobTitle": "Directeur Général"
+      }
+    ],
+    "numberOfEmployees": {
+      "@type": "QuantitativeValue",
+      "value": 15
+    }
+  }
+  </script>
 </head>
 
 <body>
+  <a href="#main-content" class="skip-to-main">Aller au contenu principal</a>
 
   <header id="header">
     <div id="logoTitre">
-      <img src="images/Logo.webp" alt="Logo Educa-Psy - Éducation et psychologie en Haïti" id="logo"> 
+      <img src="images/Logo.webp" alt="Logo Educa-Psy - Éducation et psychologie en Haïti" id="logo" width="32" height="32"> 
       <h2 id="titre">
         <a href="index.html">Educa-Psy</a>
       </h2>
@@ -32,20 +92,25 @@
         <button id="btnMenu" aria-label="Menu de navigation" aria-expanded="false">☰</button>
         <nav id="liens-deroulants" aria-label="Navigation principale">
           <a href="index.html" class="item-menu">Accueil</a>
-          <a href="presentation.html" class="item-menu">Présentation</a>
+          <a href="presentation.html" class="item-menu" aria-current="page">Présentation</a>
           <a href="services.html" class="item-menu">Services</a>
+          <a href="videos.html" class="item-menu">Vidéos</a>
+          <a href="blog.html" class="item-menu">Blog</a>
           <a href="contact.html" class="item-menu">Contact</a>
+          <a href="espace-membre.html" class="item-menu">Espace Membre</a>
         </nav>
       </div>
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
+    <!-- Hero Section -->
     <section class="hero hero-presentation">
       <h1 class="hero-titre">Qui Sommes-Nous ?</h1>
       <p class="hero-description">Une organisation engagée pour l'avenir des enfants haïtiens</p>
     </section>
 
+    <!-- Notre Histoire -->
     <section class="section-histoire">
       <div class="container">
         <h2>Notre Histoire</h2>
@@ -57,137 +122,152 @@
       </div>
     </section>
 
+    <!-- Mission & Vision -->
     <section class="section-mission-vision">
       <div class="container">
         <div class="mission-vision-grid">
-          <div class="mission-card">
-            <h2>🎯 Notre Mission</h2>
+          <article class="mission-card">
+            <h2><span aria-hidden="true">🎯</span> Notre Mission</h2>
             <p>Promouvoir l'éducation de qualité et le bien-être psychologique des enfants haïtiens en offrant des services accessibles, adaptés et professionnels. Nous croyons fermement que chaque enfant a droit à l'éducation et au soutien nécessaire pour réaliser son plein potentiel.</p>
-          </div>
+          </article>
 
-          <div class="vision-card">
-            <h2>🌟 Notre Vision</h2>
+          <article class="vision-card">
+            <h2><span aria-hidden="true">🌟</span> Notre Vision</h2>
             <p>Construire une Haïti où chaque enfant, quel que soit son milieu d'origine, a accès à une éducation de qualité et au soutien psychologique nécessaire pour devenir un adulte épanoui, confiant et contributif à la société.</p>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
+    <!-- Nos Valeurs -->
     <section class="section-valeurs">
       <div class="container">
         <h2>Nos Valeurs</h2>
         <div class="valeurs-grid">
-          <div class="valeur-box">
-            <div class="valeur-icone">💙</div>
+          <article class="valeur-box">
+            <div class="valeur-icone" aria-hidden="true">💙</div>
             <h3>Bienveillance</h3>
             <p>Nous accueillons chaque enfant et chaque famille avec empathie, respect et sans jugement.</p>
-          </div>
+          </article>
 
-          <div class="valeur-box">
-            <div class="valeur-icone">⭐</div>
+          <article class="valeur-box">
+            <div class="valeur-icone" aria-hidden="true">⭐</div>
             <h3>Excellence</h3>
             <p>Nous nous engageons à fournir des services de la plus haute qualité grâce à des professionnels qualifiés.</p>
-          </div>
+          </article>
 
-          <div class="valeur-box">
-            <div class="valeur-icone">🤝</div>
+          <article class="valeur-box">
+            <div class="valeur-icone" aria-hidden="true">🤝</div>
             <h3>Accessibilité</h3>
             <p>Nous adaptons nos tarifs pour rendre nos services accessibles à toutes les familles.</p>
-          </div>
+          </article>
 
-          <div class="valeur-box">
-            <div class="valeur-icone">🌱</div>
+          <article class="valeur-box">
+            <div class="valeur-icone" aria-hidden="true">🌱</div>
             <h3>Développement</h3>
             <p>Nous croyons au potentiel de chaque enfant et travaillons pour le révéler.</p>
-          </div>
+          </article>
 
-          <div class="valeur-box">
-            <div class="valeur-icone">🔗</div>
+          <article class="valeur-box">
+            <div class="valeur-icone" aria-hidden="true">🔗</div>
             <h3>Collaboration</h3>
             <p>Nous travaillons en partenariat avec les familles, les écoles et la communauté.</p>
-          </div>
+          </article>
 
-          <div class="valeur-box">
-            <div class="valeur-icone">🎓</div>
+          <article class="valeur-box">
+            <div class="valeur-icone" aria-hidden="true">🎓</div>
             <h3>Innovation</h3>
             <p>Nous adoptons des approches modernes et adaptées au contexte haïtien.</p>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
+    <!-- Notre Équipe -->
     <section class="section-equipe">
       <div class="container">
         <h2>Notre Équipe</h2>
         <p class="equipe-intro">Une équipe multidisciplinaire de professionnels passionnés et engagés pour la réussite de chaque enfant.</p>
         
         <div class="equipe-grid">
-          <div class="membre-card">
-            <img src="images/Equipe1.webp" alt="Dr. Jean-Baptiste Pierre" class="membre-photo">
+          <article class="membre-card">
+            <img src="images/Equipe1.webp" alt="Photo de Dr. Jean-Baptiste Pierre" class="membre-photo" width="120" height="120" loading="lazy">
             <h3>Dr. Jean-Baptiste Pierre</h3>
             <p class="membre-role">Psychologue Clinicien</p>
             <p class="membre-bio">15 ans d'expérience en psychologie infantile. Spécialiste des troubles d'apprentissage.</p>
-          </div>
+          </article>
 
-          <div class="membre-card">
-            <img src="images/Equipe2.webp" alt="Marie-Claire Joseph" class="membre-photo">
+          <article class="membre-card">
+            <img src="images/Equipe2.webp" alt="Photo de Marie-Claire Joseph" class="membre-photo" width="120" height="120" loading="lazy">
             <h3>Marie-Claire Joseph</h3>
             <p class="membre-role">Coordinatrice Pédagogique</p>
             <p class="membre-bio">Experte en sciences de l'éducation avec 12 ans d'expérience dans l'enseignement.</p>
-          </div>
+          </article>
 
-          <div class="membre-card">
-            <img src="images/Equipe3.webp" alt="Paul Augustin" class="membre-photo">
+          <article class="membre-card">
+            <img src="images/Equipe3.webp" alt="Photo de Paul Augustin" class="membre-photo" width="120" height="120" loading="lazy">
             <h3>Paul Augustin</h3>
             <p class="membre-role">Directeur Général</p>
             <p class="membre-bio">Fondateur d'Educa-Psy, passionné par l'éducation et le développement social.</p>
-          </div>
+          </article>
 
-          <div class="membre-card">
-            <img src="images/Equipe4.webp" alt="Dr. Sophie Charlot" class="membre-photo">
+          <article class="membre-card">
+            <img src="images/Equipe4.webp" alt="Photo de Dr. Sophie Charlot" class="membre-photo" width="120" height="120" loading="lazy">
             <h3>Dr. Sophie Charlot</h3>
             <p class="membre-role">Psychologue pour Enfants</p>
             <p class="membre-bio">Spécialisée en thérapie comportementale et émotionnelle des enfants.</p>
-          </div>
+          </article>
 
-          <div class="membre-card">
-            <img src="images/Equipe5.webp" alt="Jacques Mentor" class="membre-photo">
+          <article class="membre-card">
+            <img src="images/Equipe5.webp" alt="Photo de Jacques Mentor" class="membre-photo" width="120" height="120" loading="lazy">
             <h3>Jacques Mentor</h3>
             <p class="membre-role">Éducateur Spécialisé</p>
             <p class="membre-bio">Expert en pédagogie différenciée et accompagnement des élèves en difficulté.</p>
-          </div>
+          </article>
 
-          <div class="membre-card">
-            <img src="images/Equipe6.webp" alt="Anne-Marie Beauvoir" class="membre-photo">
+          <article class="membre-card">
+            <img src="images/Equipe6.webp" alt="Photo de Anne-Marie Beauvoir" class="membre-photo" width="120" height="120" loading="lazy">
             <h3>Anne-Marie Beauvoir</h3>
             <p class="membre-role">Responsable Partenariats</p>
             <p class="membre-bio">Développe les collaborations avec les écoles et organisations partenaires.</p>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
+    <!-- Nos Partenaires -->
     <section class="section-partenaires">
       <div class="container">
         <h2>Nos Partenaires</h2>
         <p>Educa-Psy collabore avec de nombreuses écoles, organisations et institutions pour maximiser son impact :</p>
         <div class="partenaires-liste">
-          <div class="partenaire-item">🏫 Plus de 20 écoles primaires et secondaires</div>
-          <div class="partenaire-item">🏥 Centres de santé communautaires</div>
-          <div class="partenaire-item">🎓 Universités locales pour la formation</div>
-          <div class="partenaire-item">🤝 ONG internationales de développement</div>
+          <div class="partenaire-item">
+            <span aria-hidden="true">🏫</span>
+            <span>Plus de 20 écoles primaires et secondaires</span>
+          </div>
+          <div class="partenaire-item">
+            <span aria-hidden="true">🏥</span>
+            <span>Centres de santé communautaires</span>
+          </div>
+          <div class="partenaire-item">
+            <span aria-hidden="true">🎓</span>
+            <span>Universités locales pour la formation</span>
+          </div>
+          <div class="partenaire-item">
+            <span aria-hidden="true">🤝</span>
+            <span>ONG internationales de développement</span>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- Call to Action -->
     <section class="section-cta">
-      <div class="container">
-        <h2>Rejoignez Notre Mission</h2>
-        <p>Ensemble, construisons un avenir meilleur pour les enfants d'Haïti</p>
-        <div class="cta-buttons">
-          <a href="don.html" class="btn-primary">Faire un don</a>
-          <a href="contact.html" class="btn-secondary">Nous contacter</a>
-        </div>
+      <h2>Rejoignez Notre Mission</h2>
+      <p>Ensemble, construisons un avenir meilleur pour les enfants d'Haïti</p>
+      <div class="cta-buttons">
+        <a href="don.html" class="btn btn-primary">Faire un don</a>
+        <a href="contact.html" class="btn btn-outline">Nous contacter</a>
       </div>
     </section>
   </main>
@@ -205,6 +285,10 @@
           <li><a href="index.html">Accueil</a></li>
           <li><a href="presentation.html">Présentation</a></li>
           <li><a href="services.html">Services</a></li>
+          <li><a href="videos.html">Vidéos</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="documents.html">Documents</a></li>
+          <li><a href="temoignages.html">Témoignages</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="don.html">Faire un don</a></li>
         </ul>
@@ -222,7 +306,11 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
-
+  <!-- Scripts optimisés - Ordre important -->
+  <script src="js/utils.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/cookies.js"></script>
+  <script src="js/chat.js"></script>
 </body>
 </html>
