@@ -1,0 +1,269 @@
+/* ====================================
+   LAYOUT.CSS - Header, Footer & Main Layout
+   ==================================== */
+
+/* ====================================
+   HEADER
+   ==================================== */
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px var(--padding-mobile);
+  background-color: var(--blanc);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+}
+
+#logoTitre {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#logo {
+  height: 32px;
+  width: auto;
+}
+
+#titre {
+  margin: 0;
+  font-size: 16px;
+}
+
+#titre a {
+  color: var(--bleu-principal);
+  font-weight: bold;
+  transition: color var(--transition-normal);
+}
+
+#titre a:hover {
+  color: var(--bleu-fonce);
+}
+
+#langueMenu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#select-langue {
+  font-size: 13px;
+  padding: 6px 10px;
+  background: var(--blanc);
+  border: 2px solid var(--bleu-principal);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--bleu-principal);
+  font-weight: bold;
+  transition: all var(--transition-normal);
+}
+
+#select-langue:hover {
+  background-color: var(--bleu-clair);
+}
+
+#btnMenu {
+  background-color: var(--bleu-principal);
+  color: var(--blanc);
+  font-weight: bold;
+  border-radius: var(--radius-sm);
+  font-size: 18px;
+  padding: 8px 14px;
+  transition: all var(--transition-normal);
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#btnMenu:hover,
+#btnMenu:focus {
+  background-color: var(--bleu-fonce);
+  transform: scale(1.05);
+}
+
+/* Menu déroulant */
+#liens-deroulants {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: var(--padding-mobile);
+  flex-direction: column;
+  background-color: var(--blanc);
+  padding: 8px 0;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  min-width: 200px;
+}
+
+#liens-deroulants.actif {
+  display: flex;
+  animation: slideDown var(--transition-normal);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.item-menu {
+  color: var(--gris-fonce);
+  font-weight: 500;
+  padding: 14px 20px;
+  transition: all var(--transition-fast);
+  font-size: 15px;
+}
+
+.item-menu:hover,
+.item-menu:focus {
+  background-color: var(--bleu-clair);
+  color: var(--bleu-principal);
+}
+
+.item-menu[aria-current="page"] {
+  background-color: var(--bleu-clair);
+  color: var(--bleu-principal);
+  font-weight: 700;
+}
+
+/* ====================================
+   MAIN CONTENT
+   ==================================== */
+
+main {
+  flex: 1;
+  width: 100%;
+}
+
+/* ====================================
+   FOOTER
+   ==================================== */
+
+.footer {
+  background: var(--gris-fonce);
+  color: var(--blanc);
+  padding: 32px var(--padding-mobile) 20px;
+  margin-top: auto;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.footerHaut h3,
+.footerMilieu h3,
+.footerBas h3 {
+  color: var(--bleu-clair);
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.footerHaut p,
+.footerBas p {
+  line-height: 1.6;
+  color: #CCCCCC;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.footerMilieu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footerMilieu ul li {
+  margin-bottom: 10px;
+}
+
+.footerMilieu a,
+.footerBas a {
+  color: var(--blanc);
+  transition: color var(--transition-normal);
+  font-size: 14px;
+}
+
+.footerMilieu a:hover,
+.footerMilieu a:focus,
+.footerBas a:hover,
+.footerBas a:focus {
+  color: var(--bleu-clair);
+}
+
+.footer-copyright {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #555555;
+  color: #CCCCCC;
+  font-size: 13px;
+}
+
+.footer-copyright a {
+  color: var(--bleu-clair);
+}
+
+/* ====================================
+   RESPONSIVE - TABLET
+   ==================================== */
+
+@media (min-width: 768px) {
+  #header {
+    padding: 16px var(--padding-tablet);
+  }
+
+  #logo {
+    height: 40px;
+  }
+
+  #titre a {
+    font-size: 20px;
+  }
+
+  #select-langue {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .footer-content {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+}
+
+/* ====================================
+   RESPONSIVE - DESKTOP
+   ==================================== */
+
+@media (min-width: 1024px) {
+  #liens-deroulants {
+    /* Sur desktop, le menu peut être horizontal si désiré */
+    /* Décommenter pour menu horizontal :
+    position: static;
+    display: flex;
+    flex-direction: row;
+    box-shadow: none;
+    background: transparent;
+    padding: 0;
+    gap: 8px;
+    */
+  }
+  
+  /* Décommenter pour masquer le bouton hamburger sur desktop :
+  #btnMenu {
+    display: none;
+  }
+  */
+}
