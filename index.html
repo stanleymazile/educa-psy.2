@@ -26,30 +26,24 @@
   <link rel="canonical" href="https://www.educa-psy.web.app/">
   
   <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-T757VLNM');</script>
-<!-- End Google Tag Manager -->
-  <!-- Favicon -->
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-
-  <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#0066CC">
-<link rel="apple-touch-icon" href="/images/icon-192x192.png">
-
-
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-T757VLNM');</script>
+  <!-- End Google Tag Manager -->
+  
   <!-- Favicon & PWA -->
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#0066CC">
-  <link rel="apple-touch-icon" href="images/icon-192x192.png">
+  <link rel="apple-touch-icon" href="/images/icon-192x192.png">
   
-  <!-- CSS - IMPORTANT: Inclure les 2 fichiers -->
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="styles-suite.css">
-</head>
+  <!-- CSS - Fichiers séparés et optimisés -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/home.css">
   
   <!-- Schema.org markup pour Google -->
   <script type="application/ld+json">
@@ -74,9 +68,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     },
     "sameAs": [
       "https://www.facebook.com/educapsy",
-      "https://www.instagram.com/educapsy"
+      "https://www.instagram.com/educapsy",
       "https://www.youtube.com/@educapsy"
-    
     ]
   }
   </script>
@@ -84,13 +77,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <body>
   <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T757VLNM"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T757VLNM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <header id="header">
     <div id="logoTitre">
-      <img src="images/Logo.webp" alt="Logo Educa-Psy - Éducation et psychologie en Haïti" id="logo"> 
+      <img src="images/Logo.webp" alt="Logo Educa-Psy - Éducation et psychologie en Haïti" id="logo" width="32" height="32"> 
       <h2 id="titre">
         <a href="index.html">Educa-Psy</a>
       </h2>
@@ -107,7 +100,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div id="menuContainer">
         <button id="btnMenu" aria-label="Menu de navigation" aria-expanded="false">☰</button>
         <nav id="liens-deroulants" aria-label="Navigation principale">
-          <a href="index.html" class="item-menu">Accueil</a>
+          <a href="index.html" class="item-menu" aria-current="page">Accueil</a>
           <a href="presentation.html" class="item-menu">Présentation</a>
           <a href="services.html" class="item-menu">Services</a>
           <a href="videos.html" class="item-menu">Vidéos</a>
@@ -116,7 +109,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <a href="espace-membre.html" class="item-menu">Espace Membre</a>
         </nav>
       </div>
-     
     </div>
   </header>
 
@@ -183,7 +175,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="footerMilieu">
         <h3>Liens rapides</h3>
-         <ul>
+        <ul>
           <li><a href="index.html">Accueil</a></li>
           <li><a href="presentation.html">Présentation</a></li>
           <li><a href="services.html">Services</a></li>
@@ -193,7 +185,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li><a href="temoignages.html">Témoignages</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="don.html">Faire un don</a></li>
-           </ul>   
+        </ul>   
       </div>
 
       <div class="footerBas">
@@ -208,17 +200,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </footer>
 
-  <!-- SCRIPTS - IMPORTANT: Inclure dans toutes les pages -->
-  <script src="script.js"></script>
-  <script src="cookies.js"></script>
-  <script src="chat.js"></script>
-  
-  <!-- Scripts spécifiques (décommenter si nécessaire) -->
-  <!-- <script src="don.js"></script> -->
-  <!-- <script src="blog.js"></script> -->
-  <!-- <script src="videos.js"></script> -->
-  <!-- <script src="membre.js"></script> -->
-  <!-- <script src="temoignages.js"></script> -->
+  <!-- Scripts optimisés - Ordre important -->
+  <script src="js/utils.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/cookies.js"></script>
+  <script src="js/chat.js"></script>
   
   <!-- Service Worker pour PWA -->
   <script>
@@ -228,16 +215,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         .catch(err => console.log('Erreur Service Worker', err));
     }
   </script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
