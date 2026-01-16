@@ -6,16 +6,69 @@
   <meta name="description" content="Contactez Educa-Psy pour toute question ou demande d'information sur nos services">
   <meta name="keywords" content="contact, Educa-Psy, Haïti, rendez-vous, information">
   <title>Contact - Educa-Psy</title>
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.educa-psy.web.app/contact.html">
+  <meta property="og:title" content="Contactez Educa-Psy">
+  <meta property="og:description" content="Nous sommes à votre écoute pour répondre à toutes vos questions">
+  <meta property="og:image" content="https://www.educa-psy.web.app/images/Logo.webp">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.educa-psy.web.app/contact.html">
+  
+  <!-- Favicon & PWA -->
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="styles-suite.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0066CC">
+  <link rel="apple-touch-icon" href="/images/icon-192x192.png">
+  
+  <!-- CSS - Fichiers séparés et optimisés -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/contact.css">
+  
+  <!-- Schema.org markup pour les coordonnées -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "mainEntity": {
+      "@type": "NGO",
+      "name": "Educa-Psy",
+      "telephone": "+509-3685-9684",
+      "email": "educapsyhaiti@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Port-au-Prince",
+        "addressCountry": "HT"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:00",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "09:00",
+          "closes": "13:00"
+        }
+      ]
+    }
+  }
+  </script>
 </head>
 
 <body>
+  <a href="#main-content" class="skip-to-main">Aller au contenu principal</a>
 
   <header id="header">
     <div id="logoTitre">
-      <img src="images/Logo.webp" alt="Logo Educa-Psy - Éducation et psychologie en Haïti" id="logo"> 
+      <img src="images/Logo.webp" alt="Logo Educa-Psy - Éducation et psychologie en Haïti" id="logo" width="32" height="32"> 
       <h2 id="titre">
         <a href="index.html">Educa-Psy</a>
       </h2>
@@ -35,33 +88,40 @@
           <a href="index.html" class="item-menu">Accueil</a>
           <a href="presentation.html" class="item-menu">Présentation</a>
           <a href="services.html" class="item-menu">Services</a>
-          <a href="contact.html" class="item-menu">Contact</a>
+          <a href="videos.html" class="item-menu">Vidéos</a>
+          <a href="blog.html" class="item-menu">Blog</a>
+          <a href="contact.html" class="item-menu" aria-current="page">Contact</a>
+          <a href="espace-membre.html" class="item-menu">Espace Membre</a>
         </nav>
       </div>
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
+    <!-- Hero Section -->
     <section class="hero hero-contact">
       <h1 class="hero-titre">Contactez-Nous</h1>
       <p class="hero-description">Nous sommes à votre écoute pour répondre à toutes vos questions</p>
     </section>
 
+    <!-- Introduction -->
     <section class="section-contact-intro">
       <div class="container">
         <p class="contact-intro-text">Notre équipe est disponible pour vous renseigner sur nos services, prendre rendez-vous ou simplement échanger sur les besoins de votre enfant. N'hésitez pas à nous contacter !</p>
       </div>
     </section>
 
+    <!-- Contenu Principal : Info + Formulaire -->
     <section class="section-contact-content">
       <div class="container">
         <div class="contact-grid">
           
-          <div class="contact-info">
+          <!-- Informations de Contact -->
+          <aside class="contact-info">
             <h2>Nos Coordonnées</h2>
             
             <div class="info-item">
-              <div class="info-icone">📧</div>
+              <div class="info-icone" aria-hidden="true">📧</div>
               <div class="info-details">
                 <h3>Email</h3>
                 <a href="mailto:educapsyhaiti@gmail.com">educapsyhaiti@gmail.com</a>
@@ -70,7 +130,7 @@
             </div>
 
             <div class="info-item">
-              <div class="info-icone">📱</div>
+              <div class="info-icone" aria-hidden="true">📱</div>
               <div class="info-details">
                 <h3>Téléphone</h3>
                 <a href="tel:+50936859684">+509 3685-9684</a>
@@ -79,7 +139,7 @@
             </div>
 
             <div class="info-item">
-              <div class="info-icone">📍</div>
+              <div class="info-icone" aria-hidden="true">📍</div>
               <div class="info-details">
                 <h3>Adresse</h3>
                 <p>Port-au-Prince, Haïti</p>
@@ -88,7 +148,7 @@
             </div>
 
             <div class="info-item">
-              <div class="info-icone">🕐</div>
+              <div class="info-icone" aria-hidden="true">🕐</div>
               <div class="info-details">
                 <h3>Horaires</h3>
                 <p>Lundi - Vendredi: 8h00 - 17h00</p>
@@ -100,35 +160,72 @@
             <div class="reseaux-sociaux">
               <h3>Suivez-nous</h3>
               <div class="social-links">
-                <a href="#" class="social-link" aria-label="Facebook">📘 Facebook</a>
-                <a href="#" class="social-link" aria-label="Instagram">📷 Instagram</a>
-                <a href="#" class="social-link" aria-label="WhatsApp">💬 WhatsApp</a>
+                <a href="https://www.facebook.com/educapsy" class="social-link" target="_blank" rel="noopener" aria-label="Suivez-nous sur Facebook">
+                  <span aria-hidden="true">📘</span> Facebook
+                </a>
+                <a href="https://www.instagram.com/educapsy" class="social-link" target="_blank" rel="noopener" aria-label="Suivez-nous sur Instagram">
+                  <span aria-hidden="true">📷</span> Instagram
+                </a>
+                <a href="https://wa.me/50936859684" class="social-link" target="_blank" rel="noopener" aria-label="Contactez-nous sur WhatsApp">
+                  <span aria-hidden="true">💬</span> WhatsApp
+                </a>
               </div>
             </div>
-          </div>
+          </aside>
 
+          <!-- Formulaire de Contact -->
           <div class="contact-form-container">
             <h2>Envoyez-nous un message</h2>
-            <form class="contact-form" id="contactForm">
+            <form class="contact-form" id="contactForm" novalidate>
               
               <div class="form-group">
-                <label for="nom">Nom complet *</label>
-                <input type="text" id="nom" name="nom" required placeholder="Votre nom">
+                <label for="nom">Nom complet <span class="required">*</span></label>
+                <input 
+                  type="text" 
+                  id="nom" 
+                  name="nom" 
+                  required 
+                  placeholder="Votre nom"
+                  autocomplete="name"
+                  minlength="2"
+                  maxlength="100"
+                  aria-required="true"
+                >
+                <span class="form-error" id="nom-error" role="alert"></span>
               </div>
 
               <div class="form-group">
-                <label for="email">Email *</label>
-                <input type="email" id="email" name="email" required placeholder="votre@email.com">
+                <label for="email">Email <span class="required">*</span></label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  required 
+                  placeholder="votre@email.com"
+                  autocomplete="email"
+                  aria-required="true"
+                >
+                <span class="form-error" id="email-error" role="alert"></span>
               </div>
 
               <div class="form-group">
-                <label for="telephone">Téléphone *</label>
-                <input type="tel" id="telephone" name="telephone" required placeholder="+509 XXXX-XXXX">
+                <label for="telephone">Téléphone <span class="required">*</span></label>
+                <input 
+                  type="tel" 
+                  id="telephone" 
+                  name="telephone" 
+                  required 
+                  placeholder="+509 XXXX-XXXX"
+                  autocomplete="tel"
+                  pattern="[\+]?[0-9\s\-\(\)]+"
+                  aria-required="true"
+                >
+                <span class="form-error" id="telephone-error" role="alert"></span>
               </div>
 
               <div class="form-group">
-                <label for="sujet">Sujet *</label>
-                <select id="sujet" name="sujet" required>
+                <label for="sujet">Sujet <span class="required">*</span></label>
+                <select id="sujet" name="sujet" required aria-required="true">
                   <option value="">Sélectionnez un sujet</option>
                   <option value="information">Demande d'information</option>
                   <option value="rendez-vous">Prise de rendez-vous</option>
@@ -136,62 +233,78 @@
                   <option value="don">Don et soutien</option>
                   <option value="autre">Autre</option>
                 </select>
+                <span class="form-error" id="sujet-error" role="alert"></span>
               </div>
 
               <div class="form-group">
-                <label for="message">Message *</label>
-                <textarea id="message" name="message" rows="6" required placeholder="Décrivez votre demande..."></textarea>
+                <label for="message">Message <span class="required">*</span></label>
+                <textarea 
+                  id="message" 
+                  name="message" 
+                  rows="6" 
+                  required 
+                  placeholder="Décrivez votre demande..."
+                  minlength="10"
+                  maxlength="1000"
+                  aria-required="true"
+                ></textarea>
+                <span class="form-error" id="message-error" role="alert"></span>
               </div>
 
-              <button type="submit" class="btn-submit">Envoyer le message</button>
+              <button type="submit" class="btn btn-primary btn-block">
+                <span class="btn-text">Envoyer le message</span>
+                <span class="btn-loading" style="display: none;">Envoi en cours...</span>
+              </button>
               
-              <p class="form-note">* Champs obligatoires</p>
+              <p class="form-note"><span class="required">*</span> Champs obligatoires</p>
             </form>
 
-            <div id="formMessage" class="form-message"></div>
+            <div id="formMessage" class="form-message" role="status" aria-live="polite"></div>
           </div>
 
         </div>
       </div>
     </section>
 
+    <!-- FAQ -->
     <section class="section-faq">
       <div class="container">
         <h2>Questions Fréquentes</h2>
         
         <div class="faq-list">
-          <div class="faq-item">
+          <article class="faq-item">
             <h3>Comment prendre rendez-vous ?</h3>
             <p>Vous pouvez nous contacter par téléphone au +509 3685-9684 ou remplir le formulaire ci-dessus. Nous vous recontacterons dans les 24-48h pour fixer un rendez-vous.</p>
-          </div>
+          </article>
 
-          <div class="faq-item">
+          <article class="faq-item">
             <h3>Quels sont vos tarifs ?</h3>
             <p>Nos tarifs sont modulables selon les revenus des familles. Les consultations individuelles démarrent à partir de 500 HTG. Nous offrons également des possibilités de gratuité pour les familles en difficulté.</p>
-          </div>
+          </article>
 
-          <div class="faq-item">
+          <article class="faq-item">
             <h3>Où se déroulent les consultations ?</h3>
             <p>Nos consultations se déroulent dans nos locaux à Port-au-Prince. Nous intervenons également dans certaines écoles partenaires.</p>
-          </div>
+          </article>
 
-          <div class="faq-item">
+          <article class="faq-item">
             <h3>Acceptez-vous les enfants de tous âges ?</h3>
             <p>Oui, nous accompagnons les enfants de 3 à 18 ans avec des services adaptés à chaque tranche d'âge.</p>
-          </div>
+          </article>
 
-          <div class="faq-item">
+          <article class="faq-item">
             <h3>Proposez-vous des consultations en créole ?</h3>
             <p>Oui, nos professionnels parlent créole, français et anglais pour s'adapter aux besoins de chaque famille.</p>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
+    <!-- Section Urgence -->
     <section class="section-urgence">
       <div class="container">
-        <div class="urgence-box">
-          <h2>⚠️ En cas d'urgence</h2>
+        <div class="urgence-box" role="alert">
+          <h2><span aria-hidden="true">⚠️</span> En cas d'urgence</h2>
           <p>Si votre enfant est en situation de détresse psychologique aiguë, contactez immédiatement :</p>
           <p class="urgence-numero"><strong>Ligne d'urgence : +509 XXXX-XXXX</strong></p>
           <p class="urgence-note">Disponible 24h/24, 7j/7</p>
@@ -214,6 +327,10 @@
           <li><a href="index.html">Accueil</a></li>
           <li><a href="presentation.html">Présentation</a></li>
           <li><a href="services.html">Services</a></li>
+          <li><a href="videos.html">Vidéos</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="documents.html">Documents</a></li>
+          <li><a href="temoignages.html">Témoignages</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="don.html">Faire un don</a></li>
         </ul>
@@ -231,27 +348,12 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
-  <script>
-    // Gestion du formulaire de contact
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const formMessage = document.getElementById('formMessage');
-      
-      // Simulation d'envoi (à remplacer par une vraie intégration)
-      formMessage.innerHTML = '<p class="success-message">✅ Merci pour votre message ! Nous vous contacterons dans les plus brefs délais.</p>';
-      formMessage.style.display = 'block';
-      
-      // Réinitialiser le formulaire
-      this.reset();
-      
-      // Masquer le message après 5 secondes
-      setTimeout(() => {
-        formMessage.style.display = 'none';
-      }, 5000);
-    });
-  </script>
-
+  <!-- Scripts optimisés - Ordre important -->
+  <script src="js/utils.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/cookies.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/contact-form.js"></script>
 </body>
 </html>
