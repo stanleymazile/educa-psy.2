@@ -1,52 +1,143 @@
 {
-  "name": "Educa-Psy",
+  "name": "Educa-Psy - Éducation et Psychologie en Haïti",
   "short_name": "Educa-Psy",
-  "description": "Éducation et psychologie pour chaque enfant en Haïti",
+  "description": "Organisation dédiée à l'éducation et au bien-être psychologique des enfants et jeunes vulnérables en Haïti",
   "start_url": "/index.html",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
   "theme_color": "#0066CC",
-  "orientation": "portrait",
+  "background_color": "#FFFFFF",
+  "lang": "fr-HT",
+  "dir": "ltr",
+  
   "icons": [
     {
-      "src": "images/icon-72x72.png",
+      "src": "/images/icon-72x72.png",
       "sizes": "72x72",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "images/icon-96x96.png",
+      "src": "/images/icon-96x96.png",
       "sizes": "96x96",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "images/icon-128x128.png",
+      "src": "/images/icon-128x128.png",
       "sizes": "128x128",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "images/icon-144x144.png",
+      "src": "/images/icon-144x144.png",
       "sizes": "144x144",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "images/icon-152x152.png",
+      "src": "/images/icon-152x152.png",
       "sizes": "152x152",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "images/icon-192x192.png",
+      "src": "/images/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "images/icon-384x384.png",
+      "src": "/images/icon-384x384.png",
       "sizes": "384x384",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "images/icon-512x512.png",
+      "src": "/images/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  
+  "screenshots": [
+    {
+      "src": "/images/screenshot-mobile.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/images/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  
+  "shortcuts": [
+    {
+      "name": "Prendre rendez-vous",
+      "short_name": "RDV",
+      "description": "Prendre un rendez-vous rapidement",
+      "url": "/contact.html?action=rdv",
+      "icons": [
+        {
+          "src": "/images/shortcut-rdv.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Nos services",
+      "short_name": "Services",
+      "description": "Découvrir nos services",
+      "url": "/services.html",
+      "icons": [
+        {
+          "src": "/images/shortcut-services.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Faire un don",
+      "short_name": "Don",
+      "description": "Soutenir notre mission",
+      "url": "/don.html",
+      "icons": [
+        {
+          "src": "/images/shortcut-don.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  
+  "categories": [
+    "education",
+    "health",
+    "lifestyle",
+    "social"
+  ],
+  
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
+  
+  "prefer_related_applications": false,
+  
+  "share_target": {
+    "action": "/contact.html",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
 }
