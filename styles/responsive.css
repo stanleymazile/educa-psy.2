@@ -86,18 +86,39 @@
     right: 8px;
   }
 
+  .carousel-wrapper {
+    padding: 0 8px;
+  }
+
   .partner-slide {
     min-width: 240px;
-    padding: 24px 16px;
+    height: 300px;
+  }
+
+  .partner-image-wrapper {
+    height: 220px;
   }
 
   .article-slide {
     min-width: 280px;
-    height: 420px;
+    height: 400px;
   }
 
   .article-image-wrapper {
-    height: 280px;
+    height: 400px;
+  }
+
+  .article-overlay {
+    padding: 24px;
+  }
+
+  .article-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .article-excerpt {
+    font-size: 13px;
   }
 
   .values-grid {
@@ -147,9 +168,10 @@
   }
 
   .btn {
-    padding: 12px 24px;
+    padding: 12px 20px;
     font-size: 14px;
     width: 100%;
+    margin: 0;
   }
 
   section {
@@ -174,6 +196,10 @@
     display: none;
   }
 
+  .carousel-wrapper {
+    padding: 0 8px;
+  }
+
   .carousel-dots {
     gap: 6px;
     margin-top: 20px;
@@ -191,23 +217,28 @@
   .partner-slide {
     min-width: 85vw;
     padding: 20px 16px;
+    height: 280px;
+  }
+
+  .partner-image-wrapper {
+    height: 200px;
   }
 
   .partner-name {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .partner-desc {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .article-slide {
     min-width: 90vw;
-    height: 380px;
+    height: 350px;
   }
 
   .article-image-wrapper {
-    height: 240px;
+    height: 350px;
   }
 
   .article-overlay {
@@ -216,10 +247,6 @@
 
   .article-title {
     font-size: 16px;
-  }
-
-  .article-content {
-    padding: 16px;
   }
 
   .article-excerpt {
@@ -282,9 +309,9 @@
   }
 
   .social-link {
-    width: 36px;
-    height: 36px;
-    font-size: 16px;
+    min-width: 120px;
+    padding: 10px 12px;
+    font-size: 13px;
   }
 
   .footer-bottom {
@@ -488,4 +515,4 @@
     color: #0066CC;
     text-decoration: underline;
   }
-}
+   }
