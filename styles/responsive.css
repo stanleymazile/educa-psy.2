@@ -114,11 +114,7 @@
 
   .article-title {
     font-size: 18px;
-    margin-bottom: 8px;
-  }
-
-  .article-excerpt {
-    font-size: 13px;
+    margin-bottom: 0;
   }
 
   .values-grid {
@@ -234,11 +230,11 @@
 
   .article-slide {
     min-width: 90vw;
-    height: 350px;
+    height: 100vh;
   }
 
   .article-image-wrapper {
-    height: 350px;
+    height: 100vh;
   }
 
   .article-overlay {
@@ -247,10 +243,6 @@
 
   .article-title {
     font-size: 16px;
-  }
-
-  .article-excerpt {
-    font-size: 12px;
   }
 
   .values-grid {
@@ -515,4 +507,4 @@
     color: #0066CC;
     text-decoration: underline;
   }
-   }
+}
