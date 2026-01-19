@@ -426,4 +426,4 @@ if (document.readyState === 'loading') {
 } else {
   const app = new EducaPsy();
   app.init();
-        }
+}
