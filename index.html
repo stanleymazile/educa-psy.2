@@ -7,516 +7,266 @@
   <meta name="keywords" content="éducation, psychologie, Haïti, enfants, bien-être">
   <title>Educa-Psy - L'éducation pour tous en Haïti</title>
   
-  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.educa-psy.web.app/">
   <meta property="og:title" content="Educa-Psy - L'éducation pour chaque enfant en Haïti">
   <meta property="og:description" content="Accompagner la réussite scolaire et le bien-être psychologique des enfants haïtiens">
-  <meta property="og:image" content="https://www.educa-psy.web.app/images/Logo.webp">
   
-  <!-- Canonical URL -->
   <link rel="canonical" href="https://www.educa-psy.web.app/">
-  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75'>📚</text></svg>">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0066CC">
+
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/responsive.css">
+
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-T757VLNM');</script>
-  
-  <!-- Favicon & PWA -->
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#0066CC">
-  <link rel="apple-touch-icon" href="/images/icon-192x192.png">
-  
-  <!-- Preload critical resources -->
-  <link rel="preload" href="/images/Logo.webp" as="image">
-  <link rel="preload" href="/css/base.css" as="style">
-  
-  <!-- CSS - Fichiers séparés et optimisés -->
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages/home.css">
-  <link rel="stylesheet" href="css/carousel.css">
-  
-  <!-- Schema.org markup pour Google -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "NGO",
-    "name": "Educa-Psy",
-    "description": "Organisation dédiée à l'éducation et au bien-être psychologique des enfants en Haïti",
-    "url": "https://www.educa-psy.web.app",
-    "logo": "https://www.educa-psy.web.app/images/Logo.webp",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Port-au-Prince",
-      "addressCountry": "HT"
-    },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+509-3685-9684",
-      "contactType": "customer service",
-      "email": "educapsyhaiti@gmail.com"
-    }
-  }
-  </script>
-
-  <style>
-    /* Styles des carrousels inline pour performance */
-    .section-partenaires-carousel {
-      padding: 50px 20px;
-      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-      overflow: hidden;
-    }
-
-    .section-partenaires-carousel h2,
-    .section-articles-carousel h2 {
-      text-align: center;
-      color: #0066CC;
-      font-size: 28px;
-      margin-bottom: 12px;
-    }
-
-    .section-partenaires-carousel > p,
-    .section-articles-carousel > p {
-      text-align: center;
-      color: #666;
-      margin-bottom: 40px;
-      font-size: 16px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .partners-carousel-container,
-    .articles-carousel-container {
-      position: relative;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 60px;
-    }
-
-    .partners-track,
-    .articles-track {
-      display: flex;
-      gap: 24px;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      padding: 20px 0;
-    }
-
-    .partners-track::-webkit-scrollbar,
-    .articles-track::-webkit-scrollbar {
-      display: none;
-    }
-
-    .partner-slide {
-      min-width: 280px;
-      flex-shrink: 0;
-      scroll-snap-align: start;
-      background: white;
-      border-radius: 16px;
-      padding: 32px 24px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease;
-      cursor: pointer;
-    }
-
-    .partner-slide:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 24px rgba(0, 102, 204, 0.15);
-    }
-
-    .partner-logo-img {
-      width: 100%;
-      max-width: 150px;
-      height: 80px;
-      object-fit: contain;
-      margin: 0 auto 16px;
-      filter: grayscale(100%);
-      transition: filter 0.3s ease;
-    }
-
-    .partner-slide:hover .partner-logo-img {
-      filter: grayscale(0%);
-    }
-
-    .partner-category {
-      display: inline-block;
-      background: #E6F2FF;
-      color: #0066CC;
-      font-size: 11px;
-      padding: 4px 12px;
-      border-radius: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .article-slide {
-      min-width: 340px;
-      flex-shrink: 0;
-      scroll-snap-align: start;
-      background: white;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .article-slide:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
-    }
-
-    .article-image {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
-
-    .article-content {
-      padding: 24px;
-    }
-
-    .article-category {
-      background: #0066CC;
-      color: white;
-      padding: 4px 12px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 11px;
-      text-transform: uppercase;
-    }
-
-    .article-title {
-      font-size: 20px;
-      font-weight: 700;
-      color: #333;
-      margin: 12px 0;
-      line-height: 1.3;
-    }
-
-    .article-excerpt {
-      font-size: 14px;
-      color: #666;
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-
-    .carousel-nav-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
-      background: white;
-      border: 2px solid #0066CC;
-      border-radius: 50%;
-      color: #0066CC;
-      font-size: 20px;
-      cursor: pointer;
-      z-index: 10;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .carousel-nav-btn:hover {
-      background: #0066CC;
-      color: white;
-    }
-
-    .carousel-nav-btn.prev { left: 10px; }
-    .carousel-nav-btn.next { right: 10px; }
-
-    .carousel-dots {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 24px;
-    }
-
-    .carousel-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #ccc;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .carousel-dot.active {
-      background: #0066CC;
-      width: 28px;
-      border-radius: 5px;
-    }
-
-    .section-articles-carousel {
-      padding: 60px 20px;
-      background: white;
-    }
-
-    @media (max-width: 768px) {
-      .partners-carousel-container,
-      .articles-carousel-container {
-        padding: 0 50px;
-      }
-      .partner-slide { min-width: 240px; }
-      .article-slide { min-width: 280px; }
-      .carousel-nav-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 18px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .carousel-nav-btn { display: none; }
-      .partners-carousel-container,
-      .articles-carousel-container {
-        padding: 0 20px;
-      }
-    }
-  </style>
 </head>
 
 <body>
-  <a href="#main-content" class="skip-to-main">Aller au contenu principal</a>
-
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T757VLNM"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-  <header id="header">
-    <div id="logoTitre">
-      <img src="images/Logo.webp" alt="Logo Educa-Psy" id="logo" width="32" height="32"> 
-      <h2 id="titre">
-        <a href="index.html">Educa-Psy</a>
-      </h2>
+  <a href="#main-content" class="skip-to-main">Aller au contenu principal</a>
+
+  <header>
+    <div class="header-left">
+      <div class="logo">📚</div>
+      <div class="site-title">Educa-Psy</div>
     </div>
 
-    <div id="langueMenu">
-      <select id="select-langue" aria-label="Sélectionner la langue">
+    <div class="header-right">
+      <select class="lang-select" aria-label="Sélectionner la langue">
         <option value="fr">FR</option>
-        <option value="ht">KR</option> 
+        <option value="ht">KR</option>
         <option value="en">EN</option>
         <option value="es">ES</option>
       </select>
 
-      <div id="menuContainer">
-        <button id="btnMenu" aria-label="Menu de navigation" aria-expanded="false">☰</button>
-        <nav id="liens-deroulants" aria-label="Navigation principale">
-          <a href="index.html" class="item-menu" aria-current="page">Accueil</a>
-          <a href="presentation.html" class="item-menu">Présentation</a>
-          <a href="services.html" class="item-menu">Services</a>
-          <a href="videos.html" class="item-menu">Vidéos</a>
-          <a href="blog.html" class="item-menu">Blog</a>
-          <a href="contact.html" class="item-menu">Contact</a>
-          <a href="espace-membre.html" class="item-menu">Espace Membre</a>
-        </nav>
-      </div>
+      <a href="espace-membre.html" class="user-icon" title="Espace Membre" aria-label="Accéder à l'espace membre">👤</a>
+
+      <nav id="nav-menu">
+        <a href="index.html" aria-current="page">Accueil</a>
+        <a href="presentation.html">Présentation</a>
+        <a href="services.html">Services</a>
+        <a href="videos.html">Vidéos</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <button class="menu-button" id="menu-toggle" aria-label="Menu de navigation" aria-expanded="false">☰</button>
     </div>
   </header>
 
   <main id="main-content">
-    <!-- Hero Section -->
+    <!-- HERO -->
     <section class="hero">
-      <h1 class="hero-titre">Accompagner les enfants et les jeunes vulnérables d'Haïti</h1>
-      <p class="hero-description">Pour une éducation de qualité, le bien-être psychologique et l'épanouissement professionnel</p>
-      <a href="services.html" class="btnHero">Découvrir nos services</a>
-    </section>
-
-    <!-- Section À propos -->
-    <section class="section-apropos">
-      <h2>Notre Mission</h2>
-      <p>Rendre accessible les services psychologiques et éducatifs en Haïti
-        à travers des partenariats solides et des accompagnements personnalisés</p>
-      
-      <div class="valeurs">
-        <div class="valeur-item">
-          <h3>📚 Éducation de qualité</h3>
-          <p>Appuyer nos partenaires dans l'exécution 
-            et la mise en place des programmes d'éducation de qualité 
-            aux besoins de chaque enfant et de la population</p>
-        </div>
-        <div class="valeur-item">
-          <h3>💙 Santé mentale et bien-être</h3>
-          <p>Réponses aux souffrances psychologiques actuelles et détresses émotionnelles 
-            de la population haïtienne</p>
-        </div>
-        <div class="valeur-item">
-          <h3>🤝 Mentorat</h3>
-          <p>Accompagnement personnalisé pour les jeunes dans différents domaines</p>
+      <div class="hero-content">
+        <h1>Accompagner les enfants et les jeunes vulnérables d'Haïti</h1>
+        <p>Pour une éducation de qualité, le bien-être psychologique et l'épanouissement professionnel</p>
+        <div class="cta-buttons">
+          <a href="services.html" class="btn btn-primary">Découvrir nos services</a>
+          <a href="https://gofund.me/28558424a" class="btn btn-secondary" target="_blank" rel="noopener">Soutenir notre mission</a>
         </div>
       </div>
     </section>
 
-    <!-- Section Impact -->
-    <section class="section-impact">
-      <h2>Nos actions en chiffres</h2>
-      <div class="statistiques">
-        <div class="stat-item">
-          <span class="stat-nombre">500+</span>
-          <span class="stat-label">Enfants et jeunes touchés dans les départements de l'Ouest, 
-            du Sud et de l'Artibonite</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-nombre">20+</span>
-          <span class="stat-label">Écoles, institutions et organisations partenaires</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-nombre">15+</span>
-          <span class="stat-label">Professionnels dévoués</span>
+    <!-- ABOUT -->
+    <section class="section-about">
+      <div class="container">
+        <h2>Notre Mission</h2>
+        <p>Rendre accessible les services psychologiques et éducatifs en Haïti à travers des partenariats solides et des accompagnements personnalisés</p>
+        
+        <div class="values-grid">
+          <div class="value-card">
+            <h3>📚 Éducation de qualité</h3>
+            <p>Appuyer nos partenaires dans l'exécution et la mise en place des programmes d'éducation de qualité aux besoins de chaque enfant</p>
+          </div>
+          <div class="value-card">
+            <h3>💙 Santé mentale et bien-être</h3>
+            <p>Réponses aux souffrances psychologiques actuelles et détresses émotionnelles de la population haïtienne</p>
+          </div>
+          <div class="value-card">
+            <h3>🤝 Mentorat</h3>
+            <p>Accompagnement personnalisé pour les jeunes dans différents domaines</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Section Don - DÉPLACÉE ICI -->
-    <section class="section-don">
+    <!-- STATS -->
+    <section class="section-stats">
+      <div class="container">
+        <h2>Nos actions en chiffres</h2>
+        
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number" data-target="500">0</div>
+            <div class="stat-label">Enfants et jeunes touchés</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-target="20">0</div>
+            <div class="stat-label">Partenaires institutionnels</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-target="15">0</div>
+            <div class="stat-label">Professionnels dévoués</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-cta">
       <h2>Soutenez notre mission</h2>
       <p>Votre contribution nous aide à offrir une éducation de qualité et un soutien psychologique aux enfants vulnérables</p>
-      <div class="btnDon">
-        <a href="don.html">Faire un Don</a>
-      </div>
+      <a href="https://gofund.me/28558424a" class="btn btn-primary" target="_blank" rel="noopener">Faire un don</a>
     </section>
 
-    <!-- Carrousel Partenaires -->
-    <section class="section-partenaires-carousel">
-      <h2>Nos Partenaires</h2>
-      <p>Ensemble pour l'éducation et le bien-être des enfants en Haïti</p>
+    <!-- PARTNERS -->
+    <section class="section-partners carousel-section">
+      <div class="container">
+        <h2>Nos Partenaires</h2>
+        <p>Ensemble pour l'éducation et le bien-être des enfants en Haïti</p>
 
-      <div class="partners-carousel-container">
-        <button class="carousel-nav-btn prev" id="partners-prev" aria-label="Précédent">‹</button>
-        
-        <div class="partners-track" id="partners-track">
-          <div class="partner-slide">
-            <span class="partner-category"> Éducation </span>
-            <img src="images/Auf.webp" alt="AUF" class="partner-logo-img" loading="lazy">
-            <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;"> AUF-CARAÏBES </h3>
-            <p style="font-size: 13px; color: #666;"> Partenaire technique et financier </p>
+        <div class="carousel-wrapper">
+          <button class="carousel-button prev" id="partners-prev" aria-label="Partenaires précédents">‹</button>
+          
+          <div class="carousel-track" id="partners-track">
+            <div class="carousel-slide partner-slide">
+              <span class="partner-category">Éducation</span>
+              <div style="font-size: 40px; margin: 16px 0;">🏫</div>
+              <h3 class="partner-name">AUF-CARAÏBES</h3>
+              <p class="partner-desc">Partenaire technique et financier</p>
+            </div>
+
+            <div class="carousel-slide partner-slide">
+              <span class="partner-category">Éducation</span>
+              <div style="font-size: 40px; margin: 16px 0;">📖</div>
+              <h3 class="partner-name">MENFP</h3>
+              <p class="partner-desc">Ministère de l'Éducation Nationale</p>
+            </div>
+
+            <div class="carousel-slide partner-slide">
+              <span class="partner-category">Santé</span>
+              <div style="font-size: 40px; margin: 16px 0;">⚕️</div>
+              <h3 class="partner-name">MSPP</h3>
+              <p class="partner-desc">Ministère de la Santé Publique</p>
+            </div>
+
+            <div class="carousel-slide partner-slide">
+              <span class="partner-category">ONG</span>
+              <div style="font-size: 40px; margin: 16px 0;">👨‍👩‍👧‍👦</div>
+              <h3 class="partner-name">Save the Children</h3>
+              <p class="partner-desc">Protection de l'enfant</p>
+            </div>
+
+            <div class="carousel-slide partner-slide">
+              <span class="partner-category">Éducation</span>
+              <div style="font-size: 40px; margin: 16px 0;">🎓</div>
+              <h3 class="partner-name">FONHEP</h3>
+              <p class="partner-desc">Enseignement Privé</p>
+            </div>
+
+            <div class="carousel-slide partner-slide">
+              <span class="partner-category">ONG</span>
+              <div style="font-size: 40px; margin: 16px 0;">💊</div>
+              <h3 class="partner-name">Zanmi Lasante</h3>
+              <p class="partner-desc">Soins de santé</p>
+            </div>
           </div>
 
-          <div class="partner-slide">
-            <span class="partner-category">Éducation</span>
-            <img src="/images/partenaires/menfp-logo.png" alt="MENFP" class="partner-logo-img" loading="lazy">
-            <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">MENFP</h3>
-            <p style="font-size: 13px; color: #666;">Ministère de l'Éducation Nationale</p>
-          </div>
-
-          <div class="partner-slide">
-            <span class="partner-category">Santé</span>
-            <img src="/images/partenaires/mspp-logo.png" alt="MSPP" class="partner-logo-img" loading="lazy">
-            <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">MSPP</h3>
-            <p style="font-size: 13px; color: #666;">Ministère de la Santé Publique</p>
-          </div>
-
-          <div class="partner-slide">
-            <span class="partner-category">ONG</span>
-            <img src="/images/partenaires/save-children-logo.png" alt="Save the Children" class="partner-logo-img" loading="lazy">
-            <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">Save the Children</h3>
-            <p style="font-size: 13px; color: #666;">Protection de l'enfant</p>
-          </div>
-
-          <div class="partner-slide">
-            <span class="partner-category">Éducation</span>
-            <img src="/images/partenaires/fonhep-logo.png" alt="FONHEP" class="partner-logo-img" loading="lazy">
-            <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">FONHEP</h3>
-            <p style="font-size: 13px; color: #666;">Enseignement Privé</p>
-          </div>
-
-          <div class="partner-slide">
-            <span class="partner-category">ONG</span>
-            <img src="/images/partenaires/pih-logo.png" alt="Zanmi Lasante" class="partner-logo-img" loading="lazy">
-            <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">Zanmi Lasante</h3>
-            <p style="font-size: 13px; color: #666;">Soins de santé</p>
-          </div>
+          <button class="carousel-button next" id="partners-next" aria-label="Partenaires suivants">›</button>
         </div>
 
-        <button class="carousel-nav-btn next" id="partners-next" aria-label="Suivant">›</button>
-      </div>
-
-      <div class="carousel-dots" id="partners-dots"></div>
-
-      <div style="text-align: center; margin-top: 30px;">
-        <a href="/contact.html?sujet=partenariat" class="btn btn-primary">Devenir Partenaire</a>
+        <div class="carousel-dots" id="partners-dots"></div>
       </div>
     </section>
 
-    <!-- Carrousel Articles -->
-    <section class="section-articles-carousel">
-      <h2>Nos Derniers Articles</h2>
-      <p>Découvrez nos actualités, conseils et ressources pour l'éducation et le bien-être</p>
+    <!-- ARTICLES -->
+    <section class="section-articles carousel-section">
+      <div class="container">
+        <h2>Nos Derniers Articles</h2>
+        <p>Découvrez nos actualités, conseils et ressources pour l'éducation et le bien-être</p>
 
-      <div class="articles-carousel-container">
-        <button class="carousel-nav-btn prev" id="articles-prev" aria-label="Précédent">‹</button>
-        
-        <div class="articles-track" id="articles-track">
-          <div class="article-slide" onclick="window.location.href='/blog/article-1.html'">
-            <img src="images/Genre1.webp" alt="Soutien scolaire" class="article-image" loading="lazy">
-            <div class="article-content">
-              <span class="article-category">Éducation</span>
-              <h3 class="article-title"> Sensibilisation en soutien scolaire </h3>
-              <p class="article-excerpt">Genre et Droit de l'enfant</p>
+        <div class="carousel-wrapper">
+          <button class="carousel-button prev" id="articles-prev" aria-label="Articles précédents">‹</button>
+          
+          <div class="carousel-track" id="articles-track">
+            <div class="carousel-slide article-slide">
+              <div class="article-image-wrapper">
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #0066CC 0%, #004999 100%); display: flex; align-items: center; justify-content: center; font-size: 60px;">📚</div>
+                <div class="article-overlay">
+                  <span class="article-category">Éducation</span>
+                  <h3 class="article-title">Sensibilisation en soutien scolaire</h3>
+                </div>
+              </div>
+              <div class="article-content">
+                <p class="article-excerpt">Genre et Droit de l'enfant - Un guide complet pour comprendre les enjeux</p>
+              </div>
+            </div>
+
+            <div class="carousel-slide article-slide">
+              <div class="article-image-wrapper">
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #28a745 0%, #1e7a34 100%); display: flex; align-items: center; justify-content: center; font-size: 60px;">💙</div>
+                <div class="article-overlay">
+                  <span class="article-category">Psychologie</span>
+                  <h3 class="article-title">Prendre soin de la santé mentale</h3>
+                </div>
+              </div>
+              <div class="article-content">
+                <p class="article-excerpt">La santé mentale est aussi importante que la santé physique. Nos conseils d'experts.</p>
+              </div>
+            </div>
+
+            <div class="carousel-slide article-slide">
+              <div class="article-image-wrapper">
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%); display: flex; align-items: center; justify-content: center; font-size: 60px;">🎯</div>
+                <div class="article-overlay">
+                  <span class="article-category">Orientation</span>
+                  <h3 class="article-title">Choisir sa voie professionnelle</h3>
+                </div>
+              </div>
+              <div class="article-content">
+                <p class="article-excerpt">Guide d'orientation pour aider les jeunes à identifier leurs talents.</p>
+              </div>
+            </div>
+
+            <div class="carousel-slide article-slide">
+              <div class="article-image-wrapper">
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%); display: flex; align-items: center; justify-content: center; font-size: 60px;">👨‍👩‍👧</div>
+                <div class="article-overlay">
+                  <span class="article-category">Famille</span>
+                  <h3 class="article-title">5 conseils pour une parentalité positive</h3>
+                </div>
+              </div>
+              <div class="article-content">
+                <p class="article-excerpt">La parentalité positive crée un environnement propice à l'épanouissement.</p>
+              </div>
             </div>
           </div>
 
-          <div class="article-slide" onclick="window.location.href='/blog/article-2.html'">
-            <img src="/images/blog/sante-mentale.jpg" alt="Santé mentale" class="article-image" loading="lazy">
-            <div class="article-content">
-              <span class="article-category">Psychologie</span>
-              <h3 class="article-title">Prendre soin de la santé mentale des jeunes</h3>
-              <p class="article-excerpt">La santé mentale est aussi importante que la santé physique. Nos conseils d'experts.</p>
-            </div>
-          </div>
-
-          <div class="article-slide" onclick="window.location.href='/blog/article-3.html'">
-            <img src="/images/blog/orientation.jpg" alt="Orientation" class="article-image" loading="lazy">
-            <div class="article-content">
-              <span class="article-category">Orientation</span>
-              <h3 class="article-title">Choisir sa voie professionnelle</h3>
-              <p class="article-excerpt">Guide d'orientation pour aider les jeunes à identifier leurs talents et choisir leur voie.</p>
-            </div>
-          </div>
-
-          <div class="article-slide" onclick="window.location.href='/blog/article-4.html'">
-            <img src="/images/blog/parentalite.jpg" alt="Parentalité" class="article-image" loading="lazy">
-            <div class="article-content">
-              <span class="article-category">Famille</span>
-              <h3 class="article-title">5 conseils pour une parentalité positive</h3>
-              <p class="article-excerpt">La parentalité positive crée un environnement propice à l'épanouissement de l'enfant.</p>
-            </div>
-          </div>
+          <button class="carousel-button next" id="articles-next" aria-label="Articles suivants">›</button>
         </div>
 
-        <button class="carousel-nav-btn next" id="articles-next" aria-label="Suivant">›</button>
-      </div>
-
-      <div class="carousel-dots" id="articles-dots"></div>
-
-      <div style="text-align: center; margin-top: 30px;">
-        <a href="/blog.html" class="btn btn-primary">Voir tous les articles</a>
+        <div class="carousel-dots" id="articles-dots"></div>
       </div>
     </section>
-
   </main>
 
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footerHaut">
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-section">
         <h3>Educa-Psy</h3>
         <p>Promouvoir l'éducation de qualité et le bien-être psychologique en Haïti</p>
       </div>
 
-      <div class="footerMilieu">
+      <div class="footer-section">
         <h3>Liens rapides</h3>
         <ul>
           <li><a href="index.html">Accueil</a></li>
@@ -525,99 +275,27 @@
           <li><a href="videos.html">Vidéos</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a href="don.html">Faire un don</a></li>
-        </ul>   
+        </ul>
       </div>
 
-      <div class="footerBas">
-        <h3>Contact</h3>
+      <div class="footer-section">
+        <h3>Contact & Support</h3>
         <p>Email: <a href="mailto:educapsyhaiti@gmail.com">educapsyhaiti@gmail.com</a></p>
         <p>Tél: <a href="tel:+50936859684">+509 3685-9684</a></p>
+        
+        <h3 style="margin-top: 20px;">Réseaux Sociaux</h3>
+        <div class="social-links">
+          <a href="https://linktr.ee/educapsyhaiti" class="social-link" title="Tous nos réseaux sociaux" target="_blank" rel="noopener">🔗</a>
+          <a href="https://gofund.me/28558424a" class="social-link" title="Nous soutenir" target="_blank" rel="noopener">💝</a>
+        </div>
       </div>
     </div>
 
-    <div class="footer-copyright">
-      <p>&copy; 2026 Educa-Psy. Tous droits réservés.</p>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Educa-Psy. Tous droits réservés. | <a href="politique-confidentialite.html">Politique de confidentialité</a></p>
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="js/utils.js"></script>
-  <script src="js/navigation.js"></script>
-  <script src="js/animations.js"></script>
-  <script src="js/cookies.js"></script>
-  <script src="js/chat.js"></script>
-  <script src="js/optimization.js"></script>
-  <script src="js/carousel.js"></script>
-  
-  <!-- Carrousel Script -->
-  <script>
-    function initCarousel(trackId, prevBtnId, nextBtnId, dotsId) {
-      const track = document.getElementById(trackId);
-      const prevBtn = document.getElementById(prevBtnId);
-      const nextBtn = document.getElementById(nextBtnId);
-      const dotsContainer = document.getElementById(dotsId);
-      
-      if (!track) return;
-
-      const slides = track.children;
-      const slideWidth = slides[0].offsetWidth + 24;
-      const visibleSlides = Math.floor(track.offsetWidth / slideWidth);
-      let currentPosition = 0;
-
-      const dotsCount = Math.min(6, Math.ceil(slides.length / visibleSlides));
-      for (let i = 0; i < dotsCount; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'carousel-dot';
-        if (i === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => scrollToPosition(i * slideWidth * visibleSlides));
-        dotsContainer.appendChild(dot);
-      }
-
-      const dots = dotsContainer.querySelectorAll('.carousel-dot');
-
-      function updateDots() {
-        const activeDot = Math.floor(currentPosition / (slideWidth * visibleSlides));
-        dots.forEach((dot, i) => dot.classList.toggle('active', i === activeDot));
-      }
-
-      function scrollToPosition(position) {
-        currentPosition = Math.max(0, position);
-        track.scrollTo({ left: currentPosition, behavior: 'smooth' });
-        updateDots();
-      }
-
-      prevBtn.addEventListener('click', () => scrollToPosition(currentPosition - slideWidth * visibleSlides));
-      nextBtn.addEventListener('click', () => scrollToPosition(currentPosition + slideWidth * visibleSlides));
-
-      let touchStartX = 0;
-      track.addEventListener('touchstart', (e) => touchStartX = e.changedTouches[0].screenX);
-      track.addEventListener('touchend', (e) => {
-        const diff = touchStartX - e.changedTouches[0].screenX;
-        if (Math.abs(diff) > 50) scrollToPosition(currentPosition + (diff > 0 ? slideWidth : -slideWidth) * visibleSlides);
-      });
-
-      track.addEventListener('scroll', () => {
-        currentPosition = track.scrollLeft;
-        updateDots();
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      initCarousel('partners-track', 'partners-prev', 'partners-next', 'partners-dots');
-      initCarousel('articles-track', 'articles-prev', 'articles-next', 'articles-dots');
-    });
-  </script>
-
-  <!-- Service Worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js')
-        .then(reg => console.log('SW enregistré'))
-        .catch(err => console.log('Erreur SW', err));
-    }
-  </script>
+  <script src="js/app.js"></script>
 </body>
 </html>
-
-
