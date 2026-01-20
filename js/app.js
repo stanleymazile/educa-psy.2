@@ -1,133 +1,112 @@
 /**
- * APP.JS - Application principale Educa-Psy
- * Gère : Navigation, Carousels, Animations, Compteurs
+ * EDUCA-PSY - APP.JS
+ * JavaScript moderne, performant et accessible
+ * Version: 2.0 - Janvier 2026
  */
 
-class EducaPsy {
+'use strict';
+
+/* ========================================
+   APP CLASS - Point d'entrée principal
+   ======================================== */
+
+class EducaPsyApp {
   constructor() {
     this.initialized = false;
+    this.carousels = [];
   }
 
+  /**
+   * Initialiser l'application
+   */
   init() {
     if (this.initialized) return;
-    this.initialized = true;
-
-    this.setupNavigation();
-    this.setupCarousels();
-    this.setupIntersectionObserver();
-    this.setupCounters();
-    this.setupServiceWorker();
-    console.log('✅ Educa-Psy initialized');
+    
+    console.log('🚀 Educa-Psy - Initialisation...');
+    
+    try {
+      this.setupNavigation();
+      this.setupCarousels();
+      this.setupCounters();
+      this.setupLanguage();
+      this.setupAccessibility();
+      
+      this.initialized = true;
+      console.log('✅ Educa-Psy - Initialisé avec succès');
+    } catch (error) {
+      console.error('❌ Erreur lors de l\'initialisation:', error);
+    }
   }
 
   /**
-   * Gestion du menu mobile et sélecteur de langue
+   * Navigation mobile et accessibilité
    */
   setupNavigation() {
-    const menuToggle = document.getElementById('menu-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    const langSelect = document.querySelector('.lang-select');
+    const menuToggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('nav');
+    
+    if (!menuToggle || !nav) return;
 
-    if (menuToggle && navMenu) {
-      menuToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        const isOpen = navMenu.classList.contains('active');
-        menuToggle.setAttribute('aria-expanded', isOpen);
+    // Toggle menu
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = nav.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Fermer au clic sur un lien
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
       });
+    });
 
-      // Fermer le menu au clic sur un lien
-      navMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          navMenu.classList.remove('active');
-          menuToggle.setAttribute('aria-expanded', 'false');
-        });
-      });
+    // Fermer au clic extérieur
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('header') && nav.classList.contains('active')) {
+        nav.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
 
-      // Fermer le menu en cliquant ailleurs
-      document.addEventListener('click', (e) => {
-        if (!e.target.closest('header')) {
-          navMenu.classList.remove('active');
-          menuToggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-
-      // Fermer avec Escape
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-          navMenu.classList.remove('active');
-          menuToggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
-
-    // Gestion de la langue
-    if (langSelect) {
-      const savedLang = localStorage.getItem('user_language') || 'fr';
-      langSelect.value = savedLang;
-
-      langSelect.addEventListener('change', (e) => {
-        localStorage.setItem('user_language', e.target.value);
-        // TODO: Charger les traductions dynamiquement
-      });
-    }
+    // Fermer avec Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('active')) {
+        nav.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.focus();
+      }
+    });
   }
 
   /**
-   * Configuration des carousels automatiques
+   * Initialiser tous les carousels
    */
   setupCarousels() {
-    // Carrousel des partenaires - AUTOPLAY ACTIVÉ
-    this.createCarousel('partners-track', 'partners-prev', 'partners-next', 'partners-dots', true);
+    // Carousel partenaires
+    const partnersCarousel = new Carousel({
+      trackId: 'partnersTrack',
+      prevBtnId: 'partnersPrev',
+      nextBtnId: 'partnersNext',
+      dotsId: 'partnersDots'
+    });
     
-    // Carrousel des articles - AUTOPLAY ACTIVÉ
-    this.createCarousel('articles-track', 'articles-prev', 'articles-next', 'articles-dots', true);
-  }
-
-  /**
-   * Créer une instance de carousel
-   */
-  createCarousel(trackId, prevId, nextId, dotsId, autoplay = false) {
-    const track = document.getElementById(trackId);
-    const prevBtn = document.getElementById(prevId);
-    const nextBtn = document.getElementById(nextId);
-    const dotsContainer = document.getElementById(dotsId);
-
-    if (!track) {
-      console.warn(`Carousel track #${trackId} not found`);
-      return;
+    if (partnersCarousel.isValid()) {
+      this.carousels.push(partnersCarousel);
     }
 
-    const carousel = new Carousel({
-      track,
-      prevBtn,
-      nextBtn,
-      dotsContainer,
-      autoplay,
-      autoplayDelay: 5000
+    // Carousel articles
+    const articlesCarousel = new Carousel({
+      trackId: 'articlesTrack',
+      prevBtnId: 'articlesPrev',
+      nextBtnId: 'articlesNext',
+      dotsId: 'articlesDots'
     });
-
-    carousel.init();
-  }
-
-  /**
-   * Observer pour animations au scroll
-   */
-  setupIntersectionObserver() {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fade-in');
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    });
-
-    // Observer les cartes de valeurs et statistiques
-    document.querySelectorAll('.value-card, .stat-card').forEach(el => {
-      observer.observe(el);
-    });
+    
+    if (articlesCarousel.isValid()) {
+      this.carousels.push(articlesCarousel);
+    }
   }
 
   /**
@@ -136,25 +115,28 @@ class EducaPsy {
   setupCounters() {
     const counters = document.querySelectorAll('[data-target]');
     if (counters.length === 0) return;
-    
-    const observerCounters = new IntersectionObserver((entries) => {
+
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
           entry.target.classList.add('counted');
           this.animateCounter(entry.target);
-          observerCounters.unobserve(entry.target);
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.5 });
+    }, {
+      threshold: 0.5,
+      rootMargin: '0px 0px -50px 0px'
+    });
 
-    counters.forEach(counter => observerCounters.observe(counter));
+    counters.forEach(counter => observer.observe(counter));
   }
 
   /**
    * Animer un compteur avec easing
    */
   animateCounter(element) {
-    const target = parseInt(element.getAttribute('data-target'));
+    const target = parseInt(element.dataset.target);
     if (isNaN(target)) return;
 
     const duration = 2000;
@@ -164,9 +146,9 @@ class EducaPsy {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
       
-      // Easing function : easeOutQuart
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      const current = Math.floor(target * easeOutQuart);
+      // Easing: easeOutCubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(target * eased);
 
       element.textContent = current + '+';
 
@@ -181,42 +163,100 @@ class EducaPsy {
   }
 
   /**
-   * Enregistrer le Service Worker
+   * Gestion de la langue avec localStorage
    */
-  setupServiceWorker() {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js')
-        .then(() => console.log('Service Worker registered'))
-        .catch(err => console.log('Service Worker error:', err));
+  setupLanguage() {
+    const langSelect = document.getElementById('lang-select');
+    if (!langSelect) return;
+
+    // Charger la langue sauvegardée
+    try {
+      const savedLang = localStorage.getItem('educa_psy_lang') || 'fr';
+      langSelect.value = savedLang;
+    } catch (error) {
+      console.warn('localStorage non disponible:', error);
+      langSelect.value = 'fr';
     }
+
+    // Sauvegarder le changement
+    langSelect.addEventListener('change', (e) => {
+      try {
+        localStorage.setItem('educa_psy_lang', e.target.value);
+        console.log('Langue changée:', e.target.value);
+        // TODO: Implémenter le changement de langue réel
+      } catch (error) {
+        console.warn('Impossible de sauvegarder la langue:', error);
+      }
+    });
+  }
+
+  /**
+   * Améliorations d'accessibilité
+   */
+  setupAccessibility() {
+    // Annoncer les changements de région dynamiques
+    const liveRegions = document.querySelectorAll('[role="region"]');
+    liveRegions.forEach(region => {
+      if (!region.hasAttribute('aria-live')) {
+        region.setAttribute('aria-live', 'polite');
+      }
+    });
   }
 }
 
-/**
- * Classe Carousel - Carrousel automatique avec contrôles
- */
+
+/* ========================================
+   CAROUSEL CLASS - Carrousel accessible
+   ======================================== */
+
 class Carousel {
   constructor(options) {
-    this.track = options.track;
-    this.prevBtn = options.prevBtn;
-    this.nextBtn = options.nextBtn;
-    this.dotsContainer = options.dotsContainer;
-    this.autoplay = options.autoplay || false;
-    this.autoplayDelay = options.autoplayDelay || 5000;
-    this.currentPosition = 0;
-    this.autoplayInterval = null;
-    this.isDragging = false;
-    this.startX = 0;
-    this.scrollLeft = 0;
+    this.track = document.getElementById(options.trackId);
+    this.prevBtn = document.getElementById(options.prevBtnId);
+    this.nextBtn = document.getElementById(options.nextBtnId);
+    this.dotsContainer = document.getElementById(options.dotsId);
+    
+    this.currentIndex = 0;
     this.dots = [];
+    this.slideWidth = 0;
+    this.visibleSlides = 1;
+    
+    if (this.isValid()) {
+      this.init();
+    }
   }
 
+  /**
+   * Vérifier si les éléments existent
+   */
+  isValid() {
+    return this.track !== null;
+  }
+
+  /**
+   * Initialiser le carousel
+   */
   init() {
+    this.calculateDimensions();
     this.createDots();
     this.attachEvents();
-    if (this.autoplay) {
-      this.startAutoplay();
-    }
+    this.updateUI();
+    
+    console.log('✅ Carousel initialisé:', this.track.id);
+  }
+
+  /**
+   * Calculer les dimensions
+   */
+  calculateDimensions() {
+    if (this.track.children.length === 0) return;
+    
+    const firstSlide = this.track.children[0];
+    const styles = window.getComputedStyle(this.track);
+    const gap = parseInt(styles.gap) || 24;
+    
+    this.slideWidth = firstSlide.offsetWidth + gap;
+    this.visibleSlides = Math.max(1, Math.floor(this.track.offsetWidth / this.slideWidth));
   }
 
   /**
@@ -224,23 +264,25 @@ class Carousel {
    */
   createDots() {
     if (!this.dotsContainer) return;
+    
+    const totalSlides = this.track.children.length;
+    const dotsCount = Math.ceil(totalSlides / this.visibleSlides);
 
-    const slides = this.track.children;
-    const dotsCount = Math.ceil(slides.length / this.getVisibleSlides());
+    // Nettoyer les dots existants
+    this.dotsContainer.innerHTML = '';
 
     for (let i = 0; i < dotsCount; i++) {
       const dot = document.createElement('button');
       dot.className = i === 0 ? 'dot active' : 'dot';
-      dot.setAttribute('aria-label', `Aller à la diapositive ${i + 1}`);
-      dot.addEventListener('click', () => {
-        this.goToSlide(i);
-        this.stopAutoplay();
-        if (this.autoplay) this.startAutoplay();
-      });
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', `Page ${i + 1} sur ${dotsCount}`);
+      dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      
+      dot.addEventListener('click', () => this.goToPage(i));
+      
       this.dotsContainer.appendChild(dot);
+      this.dots.push(dot);
     }
-
-    this.dots = Array.from(this.dotsContainer.querySelectorAll('.dot'));
   }
 
   /**
@@ -249,181 +291,192 @@ class Carousel {
   attachEvents() {
     // Boutons de navigation
     if (this.prevBtn) {
-      this.prevBtn.addEventListener('click', () => {
-        this.prev();
-        this.stopAutoplay();
-        if (this.autoplay) this.startAutoplay();
-      });
+      this.prevBtn.addEventListener('click', () => this.prev());
     }
 
     if (this.nextBtn) {
-      this.nextBtn.addEventListener('click', () => {
-        this.next();
-        this.stopAutoplay();
-        if (this.autoplay) this.startAutoplay();
-      });
+      this.nextBtn.addEventListener('click', () => this.next());
     }
 
-    // Gestion du drag/swipe
-    this.track.addEventListener('mousedown', (e) => this.startDrag(e));
-    this.track.addEventListener('mousemove', (e) => this.drag(e));
-    this.track.addEventListener('mouseup', () => this.endDrag());
-    this.track.addEventListener('mouseleave', () => this.endDrag());
-
-    // Touch support
-    this.track.addEventListener('touchstart', (e) => {
-      this.startX = e.touches[0].clientX;
-      this.scrollLeft = this.track.scrollLeft;
+    // Support clavier
+    this.track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        this.prev();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        this.next();
+      }
     });
+
+    // Support tactile (swipe)
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    this.track.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
 
     this.track.addEventListener('touchend', (e) => {
-      const diff = this.startX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) {
-        this.stopAutoplay();
-        diff > 0 ? this.next() : this.prev();
-        if (this.autoplay) this.startAutoplay();
-      }
-    });
+      touchEndX = e.changedTouches[0].screenX;
+      this.handleSwipe(touchStartX, touchEndX);
+    }, { passive: true });
 
-    // Mise à jour des dots au scroll
+    // Scroll manuel
     this.track.addEventListener('scroll', () => {
-      this.currentPosition = this.track.scrollLeft;
-      this.updateActiveDot();
+      this.updateCurrentIndex();
     });
 
-    // Pause autoplay au hover
-    if (this.autoplay) {
-      this.track.addEventListener('mouseenter', () => this.stopAutoplay());
-      this.track.addEventListener('mouseleave', () => this.startAutoplay());
+    // Redimensionnement
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        this.calculateDimensions();
+        this.updateUI();
+      }, 250);
+    });
+  }
+
+  /**
+   * Gérer le swipe tactile
+   */
+  handleSwipe(startX, endX) {
+    const diff = startX - endX;
+    const threshold = 50;
+
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        this.next();
+      } else {
+        this.prev();
+      }
     }
   }
 
   /**
-   * Démarrer le drag
-   */
-  startDrag(e) {
-    this.isDragging = true;
-    this.startX = e.pageX - this.track.offsetLeft;
-    this.scrollLeft = this.track.scrollLeft;
-    this.track.style.cursor = 'grabbing';
-  }
-
-  /**
-   * Drag en cours
-   */
-  drag(e) {
-    if (!this.isDragging) return;
-    e.preventDefault();
-    const walk = (e.pageX - this.track.offsetLeft - this.startX) * 2;
-    this.track.scrollLeft = this.scrollLeft - walk;
-  }
-
-  /**
-   * Fin du drag
-   */
-  endDrag() {
-    this.isDragging = false;
-    this.track.style.cursor = 'grab';
-  }
-
-  /**
-   * Calculer le nombre de slides visibles
-   */
-  getVisibleSlides() {
-    if (this.track.children.length === 0) return 1;
-    const slideWidth = this.track.children[0].offsetWidth + 24;
-    return Math.max(1, Math.floor(this.track.offsetWidth / slideWidth));
-  }
-
-  /**
-   * Aller à la diapositive précédente
+   * Aller à la page précédente
    */
   prev() {
-    const slideWidth = this.track.children[0].offsetWidth + 24;
-    const visibleSlides = this.getVisibleSlides();
-    this.track.scrollBy({
-      left: -(slideWidth * visibleSlides),
-      behavior: 'smooth'
-    });
+    if (this.currentIndex > 0) {
+      this.goToPage(this.currentIndex - 1);
+    }
   }
 
   /**
-   * Aller à la diapositive suivante
+   * Aller à la page suivante
    */
   next() {
-    const slideWidth = this.track.children[0].offsetWidth + 24;
-    const visibleSlides = this.getVisibleSlides();
-    this.track.scrollBy({
-      left: slideWidth * visibleSlides,
-      behavior: 'smooth'
-    });
+    const maxIndex = this.dots.length - 1;
+    if (this.currentIndex < maxIndex) {
+      this.goToPage(this.currentIndex + 1);
+    }
   }
 
   /**
-   * Aller à une diapositive spécifique
+   * Aller à une page spécifique
    */
-  goToSlide(index) {
-    const slideWidth = this.track.children[0].offsetWidth + 24;
-    const visibleSlides = this.getVisibleSlides();
+  goToPage(index) {
+    this.currentIndex = index;
+    const scrollLeft = index * this.slideWidth * this.visibleSlides;
+    
     this.track.scrollTo({
-      left: index * slideWidth * visibleSlides,
+      left: scrollLeft,
       behavior: 'smooth'
     });
+
+    this.updateUI();
   }
 
   /**
-   * Mettre à jour l'indicateur actif
+   * Mettre à jour l'index actuel basé sur le scroll
    */
-  updateActiveDot() {
-    if (this.dots.length === 0) return;
+  updateCurrentIndex() {
+    if (this.slideWidth === 0) return;
     
-    const slideWidth = this.track.children[0].offsetWidth + 24;
-    const visibleSlides = this.getVisibleSlides();
-    const activeIndex = Math.round(this.currentPosition / (slideWidth * visibleSlides));
+    const scrollLeft = this.track.scrollLeft;
+    const newIndex = Math.round(scrollLeft / (this.slideWidth * this.visibleSlides));
+    
+    if (newIndex !== this.currentIndex) {
+      this.currentIndex = newIndex;
+      this.updateUI();
+    }
+  }
 
+  /**
+   * Mettre à jour l'interface (dots et boutons)
+   */
+  updateUI() {
+    // Mettre à jour les dots
     this.dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === activeIndex);
+      const isActive = i === this.currentIndex;
+      dot.classList.toggle('active', isActive);
+      dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
-  }
 
-  /**
-   * Démarrer l'autoplay
-   */
-  startAutoplay() {
-    if (!this.autoplay) return;
-    this.stopAutoplay();
-    
-    this.autoplayInterval = setInterval(() => {
-      const maxScroll = this.track.scrollWidth - this.track.offsetWidth;
-      if (Math.abs(this.track.scrollLeft - maxScroll) < 1) {
-        // Fin atteinte, revenir au début
-        this.track.scrollTo({ left: 0, behavior: 'smooth' });
-      } else {
-        this.next();
-      }
-    }, this.autoplayDelay);
-  }
+    // Mettre à jour les boutons
+    if (this.prevBtn) {
+      this.prevBtn.disabled = this.currentIndex === 0;
+    }
 
-  /**
-   * Arrêter l'autoplay
-   */
-  stopAutoplay() {
-    if (this.autoplayInterval) {
-      clearInterval(this.autoplayInterval);
-      this.autoplayInterval = null;
+    if (this.nextBtn) {
+      this.nextBtn.disabled = this.currentIndex === this.dots.length - 1;
     }
   }
 }
 
+
+/* ========================================
+   UTILITY FUNCTIONS
+   ======================================== */
+
 /**
- * Initialiser l'application au chargement du DOM
+ * Debounce function pour optimiser les événements
  */
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+/**
+ * Throttle function pour limiter les appels
+ */
+function throttle(func, limit) {
+  let inThrottle;
+  return function(...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+}
+
+
+/* ========================================
+   INITIALISATION
+   ======================================== */
+
+// Initialiser l'app quand le DOM est prêt
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    const app = new EducaPsy();
+    const app = new EducaPsyApp();
     app.init();
   });
 } else {
-  const app = new EducaPsy();
+  // DOM déjà chargé
+  const app = new EducaPsyApp();
   app.init();
+}
+
+// Exposer l'app globalement pour le debugging
+if (typeof window !== 'undefined') {
+  window.EducaPsyApp = EducaPsyApp;
 }
