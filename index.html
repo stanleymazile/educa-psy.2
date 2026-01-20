@@ -3,289 +3,323 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Educa-Psy - Éducation et psychologie pour chaque enfant en Haïti">
-  <meta name="keywords" content="éducation, psychologie, Haïti, enfants, bien-être">
+  <meta name="description" content="Educa-Psy accompagne les enfants et jeunes vulnérables d'Haïti avec des services éducatifs et psychologiques de qualité">
+  <meta name="keywords" content="éducation, psychologie, Haïti, enfants, bien-être, mentorat">
   <title>Educa-Psy - L'éducation pour tous en Haïti</title>
   
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.educa-psy.web.app/">
   <meta property="og:title" content="Educa-Psy - L'éducation pour chaque enfant en Haïti">
   <meta property="og:description" content="Accompagner la réussite scolaire et le bien-être psychologique des enfants haïtiens">
+  <meta property="og:image" content="https://www.educa-psy.web.app/images/og-image.jpg">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Educa-Psy - L'éducation pour tous en Haïti">
+  <meta name="twitter:description" content="Accompagner la réussite scolaire et le bien-être psychologique des enfants haïtiens">
+  <meta name="twitter:image" content="https://www.educa-psy.web.app/images/twitter-card.jpg">
+  
+  <!-- Schema.org markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Educa-Psy",
+    "url": "https://www.educa-psy.web.app/",
+    "logo": "https://www.educa-psy.web.app/images/logo.png",
+    "description": "Organisation haïtienne dédiée à l'éducation et au bien-être psychologique des enfants vulnérables",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "HT"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+509-3685-9684",
+      "email": "educapsyhaiti@gmail.com",
+      "contactType": "Customer Service"
+    },
+    "sameAs": [
+      "https://linktr.ee/educapsyhaiti"
+    ]
+  }
+  </script>
   
   <link rel="canonical" href="https://www.educa-psy.web.app/">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75'>📚</text></svg>">
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#0066CC">
 
-  <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/responsive.css">
-
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-T757VLNM');</script>
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T757VLNM"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- Skip to main content pour accessibilité -->
+  <a href="#main" class="skip-link">Aller au contenu principal</a>
 
-  <a href="#main-content" class="skip-to-main">Aller au contenu principal</a>
-
-  <header>
-    <div class="header-left">
-      <a href="index.html" class="logo-link">
-        <img src="images/Logo.webp" alt="Logo Educa-Psy" class="logo">
-        <div class="site-title">Educa-Psy</div>
-      </a>
-    </div>
-
-    <div class="header-right">
-      <select class="lang-select" aria-label="Sélectionner la langue">
-        <option value="fr">FR</option>
-        <option value="ht">KR</option>
-        <option value="en">EN</option>
-        <option value="es">ES</option>
-      </select>
-
-      <a href="espace-membre.html" class="user-icon" title="Espace Membre" aria-label="Accéder à l'espace membre">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
+  <!-- HEADER -->
+  <header role="banner">
+    <div class="header-container">
+      <a href="index.html" class="logo-link" aria-label="Educa-Psy - Accueil">
+        <div class="logo" aria-hidden="true">📚</div>
+        <span>Educa-Psy</span>
       </a>
 
-      <nav id="nav-menu">
-        <a href="index.html" aria-current="page">Accueil</a>
-        <a href="presentation.html">Présentation</a>
-        <a href="services.html">Services</a>
-        <a href="videos.html">Vidéos</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+      <div class="header-actions">
+        <label for="lang-select" class="visually-hidden">Langue</label>
+        <select id="lang-select" class="lang-select" aria-label="Sélectionner la langue">
+          <option value="fr">FR</option>
+          <option value="ht">KR</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+        </select>
 
-      <button class="menu-button" id="menu-toggle" aria-label="Menu de navigation" aria-expanded="false">☰</button>
+        <a href="espace-membre.html" class="user-icon" aria-label="Accéder à l'espace membre">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+
+        <nav id="nav" role="navigation" aria-label="Navigation principale">
+          <a href="index.html" aria-current="page">Accueil</a>
+          <a href="presentation.html">Présentation</a>
+          <a href="services.html">Services</a>
+          <a href="videos.html">Vidéos</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu de navigation" aria-expanded="false" aria-controls="nav">
+          <span aria-hidden="true">☰</span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <main id="main-content">
-    <!-- HERO -->
-    <section class="hero">
+  <!-- MAIN CONTENT -->
+  <main id="main" role="main">
+    
+    <!-- HERO SECTION -->
+    <section class="hero" aria-labelledby="hero-title">
       <div class="hero-content">
-        <h1>Accompagner les enfants et les jeunes vulnérables d'Haïti</h1>
+        <h1 id="hero-title">Accompagner les enfants et jeunes vulnérables d'Haïti</h1>
         <p>Pour une éducation de qualité, le bien-être psychologique et l'épanouissement professionnel</p>
         <div class="cta-buttons">
           <a href="services.html" class="btn btn-primary">Découvrir nos services</a>
-          <a href="https://gofund.me/28558424a" class="btn btn-secondary" target="_blank" rel="noopener">Soutenir notre mission</a>
+          <a href="https://gofund.me/28558424" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Soutenir notre mission</a>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section class="section-about">
+    <!-- ABOUT SECTION -->
+    <section class="section-about" aria-labelledby="mission-title">
       <div class="container">
-        <h2>Notre Mission</h2>
+        <h2 id="mission-title">Notre Mission</h2>
         <p>Rendre accessible les services psychologiques et éducatifs en Haïti à travers des partenariats solides et des accompagnements personnalisés</p>
         
         <div class="values-grid">
-          <div class="value-card">
-            <h3>📚 Éducation de qualité</h3>
-            <p>Appuyer nos partenaires dans l'exécution et la mise en place des programmes d'éducation de qualité aux besoins de chaque enfant</p>
-          </div>
-          <div class="value-card">
-            <h3>💙 Santé mentale et bien-être</h3>
+          <article class="value-card fade-in">
+            <h3><span aria-hidden="true">📚</span> Éducation de qualité</h3>
+            <p>Appuyer nos partenaires dans l'exécution et la mise en place des programmes d'éducation de qualité adaptés aux besoins de chaque enfant</p>
+          </article>
+          
+          <article class="value-card fade-in">
+            <h3><span aria-hidden="true">💙</span> Santé mentale et bien-être</h3>
             <p>Réponses aux souffrances psychologiques actuelles et détresses émotionnelles de la population haïtienne</p>
-          </div>
-          <div class="value-card">
-            <h3>🤝 Mentorat</h3>
-            <p>Accompagnement personnalisé pour les jeunes dans différents domaines</p>
-          </div>
+          </article>
+          
+          <article class="value-card fade-in">
+            <h3><span aria-hidden="true">🤝</span> Mentorat</h3>
+            <p>Accompagnement personnalisé pour les jeunes dans différents domaines professionnels et académiques</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- STATS -->
-    <section class="section-stats">
+    <!-- STATS SECTION -->
+    <section aria-labelledby="stats-title">
       <div class="container">
-        <h2>Nos actions en chiffres</h2>
+        <h2 id="stats-title">Nos actions en chiffres</h2>
         
         <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-number" data-target="500">0</div>
+          <div class="stat-card fade-in">
+            <div class="stat-number" data-target="500" aria-label="500 enfants et jeunes touchés">0</div>
             <div class="stat-label">Enfants et jeunes touchés</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-number" data-target="20">0</div>
+          
+          <div class="stat-card fade-in">
+            <div class="stat-number" data-target="20" aria-label="20 partenaires institutionnels">0</div>
             <div class="stat-label">Partenaires institutionnels</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-number" data-target="15">0</div>
+          
+          <div class="stat-card fade-in">
+            <div class="stat-number" data-target="15" aria-label="15 professionnels dévoués">0</div>
             <div class="stat-label">Professionnels dévoués</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="section-cta">
-      <h2>Soutenez notre mission</h2>
-      <p>Votre contribution nous aide à offrir une éducation de qualité et un soutien psychologique aux enfants vulnérables</p>
-      <a href="https://gofund.me/28558424a" class="btn btn-primary" target="_blank" rel="noopener">Faire un don</a>
-    </section>
-
-    <!-- PARTNERS -->
-    <section class="section-partners carousel-section">
+    <!-- CTA SECTION -->
+    <section class="section-cta" aria-labelledby="cta-title">
       <div class="container">
-        <h2>Nos Partenaires</h2>
-        <p>Ensemble pour l'éducation et le bien-être des enfants en Haïti</p>
-
-        <div class="carousel-wrapper">
-          <button class="carousel-button prev" id="partners-prev" aria-label="Partenaires précédents">‹</button>
-          
-          <div class="carousel-track" id="partners-track">
-            <a href="https://www.auf.org/" target="_blank" rel="noopener" class="carousel-slide partner-slide" title="Visiter le site d'AUF-CARAÏBES">
-              <div class="partner-image-wrapper" style="background: linear-gradient(135deg, #0066CC 0%, #004999 100%);">
-                <div style="font-size: 60px;">🏫</div>
-                <div class="partner-overlay">
-                  <span class="partner-category">Éducation</span>
-                  <h3 class="partner-name">AUF-CARAÏBES</h3>
-                </div>
-              </div>
-              <div class="partner-content"></div>
-            </a>
-
-            <a href="https://www.menfp.gouv.ht/" target="_blank" rel="noopener" class="carousel-slide partner-slide" title="Visiter le site du MENFP">
-              <div class="partner-image-wrapper" style="background: linear-gradient(135deg, #28a745 0%, #1e7a34 100%);">
-                <div style="font-size: 60px;">📖</div>
-                <div class="partner-overlay">
-                  <span class="partner-category">Éducation</span>
-                  <h3 class="partner-name">MENFP</h3>
-                </div>
-              </div>
-              <div class="partner-content"></div>
-            </a>
-
-            <a href="https://www.mspp.gouv.ht/" target="_blank" rel="noopener" class="carousel-slide partner-slide" title="Visiter le site du MSPP">
-              <div class="partner-image-wrapper" style="background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);">
-                <div style="font-size: 60px;">⚕️</div>
-                <div class="partner-overlay">
-                  <span class="partner-category">Santé</span>
-                  <h3 class="partner-name">MSPP</h3>
-                </div>
-              </div>
-              <div class="partner-content"></div>
-            </a>
-
-            <a href="https://www.savethechildren.net/" target="_blank" rel="noopener" class="carousel-slide partner-slide" title="Visiter le site de Save the Children">
-              <div class="partner-image-wrapper" style="background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);">
-                <div style="font-size: 60px;">👨‍👩‍👧‍👦</div>
-                <div class="partner-overlay">
-                  <span class="partner-category">ONG</span>
-                  <h3 class="partner-name">Save the Children</h3>
-                </div>
-              </div>
-              <div class="partner-content"></div>
-            </a>
-
-            <a href="https://www.fonhep.org/" target="_blank" rel="noopener" class="carousel-slide partner-slide" title="Visiter le site de FONHEP">
-              <div class="partner-image-wrapper" style="background: linear-gradient(135deg, #673ab7 0%, #512da8 100%);">
-                <div style="font-size: 60px;">🎓</div>
-                <div class="partner-overlay">
-                  <span class="partner-category">Éducation</span>
-                  <h3 class="partner-name">FONHEP</h3>
-                </div>
-              </div>
-              <div class="partner-content"></div>
-            </a>
-
-            <a href="https://zl.org/" target="_blank" rel="noopener" class="carousel-slide partner-slide" title="Visiter le site de Zanmi Lasante">
-              <div class="partner-image-wrapper" style="background: linear-gradient(135deg, #00bcd4 0%, #0097a7 100%);">
-                <div style="font-size: 60px;">💊</div>
-                <div class="partner-overlay">
-                  <span class="partner-category">ONG</span>
-                  <h3 class="partner-name">Zanmi Lasante</h3>
-                </div>
-              </div>
-              <div class="partner-content"></div>
-            </a>
-          </div>
-
-          <button class="carousel-button next" id="partners-next" aria-label="Partenaires suivants">›</button>
-        </div>
-
-        <div class="carousel-dots" id="partners-dots"></div>
+        <h2 id="cta-title">Soutenez notre mission</h2>
+        <p>Votre contribution nous aide à offrir une éducation de qualité et un soutien psychologique aux enfants vulnérables</p>
+        <a href="https://gofund.me/28558424" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Faire un don</a>
       </div>
     </section>
 
-    <!-- ARTICLES -->
-    <section class="section-articles carousel-section">
+    <!-- PARTNERS SECTION -->
+    <section aria-labelledby="partners-title">
       <div class="container">
-        <h2>Nos Derniers Articles</h2>
+        <h2 id="partners-title">Nos Partenaires</h2>
+        <p>Ensemble pour l'éducation et le bien-être des enfants en Haïti</p>
+
+        <div class="carousel-wrapper" role="region" aria-label="Carrousel des partenaires">
+          <div class="carousel-track" id="partnersTrack">
+            
+            <a href="https://www.auf.org/" target="_blank" rel="noopener noreferrer" class="carousel-slide partner-card">
+              <div class="partner-icon" aria-hidden="true">🏫</div>
+              <div class="partner-content">
+                <span class="partner-category">Éducation</span>
+                <h3 class="partner-name">AUF-CARAÏBES</h3>
+              </div>
+            </a>
+
+            <a href="https://www.menfp.gouv.ht/" target="_blank" rel="noopener noreferrer" class="carousel-slide partner-card">
+              <div class="partner-icon" aria-hidden="true">📖</div>
+              <div class="partner-content">
+                <span class="partner-category">Éducation</span>
+                <h3 class="partner-name">MENFP</h3>
+              </div>
+            </a>
+
+            <a href="https://www.mspp.gouv.ht/" target="_blank" rel="noopener noreferrer" class="carousel-slide partner-card">
+              <div class="partner-icon" aria-hidden="true">⚕️</div>
+              <div class="partner-content">
+                <span class="partner-category">Santé</span>
+                <h3 class="partner-name">MSPP</h3>
+              </div>
+            </a>
+
+            <a href="https://www.savethechildren.net/" target="_blank" rel="noopener noreferrer" class="carousel-slide partner-card">
+              <div class="partner-icon" aria-hidden="true">👨‍👩‍👧‍👦</div>
+              <div class="partner-content">
+                <span class="partner-category">ONG</span>
+                <h3 class="partner-name">Save the Children</h3>
+              </div>
+            </a>
+
+            <a href="https://www.fonhep.org/" target="_blank" rel="noopener noreferrer" class="carousel-slide partner-card">
+              <div class="partner-icon" aria-hidden="true">🎓</div>
+              <div class="partner-content">
+                <span class="partner-category">Éducation</span>
+                <h3 class="partner-name">FONHEP</h3>
+              </div>
+            </a>
+
+            <a href="https://zl.org/" target="_blank" rel="noopener noreferrer" class="carousel-slide partner-card">
+              <div class="partner-icon" aria-hidden="true">💊</div>
+              <div class="partner-content">
+                <span class="partner-category">ONG</span>
+                <h3 class="partner-name">Zanmi Lasante</h3>
+              </div>
+            </a>
+          </div>
+
+          <div class="carousel-controls">
+            <button class="carousel-btn" id="partnersPrev" aria-label="Voir les partenaires précédents">
+              <span aria-hidden="true">‹</span>
+            </button>
+            <button class="carousel-btn" id="partnersNext" aria-label="Voir les partenaires suivants">
+              <span aria-hidden="true">›</span>
+            </button>
+          </div>
+
+          <div class="carousel-dots" id="partnersDots" role="tablist" aria-label="Navigation du carrousel partenaires"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARTICLES SECTION -->
+    <section class="section-about" aria-labelledby="articles-title">
+      <div class="container">
+        <h2 id="articles-title">Nos Derniers Articles</h2>
         <p>Découvrez nos actualités, conseils et ressources pour l'éducation et le bien-être</p>
 
-        <div class="carousel-wrapper">
-          <button class="carousel-button prev" id="articles-prev" aria-label="Articles précédents">‹</button>
-          
-          <div class="carousel-track" id="articles-track">
-            <a href="/blog/article-1.html" class="carousel-slide article-slide" title="Lire l'article sur le soutien scolaire">
-              <div class="article-image-wrapper" style="background: linear-gradient(135deg, #0066CC 0%, #004999 100%);">
-                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 80px;">📚</div>
-                <div class="article-overlay">
+        <div class="carousel-wrapper" role="region" aria-label="Carrousel des articles">
+          <div class="carousel-track" id="articlesTrack">
+            
+            <article class="carousel-slide article-card">
+              <a href="blog/article-1.html" class="article-link">
+                <div class="article-image" aria-hidden="true">📚</div>
+                <div class="article-content">
                   <span class="article-category">Éducation</span>
                   <h3 class="article-title">Sensibilisation en soutien scolaire</h3>
                 </div>
-              </div>
-            </a>
+              </a>
+            </article>
 
-            <a href="/blog/article-2.html" class="carousel-slide article-slide" title="Lire l'article sur la santé mentale">
-              <div class="article-image-wrapper" style="background: linear-gradient(135deg, #28a745 0%, #1e7a34 100%);">
-                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 80px;">💙</div>
-                <div class="article-overlay">
+            <article class="carousel-slide article-card">
+              <a href="blog/article-2.html" class="article-link">
+                <div class="article-image" aria-hidden="true">💙</div>
+                <div class="article-content">
                   <span class="article-category">Psychologie</span>
                   <h3 class="article-title">Prendre soin de la santé mentale</h3>
                 </div>
-              </div>
-            </a>
+              </a>
+            </article>
 
-            <a href="/blog/article-3.html" class="carousel-slide article-slide" title="Lire l'article sur l'orientation">
-              <div class="article-image-wrapper" style="background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);">
-                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 80px;">🎯</div>
-                <div class="article-overlay">
+            <article class="carousel-slide article-card">
+              <a href="blog/article-3.html" class="article-link">
+                <div class="article-image" aria-hidden="true">🎯</div>
+                <div class="article-content">
                   <span class="article-category">Orientation</span>
                   <h3 class="article-title">Choisir sa voie professionnelle</h3>
                 </div>
-              </div>
-            </a>
+              </a>
+            </article>
 
-            <a href="/blog/article-4.html" class="carousel-slide article-slide" title="Lire l'article sur la parentalité">
-              <div class="article-image-wrapper" style="background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);">
-                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 80px;">👨‍👩‍👧</div>
-                <div class="article-overlay">
+            <article class="carousel-slide article-card">
+              <a href="blog/article-4.html" class="article-link">
+                <div class="article-image" aria-hidden="true">👨‍👩‍👧</div>
+                <div class="article-content">
                   <span class="article-category">Famille</span>
                   <h3 class="article-title">5 conseils pour une parentalité positive</h3>
                 </div>
-              </div>
-            </a>
+              </a>
+            </article>
           </div>
 
-          <button class="carousel-button next" id="articles-next" aria-label="Articles suivants">›</button>
-        </div>
+          <div class="carousel-controls">
+            <button class="carousel-btn" id="articlesPrev" aria-label="Voir les articles précédents">
+              <span aria-hidden="true">‹</span>
+            </button>
+            <button class="carousel-btn" id="articlesNext" aria-label="Voir les articles suivants">
+              <span aria-hidden="true">›</span>
+            </button>
+          </div>
 
-        <div class="carousel-dots" id="articles-dots"></div>
+          <div class="carousel-dots" id="articlesDots" role="tablist" aria-label="Navigation du carrousel articles"></div>
+        </div>
       </div>
     </section>
+
   </main>
 
-  <footer>
+  <!-- FOOTER -->
+  <footer role="contentinfo">
     <div class="footer-grid">
+      
       <div class="footer-section">
         <h3>Educa-Psy</h3>
         <p>Promouvoir l'éducation de qualité et le bien-être psychologique en Haïti pour un avenir meilleur</p>
       </div>
 
-      <div class="footer-section">
-        <h3>Accès Rapide</h3>
+      <nav class="footer-section" aria-labelledby="footer-nav-title">
+        <h3 id="footer-nav-title">Accès Rapide</h3>
         <ul>
           <li><a href="index.html">Accueil</a></li>
           <li><a href="presentation.html">Présentation</a></li>
@@ -293,17 +327,17 @@
           <li><a href="blog.html">Blog</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
-      </div>
+      </nav>
 
       <div class="footer-section">
         <h3>Contact & Support</h3>
-        <p>📧 Email: <a href="mailto:educapsyhaiti@gmail.com">educapsyhaiti@gmail.com</a></p>
-        <p>📱 Tél: <a href="tel:+50936859684">+509 3685-9684</a></p>
+        <p><span aria-hidden="true">📧</span> Email: <a href="mailto:educapsyhaiti@gmail.com">educapsyhaiti@gmail.com</a></p>
+        <p><span aria-hidden="true">📱</span> Tél: <a href="tel:+50936859684">+509 3685-9684</a></p>
         
-        <h3 style="margin-top: 24px;">Nous Rejoindre</h3>
+        <h3 style="margin-top: 1.5rem;">Nous Rejoindre</h3>
         <div class="social-links">
-          <a href="https://linktr.ee/educapsyhaiti" class="social-link" title="Tous nos réseaux sociaux - Linktree" target="_blank" rel="noopener">Nos Réseaux</a>
-          <a href="https://gofund.me/28558424a" class="social-link" title="Soutenir Educa-Psy par un don" target="_blank" rel="noopener">Faire un Don</a>
+          <a href="https://linktr.ee/educapsyhaiti" class="social-link" target="_blank" rel="noopener noreferrer">Nos Réseaux</a>
+          <a href="https://gofund.me/28558424" class="social-link" target="_blank" rel="noopener noreferrer">Faire un Don</a>
         </div>
       </div>
     </div>
@@ -313,6 +347,7 @@
     </div>
   </footer>
 
+  <!-- JavaScript -->
   <script src="js/app.js"></script>
 </body>
-</html>
+                </html>
