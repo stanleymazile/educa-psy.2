@@ -3,165 +3,248 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Educa-Psy - Éducation et psychologie pour chaque enfant en Haïti">
-  <title>Educa-Psy - L'éducation pour tous en Haïti</title>
+  <meta name="description" content="Educa-Psy - Organisation dédiée à l'éducation et au bien-être psychologique des enfants et jeunes vulnérables en Haïti. Soutien scolaire, accompagnement psychologique et mentorat.">
+  <meta name="keywords" content="éducation Haïti, psychologie enfants, soutien scolaire, ONG Haïti, bien-être mental">
+  <meta name="author" content="Educa-Psy">
+  <title>Educa-Psy - Éducation et Psychologie pour chaque enfant en Haïti</title>
   
   <!-- Favicon & PWA -->
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="images/icon-192x192.png">
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#0066CC">
   
-  <!-- ✅ CSS MODERNE - ORDRE CORRECT -->
+  <!-- CSS - Ordre Optimisé -->
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages/home.css">
   
-  <!-- Open Graph -->
-  <meta property="og:title" content="Educa-Psy - L'éducation pour chaque enfant en Haïti">
-  <meta property="og:description" content="Accompagner la réussite scolaire et le bien-être psychologique">
-  <meta property="og:image" content="https://www.educa-psy.web.app/images/Logo.webp">
+  <!-- Preconnect pour performance -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
   
-  <!-- Schema.org -->
+  <!-- Open Graph pour réseaux sociaux -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Educa-Psy - Éducation pour chaque enfant en Haïti">
+  <meta property="og:description" content="Accompagner la réussite scolaire et le bien-être psychologique des enfants vulnérables">
+  <meta property="og:image" content="https://www.educa-psy.web.app/images/Logo.webp">
+  <meta property="og:url" content="https://www.educa-psy.web.app">
+  <meta property="og:locale" content="fr_HT">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Educa-Psy - Éducation en Haïti">
+  <meta name="twitter:description" content="Accompagner la réussite scolaire et le bien-être psychologique">
+  <meta name="twitter:image" content="https://www.educa-psy.web.app/images/Logo.webp">
+  
+  <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "NGO",
     "name": "Educa-Psy",
-    "description": "Organisation dédiée à l'éducation et au bien-être psychologique des enfants en Haïti",
+    "alternateName": "Educa-Psy Haiti",
+    "description": "Organisation dédiée à l'éducation et au bien-être psychologique des enfants et jeunes vulnérables en Haïti",
     "url": "https://www.educa-psy.web.app",
-    "logo": "https://www.educa-psy.web.app/images/Logo.webp"
+    "logo": "https://www.educa-psy.web.app/images/Logo.webp",
+    "foundingDate": "2024",
+    "foundingLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "HT",
+        "addressLocality": "Port-au-Prince"
+      }
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+509-3685-9684",
+      "email": "educapsyhaiti@gmail.com",
+      "contactType": "Customer Service",
+      "availableLanguage": ["French", "Haitian Creole"]
+    },
+    "sameAs": [
+      "https://www.facebook.com/educapsy",
+      "https://www.instagram.com/educapsy"
+    ]
   }
   </script>
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.educa-psy.web.app/index.html">
 </head>
 
 <body>
+  <!-- Skip to main content pour accessibilité -->
   <a href="#main-content" class="skip-to-main">Aller au contenu principal</a>
 
-  <header id="header">
+  <!-- Header -->
+  <header id="header" role="banner">
     <div id="logoTitre">
-      <img src="images/Logo.webp" alt="Logo Educa-Psy" id="logo" width="32" height="32"> 
-      <h2 id="titre">
-        <a href="index.html">Educa-Psy</a>
-      </h2>
+      <img src="images/Logo.webp" alt="Logo Educa-Psy - Éducation et Psychologie" id="logo" width="40" height="40" loading="eager"> 
+      <h1 id="titre">
+        <a href="index.html" aria-label="Retour à l'accueil Educa-Psy">Educa-Psy</a>
+      </h1>
     </div>
 
     <div id="langueMenu">
-      <select id="select-langue" aria-label="Sélectionner la langue">
-        <option value="fr">FR</option>
-        <option value="ht">KR</option> 
-        <option value="en">EN</option>
-        <option value="es">ES</option>
+      <label for="select-langue" class="sr-only">Langue</label>
+      <select id="select-langue" aria-label="Sélectionner la langue du site">
+        <option value="fr" selected>🇫🇷 FR</option>
+        <option value="ht">🇭🇹 KR</option>
+        <option value="en">🇬🇧 EN</option>
+        <option value="es">🇪🇸 ES</option>
       </select>
 
       <div id="menuContainer">
-        <button id="btnMenu" aria-label="Menu de navigation" aria-expanded="false">☰</button>
+        <button id="btnMenu" aria-label="Ouvrir le menu de navigation" aria-expanded="false" aria-controls="liens-deroulants">
+          <span aria-hidden="true">☰</span>
+        </button>
         <nav id="liens-deroulants" aria-label="Navigation principale">
-          <a href="index.html" class="item-menu" aria-current="page">Accueil</a>
-          <a href="presentation.html" class="item-menu">Présentation</a>
-          <a href="services.html" class="item-menu">Services</a>
-          <a href="videos.html" class="item-menu">Vidéos</a>
-          <a href="blog.html" class="item-menu">Blog</a>
-          <a href="contact.html" class="item-menu">Contact</a>
-          <a href="espace-membre.html" class="item-menu">Espace Membre</a>
+          <a href="index.html" class="item-menu" aria-current="page">🏠 Accueil</a>
+          <a href="presentation.html" class="item-menu">ℹ️ Présentation</a>
+          <a href="services.html" class="item-menu">🎓 Services</a>
+          <a href="videos.html" class="item-menu">🎥 Vidéos</a>
+          <a href="blog.html" class="item-menu">📝 Blog</a>
+          <a href="contact.html" class="item-menu">📞 Contact</a>
+          <a href="espace-membre.html" class="item-menu">👤 Espace Membre</a>
         </nav>
       </div>
     </div>
   </header>
 
-  <main id="main-content">
+  <!-- Main Content -->
+  <main id="main-content" role="main">
+    
     <!-- Hero Section -->
-    <section class="hero">
-      <h1 class="hero-titre">Accompagner les enfants et les jeunes vulnérables d'Haïti</h1>
+    <section class="hero" aria-labelledby="hero-titre">
+      <h2 id="hero-titre" class="hero-titre">Accompagner les enfants et les jeunes vulnérables d'Haïti</h2>
       <p class="hero-description">Pour une éducation de qualité, le bien-être psychologique et l'épanouissement professionnel</p>
-      <a href="services.html" class="btnHero">Découvrir nos services</a>
+      <a href="services.html" class="btnHero" aria-label="Découvrir nos services d'éducation et de psychologie">Découvrir nos services</a>
     </section>
 
     <!-- Section À propos -->
-    <section class="section-apropos">
-      <h2>Notre Mission</h2>
-      <p>Rendre accessible les services psychologiques et éducatifs en Haïti à travers des partenariats solides et des accompagnements personnalisés</p>
+    <section class="section-apropos" aria-labelledby="mission-titre">
+      <h2 id="mission-titre">Notre Mission</h2>
+      <p>Rendre accessibles les services psychologiques et éducatifs en Haïti à travers des partenariats solides et des accompagnements personnalisés pour chaque enfant.</p>
       
-      <div class="valeurs">
-        <div class="valeur-item">
-          <h3>📚 Éducation de qualité</h3>
-          <p>Appuyer nos partenaires dans l'exécution et la mise en place des programmes d'éducation de qualité aux besoins de chaque enfant</p>
-        </div>
-        <div class="valeur-item">
-          <h3>💙 Santé mentale et bien-être</h3>
-          <p>Réponses aux souffrances psychologiques actuelles et détresses émotionnelles de la population haïtienne</p>
-        </div>
-        <div class="valeur-item">
-          <h3>🤝 Mentorat</h3>
-          <p>Accompagnement personnalisé pour les jeunes dans différents domaines</p>
-        </div>
+      <div class="valeurs" role="list" aria-label="Nos valeurs principales">
+        <article class="valeur-item" role="listitem">
+          <h3><span aria-hidden="true">📚</span> Éducation de qualité</h3>
+          <p>Appuyer nos partenaires dans l'exécution et la mise en place de programmes d'éducation de qualité adaptés aux besoins de chaque enfant</p>
+        </article>
+        
+        <article class="valeur-item" role="listitem">
+          <h3><span aria-hidden="true">💙</span> Santé mentale et bien-être</h3>
+          <p>Répondre aux souffrances psychologiques actuelles et aux détresses émotionnelles de la population haïtienne, en particulier des jeunes</p>
+        </article>
+        
+        <article class="valeur-item" role="listitem">
+          <h3><span aria-hidden="true">🤝</span> Mentorat personnalisé</h3>
+          <p>Accompagnement individuel pour les jeunes dans leur parcours scolaire, professionnel et personnel</p>
+        </article>
       </div>
     </section>
 
     <!-- Section Impact -->
-    <section class="section-impact">
-      <h2>Nos actions en chiffres</h2>
-      <div class="statistiques">
-        <div class="stat-item">
-          <span class="stat-nombre">500+</span>
+    <section class="section-impact" aria-labelledby="impact-titre">
+      <h2 id="impact-titre">Notre Impact en Chiffres</h2>
+      <div class="statistiques" role="list" aria-label="Statistiques de notre impact">
+        <div class="stat-item" role="listitem">
+          <span class="stat-nombre" aria-label="500 enfants et jeunes touchés">500+</span>
           <span class="stat-label">Enfants et jeunes touchés</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-nombre">20+</span>
+        <div class="stat-item" role="listitem">
+          <span class="stat-nombre" aria-label="20 écoles partenaires">20+</span>
           <span class="stat-label">Écoles partenaires</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-nombre">15+</span>
+        <div class="stat-item" role="listitem">
+          <span class="stat-nombre" aria-label="15 professionnels dévoués">15+</span>
           <span class="stat-label">Professionnels dévoués</span>
         </div>
       </div>
     </section>
 
     <!-- Section Don -->
-    <section class="section-don">
-      <h2>Soutenez notre mission</h2>
-      <p>Votre contribution nous aide à offrir une éducation de qualité et un soutien psychologique aux enfants vulnérables</p>
+    <section class="section-don" aria-labelledby="don-titre">
+      <h2 id="don-titre">Soutenez Notre Mission</h2>
+      <p>Votre contribution nous aide à offrir une éducation de qualité et un soutien psychologique aux enfants vulnérables d'Haïti. Chaque don compte et fait la différence.</p>
       <div class="btnDon">
-        <a href="don.html">Faire un Don</a>
+        <a href="don.html" class="btn-don" aria-label="Faire un don pour soutenir Educa-Psy">
+          <span aria-hidden="true">❤️</span> Faire un Don
+        </a>
       </div>
     </section>
+
   </main>
 
-  <footer class="footer">
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
     <div class="footer-content">
+      
       <div class="footerHaut">
         <h3>Educa-Psy</h3>
-        <p>Promouvoir l'éducation de qualité et le bien-être psychologique en Haïti</p>
+        <p>Organisation haïtienne à but non lucratif dédiée à promouvoir l'éducation de qualité et le bien-être psychologique des enfants et jeunes vulnérables.</p>
       </div>
 
-      <div class="footerMilieu">
-        <h3>Liens rapides</h3>
+      <nav class="footerMilieu" aria-label="Navigation du pied de page">
+        <h3>Liens Rapides</h3>
         <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="presentation.html">Présentation</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="index.html" aria-current="page">Accueil</a></li>
+          <li><a href="presentation.html">Qui sommes-nous ?</a></li>
+          <li><a href="services.html">Nos services</a></li>
+          <li><a href="blog.html">Actualités</a></li>
+          <li><a href="contact.html">Nous contacter</a></li>
           <li><a href="don.html">Faire un don</a></li>
         </ul>
-      </div>
+      </nav>
 
       <div class="footerBas">
         <h3>Contact</h3>
-        <p>Email: <a href="mailto:educapsyhaiti@gmail.com">educapsyhaiti@gmail.com</a></p>
-        <p>Tél: <a href="tel:+50936859684">+509 3685-9684</a></p>
+        <p>
+          <strong>Email:</strong><br>
+          <a href="mailto:educapsyhaiti@gmail.com">educapsyhaiti@gmail.com</a>
+        </p>
+        <p>
+          <strong>Téléphone:</strong><br>
+          <a href="tel:+50936859684">+509 3685-9684</a>
+        </p>
+        <p>
+          <strong>Localisation:</strong><br>
+          Port-au-Prince, Haïti
+        </p>
       </div>
+      
     </div>
 
     <div class="footer-copyright">
-      <p>&copy; 2026 Educa-Psy. Tous droits réservés.</p>
+      <p>
+        &copy; 2026 Educa-Psy. Tous droits réservés. | 
+        <a href="mentions-legales.html">Mentions légales</a> | 
+        <a href="politique-confidentialite.html">Politique de confidentialité</a>
+      </p>
     </div>
   </footer>
 
-  <!-- ✅ SCRIPTS MODERNES - ORDRE CORRECT ET OBLIGATOIRE -->
+  <!-- Scripts - Ordre Optimisé (CHAT.JS SUPPRIMÉ) -->
   <script src="js/utils.js"></script>
   <script src="js/navigation.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/cookies.js"></script>
-  <script src="js/chat.js"></script>
+  
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => {
+            console.log('Service Worker enregistré:', registration);
+          })
+          .catch(error => {
+            console.log('Erreur Service Worker:', error);
+          });
+      });
+    }
+  </script>
 </body>
 </html>
