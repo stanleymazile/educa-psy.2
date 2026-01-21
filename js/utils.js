@@ -1,19 +1,32 @@
 /**
- * UTILS.JS - Fonctions utilitaires réutilisables
- * Ce fichier doit être chargé en premier
+ * UTILS.JS - Fonctions utilitaires pour index.html
+ * Version: 2.0.0 - Épurée et Optimisée
+ * 
+ * Fonctionnalités conservées:
+ * - Sécurité XSS
+ * - Debounce/Throttle
+ * - Gestion des cookies
+ * - Validation
+ * - Notifications toast
+ * - Tracking événements
  */
 
 (function(window) {
   'use strict';
 
-  // Créer un namespace global pour nos utilitaires
+  // Créer le namespace global
   window.EducaPsy = window.EducaPsy || {};
   
   const Utils = {
+    
+    /* ====================================
+       SÉCURITÉ
+       ==================================== */
+    
     /**
-     * Échapper le HTML pour prévenir les attaques XSS
+     * Échapper le HTML pour prévenir XSS
      * @param {string} text - Texte à échapper
-     * @returns {string} Texte échappé
+     * @returns {string} Texte sécurisé
      */
     escapeHtml: function(text) {
       const div = document.createElement('div');
@@ -21,6 +34,10 @@
       return div.innerHTML;
     },
 
+    /* ====================================
+       PERFORMANCE
+       ==================================== */
+    
     /**
      * Debounce - Limite l'exécution d'une fonction
      * @param {Function} func - Fonction à debouncer
@@ -40,9 +57,9 @@
     },
 
     /**
-     * Throttle - Limite l'exécution d'une fonction dans le temps
+     * Throttle - Limite l'exécution dans le temps
      * @param {Function} func - Fonction à throttler
-     * @param {number} limit - Limite de temps en ms
+     * @param {number} limit - Limite en ms
      * @returns {Function} Fonction throttlée
      */
     throttle: function(func, limit) {
@@ -56,9 +73,13 @@
       };
     },
 
+    /* ====================================
+       DATE & HEURE
+       ==================================== */
+    
     /**
-     * Récupérer la date et l'heure actuelles formatées
-     * @returns {string} Heure formatée HH:MM
+     * Heure actuelle formatée
+     * @returns {string} HH:MM
      */
     getCurrentTime: function() {
       const now = new Date();
@@ -67,8 +88,8 @@
     },
 
     /**
-     * Récupérer la date formatée
-     * @returns {string} Date formatée DD/MM/YYYY
+     * Date actuelle formatée
+     * @returns {string} DD/MM/YYYY
      */
     getCurrentDate: function() {
       const now = new Date();
@@ -77,59 +98,33 @@
              now.getFullYear();
     },
 
+    /* ====================================
+       COOKIES
+       ==================================== */
+    
     /**
-     * Vérifier si un élément est visible dans le viewport
-     * @param {HTMLElement} element - Élément à vérifier
-     * @returns {boolean} True si visible
-     */
-    isInViewport: function(element) {
-      const rect = element.getBoundingClientRect();
-      return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-      );
-    },
-
-    /**
-     * Smooth scroll vers un élément
-     * @param {string|HTMLElement} target - Sélecteur CSS ou élément
-     * @param {number} offset - Décalage en pixels
-     */
-    smoothScrollTo: function(target, offset = 0) {
-      const element = typeof target === 'string' ? document.querySelector(target) : target;
-      if (!element) return;
-
-      const targetPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
-      
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
-    },
-
-    /**
-     * Gestion des cookies (support pour cookies.js)
+     * Récupérer un cookie
      * @param {string} name - Nom du cookie
-     * @returns {string|null} Valeur du cookie
+     * @returns {string|null} Valeur ou null
      */
     getCookie: function(name) {
       const nameEQ = name + "=";
       const ca = document.cookie.split(';');
       for (let i = 0; i < ca.length; i++) {
         let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        while (c.charAt(0) === ' ') c = c.substring(1);
+        if (c.indexOf(nameEQ) === 0) {
+          return c.substring(nameEQ.length);
+        }
       }
       return null;
     },
 
     /**
      * Définir un cookie
-     * @param {string} name - Nom du cookie
-     * @param {string} value - Valeur du cookie
-     * @param {number} days - Durée de vie en jours
+     * @param {string} name - Nom
+     * @param {string} value - Valeur
+     * @param {number} days - Durée en jours
      */
     setCookie: function(name, value, days) {
       const date = new Date();
@@ -140,10 +135,47 @@
 
     /**
      * Supprimer un cookie
-     * @param {string} name - Nom du cookie
+     * @param {string} name - Nom
      */
     deleteCookie: function(name) {
       document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;";
+    },
+
+    /* ====================================
+       VALIDATION
+       ==================================== */
+    
+    /**
+     * Valider un email
+     * @param {string} email - Email à valider
+     * @returns {boolean} True si valide
+     */
+    isValidEmail: function(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    },
+
+    /**
+     * Valider un téléphone haïtien
+     * @param {string} phone - Numéro
+     * @returns {boolean} True si valide
+     */
+    isValidHaitianPhone: function(phone) {
+      const cleaned = phone.replace(/[\s\-\(\)]/g, '');
+      return /^(\+?509)?[0-9]{8}$/.test(cleaned);
+    },
+
+    /* ====================================
+       FORMATAGE
+       ==================================== */
+    
+    /**
+     * Formater un nombre avec espaces
+     * @param {number} num - Nombre
+     * @returns {string} Formaté
+     */
+    formatNumber: function(num) {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     },
 
     /**
@@ -154,49 +186,23 @@
       return 'id_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     },
 
-    /**
-     * Formater un nombre avec des espaces
-     * @param {number} num - Nombre à formater
-     * @returns {string} Nombre formaté
-     */
-    formatNumber: function(num) {
-      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    },
-
-    /**
-     * Valider une adresse email
-     * @param {string} email - Email à valider
-     * @returns {boolean} True si valide
-     */
-    isValidEmail: function(email) {
-      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return re.test(email);
-    },
-
-    /**
-     * Valider un numéro de téléphone haïtien
-     * @param {string} phone - Numéro à valider
-     * @returns {boolean} True si valide
-     */
-    isValidHaitianPhone: function(phone) {
-      // Format: +509 XXXX-XXXX ou 509XXXXXXXX ou XXXXXXXX
-      const cleaned = phone.replace(/[\s\-\(\)]/g, '');
-      return /^(\+?509)?[0-9]{8}$/.test(cleaned);
-    },
-
+    /* ====================================
+       NOTIFICATIONS TOAST
+       ==================================== */
+    
     /**
      * Afficher une notification toast
-     * @param {string} message - Message à afficher
-     * @param {string} type - Type: 'success', 'error', 'warning', 'info'
+     * @param {string} message - Message
+     * @param {string} type - 'success', 'error', 'warning', 'info'
      * @param {number} duration - Durée en ms
      */
     showToast: function(message, type = 'info', duration = 3000) {
-      // Vérifier si le conteneur existe, sinon le créer
-      let toastContainer = document.getElementById('toast-container');
-      if (!toastContainer) {
-        toastContainer = document.createElement('div');
-        toastContainer.id = 'toast-container';
-        toastContainer.style.cssText = `
+      // Créer ou récupérer le conteneur
+      let container = document.getElementById('toast-container');
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.style.cssText = `
           position: fixed;
           top: 20px;
           right: 20px;
@@ -204,25 +210,25 @@
           display: flex;
           flex-direction: column;
           gap: 10px;
+          max-width: 350px;
         `;
-        document.body.appendChild(toastContainer);
+        document.body.appendChild(container);
       }
 
+      // Créer le toast
       const toast = document.createElement('div');
       toast.className = `toast toast-${type}`;
-      toast.textContent = message;
-      toast.style.cssText = `
-        padding: 16px 24px;
-        border-radius: 8px;
-        background: white;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        animation: slideInRight 0.3s ease;
-        max-width: 300px;
-        color: #333;
-        font-size: 14px;
-        border-left: 4px solid;
-      `;
-
+      toast.setAttribute('role', 'alert');
+      toast.setAttribute('aria-live', 'polite');
+      
+      // Icônes selon le type
+      const icons = {
+        success: '✅',
+        error: '❌',
+        warning: '⚠️',
+        info: 'ℹ️'
+      };
+      
       // Couleurs selon le type
       const colors = {
         success: '#28a745',
@@ -230,19 +236,51 @@
         warning: '#ffc107',
         info: '#0066CC'
       };
-      toast.style.borderLeftColor = colors[type] || colors.info;
 
-      toastContainer.appendChild(toast);
+      toast.innerHTML = `
+        <span aria-hidden="true" style="font-size: 20px; margin-right: 8px;">
+          ${icons[type] || icons.info}
+        </span>
+        <span>${this.escapeHtml(message)}</span>
+      `;
+      
+      toast.style.cssText = `
+        display: flex;
+        align-items: center;
+        padding: 16px 24px;
+        border-radius: 8px;
+        background: white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        animation: slideInRight 0.3s ease;
+        color: #333;
+        font-size: 14px;
+        border-left: 4px solid ${colors[type] || colors.info};
+        cursor: pointer;
+      `;
 
-      // Supprimer après la durée spécifiée
-      setTimeout(() => {
+      container.appendChild(toast);
+
+      // Fermer au clic
+      toast.addEventListener('click', () => {
         toast.style.animation = 'slideOutRight 0.3s ease';
         setTimeout(() => toast.remove(), 300);
+      });
+
+      // Fermer automatiquement
+      setTimeout(() => {
+        if (toast.parentNode) {
+          toast.style.animation = 'slideOutRight 0.3s ease';
+          setTimeout(() => toast.remove(), 300);
+        }
       }, duration);
     },
 
+    /* ====================================
+       DÉTECTION DEVICE
+       ==================================== */
+    
     /**
-     * Vérifier si l'utilisateur est sur mobile
+     * Vérifier si mobile
      * @returns {boolean} True si mobile
      */
     isMobile: function() {
@@ -250,7 +288,7 @@
     },
 
     /**
-     * Obtenir la taille de l'écran
+     * Taille d'écran
      * @returns {string} 'mobile', 'tablet' ou 'desktop'
      */
     getScreenSize: function() {
@@ -260,29 +298,35 @@
       return 'desktop';
     },
 
+    /* ====================================
+       LOGGING & TRACKING
+       ==================================== */
+    
     /**
-     * Logger avec timestamp (pour le développement)
-     * @param {string} message - Message à logger
-     * @param {*} data - Données supplémentaires
+     * Logger avec timestamp
+     * @param {string} message - Message
+     * @param {*} data - Données optionnelles
      */
     log: function(message, data) {
       if (typeof console !== 'undefined' && console.log) {
         const timestamp = this.getCurrentTime();
+        const prefix = `[EducaPsy ${timestamp}]`;
+        
         if (data !== undefined) {
-          console.log(`[${timestamp}] ${message}`, data);
+          console.log(prefix, message, data);
         } else {
-          console.log(`[${timestamp}] ${message}`);
+          console.log(prefix, message);
         }
       }
     },
 
     /**
-     * Tracker un événement (pour analytics)
+     * Tracker un événement (Google Analytics)
      * @param {string} eventName - Nom de l'événement
-     * @param {Object} eventData - Données de l'événement
+     * @param {Object} eventData - Données
      */
     trackEvent: function(eventName, eventData = {}) {
-      // Google Analytics
+      // Google Analytics (gtag)
       if (typeof gtag !== 'undefined') {
         gtag('event', eventName, {
           event_category: 'User Interaction',
@@ -290,42 +334,63 @@
         });
       }
       
-      // Log pour le développement
-      this.log('Event tracked:', { eventName, eventData });
+      // Log pour développement
+      this.log('📊 Event tracked:', { eventName, eventData });
     }
   };
 
-  // Ajouter les animations CSS nécessaires
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes slideInRight {
-      from {
-        transform: translateX(100%);
-        opacity: 0;
+  // Ajouter les animations CSS pour les toasts
+  if (!document.getElementById('toast-animations')) {
+    const style = document.createElement('style');
+    style.id = 'toast-animations';
+    style.textContent = `
+      @keyframes slideInRight {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
       }
-      to {
-        transform: translateX(0);
-        opacity: 1;
+      
+      @keyframes slideOutRight {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(100%);
+          opacity: 0;
+        }
       }
-    }
-    
-    @keyframes slideOutRight {
-      from {
-        transform: translateX(0);
-        opacity: 1;
-      }
-      to {
-        transform: translateX(100%);
-        opacity: 0;
-      }
-    }
-  `;
-  document.head.appendChild(style);
 
-  // Exposer les utilitaires globalement
+      #toast-container {
+        pointer-events: none;
+      }
+
+      #toast-container .toast {
+        pointer-events: all;
+      }
+
+      @media (max-width: 480px) {
+        #toast-container {
+          top: auto;
+          bottom: 20px;
+          right: 10px;
+          left: 10px;
+          max-width: none;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // Exposer globalement
   window.EducaPsy.Utils = Utils;
 
   // Log de chargement
-  Utils.log('Utils.js chargé avec succès');
+  Utils.log('✅ Utils.js chargé avec succès');
 
 })(window);
