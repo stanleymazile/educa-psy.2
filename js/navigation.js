@@ -1,6 +1,13 @@
 /**
- * NAVIGATION.JS - Gestion du menu et de la navigation
+ * NAVIGATION.JS - Gestion du menu et navigation
+ * Version: 2.0.0 - Épurée et Optimisée
  * Dépendances: utils.js
+ * 
+ * Fonctionnalités:
+ * - Menu déroulant mobile
+ * - Sélecteur de langue
+ * - Scroll behavior
+ * - Lien actif
  */
 
 (function() {
@@ -9,6 +16,7 @@
   const Navigation = {
     initialized: false,
     menuOpen: false,
+    elements: {}, // Stocker les références
 
     /**
      * Initialiser la navigation
@@ -20,32 +28,51 @@
       }
 
       this.initialized = true;
+      this.cacheElements();
       this.initMenu();
       this.initLanguageSelector();
       this.initScrollBehavior();
+      this.setActiveLink();
       
-      window.EducaPsy.Utils.log('Navigation initialisée');
+      window.EducaPsy.Utils.log('✅ Navigation initialisée');
+    },
+
+    /**
+     * Mettre en cache les éléments DOM
+     */
+    cacheElements: function() {
+      this.elements = {
+        btnMenu: document.getElementById('btnMenu'),
+        menuDeroulant: document.getElementById('liens-deroulants'),
+        selectLangue: document.getElementById('select-langue'),
+        header: document.getElementById('header'),
+        menuLinks: document.querySelectorAll('.item-menu')
+      };
+
+      // Vérifier que les éléments existent
+      if (!this.elements.btnMenu || !this.elements.menuDeroulant) {
+        console.error('❌ Éléments de menu manquants');
+        return false;
+      }
+
+      return true;
     },
 
     /**
      * Initialiser le menu déroulant
      */
     initMenu: function() {
-      const btnMenu = document.getElementById('btnMenu');
-      const menuDeroulant = document.getElementById('liens-deroulants');
-      
-      if (!btnMenu || !menuDeroulant) {
-        console.warn('Éléments de menu non trouvés');
-        return;
-      }
+      if (!this.cacheElements()) return;
 
-      // Toggle menu au clic sur le bouton
+      const { btnMenu, menuDeroulant } = this.elements;
+
+      // Toggle menu au clic
       btnMenu.addEventListener('click', (e) => {
         e.stopPropagation();
         this.toggleMenu();
       });
 
-      // Support clavier pour le bouton
+      // Support clavier
       btnMenu.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
@@ -53,7 +80,7 @@
         }
       });
 
-      // Fermer le menu si on clique ailleurs
+      // Fermer si clic ailleurs
       document.addEventListener('click', (e) => {
         if (this.menuOpen && 
             !menuDeroulant.contains(e.target) && 
@@ -62,15 +89,15 @@
         }
       });
 
-      // Fermer avec la touche Escape
+      // Fermer avec Escape
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && this.menuOpen) {
           this.closeMenu();
-          btnMenu.focus(); // Retour du focus
+          btnMenu.focus();
         }
       });
 
-      // Fermer le menu après clic sur un lien (mobile)
+      // Fermer après clic sur lien (mobile)
       menuDeroulant.addEventListener('click', (e) => {
         if (e.target.classList.contains('item-menu') && 
             window.innerWidth <= 768) {
@@ -78,7 +105,7 @@
         }
       });
 
-      // Fermer le menu si la fenêtre est redimensionnée en desktop
+      // Fermer si resize vers desktop
       window.addEventListener('resize', window.EducaPsy.Utils.debounce(() => {
         if (window.innerWidth > 768 && this.menuOpen) {
           this.closeMenu();
@@ -87,28 +114,23 @@
     },
 
     /**
-     * Ouvrir/fermer le menu
+     * Toggle menu
      */
     toggleMenu: function() {
-      if (this.menuOpen) {
-        this.closeMenu();
-      } else {
-        this.openMenu();
-      }
+      this.menuOpen ? this.closeMenu() : this.openMenu();
     },
 
     /**
      * Ouvrir le menu
      */
     openMenu: function() {
-      const btnMenu = document.getElementById('btnMenu');
-      const menuDeroulant = document.getElementById('liens-deroulants');
+      const { btnMenu, menuDeroulant } = this.elements;
       
       menuDeroulant.classList.add('actif');
       btnMenu.setAttribute('aria-expanded', 'true');
       this.menuOpen = true;
 
-      // Focus sur le premier lien
+      // Focus sur premier lien
       const firstLink = menuDeroulant.querySelector('.item-menu');
       if (firstLink) {
         setTimeout(() => firstLink.focus(), 100);
@@ -121,8 +143,7 @@
      * Fermer le menu
      */
     closeMenu: function() {
-      const btnMenu = document.getElementById('btnMenu');
-      const menuDeroulant = document.getElementById('liens-deroulants');
+      const { btnMenu, menuDeroulant } = this.elements;
       
       menuDeroulant.classList.remove('actif');
       btnMenu.setAttribute('aria-expanded', 'false');
@@ -135,9 +156,9 @@
      * Initialiser le sélecteur de langue
      */
     initLanguageSelector: function() {
-      const selectLangue = document.getElementById('select-langue');
+      const { selectLangue } = this.elements;
       if (!selectLangue) {
-        console.warn('Sélecteur de langue non trouvé');
+        console.warn('⚠️ Sélecteur de langue non trouvé');
         return;
       }
 
@@ -148,50 +169,49 @@
       }
 
       selectLangue.addEventListener('change', (e) => {
-        const langue = e.target.value;
-        this.changeLanguage(langue);
+        this.changeLanguage(e.target.value);
       });
     },
 
     /**
      * Changer la langue
-     * @param {string} langue - Code de la langue (fr, ht, en, es)
+     * @param {string} langue - Code langue (fr, ht, en, es)
      */
     changeLanguage: function(langue) {
-      // Sauvegarder la préférence
+      // Sauvegarder
       window.EducaPsy.Utils.setCookie('user_language', langue, 365);
       
-      // Logger l'événement
+      // Logger
       window.EducaPsy.Utils.trackEvent('language_changed', { language: langue });
-      window.EducaPsy.Utils.log('Langue changée:', langue);
+      window.EducaPsy.Utils.log('🌐 Langue changée:', langue);
 
-      // Afficher une notification
+      // Afficher notification
       const langNames = {
-        fr: 'Français',
-        ht: 'Kreyòl',
-        en: 'English',
-        es: 'Español'
+        fr: 'Français 🇫🇷',
+        ht: 'Kreyòl 🇭🇹',
+        en: 'English 🇬🇧',
+        es: 'Español 🇪🇸'
       };
       
       window.EducaPsy.Utils.showToast(
-        `Langue changée: ${langNames[langue] || langue}`, 
+        `Langue: ${langNames[langue] || langue}`, 
         'success', 
         2000
       );
 
       // TODO: Implémenter la traduction réelle
-      // Option 1: Redirection vers des pages traduites
+      // Option 1: Redirection
       // window.location.href = `/${langue}/index.html`;
       
-      // Option 2: Chargement dynamique des traductions
+      // Option 2: Chargement dynamique
       // this.loadTranslations(langue);
     },
 
     /**
-     * Initialiser les comportements au scroll
+     * Comportement au scroll
      */
     initScrollBehavior: function() {
-      const header = document.getElementById('header');
+      const { header } = this.elements;
       if (!header) return;
 
       let lastScrollTop = 0;
@@ -200,24 +220,12 @@
       const handleScroll = () => {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        // Ajouter une ombre au header lors du scroll
+        // Ombre au scroll
         if (scrollTop > 10) {
           header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
         } else {
           header.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.1)';
         }
-
-        // Masquer le header lors du scroll vers le bas (optionnel)
-        // Décommenter pour activer
-        /*
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-          // Scroll down
-          header.style.transform = 'translateY(-100%)';
-        } else {
-          // Scroll up
-          header.style.transform = 'translateY(0)';
-        }
-        */
 
         lastScrollTop = scrollTop;
         ticking = false;
@@ -225,46 +233,58 @@
 
       window.addEventListener('scroll', () => {
         if (!ticking) {
-          window.requestAnimationFrame(() => {
-            handleScroll();
-          });
+          window.requestAnimationFrame(handleScroll);
           ticking = true;
         }
-      });
+      }, { passive: true });
 
-      // Ajouter une transition fluide au header
-      header.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+      // Transition fluide
+      header.style.transition = 'box-shadow 0.3s ease';
     },
 
     /**
-     * Activer le lien correspondant à la page actuelle
+     * Marquer le lien actif
      */
     setActiveLink: function() {
       const currentPath = window.location.pathname;
-      const links = document.querySelectorAll('.item-menu');
+      const { menuLinks } = this.elements;
       
-      links.forEach(link => {
+      if (!menuLinks) return;
+
+      menuLinks.forEach(link => {
         const href = link.getAttribute('href');
-        if (currentPath.endsWith(href)) {
+        
+        // Vérifier si c'est la page actuelle
+        if (currentPath.endsWith(href) || 
+            (href === 'index.html' && currentPath === '/')) {
           link.setAttribute('aria-current', 'page');
           link.style.fontWeight = '700';
+          link.style.backgroundColor = 'var(--bleu-clair)';
+          link.style.color = 'var(--bleu-principal)';
         }
       });
+    },
+
+    /**
+     * Nettoyer (pour SPA)
+     */
+    cleanup: function() {
+      // Retirer les event listeners si nécessaire
+      this.initialized = false;
+      this.menuOpen = false;
+      this.elements = {};
+      window.EducaPsy.Utils.log('🧹 Navigation nettoyée');
     }
   };
 
-  // Initialiser au chargement du DOM
+  // Initialiser au chargement
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      Navigation.init();
-      Navigation.setActiveLink();
-    });
+    document.addEventListener('DOMContentLoaded', () => Navigation.init());
   } else {
     Navigation.init();
-    Navigation.setActiveLink();
   }
 
-  // Exposer globalement pour accès externe si nécessaire
+  // Exposer globalement
   window.EducaPsy = window.EducaPsy || {};
   window.EducaPsy.Navigation = Navigation;
 
