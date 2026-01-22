@@ -250,6 +250,249 @@
 }
 
 /* ====================================
+   SECTION ACTUALITÉS
+   ==================================== */
+
+.section-actualites {
+  padding: 60px var(--padding-mobile);
+  background: var(--blanc);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.section-actualites.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-actualites h2 {
+  text-align: center;
+  font-size: 26px;
+  color: var(--bleu-principal);
+  margin-bottom: 12px;
+}
+
+.section-actualites .subtitle {
+  text-align: center;
+  color: var(--gris-moyen);
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+.actualites-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.actualite-card {
+  background: var(--blanc);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+}
+
+.actualite-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.actualite-image {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, var(--bleu-principal) 0%, var(--bleu-fonce) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.actualite-icon {
+  font-size: 4rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.actualite-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--bleu-principal);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+.actualite-content {
+  padding: 24px;
+}
+
+.actualite-date {
+  color: var(--gris-moyen);
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.actualite-title {
+  color: var(--bleu-principal);
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.actualite-excerpt {
+  color: var(--gris-moyen);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.actualite-link {
+  color: var(--bleu-principal);
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap var(--transition-normal);
+}
+
+.actualite-link:hover {
+  gap: 10px;
+}
+
+/* ====================================
+   SECTION PARTENAIRES
+   ==================================== */
+
+.section-partenaires {
+  padding: 60px var(--padding-mobile);
+  background: var(--bleu-clair);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.section-partenaires.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-partenaires h2 {
+  text-align: center;
+  font-size: 26px;
+  color: var(--bleu-principal);
+  margin-bottom: 12px;
+}
+
+.section-partenaires .subtitle {
+  text-align: center;
+  color: var(--gris-moyen);
+  font-size: 16px;
+  max-width: 700px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+.partenaires-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+
+.partenaire-card {
+  background: var(--blanc);
+  padding: 28px 24px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: all var(--transition-normal);
+  border: 2px solid transparent;
+}
+
+.partenaire-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--bleu-principal);
+}
+
+.partenaire-logo {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 16px;
+  background: linear-gradient(135deg, var(--bleu-clair) 0%, #d4e8ff 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: var(--bleu-principal);
+  transition: all var(--transition-normal);
+}
+
+.partenaire-card:hover .partenaire-logo {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 8px 20px rgba(0, 102, 204, 0.2);
+}
+
+.partenaire-name {
+  color: var(--bleu-principal);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.partenaire-type {
+  color: var(--gris-moyen);
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.partenaire-description {
+  color: var(--gris-moyen);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.partenaires-cta {
+  text-align: center;
+}
+
+.btn-partenaire {
+  background: var(--bleu-principal);
+  color: var(--blanc);
+  padding: 14px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: all var(--transition-normal);
+  box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+}
+
+.btn-partenaire:hover {
+  background: var(--bleu-fonce);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+}
+
+/* ====================================
    RESPONSIVE - TABLET
    ==================================== */
 
@@ -275,13 +518,17 @@
 
   .section-apropos,
   .section-impact,
-  .section-don {
+  .section-don,
+  .section-actualites,
+  .section-partenaires {
     padding: 60px var(--padding-tablet);
   }
 
   .section-apropos h2,
   .section-impact h2,
-  .section-don h2 {
+  .section-don h2,
+  .section-actualites h2,
+  .section-partenaires h2 {
     font-size: 32px;
   }
 
@@ -297,6 +544,22 @@
 
   .stat-nombre {
     font-size: 48px;
+  }
+
+  .actualites-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .partenaires-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .partenaire-logo {
+    width: 120px;
+    height: 120px;
+    font-size: 3.5rem;
   }
 }
 
@@ -317,13 +580,16 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
   }
+
+  .partenaires-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* ====================================
    ANIMATIONS SUPPLÉMENTAIRES
    ==================================== */
 
-/* Animation pour les éléments au scroll */
 @media (prefers-reduced-motion: no-preference) {
   .valeur-item {
     animation: fadeInScale 0.5s ease-out backwards;
@@ -332,6 +598,25 @@
   .valeur-item:nth-child(1) { animation-delay: 0.1s; }
   .valeur-item:nth-child(2) { animation-delay: 0.2s; }
   .valeur-item:nth-child(3) { animation-delay: 0.3s; }
+
+  .actualite-card {
+    animation: fadeInScale 0.6s ease-out backwards;
+  }
+
+  .actualite-card:nth-child(1) { animation-delay: 0.1s; }
+  .actualite-card:nth-child(2) { animation-delay: 0.2s; }
+  .actualite-card:nth-child(3) { animation-delay: 0.3s; }
+
+  .partenaire-card {
+    animation: fadeInScale 0.6s ease-out backwards;
+  }
+
+  .partenaire-card:nth-child(1) { animation-delay: 0.1s; }
+  .partenaire-card:nth-child(2) { animation-delay: 0.2s; }
+  .partenaire-card:nth-child(3) { animation-delay: 0.3s; }
+  .partenaire-card:nth-child(4) { animation-delay: 0.4s; }
+  .partenaire-card:nth-child(5) { animation-delay: 0.5s; }
+  .partenaire-card:nth-child(6) { animation-delay: 0.6s; }
   
   @keyframes fadeInScale {
     from {
@@ -343,4 +628,4 @@
       transform: scale(1);
     }
   }
-}
+     }
