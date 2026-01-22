@@ -299,17 +299,16 @@
 .actualite-image {
   width: 100%;
   height: 200px;
-  background: linear-gradient(135deg, var(--bleu-principal) 0%, var(--bleu-fonce) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(135deg, var(--bleu-principal) 0%, var(--bleu-fonce) 100%);
 }
 
-.actualite-icon {
-  font-size: 4rem;
-  color: rgba(255, 255, 255, 0.3);
+.actualite-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .actualite-badge {
@@ -322,6 +321,8 @@
   border-radius: var(--radius-full);
   font-size: 0.85rem;
   font-weight: 600;
+  z-index: 1;
+  backdrop-filter: blur(10px);
 }
 
 .actualite-content {
@@ -417,6 +418,14 @@
   font-size: 3rem;
   color: var(--bleu-principal);
   transition: all var(--transition-normal);
+  overflow: hidden;
+}
+
+.partenaire-logo img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  border-radius: 50%;
 }
 
 .partenaire-card:hover .partenaire-logo {
@@ -467,6 +476,35 @@
   background: var(--bleu-fonce);
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+  color: var(--blanc);
+}
+
+/* ====================================
+   FOOTER SOCIAL
+   ==================================== */
+
+.footer-social {
+  margin-top: 16px;
+}
+
+.social-link {
+  display: inline-block;
+  background: var(--bleu-principal);
+  color: var(--blanc);
+  padding: 10px 24px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all var(--transition-normal);
+  box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+}
+
+.social-link:hover,
+.social-link:focus {
+  background: var(--bleu-fonce);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
   color: var(--blanc);
 }
 
@@ -591,4 +629,4 @@
       transform: scale(1);
     }
   }
-}
+   }
