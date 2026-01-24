@@ -1,6 +1,33 @@
 /* ====================================
    HOME.CSS - Styles spécifiques à la page d'accueil
+   Version améliorée avec nouvelle palette de couleurs
    ==================================== */
+
+/* ====================================
+   VARIABLES DE COULEURS ENRICHIES
+   ==================================== */
+
+:root {
+  /* Couleurs principales existantes */
+  --bleu-principal: #0066CC;
+  --bleu-fonce: #004999;
+  --bleu-clair: #E6F2FF;
+  --gris-fonce: #333333;
+  --gris-moyen: #666666;
+  --blanc: #FFFFFF;
+  
+  /* Nouvelles couleurs d'accent */
+  --orange-principal: #FF8C42;
+  --orange-fonce: #E67E22;
+  --orange-clair: #FFE5D4;
+  --vert-principal: #2ECC71;
+  --vert-fonce: #27AE60;
+  --vert-clair: #D4EFDF;
+  --jaune-principal: #F39C12;
+  --jaune-clair: #FEF5E7;
+  --violet-principal: #9B59B6;
+  --violet-clair: #F4ECF7;
+}
 
 /* ====================================
    HERO SECTION
@@ -36,14 +63,14 @@
 }
 
 .btnHero {
-  background-color: var(--blanc);
-  color: var(--bleu-principal);
+  background-color: var(--orange-principal);
+  color: var(--blanc);
   font-size: 15px;
   font-weight: bold;
   padding: 14px 32px;
   text-decoration: none;
   border-radius: var(--radius-full);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(255, 140, 66, 0.4);
   transition: all var(--transition-normal);
   display: inline-block;
   min-width: 200px;
@@ -52,10 +79,10 @@
 
 .btnHero:hover,
 .btnHero:focus {
-  background-color: var(--bleu-clair);
+  background-color: var(--orange-fonce);
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  color: var(--bleu-principal);
+  box-shadow: 0 6px 20px rgba(255, 140, 66, 0.5);
+  color: var(--blanc);
 }
 
 @keyframes fadeInUp {
@@ -156,11 +183,45 @@
   border-radius: var(--radius-md);
   transition: all var(--transition-normal);
   text-align: center;
+  border: 2px solid transparent;
 }
 
 .valeur-item:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
+}
+
+/* Couleurs spécifiques par carte */
+.valeur-item:nth-child(1) {
+  background: linear-gradient(135deg, var(--bleu-clair) 0%, #d4e8ff 100%);
+}
+
+.valeur-item:nth-child(1):hover {
+  border-color: var(--bleu-principal);
+}
+
+.valeur-item:nth-child(2) {
+  background: linear-gradient(135deg, var(--violet-clair) 0%, #f0e5f5 100%);
+}
+
+.valeur-item:nth-child(2):hover {
+  border-color: var(--violet-principal);
+}
+
+.valeur-item:nth-child(2) h3 {
+  color: var(--violet-principal);
+}
+
+.valeur-item:nth-child(3) {
+  background: linear-gradient(135deg, var(--orange-clair) 0%, #ffe0cc 100%);
+}
+
+.valeur-item:nth-child(3):hover {
+  border-color: var(--orange-principal);
+}
+
+.valeur-item:nth-child(3) h3 {
+  color: var(--orange-fonce);
 }
 
 .valeur-item h3 {
@@ -186,7 +247,7 @@
    ==================================== */
 
 .section-impact {
-  background-color: var(--bleu-clair);
+  background: linear-gradient(135deg, var(--bleu-clair) 0%, #e8f4ff 100%);
   padding: 40px var(--padding-mobile);
   text-align: center;
   opacity: 0;
@@ -221,6 +282,7 @@
   background: var(--blanc);
   border-radius: var(--radius-md);
   transition: all var(--transition-normal);
+  border: 2px solid transparent;
 }
 
 .stat-item:hover {
@@ -228,10 +290,44 @@
   box-shadow: var(--shadow-md);
 }
 
+.stat-item:nth-child(1):hover {
+  border-color: var(--vert-principal);
+}
+
+.stat-item:nth-child(1):hover .stat-nombre {
+  background: linear-gradient(135deg, var(--vert-principal), var(--vert-fonce));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-item:nth-child(2):hover {
+  border-color: var(--orange-principal);
+}
+
+.stat-item:nth-child(2):hover .stat-nombre {
+  background: linear-gradient(135deg, var(--orange-principal), var(--orange-fonce));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-item:nth-child(3):hover {
+  border-color: var(--bleu-principal);
+}
+
+.stat-item:nth-child(3):hover .stat-nombre {
+  background: linear-gradient(135deg, var(--bleu-principal), var(--bleu-fonce));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .stat-nombre {
   font-size: 36px;
   font-weight: bold;
   color: var(--bleu-principal);
+  transition: all var(--transition-normal);
 }
 
 .stat-label {
@@ -249,6 +345,7 @@
   opacity: 0;
   transform: translateY(30px);
   transition: opacity var(--transition-slow), transform var(--transition-slow);
+  background: linear-gradient(135deg, var(--orange-clair) 0%, #fff0e6 100%);
 }
 
 .section-don.visible {
@@ -258,7 +355,7 @@
 
 .section-don h2 {
   font-size: 26px;
-  color: var(--bleu-principal);
+  color: var(--orange-fonce);
   margin-bottom: 12px;
 }
 
@@ -274,12 +371,12 @@
 
 .btnDon a {
   color: var(--blanc);
-  background-color: var(--bleu-principal);
+  background: linear-gradient(135deg, var(--orange-principal) 0%, var(--orange-fonce) 100%);
   border-radius: var(--radius-full);
   font-weight: bold;
   font-size: 16px;
   text-decoration: none;
-  box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 140, 66, 0.4);
   transition: all var(--transition-normal);
   padding: 14px 40px;
   display: inline-block;
@@ -288,9 +385,8 @@
 
 .btnDon a:hover,
 .btnDon a:focus {
-  background-color: var(--bleu-fonce);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 140, 66, 0.5);
   color: var(--blanc);
 }
 
@@ -361,13 +457,28 @@
   top: 15px;
   left: 15px;
   background: rgba(255, 255, 255, 0.95);
-  color: var(--bleu-principal);
   padding: 6px 16px;
   border-radius: var(--radius-full);
   font-size: 0.85rem;
   font-weight: 600;
   z-index: 1;
   backdrop-filter: blur(10px);
+}
+
+/* Badges colorés selon le type */
+.actualite-card:nth-child(1) .actualite-badge {
+  color: var(--orange-fonce);
+  background: var(--orange-clair);
+}
+
+.actualite-card:nth-child(2) .actualite-badge {
+  color: var(--jaune-principal);
+  background: var(--jaune-clair);
+}
+
+.actualite-card:nth-child(3) .actualite-badge {
+  color: var(--vert-fonce);
+  background: var(--vert-clair);
 }
 
 .actualite-content {
@@ -399,7 +510,7 @@
 }
 
 .actualite-link {
-  color: var(--bleu-principal);
+  color: var(--orange-principal);
   font-weight: 600;
   text-decoration: none;
   display: inline-flex;
@@ -410,6 +521,7 @@
 
 .actualite-link:hover {
   gap: 10px;
+  color: var(--orange-fonce);
 }
 
 .actualites-cta {
@@ -418,7 +530,7 @@
 }
 
 .btn-actualites {
-  background: var(--bleu-principal);
+  background: linear-gradient(135deg, var(--bleu-principal) 0%, var(--bleu-fonce) 100%);
   color: var(--blanc);
   padding: 14px 32px;
   border-radius: var(--radius-full);
@@ -433,7 +545,6 @@
 
 .btn-actualites:hover,
 .btn-actualites:focus {
-  background: var(--bleu-fonce);
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
   color: var(--blanc);
@@ -445,13 +556,13 @@
 
 .section-partenaires {
   padding: 60px var(--padding-mobile);
-  background: var(--bleu-clair);
+  background: linear-gradient(135deg, var(--vert-clair) 0%, #e8f8f0 100%);
   text-align: center;
 }
 
 .section-partenaires h2 {
   font-size: 26px;
-  color: var(--bleu-principal);
+  color: var(--vert-fonce);
   margin-bottom: 12px;
 }
 
@@ -475,7 +586,7 @@
 .partenaire-card:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
-  border-color: var(--bleu-principal);
+  border-color: var(--vert-principal);
 }
 
 .partenaire-logo {
@@ -507,7 +618,7 @@
 }
 
 .partenaire-name {
-  color: var(--bleu-principal);
+  color: var(--vert-fonce);
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 8px;
@@ -532,7 +643,7 @@
 }
 
 .btn-partenaire {
-  background: var(--bleu-principal);
+  background: linear-gradient(135deg, var(--vert-principal) 0%, var(--vert-fonce) 100%);
   color: var(--blanc);
   padding: 14px 32px;
   border-radius: var(--radius-full);
@@ -540,15 +651,14 @@
   font-weight: 600;
   display: inline-block;
   transition: all var(--transition-normal);
-  box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
   min-width: 200px;
 }
 
 .btn-partenaire:hover,
 .btn-partenaire:focus {
-  background: var(--bleu-fonce);
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+  box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
   color: var(--blanc);
 }
 
@@ -709,4 +819,4 @@
       transform: scale(1);
     }
   }
-}
+   }
