@@ -1,6 +1,6 @@
 /* ====================================
-   COMPONENTS.CSS - Composants pour index.html uniquement
-   Version: 2.0.0 - Épurée et Optimisée
+   COMPONENTS.CSS - Composants pour Educa-Psy
+   Version: 2.1.0 - Intégration Carrousel Optimisée
    ==================================== */
 
 /* ====================================
@@ -42,32 +42,12 @@
   color: var(--bleu-principal);
 }
 
-.btnHero:active {
-  transform: translateY(-1px);
-}
-
 /* Bouton Don */
 .btn-don {
   color: var(--blanc);
   background: linear-gradient(135deg, var(--bleu-principal) 0%, var(--bleu-fonce) 100%);
   box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
   min-width: 200px;
-}
-
-/* Effet de brillance au survol */
-.btn-don::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
-}
-
-.btn-don:hover::before {
-  left: 100%;
 }
 
 .btn-don:hover,
@@ -77,16 +57,117 @@
   color: var(--blanc);
 }
 
-.btn-don:active {
-  transform: translateY(-1px) scale(1);
+/* ====================================
+   CAROUSEL (Actualités & Partenaires)
+   ==================================== */
+
+.actualites-carousel-wrapper, 
+.partenaires-carousel-wrapper {
+  width: 100%;
+  overflow: hidden; /* Empêche le débordement sur desktop */
+  position: relative;
+  margin: 20px 0;
 }
 
-/* États désactivés */
-.btnHero:disabled,
-.btn-don:disabled {
-  opacity: 0.6;
+.actualites-carousel, 
+.partenaires-carousel {
+  display: flex;
+  transition: transform var(--transition-normal);
+  will-change: transform;
+}
+
+/* --- OPTIMISATION MOBILE (< 768px) --- */
+@media (max-width: 767px) {
+  .actualites-carousel, 
+  .partenaires-carousel {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    gap: 16px;
+    padding: 0 20px; /* Aligne la première carte */
+  }
+
+  .actualites-carousel::-webkit-scrollbar,
+  .partenaires-carousel::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+
+  .actualite-card, 
+  .partenaire-card {
+    flex: 0 0 85% !important; /* Laisse voir 15% de la carte suivante pour le "peek" */
+    scroll-snap-align: start;
+  }
+}
+
+/* --- INDICATEURS (DOTS) --- */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 25px 0;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--bleu-clair);
+  border: 2px solid var(--bleu-principal);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  padding: 0;
+}
+
+.carousel-dot.active {
+  background-color: var(--bleu-principal);
+  width: 24px; /* Effet pilule */
+  border-radius: 6px;
+}
+
+/* --- BOUTONS NAVIGATION (Desktop) --- */
+.carousel-controls {
+  display: none;
+  justify-content: space-between;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  z-index: 10;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+@media (min-width: 768px) {
+  .carousel-controls {
+    display: flex;
+  }
+}
+
+.carousel-btn {
+  pointer-events: auto;
+  background: var(--blanc);
+  border: 1px solid var(--bleu-principal);
+  color: var(--bleu-principal);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  box-shadow: var(--shadow-md);
+}
+
+.carousel-btn:hover:not(:disabled) {
+  background: var(--bleu-principal);
+  color: var(--blanc);
+}
+
+.carousel-btn:disabled {
+  opacity: 0.3;
   cursor: not-allowed;
-  transform: none !important;
 }
 
 /* ====================================
@@ -117,66 +198,22 @@
   font-size: 20px;
   color: var(--bleu-principal);
   margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.valeur-item p {
-  color: var(--gris-moyen);
-  line-height: 1.6;
-  font-size: 14px;
-  margin: 0;
 }
 
 /* Statistiques */
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  text-align: center;
-}
-
 .stat-nombre {
   font-size: 36px;
   font-weight: bold;
   color: var(--bleu-principal);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
-}
-
-.stat-label {
-  font-size: 14px;
-  color: var(--gris-moyen);
-  font-weight: 500;
 }
 
 /* ====================================
-   ALERTS (Pour cookies uniquement)
+   ANIMATIONS & ACCESSIBILITÉ
    ==================================== */
 
-.alert {
-  padding: 16px;
-  border-radius: var(--radius-sm);
-  margin-bottom: 20px;
-  border-left: 4px solid;
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
-
-.alert-success {
-  background-color: #d4edda;
-  color: #155724;
-  border-color: var(--success);
-}
-
-.alert-info {
-  background-color: #d1ecf1;
-  color: #0c5460;
-  border-color: var(--info);
-}
-
-/* ====================================
-   LOADING SPINNER (Minimal)
-   ==================================== */
 
 .spinner {
   border: 4px solid rgba(0, 102, 204, 0.2);
@@ -188,158 +225,17 @@
   margin: 0 auto;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* ====================================
-   ANIMATIONS
-   ==================================== */
-
-/* Fade In */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Scale In */
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.9) translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-/* Pulse pour compteur */
-.stat-nombre.counting {
-  animation: pulse 0.5s ease-in-out;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-/* ====================================
-   RESPONSIVE
-   ==================================== */
-
-@media (min-width: 768px) {
-  .btnHero,
-  .btn-don {
-    padding: 16px 40px;
-    font-size: 16px;
-  }
-
-  .valeur-item,
-  .stat-item {
-    padding: 28px 24px;
-  }
-
-  .stat-nombre {
-    font-size: 48px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .valeur-item {
-    padding: 32px 24px;
-  }
-
-  .stat-nombre {
-    font-size: 56px;
-  }
-}
-
-@media (max-width: 480px) {
-  .btnHero,
-  .btn-don {
-    padding: 12px 24px;
-    font-size: 14px;
-    min-width: 160px;
-  }
-
-  .valeur-item h3 {
-    font-size: 18px;
-  }
-
-  .stat-nombre {
-    font-size: 32px;
-  }
-}
-
-/* ====================================
-   ACCESSIBILITÉ
-   ==================================== */
-
-/* Focus visible */
-.btnHero:focus-visible,
-.btn-don:focus-visible,
-.valeur-item:focus-visible,
-.stat-item:focus-visible {
-  outline: 3px solid var(--bleu-principal);
-  outline-offset: 2px;
-}
-
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .btnHero,
-  .btn-don,
-  .valeur-item,
-  .stat-item {
+  * {
     transition: none !important;
     animation: none !important;
   }
-
-  .btnHero:hover,
-  .btn-don:hover,
-  .valeur-item:hover,
-  .stat-item:hover {
-    transform: none !important;
-  }
-
-  .spinner {
-    animation-duration: 2s;
-  }
 }
 
-/* High contrast mode */
-@media (prefers-contrast: high) {
-  .btnHero,
-  .btn-don {
-    border: 2px solid currentColor;
-  }
-
-  .valeur-item,
-  .stat-item {
-    border: 2px solid var(--gris-fonce);
-  }
-}
-
-/* ====================================
-   PRINT STYLES
-   ==================================== */
-
+/* Styles d'impression */
 @media print {
-  .btnHero,
-  .btn-don {
-    display: none;
-  }
-
-  .valeur-item,
-  .stat-item {
-    box-shadow: none !important;
-    border: 1px solid #ccc;
-    page-break-inside: avoid;
+  .carousel-controls, .carousel-dots, .btnHero, .btn-don {
+    display: none !important;
   }
 }
+
