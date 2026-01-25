@@ -20,77 +20,33 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages/home.css">
   
-  <!-- Preconnect pour performance -->
-  <link rel="preconnect" href="https://www.googletagmanager.com">
-  
-  <!-- Open Graph pour réseaux sociaux -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Educa-Psy - Éducation pour chaque enfant en Haïti">
   <meta property="og:description" content="Accompagner la réussite scolaire et le bien-être psychologique des enfants vulnérables">
   <meta property="og:image" content="https://www.educa-psy.web.app/images/Logo.webp">
   <meta property="og:url" content="https://www.educa-psy.web.app">
-  <meta property="og:locale" content="fr_HT">
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Educa-Psy - Éducation en Haïti">
-  <meta name="twitter:description" content="Accompagner la réussite scolaire et le bien-être psychologique">
-  <meta name="twitter:image" content="https://www.educa-psy.web.app/images/Logo.webp">
-  
-  <!-- Schema.org Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "NGO",
-    "name": "Educa-Psy",
-    "alternateName": "Educa-Psy Haiti",
-    "description": "Organisation dédiée à l'éducation et au bien-être psychologique des enfants et jeunes vulnérables en Haïti",
-    "url": "https://www.educa-psy.web.app",
-    "logo": "https://www.educa-psy.web.app/images/Logo.webp",
-    "foundingDate": "2024",
-    "foundingLocation": {
-      "@type": "Place",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "HT",
-        "addressLocality": "Port-au-Prince"
-      }
-    },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+509-3685-9684",
-      "email": "educapsyhaiti@gmail.com",
-      "contactType": "Customer Service",
-      "availableLanguage": ["French", "Haitian Creole"]
-    },
-    "sameAs": [
-      "https://linktr.ee/educapsyhaiti",
-      "https://www.facebook.com/educapsy",
-      "https://www.instagram.com/educapsy"
-    ]
-  }
-  </script>
   
   <!-- Canonical URL -->
   <link rel="canonical" href="https://www.educa-psy.web.app/index.html">
 </head>
 
 <body>
-  <!-- Skip to main content pour accessibilité -->
+  <!-- Skip to main content -->
   <a href="#main-content" class="skip-to-main">Aller au contenu principal</a>
 
   <!-- Header -->
   <header id="header" role="banner">
     <div id="logoTitre">
-      <img src="images/Logo.webp" alt="Logo Educa-Psy - Éducation et Psychologie" id="logo" width="40" height="40" loading="eager"> 
+      <img src="images/Logo.webp" alt="Logo Educa-Psy" id="logo" width="40" height="40" loading="eager"> 
       <h1 id="titre">
-        <a href="index.html" aria-label="Retour à l'accueil Educa-Psy">Educa-Psy</a>
+        <a href="index.html" aria-label="Retour à l'accueil">Educa-Psy</a>
       </h1>
     </div>
 
     <div id="langueMenu">
       <label for="select-langue" class="sr-only">Langue</label>
-      <select id="select-langue" aria-label="Sélectionner la langue du site">
+      <select id="select-langue" aria-label="Sélectionner la langue">
         <option value="fr" selected>🇫🇷 FR</option>
         <option value="ht">🇭🇹 KR</option>
         <option value="en">🇬🇧 EN</option>
@@ -98,7 +54,7 @@
       </select>
 
       <div id="menuContainer">
-        <button id="btnMenu" aria-label="Ouvrir le menu de navigation" aria-expanded="false" aria-controls="liens-deroulants">
+        <button id="btnMenu" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="liens-deroulants">
           <span aria-hidden="true">☰</span>
         </button>
         <nav id="liens-deroulants" aria-label="Navigation principale">
@@ -121,7 +77,7 @@
     <section class="hero" aria-labelledby="hero-titre">
       <h2 id="hero-titre" class="hero-titre">Accompagner les enfants et les jeunes vulnérables d'Haïti</h2>
       <p class="hero-description">Pour une éducation de qualité, le bien-être psychologique et l'épanouissement professionnel</p>
-      <a href="services.html" class="btnHero" aria-label="Découvrir nos services d'éducation et de psychologie">Découvrir nos services</a>
+      <a href="services.html" class="btnHero" aria-label="Découvrir nos services">Découvrir nos services</a>
     </section>
 
     <!-- Section À propos -->
@@ -130,10 +86,42 @@
       <p>Rendre accessibles les services psychologiques et éducatifs en Haïti à travers des partenariats solides et des accompagnements personnalisés pour chaque enfant.</p>
     </section>
 
-    <!-- Section Image ODD -->
+    <!-- Section Galerie ODD -->
     <section class="section-odd" aria-label="Objectifs de développement durable">
       <div class="odd-container">
-        <img src="images/Odd.webp" alt="Objectifs de Développement Durable - Educa-Psy" loading="lazy">
+        <div class="odd-gallery">
+          <div class="odd-gallery-item">
+            <img src="images/Odd.webp" alt="Objectifs de Développement Durable" loading="lazy">
+            <div class="odd-gallery-caption">
+              <h3>ODD - Éducation de Qualité</h3>
+              <p>Nos actions s'alignent sur les objectifs de développement durable</p>
+            </div>
+          </div>
+          
+          <div class="odd-gallery-item">
+            <img src="images/Art.webp" alt="Art et Culture" loading="lazy">
+            <div class="odd-gallery-caption">
+              <h3>Art et Culture</h3>
+              <p>Développement artistique et culturel des jeunes</p>
+            </div>
+          </div>
+          
+          <div class="odd-gallery-item">
+            <img src="images/Genre3.webp" alt="Égalité des genres" loading="lazy">
+            <div class="odd-gallery-caption">
+              <h3>Égalité et Inclusion</h3>
+              <p>Promouvoir l'égalité pour tous les enfants</p>
+            </div>
+          </div>
+          
+          <div class="odd-gallery-item">
+            <img src="images/Droit.webp" alt="Droits de l'enfant" loading="lazy">
+            <div class="odd-gallery-caption">
+              <h3>Droits de l'Enfant</h3>
+              <p>Protection et respect des droits fondamentaux</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -160,9 +148,9 @@
     <!-- Section Impact -->
     <section class="section-impact" aria-labelledby="impact-titre">
       <h2 id="impact-titre">Notre Impact en Chiffres</h2>
-      <div class="statistiques" role="list" aria-label="Statistiques de notre impact">
+      <div class="statistiques" role="list" aria-label="Statistiques">
         <div class="stat-item" role="listitem">
-          <span class="stat-nombre" aria-label="500 enfants et jeunes touchés">500+</span>
+          <span class="stat-nombre" aria-label="500 enfants touchés">500+</span>
           <span class="stat-label">Enfants et jeunes touchés</span>
         </div>
         <div class="stat-item" role="listitem">
@@ -170,7 +158,7 @@
           <span class="stat-label">Écoles partenaires</span>
         </div>
         <div class="stat-item" role="listitem">
-          <span class="stat-nombre" aria-label="15 professionnels dévoués">15+</span>
+          <span class="stat-nombre" aria-label="15 professionnels">15+</span>
           <span class="stat-label">Professionnels dévoués</span>
         </div>
       </div>
@@ -181,140 +169,144 @@
       <h2 id="don-titre">Soutenez Notre Mission</h2>
       <p>Votre contribution nous aide à offrir une éducation de qualité et un soutien psychologique aux enfants vulnérables d'Haïti. Chaque don compte et fait la différence.</p>
       <div class="btnDon">
-        <a href="https://gofund.me/28558424a" class="btn-don" target="_blank" rel="noopener noreferrer" aria-label="Faire un don pour soutenir Educa-Psy via GoFundMe">
+        <a href="https://gofund.me/28558424a" class="btn-don" target="_blank" rel="noopener noreferrer" aria-label="Faire un don via GoFundMe">
           <span aria-hidden="true">❤️</span> Faire un Don
         </a>
       </div>
     </section>
 
-    <!-- Section Actualités -->
+    <!-- Section Actualités - CARROUSEL -->
     <section class="section-actualites" aria-labelledby="actualites-titre">
       <h2 id="actualites-titre">📰 Nos Actualités</h2>
       <p class="subtitle">Suivez nos dernières actions, événements et nouvelles sur le terrain</p>
       
-      <div class="actualites-grid">
-        
-        <article class="actualite-card">
-          <div class="actualite-image">
-            <img src="images/Genre3.webp" alt="Programme de mentorat 2026" loading="lazy">
-            <span class="actualite-badge">Nouveau</span>
-          </div>
-          <div class="actualite-content">
-            <div class="actualite-date">
-              <span aria-hidden="true">📅</span> 15 janvier 2026
+      <div class="actualites-carousel-wrapper">
+        <div class="actualites-carousel">
+          
+          <article class="actualite-card">
+            <div class="actualite-image">
+              <img src="images/Genre3.webp" alt="Programme de mentorat 2026" loading="lazy">
+              <span class="actualite-badge">Nouveau</span>
             </div>
-            <h3 class="actualite-title">Lancement du programme de mentorat 2026</h3>
-            <p class="actualite-excerpt">
-              Nous sommes fiers d'annoncer le lancement de notre nouveau programme de mentorat qui accompagnera 150 jeunes cette année dans leur parcours scolaire et professionnel.
-            </p>
-            <a href="blog.html" class="actualite-link" aria-label="Lire l'article complet sur le programme de mentorat">
-              Lire la suite →
-            </a>
-          </div>
-        </article>
-
-        <article class="actualite-card">
-          <div class="actualite-image">
-            <img src="images/Droit.webp" alt="Formation des enseignants" loading="lazy">
-            <span class="actualite-badge">Événement</span>
-          </div>
-          <div class="actualite-content">
-            <div class="actualite-date">
-              <span aria-hidden="true">📅</span> 10 janvier 2026
+            <div class="actualite-content">
+              <div class="actualite-date">
+                <span aria-hidden="true">📅</span> 15 janvier 2026
+              </div>
+              <h3 class="actualite-title">Lancement du programme de mentorat 2026</h3>
+              <p class="actualite-excerpt">
+                Nous sommes fiers d'annoncer le lancement de notre nouveau programme de mentorat qui accompagnera 150 jeunes cette année dans leur parcours scolaire et professionnel.
+              </p>
+              <a href="blog.html" class="actualite-link" aria-label="Lire l'article">
+                Lire la suite →
+              </a>
             </div>
-            <h3 class="actualite-title">Formation des enseignants sur la santé mentale</h3>
-            <p class="actualite-excerpt">
-              Une formation intensive de 3 jours a permis à 45 enseignants de mieux comprendre et accompagner les élèves en détresse psychologique.
-            </p>
-            <a href="blog.html" class="actualite-link" aria-label="Lire l'article complet sur la formation des enseignants">
-              Lire la suite →
-            </a>
-          </div>
-        </article>
+          </article>
 
-        <article class="actualite-card">
-          <div class="actualite-image">
-            <img src="images/Droit1.webp" alt="Bilan annuel 2025" loading="lazy">
-            <span class="actualite-badge">Impact</span>
-          </div>
-          <div class="actualite-content">
-            <div class="actualite-date">
-              <span aria-hidden="true">📅</span> 5 janvier 2026
+          <article class="actualite-card">
+            <div class="actualite-image">
+              <img src="images/Droit.webp" alt="Formation des enseignants" loading="lazy">
+              <span class="actualite-badge">Événement</span>
             </div>
-            <h3 class="actualite-title">Bilan 2025 : 500+ enfants soutenus</h3>
-            <p class="actualite-excerpt">
-              Retour sur une année exceptionnelle marquée par l'accompagnement de plus de 500 enfants et jeunes vulnérables à travers nos différents programmes.
-            </p>
-            <a href="blog.html" class="actualite-link" aria-label="Lire le bilan complet de l'année 2025">
-              Lire la suite →
-            </a>
-          </div>
-        </article>
+            <div class="actualite-content">
+              <div class="actualite-date">
+                <span aria-hidden="true">📅</span> 10 janvier 2026
+              </div>
+              <h3 class="actualite-title">Formation des enseignants sur la santé mentale</h3>
+              <p class="actualite-excerpt">
+                Une formation intensive de 3 jours a permis à 45 enseignants de mieux comprendre et accompagner les élèves en détresse psychologique.
+              </p>
+              <a href="blog.html" class="actualite-link" aria-label="Lire l'article">
+                Lire la suite →
+              </a>
+            </div>
+          </article>
 
+          <article class="actualite-card">
+            <div class="actualite-image">
+              <img src="images/Droit1.webp" alt="Bilan annuel 2025" loading="lazy">
+              <span class="actualite-badge">Impact</span>
+            </div>
+            <div class="actualite-content">
+              <div class="actualite-date">
+                <span aria-hidden="true">📅</span> 5 janvier 2026
+              </div>
+              <h3 class="actualite-title">Bilan 2025 : 500+ enfants soutenus</h3>
+              <p class="actualite-excerpt">
+                Retour sur une année exceptionnelle marquée par l'accompagnement de plus de 500 enfants et jeunes vulnérables à travers nos différents programmes.
+              </p>
+              <a href="blog.html" class="actualite-link" aria-label="Lire le bilan">
+                Lire la suite →
+              </a>
+            </div>
+          </article>
+
+        </div>
       </div>
 
       <div class="actualites-cta">
-        <a href="blog.html" class="btn-actualites" aria-label="Voir tous nos articles et actualités">
+        <a href="blog.html" class="btn-actualites" aria-label="Voir tous les articles">
           📰 Plus d'Articles
         </a>
       </div>
     </section>
 
-    <!-- Section Partenaires -->
+    <!-- Section Partenaires - CARROUSEL -->
     <section class="section-partenaires" aria-labelledby="partenaires-titre">
       <h2 id="partenaires-titre">🤝 Nos Partenaires</h2>
       <p class="subtitle">Ensemble, nous construisons un avenir meilleur pour les enfants d'Haïti</p>
       
-      <div class="partenaires-grid" role="list" aria-label="Nos partenaires">
-        
-        <article class="partenaire-card" role="listitem">
-          <div class="partenaire-logo">
-            <img src="images/Auf.webp" alt="Logo AUF" loading="lazy">
-          </div>
-          <h3 class="partenaire-name">AUF</h3>
-          <p class="partenaire-type">Partenaire Académique</p>
-          <p class="partenaire-description">
-            L'Agence Universitaire de la Francophonie nous accompagne dans le développement de nos programmes éducatifs.
-          </p>
-        </article>
+      <div class="partenaires-carousel-wrapper">
+        <div class="partenaires-carousel">
+          
+          <article class="partenaire-card" role="listitem">
+            <div class="partenaire-logo">
+              <img src="images/Auf.webp" alt="Logo AUF" loading="lazy">
+            </div>
+            <h3 class="partenaire-name">AUF</h3>
+            <p class="partenaire-type">Partenaire Académique</p>
+            <p class="partenaire-description">
+              L'Agence Universitaire de la Francophonie nous accompagne dans le développement de nos programmes éducatifs.
+            </p>
+          </article>
 
-        <article class="partenaire-card" role="listitem">
-          <div class="partenaire-logo">
-            <img src="images/Fanm.webp" alt="Logo FANM" loading="lazy">
-          </div>
-          <h3 class="partenaire-name">FANM</h3>
-          <p class="partenaire-type">Autonomisation des femmes</p>
-          <p class="partenaire-description">
-            Partenariat pour l'autonomisation et l'accompagnement des jeunes filles et femmes vulnérables.
-          </p>
-        </article>
+          <article class="partenaire-card" role="listitem">
+            <div class="partenaire-logo">
+              <img src="images/Fanm.webp" alt="Logo FANM" loading="lazy">
+            </div>
+            <h3 class="partenaire-name">FANM</h3>
+            <p class="partenaire-type">Autonomisation des femmes</p>
+            <p class="partenaire-description">
+              Partenariat pour l'autonomisation et l'accompagnement des jeunes filles et femmes vulnérables.
+            </p>
+          </article>
 
-        <article class="partenaire-card" role="listitem">
-          <div class="partenaire-logo">
-            <img src="images/Ajart.webp" alt="Logo AJART" loading="lazy">
-          </div>
-          <h3 class="partenaire-name">AJART</h3>
-          <p class="partenaire-type">Art et Culture</p>
-          <p class="partenaire-description">
-            Collaboration pour le développement artistique et culturel des jeunes à travers des ateliers créatifs.
-          </p>
-        </article>
+          <article class="partenaire-card" role="listitem">
+            <div class="partenaire-logo">
+              <img src="images/Ajart.webp" alt="Logo AJART" loading="lazy">
+            </div>
+            <h3 class="partenaire-name">AJART</h3>
+            <p class="partenaire-type">Art et Culture</p>
+            <p class="partenaire-description">
+              Collaboration pour le développement artistique et culturel des jeunes à travers des ateliers créatifs.
+            </p>
+          </article>
 
-        <article class="partenaire-card" role="listitem">
-          <div class="partenaire-logo">
-            <img src="images/Ecole.webp" alt="Logo Écoles Partenaires" loading="lazy">
-          </div>
-          <h3 class="partenaire-name">Écoles Partenaires</h3>
-          <p class="partenaire-type">Réseau éducatif</p>
-          <p class="partenaire-description">
-            20+ établissements scolaires collaborent avec nous pour offrir un soutien éducatif de qualité.
-          </p>
-        </article>
+          <article class="partenaire-card" role="listitem">
+            <div class="partenaire-logo">
+              <img src="images/Ecole.webp" alt="Logo Écoles Partenaires" loading="lazy">
+            </div>
+            <h3 class="partenaire-name">Écoles Partenaires</h3>
+            <p class="partenaire-type">Réseau éducatif</p>
+            <p class="partenaire-description">
+              20+ établissements scolaires collaborent avec nous pour offrir un soutien éducatif de qualité.
+            </p>
+          </article>
 
+        </div>
       </div>
 
       <div class="partenaires-cta">
-        <a href="contact.html" class="btn-partenaire" aria-label="Contactez-nous pour devenir partenaire">
+        <a href="contact.html" class="btn-partenaire" aria-label="Devenir partenaire">
           🤝 Devenir Partenaire
         </a>
       </div>
@@ -330,15 +322,14 @@
         <h3>Educa-Psy</h3>
         <p>Organisation haïtienne à but non lucratif dédiée à promouvoir l'éducation de qualité et le bien-être psychologique des enfants et jeunes vulnérables.</p>
         
-        <!-- Réseaux sociaux -->
         <div class="footer-social">
-          <a href="https://linktr.ee/educapsyhaiti" target="_blank" rel="noopener noreferrer" aria-label="Suivez-nous sur nos réseaux sociaux via Linktree" class="social-link">
+          <a href="https://linktr.ee/educapsyhaiti" target="_blank" rel="noopener noreferrer" aria-label="Nos réseaux sociaux" class="social-link">
             🔗 Nos Réseaux Sociaux
           </a>
         </div>
       </div>
 
-      <nav class="footerMilieu" aria-label="Navigation du pied de page">
+      <nav class="footerMilieu" aria-label="Navigation footer">
         <h3>Liens Rapides</h3>
         <ul>
           <li><a href="index.html" aria-current="page">Accueil</a></li>
@@ -380,22 +371,9 @@
   <!-- Scripts - Ordre Optimisé -->
   <script src="js/utils.js"></script>
   <script src="js/navigation.js"></script>
+  <script src="js/carousel.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/cookies.js"></script>
   
-  <!-- Service Worker Registration -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-          .then(registration => {
-            console.log('Service Worker enregistré:', registration);
-          })
-          .catch(error => {
-            console.log('Erreur Service Worker:', error);
-          });
-      });
-    }
-  </script>
 </body>
-          </html>
+  </html>
