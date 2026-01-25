@@ -1,20 +1,20 @@
 /* ====================================
-   COMPONENTS.CSS - Version 3.0.0
-   Design: Modern Luxury (Articles) & Minimalist Pro (Logos)
+   COMPONENTS.CSS - Version 4.0.0
+   Design: Ultra-Minimaliste (Sans dégradé, sans description)
    ==================================== */
 
-/* --- VARIABLES LOCALES --- */
+/* --- VARIABLES --- */
 :root {
-  --transition-main: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
-  --shadow-hover: 0 20px 40px rgba(0, 102, 204, 0.12);
+  --transition-fast: all 0.3s ease;
+  --shadow-flat: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
-/* --- ANIMATIONS DE RÉVÉLATION (REVEAL) --- */
+/* --- ANIMATIONS DE RÉVÉLATION --- */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .reveal.active {
@@ -23,209 +23,175 @@
 }
 
 /* --- BOUTONS --- */
-.btnHero, .btn-don, .btn-actualites, .btn-partenaire {
+.btnHero, .btn-don {
   display: inline-block;
-  padding: 14px 32px;
-  border-radius: 50px;
+  padding: 14px 30px;
+  border-radius: 8px; /* Look plus carré/pro */
   font-weight: 700;
   text-decoration: none;
-  transition: var(--transition-main);
+  transition: var(--transition-fast);
   cursor: pointer;
   border: none;
-  font-size: 15px;
 }
 
 .btnHero {
   background: var(--blanc);
   color: var(--bleu-principal);
-  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--bleu-principal);
 }
 
 .btn-don {
   color: var(--blanc);
-  background: linear-gradient(135deg, var(--bleu-principal) 0%, var(--bleu-fonce) 100%);
+  background: var(--bleu-principal);
 }
 
 .btnHero:hover, .btn-don:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-flat);
 }
 
 /* --- STRUCTURE CAROUSEL --- */
-.actualites-carousel-wrapper, 
-.partenaires-carousel-wrapper {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  padding: 20px 0;
-}
-
 .actualites-carousel, 
 .partenaires-carousel {
   display: flex;
   gap: 20px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
   scroll-behavior: smooth;
-  padding: 10px;
+  padding: 20px 0;
 }
 
 .actualites-carousel::-webkit-scrollbar, 
 .partenaires-carousel::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  display: none;
 }
 
-/* --- 📰 ARTICLES (MODERN LUXURY AVEC DÉGRADÉ) --- */
+/* --- 📰 ACTUALITÉS : TITRE + LIEN UNIQUEMENT --- */
 .actualite-card {
-  flex: 0 0 350px; /* Largeur fixe sur desktop */
+  flex: 0 0 320px;
   scroll-snap-align: start;
   background: var(--blanc);
-  border-radius: 24px;
-  position: relative;
+  border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(0,0,0,0.03);
-  box-shadow: var(--shadow-soft);
-  transition: var(--transition-main);
+  border: 1px solid #eee;
+  transition: var(--transition-fast);
 }
 
 .actualite-image {
-  position: relative;
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
-}
-
-/* Dégradé blanc uniquement sur les articles */
-.actualite-image::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
-  height: 65%;
-  background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-  z-index: 1;
+  aspect-ratio: 16 / 9;
 }
 
 .actualite-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1s ease;
 }
 
 .actualite-content {
-  padding: 0 25px 25px;
-  position: relative;
-  z-index: 2;
-  margin-top: -45px; /* Chevauchement sur l'image */
+  padding: 20px;
+}
+
+/* Suppression de toute description */
+.actualite-card p, 
+.actualite-excerpt,
+.actualite-description {
+  display: none !important;
+}
+
+.actualite-date {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 8px;
+  display: block;
 }
 
 .actualite-title {
-  font-size: 19px;
-  font-weight: 800;
-  color: #1a1a1a;
-  line-height: 1.3;
-  min-height: 2.6em;
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
   margin-bottom: 15px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .actualite-link {
   color: var(--bleu-principal);
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: none;
   font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .actualite-card:hover {
-  transform: translateY(-10px);
   box-shadow: var(--shadow-hover);
+  border-color: var(--bleu-principal);
 }
 
-.actualite-card:hover img {
-  transform: scale(1.1);
-}
-
-/* --- 🤝 PARTENAIRES (MINIMALISTE PRO SANS FOND) --- */
+/* --- 🤝 PARTENAIRES : LOGOS NORMAUX --- */
 .partenaire-card {
-  flex: 0 0 220px;
+  flex: 0 0 200px;
   scroll-snap-align: center;
-  background: transparent;
-  border: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  transition: var(--transition-main);
+  padding: 10px;
 }
 
 .partenaire-logo {
-  height: 80px;
+  height: 100px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: grayscale(100%);
-  opacity: 0.6;
-  transition: var(--transition-main);
-  margin-bottom: 15px;
+  transition: transform 0.3s ease;
 }
 
 .partenaire-logo img {
-  max-height: 100%;
-  max-width: 160px;
+  max-height: 80px;
+  max-width: 100%;
   object-fit: contain;
+  /* Plus de filtre gris, logo normal */
 }
 
 .partenaire-card:hover .partenaire-logo {
-  filter: grayscale(0%);
-  opacity: 1;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .partenaire-name {
+  margin-top: 10px;
   font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--bleu-principal);
+  font-weight: 600;
+  color: #444;
 }
 
-/* --- INDICATEURS (DOTS) --- */
+/* --- DOTS --- */
 .carousel-dots {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 8px;
+  padding: 10px 0;
 }
 
 .carousel-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #ddd;
+  background: #ccc;
   border: none;
   cursor: pointer;
-  transition: var(--transition-main);
 }
 
 .carousel-dot.active {
   background: var(--bleu-principal);
-  width: 24px;
-  border-radius: 10px;
 }
 
-/* --- RESPONSIVE --- */
+/* --- MOBILE --- */
 @media (max-width: 768px) {
-  .actualite-card {
-    flex: 0 0 85%; /* Peek effect sur mobile */
-  }
-  
-  .partenaire-card {
-    flex: 0 0 50%;
-  }
+  .actualite-card { flex: 0 0 85%; }
+  .partenaire-card { flex: 0 0 50%; }
 }
 
