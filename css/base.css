@@ -1,50 +1,116 @@
 /* ====================================
    BASE.CSS - Variables, Reset & Typographie
+   Version 3.0 - Palette Harmonisée et Centralisée
    ==================================== */
 
-/* Variables CSS */
+/* Variables CSS - TOUTES LES COULEURS CENTRALISÉES */
 :root {
-  /* Couleurs principales */
+  /* ===== PALETTE PRINCIPALE ===== */
+  /* Bleu - Couleur primaire */
   --bleu-principal: #0066CC;
   --bleu-fonce: #004999;
   --bleu-clair: #E6F2FF;
+  --bleu-hover: #0052A3;
+  
+  /* Orange - Énergie et action */
+  --orange-principal: #FF8C42;
+  --orange-fonce: #E67E22;
+  --orange-clair: #FFE5D4;
+  --orange-hover: #FF7629;
+  
+  /* Vert - Croissance et succès */
+  --vert-principal: #2ECC71;
+  --vert-fonce: #27AE60;
+  --vert-clair: #D4EFDF;
+  --vert-hover: #25B864;
+  
+  /* Violet - Santé mentale */
+  --violet-principal: #9B59B6;
+  --violet-fonce: #8E44AD;
+  --violet-clair: #F4ECF7;
+  --violet-hover: #8E44AD;
+  
+  /* Jaune - Optimisme */
+  --jaune-principal: #F39C12;
+  --jaune-fonce: #E67E22;
+  --jaune-clair: #FEF5E7;
+  
+  /* Rose - Empathie */
+  --rose-principal: #E91E63;
+  --rose-clair: #FCE4EC;
+  
+  /* ===== COULEURS NEUTRES ===== */
   --gris-fonce: #333333;
   --gris-moyen: #666666;
+  --gris-clair: #CCCCCC;
+  --gris-tres-clair: #F5F5F5;
   --blanc: #FFFFFF;
+  --noir: #000000;
   
-  /* Couleurs d'état */
+  /* ===== COULEURS D'ÉTAT ===== */
   --success: #28a745;
   --warning: #ffc107;
   --error: #dc3545;
   --info: #17a2b8;
   
-  /* Espacements */
+  /* ===== GRADIENTS ===== */
+  --gradient-bleu: linear-gradient(135deg, var(--bleu-principal) 0%, var(--bleu-fonce) 100%);
+  --gradient-orange: linear-gradient(135deg, var(--orange-principal) 0%, var(--orange-fonce) 100%);
+  --gradient-vert: linear-gradient(135deg, var(--vert-principal) 0%, var(--vert-fonce) 100%);
+  --gradient-violet: linear-gradient(135deg, var(--violet-principal) 0%, var(--violet-fonce) 100%);
+  --gradient-hero: linear-gradient(135deg, #0066CC 0%, #004999 50%, #9B59B6 100%);
+  
+  /* ===== BACKGROUNDS COLORÉS ===== */
+  --bg-bleu-soft: linear-gradient(135deg, var(--bleu-clair) 0%, #d4e8ff 100%);
+  --bg-violet-soft: linear-gradient(135deg, var(--violet-clair) 0%, #f0e5f5 100%);
+  --bg-orange-soft: linear-gradient(135deg, var(--orange-clair) 0%, #ffe0cc 100%);
+  --bg-vert-soft: linear-gradient(135deg, var(--vert-clair) 0%, #e8f8f0 100%);
+  
+  /* ===== ESPACEMENTS ===== */
   --padding-mobile: 16px;
   --padding-tablet: 24px;
   --padding-desktop: 32px;
+  --section-spacing: 60px;
+  --gap-sm: 12px;
+  --gap-md: 24px;
+  --gap-lg: 40px;
   
-  /* Transitions */
+  /* ===== TRANSITIONS ===== */
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
   --transition-slow: 0.6s ease;
+  --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   
-  /* Ombres */
+  /* ===== OMBRES ===== */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
-  --shadow-xl: 0 8px 40px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.2);
+  --shadow-colored-bleu: 0 4px 15px rgba(0, 102, 204, 0.3);
+  --shadow-colored-orange: 0 4px 15px rgba(255, 140, 66, 0.4);
+  --shadow-colored-vert: 0 4px 15px rgba(46, 204, 113, 0.3);
   
-  /* Border radius */
+  /* ===== BORDER RADIUS ===== */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
+  --radius-xl: 24px;
   --radius-full: 50px;
   
-  /* Z-index layers */
+  /* ===== TYPOGRAPHIE ===== */
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* ===== Z-INDEX LAYERS ===== */
+  --z-base: 1;
   --z-dropdown: 1000;
   --z-sticky: 1000;
   --z-modal: 9999;
   --z-chat: 10000;
+  --z-toast: 10001;
 }
 
 /* Reset CSS */
@@ -65,7 +131,7 @@ html {
 }
 
 body { 
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
+  font-family: var(--font-family);
   line-height: 1.6;
   background-color: var(--blanc);
   color: var(--gris-fonce);
@@ -76,9 +142,10 @@ body {
 
 /* Typographie */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   line-height: 1.2;
   margin-bottom: 0.5em;
+  color: var(--gris-fonce);
 }
 
 h1 { font-size: 2rem; }      /* 32px */
@@ -90,6 +157,7 @@ h6 { font-size: 1rem; }      /* 16px */
 
 p {
   margin-bottom: 1em;
+  color: var(--gris-moyen);
 }
 
 /* Liens */
@@ -219,23 +287,6 @@ select:focus-visible {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* Dark mode support (optionnel) */
-@media (prefers-color-scheme: dark) {
-  /* Décommenter si vous voulez supporter le mode sombre
-  :root {
-    --blanc: #1a1a1a;
-    --gris-fonce: #e0e0e0;
-    --gris-moyen: #b0b0b0;
-    --bleu-clair: rgba(0, 102, 204, 0.2);
-  }
-  
-  body {
-    background-color: #1a1a1a;
-    color: #e0e0e0;
-  }
-  */
 }
 
 /* Print styles */
