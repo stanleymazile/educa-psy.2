@@ -1,14 +1,7 @@
 /**
- * CAROUSEL.JS - Gestion des carrousels modernes
- * Version: 1.0.0
+ * CAROUSEL.JS - Gestion des carrousels simples avec swipe
+ * Version Simple: 1.0.0
  * Dépendances: utils.js
- * 
- * Fonctionnalités:
- * - Carrousel actualités
- * - Carrousel partenaires
- * - Support tactile (swipe)
- * - Navigation clavier
- * - Auto-play optionnel
  */
 
 (function() {
@@ -29,26 +22,23 @@
 
       this.initialized = true;
 
-      // Initialiser le carrousel d'actualités
+      // Initialiser carrousel actualités
       this.initActualitesCarousel();
       
-      // Initialiser le carrousel de partenaires
+      // Initialiser carrousel partenaires
       this.initPartenairesCarousel();
 
-      window.EducaPsy.Utils.log('✅ Carrousels initialisés');
+      window.EducaPsy.Utils.log('✅ Carrousels simples initialisés');
     },
 
     /**
-     * Initialiser le carrousel d'actualités
+     * Initialiser carrousel actualités
      */
     initActualitesCarousel: function() {
       const wrapper = document.querySelector('.actualites-carousel-wrapper');
       const carousel = document.querySelector('.actualites-carousel');
       
-      if (!wrapper || !carousel) {
-        console.warn('⚠️ Carrousel actualités non trouvé');
-        return;
-      }
+      if (!wrapper || !carousel) return;
 
       const slides = carousel.querySelectorAll('.actualite-card');
       if (slides.length === 0) return;
@@ -60,40 +50,32 @@
         currentIndex: 0,
         totalSlides: slides.length,
         slidesPerView: this.getSlidesPerView(),
-        isAnimating: false,
-        autoPlayInterval: null
+        isAnimating: false
       };
 
-      // Créer les contrôles
-      this.createControls(wrapper, carouselData, 'actualites');
+      // Sur mobile: swipe natif + observer
+      if (window.innerWidth < 768) {
+        this.enableNativeSwipe(carouselData);
+      } else {
+        // Desktop: contrôles classiques
+        this.createControls(wrapper, carouselData);
+        this.enableSwipe(wrapper, carouselData);
+      }
 
-      // Activer le swipe
-      this.enableSwipe(wrapper, carouselData);
-
-      // Navigation clavier
-      this.enableKeyboardNav(carouselData);
-
-      // Responsive
+      this.createDots(wrapper, carouselData);
       this.handleResize(carouselData);
 
-      // Sauvegarder
       this.carousels.set('actualites', carouselData);
-
-      // Auto-play (optionnel)
-      // this.startAutoPlay(carouselData, 5000);
     },
 
     /**
-     * Initialiser le carrousel de partenaires
+     * Initialiser carrousel partenaires
      */
     initPartenairesCarousel: function() {
       const wrapper = document.querySelector('.partenaires-carousel-wrapper');
       const carousel = document.querySelector('.partenaires-carousel');
       
-      if (!wrapper || !carousel) {
-        console.warn('⚠️ Carrousel partenaires non trouvé');
-        return;
-      }
+      if (!wrapper || !carousel) return;
 
       const slides = carousel.querySelectorAll('.partenaire-card');
       if (slides.length === 0) return;
@@ -109,44 +91,64 @@
         autoPlayInterval: null
       };
 
-      // Créer les contrôles
-      this.createControls(wrapper, carouselData, 'partenaires');
+      // Sur mobile: swipe natif
+      if (window.innerWidth < 768) {
+        this.enableNativeSwipe(carouselData);
+      } else {
+        this.createControls(wrapper, carouselData);
+        this.enableSwipe(wrapper, carouselData);
+        // Auto-play uniquement sur desktop
+        this.startAutoPlay(carouselData, 4000);
+      }
 
-      // Activer le swipe
-      this.enableSwipe(wrapper, carouselData);
-
-      // Navigation clavier
-      this.enableKeyboardNav(carouselData);
-
-      // Responsive
+      this.createDots(wrapper, carouselData);
       this.handleResize(carouselData);
 
-      // Sauvegarder
       this.carousels.set('partenaires', carouselData);
-
-      // Auto-play pour partenaires
-      this.startAutoPlay(carouselData, 4000);
     },
 
     /**
-     * Créer les contrôles du carrousel
+     * Activer le swipe natif (mobile)
      */
-    createControls: function(wrapper, data, type) {
-      // Vérifier si les contrôles existent déjà
+    enableNativeSwipe: function(data) {
+      const { carousel } = data;
+      
+      // Utiliser scroll-snap-type (déjà dans CSS)
+      // Écouter les changements de scroll pour mettre à jour les dots
+      let scrollTimeout;
+      
+      carousel.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        
+        scrollTimeout = setTimeout(() => {
+          // Calculer l'index actuel basé sur la position de scroll
+          const scrollLeft = carousel.scrollLeft;
+          const slideWidth = carousel.offsetWidth;
+          const newIndex = Math.round(scrollLeft / slideWidth);
+          
+          if (newIndex !== data.currentIndex) {
+            data.currentIndex = newIndex;
+            this.updateDots(data);
+          }
+        }, 100);
+      }, { passive: true });
+    },
+
+    /**
+     * Créer les contrôles (desktop seulement)
+     */
+    createControls: function(wrapper, data) {
       if (wrapper.querySelector('.carousel-controls')) return;
 
-      // Créer le conteneur de contrôles
       const controlsContainer = document.createElement('div');
       controlsContainer.className = 'carousel-controls';
 
-      // Bouton précédent
       const prevBtn = document.createElement('button');
       prevBtn.className = 'carousel-btn carousel-prev';
       prevBtn.innerHTML = '‹';
       prevBtn.setAttribute('aria-label', 'Slide précédent');
       prevBtn.addEventListener('click', () => this.prevSlide(data));
 
-      // Bouton suivant
       const nextBtn = document.createElement('button');
       nextBtn.className = 'carousel-btn carousel-next';
       nextBtn.innerHTML = '›';
@@ -156,20 +158,14 @@
       controlsContainer.appendChild(prevBtn);
       controlsContainer.appendChild(nextBtn);
 
-      // Insérer avant le carrousel
       wrapper.parentNode.insertBefore(controlsContainer, wrapper);
-
-      // Créer les dots
-      this.createDots(wrapper, data, type);
-
-      // Mettre à jour l'état initial
       this.updateControls(data);
     },
 
     /**
-     * Créer les indicateurs (dots)
+     * Créer les dots
      */
-    createDots: function(wrapper, data, type) {
+    createDots: function(wrapper, data) {
       const dotsContainer = document.createElement('div');
       dotsContainer.className = 'carousel-dots';
 
@@ -180,21 +176,38 @@
         dot.className = 'carousel-dot';
         dot.setAttribute('aria-label', `Aller au groupe ${i + 1}`);
         
-        if (i === 0) {
-          dot.classList.add('active');
-        }
+        if (i === 0) dot.classList.add('active');
 
         dot.addEventListener('click', () => {
-          data.currentIndex = i * data.slidesPerView;
-          this.updateCarousel(data);
+          const newIndex = i * data.slidesPerView;
+          this.goToSlide(data, newIndex);
         });
 
         dotsContainer.appendChild(dot);
       }
 
-      // Insérer après les contrôles
-      const controls = wrapper.previousElementSibling;
       wrapper.parentNode.insertBefore(dotsContainer, wrapper);
+    },
+
+    /**
+     * Aller à un slide spécifique
+     */
+    goToSlide: function(data, index) {
+      if (data.isAnimating) return;
+      
+      data.currentIndex = Math.max(0, Math.min(index, data.totalSlides - data.slidesPerView));
+      
+      if (window.innerWidth < 768) {
+        // Mobile: scroll natif
+        const slideWidth = data.carousel.offsetWidth;
+        data.carousel.scrollTo({
+          left: data.currentIndex * slideWidth,
+          behavior: 'smooth'
+        });
+      } else {
+        // Desktop: transform
+        this.updateCarousel(data);
+      }
     },
 
     /**
@@ -207,13 +220,11 @@
       
       if (data.currentIndex < maxIndex) {
         data.currentIndex++;
-        this.updateCarousel(data);
       } else {
-        // Retour au début
         data.currentIndex = 0;
-        this.updateCarousel(data);
       }
-
+      
+      this.updateCarousel(data);
       window.EducaPsy.Utils.trackEvent('carousel_next');
     },
 
@@ -225,13 +236,11 @@
 
       if (data.currentIndex > 0) {
         data.currentIndex--;
-        this.updateCarousel(data);
       } else {
-        // Aller à la fin
         data.currentIndex = data.totalSlides - data.slidesPerView;
-        this.updateCarousel(data);
       }
-
+      
+      this.updateCarousel(data);
       window.EducaPsy.Utils.trackEvent('carousel_prev');
     },
 
@@ -247,19 +256,18 @@
       data.carousel.style.transform = `translateX(${offset}%)`;
 
       this.updateControls(data);
+      this.updateDots(data);
 
       setTimeout(() => {
         data.isAnimating = false;
-      }, 500);
+      }, 400);
     },
 
     /**
-     * Mettre à jour l'état des contrôles
+     * Mettre à jour les contrôles
      */
     updateControls: function(data) {
-      const wrapper = data.wrapper;
-      const controls = wrapper.previousElementSibling;
-      
+      const controls = data.wrapper.previousElementSibling;
       if (!controls || !controls.classList.contains('carousel-controls')) return;
 
       const prevBtn = controls.querySelector('.carousel-prev');
@@ -267,28 +275,32 @@
       
       const maxIndex = data.totalSlides - data.slidesPerView;
 
-      // Activer/désactiver les boutons (optionnel)
-      // prevBtn.disabled = data.currentIndex === 0;
-      // nextBtn.disabled = data.currentIndex >= maxIndex;
-
-      // Mettre à jour les dots
-      const dots = wrapper.previousElementSibling;
-      if (dots && dots.classList.contains('carousel-dots')) {
-        const allDots = dots.querySelectorAll('.carousel-dot');
-        const activeDotIndex = Math.floor(data.currentIndex / data.slidesPerView);
-        
-        allDots.forEach((dot, index) => {
-          if (index === activeDotIndex) {
-            dot.classList.add('active');
-          } else {
-            dot.classList.remove('active');
-          }
-        });
-      }
+      // Désactiver les boutons aux extrémités
+      if (prevBtn) prevBtn.disabled = data.currentIndex === 0;
+      if (nextBtn) nextBtn.disabled = data.currentIndex >= maxIndex;
     },
 
     /**
-     * Activer la navigation tactile (swipe)
+     * Mettre à jour les dots
+     */
+    updateDots: function(data) {
+      const dotsContainer = data.wrapper.previousElementSibling;
+      if (!dotsContainer || !dotsContainer.classList.contains('carousel-dots')) return;
+
+      const allDots = dotsContainer.querySelectorAll('.carousel-dot');
+      const activeDotIndex = Math.floor(data.currentIndex / data.slidesPerView);
+      
+      allDots.forEach((dot, index) => {
+        if (index === activeDotIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    },
+
+    /**
+     * Activer le swipe (desktop)
      */
     enableSwipe: function(wrapper, data) {
       let touchStartX = 0;
@@ -303,7 +315,7 @@
         this.handleSwipe(touchStartX, touchEndX, data);
       }, { passive: true });
 
-      // Support souris
+      // Support souris (desktop)
       let mouseStartX = 0;
       let isDragging = false;
 
@@ -329,6 +341,9 @@
         isDragging = false;
         wrapper.style.cursor = 'grab';
       });
+
+      // Style cursor
+      wrapper.style.cursor = 'grab';
     },
 
     /**
@@ -341,42 +356,14 @@
       if (Math.abs(diff) < threshold) return;
 
       if (diff > 0) {
-        // Swipe left - next
         this.nextSlide(data);
       } else {
-        // Swipe right - prev
         this.prevSlide(data);
       }
     },
 
     /**
-     * Navigation clavier
-     */
-    enableKeyboardNav: function(data) {
-      document.addEventListener('keydown', (e) => {
-        // Vérifier si un carrousel est visible
-        if (!this.isCarouselVisible(data.wrapper)) return;
-
-        if (e.key === 'ArrowLeft') {
-          e.preventDefault();
-          this.prevSlide(data);
-        } else if (e.key === 'ArrowRight') {
-          e.preventDefault();
-          this.nextSlide(data);
-        }
-      });
-    },
-
-    /**
-     * Vérifier si le carrousel est visible
-     */
-    isCarouselVisible: function(wrapper) {
-      const rect = wrapper.getBoundingClientRect();
-      return rect.top < window.innerHeight && rect.bottom > 0;
-    },
-
-    /**
-     * Obtenir le nombre de slides visibles
+     * Obtenir slides visibles (actualités)
      */
     getSlidesPerView: function() {
       const width = window.innerWidth;
@@ -386,13 +373,13 @@
     },
 
     /**
-     * Obtenir le nombre de slides partenaires visibles
+     * Obtenir slides visibles (partenaires)
      */
     getPartenairesSlidesPerView: function() {
       const width = window.innerWidth;
       if (width >= 1024) return 3;
       if (width >= 768) return 2;
-      return 2; // Toujours 2 minimum pour partenaires
+      return 1;
     },
 
     /**
@@ -400,24 +387,40 @@
      */
     handleResize: function(data) {
       const resizeHandler = window.EducaPsy.Utils.debounce(() => {
+        const isMobile = window.innerWidth < 768;
         const oldSlidesPerView = data.slidesPerView;
-        data.slidesPerView = this.getSlidesPerView();
+        
+        // Recalculer slides per view
+        data.slidesPerView = this.carousels.get('actualites') === data 
+          ? this.getSlidesPerView() 
+          : this.getPartenairesSlidesPerView();
 
         if (oldSlidesPerView !== data.slidesPerView) {
-          // Recalculer l'index
+          // Réinitialiser position
           data.currentIndex = Math.min(
             data.currentIndex,
             data.totalSlides - data.slidesPerView
           );
           
-          this.updateCarousel(data);
+          if (!isMobile) {
+            this.updateCarousel(data);
+          }
           
           // Recréer les dots
           const dotsContainer = data.wrapper.previousElementSibling;
           if (dotsContainer && dotsContainer.classList.contains('carousel-dots')) {
             dotsContainer.remove();
-            const type = this.carousels.get('actualites') === data ? 'actualites' : 'partenaires';
-            this.createDots(data.wrapper, data, type);
+            this.createDots(data.wrapper, data);
+          }
+
+          // Gérer les contrôles selon breakpoint
+          const controls = data.wrapper.previousElementSibling;
+          if (controls && controls.classList.contains('carousel-controls')) {
+            if (isMobile) {
+              controls.style.display = 'none';
+            } else {
+              controls.style.display = 'flex';
+            }
           }
         }
       }, 250);
@@ -426,36 +429,45 @@
     },
 
     /**
-     * Démarrer l'auto-play
+     * Démarrer auto-play
      */
-    startAutoPlay: function(data, interval = 5000) {
+    startAutoPlay: function(data, interval = 4000) {
       this.stopAutoPlay(data);
 
       data.autoPlayInterval = setInterval(() => {
-        if (this.isCarouselVisible(data.wrapper)) {
+        if (this.isCarouselVisible(data.wrapper) && window.innerWidth >= 768) {
           this.nextSlide(data);
         }
       }, interval);
 
-      // Arrêter au survol
-      data.wrapper.addEventListener('mouseenter', () => {
-        this.stopAutoPlay(data);
-      });
+      // Arrêter au survol (desktop seulement)
+      if (window.innerWidth >= 768) {
+        data.wrapper.addEventListener('mouseenter', () => {
+          this.stopAutoPlay(data);
+        });
 
-      // Redémarrer quand la souris sort
-      data.wrapper.addEventListener('mouseleave', () => {
-        this.startAutoPlay(data, interval);
-      });
+        data.wrapper.addEventListener('mouseleave', () => {
+          this.startAutoPlay(data, interval);
+        });
+      }
     },
 
     /**
-     * Arrêter l'auto-play
+     * Arrêter auto-play
      */
     stopAutoPlay: function(data) {
       if (data.autoPlayInterval) {
         clearInterval(data.autoPlayInterval);
         data.autoPlayInterval = null;
       }
+    },
+
+    /**
+     * Vérifier visibilité carrousel
+     */
+    isCarouselVisible: function(wrapper) {
+      const rect = wrapper.getBoundingClientRect();
+      return rect.top < window.innerHeight && rect.bottom > 0;
     },
 
     /**
