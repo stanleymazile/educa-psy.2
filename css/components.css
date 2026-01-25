@@ -1,46 +1,54 @@
 /* ====================================
-   COMPONENTS.CSS - Version 2.2.0
-   Design épuré (Titre + Lien uniquement)
+   COMPONENTS.CSS - Version 3.0.0
+   Design: Modern Luxury (Articles) & Minimalist Pro (Logos)
    ==================================== */
 
+/* --- VARIABLES LOCALES --- */
+:root {
+  --transition-main: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 20px 40px rgba(0, 102, 204, 0.12);
+}
+
+/* --- ANIMATIONS DE RÉVÉLATION (REVEAL) --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* --- BOUTONS --- */
-.btn, .btnHero, .btn-don {
+.btnHero, .btn-don, .btn-actualites, .btn-partenaire {
   display: inline-block;
   padding: 14px 32px;
-  border-radius: var(--radius-full);
-  font-weight: bold;
-  text-align: center;
-  transition: all var(--transition-normal);
+  border-radius: 50px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: var(--transition-main);
   cursor: pointer;
   border: none;
   font-size: 15px;
-  text-decoration: none;
-  min-height: 48px;
-  line-height: 1.2;
-  position: relative;
-  overflow: hidden;
 }
 
 .btnHero {
-  background-color: var(--blanc);
+  background: var(--blanc);
   color: var(--bleu-principal);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.btnHero:hover {
-  background-color: var(--bleu-clair);
-  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
 }
 
 .btn-don {
   color: var(--blanc);
   background: linear-gradient(135deg, var(--bleu-principal) 0%, var(--bleu-fonce) 100%);
-  box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
 }
 
-.btn-don:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+.btnHero:hover, .btn-don:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
 }
 
 /* --- STRUCTURE CAROUSEL --- */
@@ -49,88 +57,141 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-  margin: 20px 0;
+  padding: 20px 0;
 }
 
 .actualites-carousel, 
 .partenaires-carousel {
   display: flex;
-  transition: transform var(--transition-normal);
-  will-change: transform;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  scroll-behavior: smooth;
+  padding: 10px;
 }
 
-/* --- CARTES ÉPURÉES (Titre + Lien) --- */
-.actualite-card, 
-.partenaire-card {
+.actualites-carousel::-webkit-scrollbar, 
+.partenaires-carousel::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* --- 📰 ARTICLES (MODERN LUXURY AVEC DÉGRADÉ) --- */
+.actualite-card {
+  flex: 0 0 350px; /* Largeur fixe sur desktop */
+  scroll-snap-align: start;
   background: var(--blanc);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  border: 1px solid rgba(0,0,0,0.05);
-  transition: transform 0.3s ease;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.03);
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-main);
 }
 
-/* Suppression forcée des paragraphes explicatifs */
-.actualite-card p, 
-.partenaire-card .partenaire-description,
-.actualite-excerpt {
-  display: none !important;
+.actualite-image {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+/* Dégradé blanc uniquement sur les articles */
+.actualite-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 65%;
+  background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+  z-index: 1;
+}
+
+.actualite-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s ease;
 }
 
 .actualite-content {
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+  padding: 0 25px 25px;
+  position: relative;
+  z-index: 2;
+  margin-top: -45px; /* Chevauchement sur l'image */
 }
 
-.actualite-title, .partenaire-name {
-  font-size: 18px;
-  margin-bottom: 12px;
-  color: var(--bleu-principal);
-  line-height: 1.4;
-  /* Limite à 2 lignes pour l'uniformité */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  min-height: 2.8em;
+.actualite-title {
+  font-size: 19px;
+  font-weight: 800;
+  color: #1a1a1a;
+  line-height: 1.3;
+  min-height: 2.6em;
+  margin-bottom: 15px;
 }
 
 .actualite-link {
-  margin-top: auto;
-  font-weight: bold;
   color: var(--bleu-principal);
+  font-weight: 700;
   text-decoration: none;
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.actualite-link:hover {
-  text-decoration: underline;
+.actualite-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-hover);
 }
 
-/* --- OPTIMISATION SWIPE MOBILE (< 768px) --- */
-@media (max-width: 767px) {
-  .actualites-carousel, 
-  .partenaires-carousel {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 16px;
-    padding: 0 20px;
-    scrollbar-width: none; /* Firefox */
-  }
+.actualite-card:hover img {
+  transform: scale(1.1);
+}
 
-  .actualites-carousel::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
-  }
+/* --- 🤝 PARTENAIRES (MINIMALISTE PRO SANS FOND) --- */
+.partenaire-card {
+  flex: 0 0 220px;
+  scroll-snap-align: center;
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  transition: var(--transition-main);
+}
 
-  .actualite-card, 
-  .partenaire-card {
-    flex: 0 0 85% !important; /* Effet "Peek" pour inviter au swipe */
-    scroll-snap-align: start;
-  }
+.partenaire-logo {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: var(--transition-main);
+  margin-bottom: 15px;
+}
+
+.partenaire-logo img {
+  max-height: 100%;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+.partenaire-card:hover .partenaire-logo {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.partenaire-name {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--bleu-principal);
 }
 
 /* --- INDICATEURS (DOTS) --- */
@@ -138,53 +199,33 @@
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin: 20px 0;
+  margin-top: 20px;
 }
 
 .carousel-dot {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background-color: #ccc;
+  background: #ddd;
   border: none;
-  padding: 0;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition-main);
 }
 
 .carousel-dot.active {
-  background-color: var(--bleu-principal);
-  width: 22px;
-  border-radius: 5px;
+  background: var(--bleu-principal);
+  width: 24px;
+  border-radius: 10px;
 }
 
-/* --- STATS & VALEURS --- */
-.valeur-item, .stat-item {
-  background-color: var(--blanc);
-  border-radius: var(--radius-md);
-  padding: 24px 20px;
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.valeur-item:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-}
-
-.stat-nombre {
-  font-size: 36px;
-  font-weight: bold;
-  color: var(--bleu-principal);
-  display: block;
-}
-
-/* --- ACCESSIBILITÉ & PRINT --- */
-@media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; animation: none !important; }
-}
-
-@media print {
-  .carousel-dots, .btnHero, .btn-don, .actualite-link { display: none !important; }
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .actualite-card {
+    flex: 0 0 85%; /* Peek effect sur mobile */
+  }
+  
+  .partenaire-card {
+    flex: 0 0 50%;
+  }
 }
 
