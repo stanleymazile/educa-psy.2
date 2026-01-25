@@ -1,15 +1,10 @@
 /* ====================================
-   COMPONENTS.CSS - Composants pour Educa-Psy
-   Version: 2.1.0 - Intégration Carrousel Optimisée
+   COMPONENTS.CSS - Version 2.2.0
+   Design épuré (Titre + Lien uniquement)
    ==================================== */
 
-/* ====================================
-   BOUTONS
-   ==================================== */
-
-.btn,
-.btnHero,
-.btn-don {
+/* --- BOUTONS --- */
+.btn, .btnHero, .btn-don {
   display: inline-block;
   padding: 14px 32px;
   border-radius: var(--radius-full);
@@ -26,45 +21,33 @@
   overflow: hidden;
 }
 
-/* Bouton Hero */
 .btnHero {
   background-color: var(--blanc);
   color: var(--bleu-principal);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  min-width: 200px;
 }
 
-.btnHero:hover,
-.btnHero:focus {
+.btnHero:hover {
   background-color: var(--bleu-clair);
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  color: var(--bleu-principal);
 }
 
-/* Bouton Don */
 .btn-don {
   color: var(--blanc);
   background: linear-gradient(135deg, var(--bleu-principal) 0%, var(--bleu-fonce) 100%);
   box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
-  min-width: 200px;
 }
 
-.btn-don:hover,
-.btn-don:focus {
+.btn-don:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
-  color: var(--blanc);
 }
 
-/* ====================================
-   CAROUSEL (Actualités & Partenaires)
-   ==================================== */
-
+/* --- STRUCTURE CAROUSEL --- */
 .actualites-carousel-wrapper, 
 .partenaires-carousel-wrapper {
   width: 100%;
-  overflow: hidden; /* Empêche le débordement sur desktop */
+  overflow: hidden;
   position: relative;
   margin: 20px 0;
 }
@@ -76,26 +59,76 @@
   will-change: transform;
 }
 
-/* --- OPTIMISATION MOBILE (< 768px) --- */
+/* --- CARTES ÉPURÉES (Titre + Lien) --- */
+.actualite-card, 
+.partenaire-card {
+  background: var(--blanc);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+/* Suppression forcée des paragraphes explicatifs */
+.actualite-card p, 
+.partenaire-card .partenaire-description,
+.actualite-excerpt {
+  display: none !important;
+}
+
+.actualite-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.actualite-title, .partenaire-name {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: var(--bleu-principal);
+  line-height: 1.4;
+  /* Limite à 2 lignes pour l'uniformité */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.8em;
+}
+
+.actualite-link {
+  margin-top: auto;
+  font-weight: bold;
+  color: var(--bleu-principal);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.actualite-link:hover {
+  text-decoration: underline;
+}
+
+/* --- OPTIMISATION SWIPE MOBILE (< 768px) --- */
 @media (max-width: 767px) {
   .actualites-carousel, 
   .partenaires-carousel {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
     gap: 16px;
-    padding: 0 20px; /* Aligne la première carte */
+    padding: 0 20px;
+    scrollbar-width: none; /* Firefox */
   }
 
-  .actualites-carousel::-webkit-scrollbar,
-  .partenaires-carousel::-webkit-scrollbar {
+  .actualites-carousel::-webkit-scrollbar {
     display: none; /* Chrome/Safari */
   }
 
   .actualite-card, 
   .partenaire-card {
-    flex: 0 0 85% !important; /* Laisse voir 15% de la carte suivante pour le "peek" */
+    flex: 0 0 85% !important; /* Effet "Peek" pour inviter au swipe */
     scroll-snap-align: start;
   }
 }
@@ -105,137 +138,53 @@
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin: 25px 0;
+  margin: 20px 0;
 }
 
 .carousel-dot {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background-color: var(--bleu-clair);
-  border: 2px solid var(--bleu-principal);
-  cursor: pointer;
-  transition: all var(--transition-normal);
+  background-color: #ccc;
+  border: none;
   padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .carousel-dot.active {
   background-color: var(--bleu-principal);
-  width: 24px; /* Effet pilule */
-  border-radius: 6px;
+  width: 22px;
+  border-radius: 5px;
 }
 
-/* --- BOUTONS NAVIGATION (Desktop) --- */
-.carousel-controls {
-  display: none;
-  justify-content: space-between;
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  z-index: 10;
-  pointer-events: none;
-  transform: translateY(-50%);
-}
-
-@media (min-width: 768px) {
-  .carousel-controls {
-    display: flex;
-  }
-}
-
-.carousel-btn {
-  pointer-events: auto;
-  background: var(--blanc);
-  border: 1px solid var(--bleu-principal);
-  color: var(--bleu-principal);
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
-  box-shadow: var(--shadow-md);
-}
-
-.carousel-btn:hover:not(:disabled) {
-  background: var(--bleu-principal);
-  color: var(--blanc);
-}
-
-.carousel-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-/* ====================================
-   CARDS - Valeurs et Stats
-   ==================================== */
-
-.valeur-item,
-.stat-item {
+/* --- STATS & VALEURS --- */
+.valeur-item, .stat-item {
   background-color: var(--blanc);
   border-radius: var(--radius-md);
   padding: 24px 20px;
-  transition: all var(--transition-normal);
-  border: 2px solid transparent;
+  text-align: center;
+  transition: transform 0.3s ease;
 }
 
-.valeur-item {
-  background-color: var(--bleu-clair);
-}
-
-.valeur-item:hover,
-.stat-item:hover {
+.valeur-item:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
-  border-color: var(--bleu-principal);
 }
 
-.valeur-item h3 {
-  font-size: 20px;
-  color: var(--bleu-principal);
-  margin-bottom: 12px;
-}
-
-/* Statistiques */
 .stat-nombre {
   font-size: 36px;
   font-weight: bold;
   color: var(--bleu-principal);
+  display: block;
 }
 
-/* ====================================
-   ANIMATIONS & ACCESSIBILITÉ
-   ==================================== */
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.spinner {
-  border: 4px solid rgba(0, 102, 204, 0.2);
-  border-top-color: var(--bleu-principal);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  margin: 0 auto;
-}
-
+/* --- ACCESSIBILITÉ & PRINT --- */
 @media (prefers-reduced-motion: reduce) {
-  * {
-    transition: none !important;
-    animation: none !important;
-  }
+  * { transition: none !important; animation: none !important; }
 }
 
-/* Styles d'impression */
 @media print {
-  .carousel-controls, .carousel-dots, .btnHero, .btn-don {
-    display: none !important;
-  }
+  .carousel-dots, .btnHero, .btn-don, .actualite-link { display: none !important; }
 }
 
