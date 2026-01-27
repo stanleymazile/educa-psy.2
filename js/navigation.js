@@ -1,10 +1,11 @@
 /**
  * NAVIGATION.JS - Gestion du menu et navigation
- * Version: 2.0.0 - Épurée et Optimisée
+ * Version: 2.1.0 - Avec menu déroulant Services intégré
  * Dépendances: utils.js
  * 
  * Fonctionnalités:
  * - Menu déroulant mobile
+ * - Menu déroulant Services avec 4 programmes
  * - Sélecteur de langue
  * - Scroll behavior
  * - Lien actif
@@ -111,6 +112,128 @@
           this.closeMenu();
         }
       }, 250));
+
+      // Initialiser le menu déroulant Services
+      this.initSubmenu();
+    },
+
+    /**
+     * Initialiser le menu déroulant Services
+     */
+    initSubmenu: function() {
+      const menuToggles = document.querySelectorAll('.item-menu-toggle');
+      
+      if (menuToggles.length === 0) {
+        return; // Pas de menu déroulant à initialiser
+      }
+
+      menuToggles.forEach(toggle => {
+        // Toggle au clic
+        toggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          const submenu = toggle.nextElementSibling;
+          const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+          
+          // Fermer tous les autres sous-menus
+          this.closeAllSubmenus();
+          
+          // Toggle le menu actuel
+          if (!isExpanded) {
+            toggle.setAttribute('aria-expanded', 'true');
+            if (submenu) submenu.setAttribute('aria-expanded', 'true');
+            window.EducaPsy.Utils.trackEvent('submenu_opened', { menu: 'services' });
+          } else {
+            toggle.setAttribute('aria-expanded', 'false');
+            if (submenu) submenu.setAttribute('aria-expanded', 'false');
+            window.EducaPsy.Utils.trackEvent('submenu_closed', { menu: 'services' });
+          }
+        });
+
+        // Support clavier
+        toggle.addEventListener('keydown', (e) => {
+          const submenu = toggle.nextElementSibling;
+          const links = submenu ? submenu.querySelectorAll('.submenu-link') : [];
+          
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            toggle.setAttribute('aria-expanded', 'true');
+            if (submenu) submenu.setAttribute('aria-expanded', 'true');
+            if (links.length > 0) {
+              links[0].focus();
+            }
+          } else if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggle.click();
+          } else if (e.key === 'Escape') {
+            e.preventDefault();
+            this.closeAllSubmenus();
+            toggle.focus();
+          }
+        });
+      });
+
+      // Gestion des liens du sous-menu
+      document.querySelectorAll('.submenu-link').forEach((link, index, links) => {
+        link.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (index < links.length - 1) {
+              links[index + 1].focus();
+            }
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (index > 0) {
+              links[index - 1].focus();
+            } else {
+              // Revenir au bouton toggle
+              const toggle = link.closest('.item-menu-dropdown')?.querySelector('.item-menu-toggle');
+              if (toggle) toggle.focus();
+            }
+          } else if (e.key === 'Escape') {
+            e.preventDefault();
+            this.closeAllSubmenus();
+          }
+        });
+
+        // Fermer le sous-menu après clic (mobile)
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 768) {
+            this.closeAllSubmenus();
+          }
+        });
+      });
+
+      // Fermer les sous-menus si clic ailleurs
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.item-menu-dropdown')) {
+          this.closeAllSubmenus();
+        }
+      });
+
+      // Fermer les sous-menus au resize vers desktop
+      window.addEventListener('resize', window.EducaPsy.Utils.debounce(() => {
+        if (window.innerWidth > 768) {
+          this.closeAllSubmenus();
+        }
+      }, 250));
+    },
+
+    /**
+     * Fermer tous les sous-menus
+     */
+    closeAllSubmenus: function() {
+      const menuToggles = document.querySelectorAll('.item-menu-toggle');
+      const submenus = document.querySelectorAll('.submenu');
+      
+      menuToggles.forEach(toggle => {
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+      
+      submenus.forEach(submenu => {
+        submenu.setAttribute('aria-expanded', 'false');
+      });
     },
 
     /**
@@ -148,6 +271,9 @@
       menuDeroulant.classList.remove('actif');
       btnMenu.setAttribute('aria-expanded', 'false');
       this.menuOpen = false;
+
+      // Fermer aussi les sous-menus
+      this.closeAllSubmenus();
 
       window.EducaPsy.Utils.trackEvent('menu_closed');
     },
@@ -289,3 +415,4 @@
   window.EducaPsy.Navigation = Navigation;
 
 })();
+
