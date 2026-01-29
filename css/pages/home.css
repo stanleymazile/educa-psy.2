@@ -12,12 +12,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--gradient-bleu);
   padding: 60px var(--padding-mobile);
   text-align: center;
   color: var(--blanc);
   min-height: 300px;
-
+   
    background-image:
     linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
     url("images/Droit1.webp");
