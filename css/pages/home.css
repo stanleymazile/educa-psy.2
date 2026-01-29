@@ -43,6 +43,8 @@
   font-weight: bold;
   margin-bottom: 30px; /* Plus d'espace sous le titre */
   line-height: 1.3;
+   animation: fadeInUp 1.2s ease-out;
+}
 }
 
 .btnHero {
