@@ -8,12 +8,13 @@
    ==================================== */
 
 .hero {
-  position: relative; /* Important pour contenir l'image */
-  min-height: 400px;
+  position: relative;
+  min-height: 450px; /* Augmenté légèrement pour l'équilibre visuel */
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
 }
 
 .hero-bg-img {
@@ -22,24 +23,27 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Remplace le background-size: cover */
-  z-index: -1; /* Place l'image derrière le texte */
-  filter: brightness(0.5); /* Remplace le dégradé noir */
+  object-fit: cover;
+  z-index: -1;
+  /* On assombrit l'image pour faire ressortir le texte blanc */
+  filter: brightness(0.4); 
 }
 
 .hero-content {
   position: relative;
   z-index: 1;
   text-align: center;
-   font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 12px;
-  line-height: 1.2;
-  max-width: 100%;
-  animation: fadeInUp 0.8s ease-out;
-  color: var(--blanc);
+  max-width: 800px;
+  color: #ffffff; /* Forcer le blanc ici */
 }
 
+.hero-titre {
+  color: #ffffff !important; /* Force la couleur blanche pour contrer d'autres styles */
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px; /* Plus d'espace sous le titre */
+  line-height: 1.3;
+}
 
 .btnHero {
   background: var(--blanc);
