@@ -7,6 +7,7 @@
    HERO SECTION
    ==================================== */
 
+
 .hero {
   display: flex;
   flex-direction: column;
@@ -18,14 +19,17 @@
   color: var(--blanc);
   text-align: center;
 
-  background-image:
-    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+  /* Le dégradé reste en premier (couche supérieure), l'image en second */
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
     url("../images/Droit1.webp");
 
-  background-repeat: no-repeat, repeat-x;
-  background-position: center, top left;
-  background-size: auto, 300px auto;
+  /* Configuration pour une image plein écran */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; /* L'image remplit tout l'espace sans déformation */
 }
+
 
 .hero-titre {
   font-size: 28px;
