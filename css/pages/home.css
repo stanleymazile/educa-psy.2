@@ -12,18 +12,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 60px var(--padding-mobile);
-  text-align: center;
-  color: var(--blanc);
+
   min-height: 300px;
+  padding: 60px var(--padding-mobile);
+  color: var(--blanc);
+  text-align: center;
 
   background-image:
     linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-    url("images/Droit1.webp");
+    url("../images/Droit1.webp");
 
   background-repeat: no-repeat, repeat-x;
   background-position: center, top left;
-  background-size: cover, 300px auto;
+  background-size: auto, 300px auto;
 }
 
 .hero-titre {
