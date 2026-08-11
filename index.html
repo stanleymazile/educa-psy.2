@@ -7,24 +7,46 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Navigation -->
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- NAVIGATION AVEC MENU MOBILE DÉROULANT         -->
+    <!-- ═══════════════════════════════════════════════ -->
     <nav class="navbar">
         <div class="container nav-content">
             <a href="#" class="logo">
                 <div class="logo-icon">E-P</div>
                 <span>Educa-Psy</span>
             </a>
+            
+            <!-- Desktop Menu -->
             <ul class="nav-links">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#categories">Catégories</a></li>
                 <li><a href="#opportunites">Opportunités</a></li>
                 <li><a href="#apropos">À propos</a></li>
             </ul>
-            <a href="https://educa-psy-haiti.web.app" target="_blank" class="btn-primary">Site Officiel</a>
+            
+            <!-- Desktop CTA -->
+            <a href="https://educa-psy-haiti.web.app" target="_blank" class="btn-primary desktop-only">Entreprise</a>
+            
+            <!-- Mobile Hamburger -->
+            <button class="mobile-toggle" onclick="toggleMenu()" aria-label="Menu">
+                <svg id="icon-menu" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <svg id="icon-close" class="icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="mobile-menu hidden">
+            <a href="#accueil" onclick="closeMenu()">Accueil</a>
+            <a href="#categories" onclick="closeMenu()">Catégories</a>
+            <a href="#opportunites" onclick="closeMenu()">Opportunités</a>
+            <a href="#apropos" onclick="closeMenu()">À propos</a>
+            <a href="https://educa-psy-haiti.web.app" target="_blank" onclick="closeMenu()" class="mobile-cta">Entreprise</a>
         </div>
     </nav>
 
-    <!-- Hero -->
+    <!-- HERO -->
     <header id="accueil" class="hero">
         <div class="container hero-content">
             <span class="badge">Portail d'Information</span>
@@ -37,7 +59,7 @@
         </div>
     </header>
 
-    <!-- Catégories / Articles -->
+    <!-- CATÉGORIES / ARTICLES -->
     <section id="categories" class="section">
         <div class="container">
             <div class="section-header">
@@ -45,7 +67,6 @@
                 <p>Cliquez sur une catégorie pour filtrer les articles.</p>
             </div>
             
-            <!-- Boutons de filtre -->
             <div class="filter-tabs">
                 <button class="filter-btn active" data-cat="education">Éducation</button>
                 <button class="filter-btn" data-cat="technologie">Technologie</button>
@@ -53,14 +74,12 @@
                 <button class="filter-btn" data-cat="psychologie">Psychologie</button>
             </div>
 
-            <!-- Grille d'articles -->
             <div class="articles-grid" id="articles-grid">
                 
                 <!-- ═══════════════════════════════════════ -->
-                <!-- ║  AJOUTER UN ARTICLE : COPIER/COLLER  ║ -->
+                <!-- AJOUTER UN ARTICLE : COPIER CE BLOC    -->
                 <!-- ═══════════════════════════════════════ -->
                 
-                <!-- Article Éducation 1 -->
                 <article class="article-card" data-category="education">
                     <div class="article-image bg-education">📚</div>
                     <div class="article-body">
@@ -71,7 +90,6 @@
                     </div>
                 </article>
 
-                <!-- Article Éducation 2 -->
                 <article class="article-card" data-category="education">
                     <div class="article-image bg-education">🎓</div>
                     <div class="article-body">
@@ -82,7 +100,6 @@
                     </div>
                 </article>
 
-                <!-- Article Technologie 1 -->
                 <article class="article-card" data-category="technologie">
                     <div class="article-image bg-technologie">💻</div>
                     <div class="article-body">
@@ -93,7 +110,6 @@
                     </div>
                 </article>
 
-                <!-- Article Technologie 2 -->
                 <article class="article-card" data-category="technologie">
                     <div class="article-image bg-technologie">🌐</div>
                     <div class="article-body">
@@ -104,7 +120,6 @@
                     </div>
                 </article>
 
-                <!-- Article Science 1 -->
                 <article class="article-card" data-category="science">
                     <div class="article-image bg-science">🔬</div>
                     <div class="article-body">
@@ -115,7 +130,6 @@
                     </div>
                 </article>
 
-                <!-- Article Science 2 -->
                 <article class="article-card" data-category="science">
                     <div class="article-image bg-science">🧬</div>
                     <div class="article-body">
@@ -126,7 +140,6 @@
                     </div>
                 </article>
 
-                <!-- Article Psychologie 1 -->
                 <article class="article-card" data-category="psychologie">
                     <div class="article-image bg-psychologie">🧠</div>
                     <div class="article-body">
@@ -137,7 +150,6 @@
                     </div>
                 </article>
 
-                <!-- Article Psychologie 2 -->
                 <article class="article-card" data-category="psychologie">
                     <div class="article-image bg-psychologie">💬</div>
                     <div class="article-body">
@@ -152,20 +164,32 @@
         </div>
     </section>
 
-    <!-- Opportunités -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- OPPORTUNITÉS AVEC FILTRE                      -->
+    <!-- ═══════════════════════════════════════════════ -->
     <section id="opportunites" class="section bg-light">
         <div class="container">
             <div class="section-header">
                 <h2>Opportunités</h2>
                 <p>Emplois, collaborations et appels à candidatures.</p>
             </div>
-            <div class="opportunities-grid">
+            
+            <!-- Filtres Opportunités -->
+            <div class="filter-tabs opp-filter-tabs">
+                <button class="opp-filter-btn active" data-opp="tous">Tous</button>
+                <button class="opp-filter-btn" data-opp="emploi">Emploi</button>
+                <button class="opp-filter-btn" data-opp="stage">Stage</button>
+                <button class="opp-filter-btn" data-opp="collaboration">Collaboration</button>
+                <button class="opp-filter-btn" data-opp="bourse">Bourse</button>
+            </div>
+
+            <div class="opportunities-grid" id="opportunities-grid">
                 
                 <!-- ═══════════════════════════════════════ -->
-                <!-- ║  AJOUTER UNE OPPORTUNITÉ : COPIER    ║ -->
+                <!-- AJOUTER UNE OPPORTUNITÉ : COPIER       -->
                 <!-- ═══════════════════════════════════════ -->
 
-                <div class="opportunity-card">
+                <div class="opportunity-card" data-opp-type="emploi">
                     <div class="opportunity-header">
                         <span class="badge-opportunity badge-job">Emploi</span>
                         <span class="date">Publié le 8 août 2026</span>
@@ -175,7 +199,7 @@
                     <a href="#" class="read-more">Postuler maintenant →</a>
                 </div>
 
-                <div class="opportunity-card">
+                <div class="opportunity-card" data-opp-type="collaboration">
                     <div class="opportunity-header">
                         <span class="badge-opportunity badge-collab">Collaboration</span>
                         <span class="date">Publié le 5 août 2026</span>
@@ -185,7 +209,7 @@
                     <a href="#" class="read-more">En savoir plus →</a>
                 </div>
 
-                <div class="opportunity-card">
+                <div class="opportunity-card" data-opp-type="stage">
                     <div class="opportunity-header">
                         <span class="badge-opportunity badge-intern">Stage</span>
                         <span class="date">Publié le 2 août 2026</span>
@@ -195,7 +219,7 @@
                     <a href="#" class="read-more">Postuler maintenant →</a>
                 </div>
 
-                <div class="opportunity-card">
+                <div class="opportunity-card" data-opp-type="bourse">
                     <div class="opportunity-header">
                         <span class="badge-opportunity badge-scholarship">Bourse</span>
                         <span class="date">Publié le 28 juillet 2026</span>
@@ -209,7 +233,7 @@
         </div>
     </section>
 
-    <!-- À propos -->
+    <!-- À PROPOS -->
     <section id="apropos" class="section">
         <div class="container about-container">
             <h2>À propos d'Educa-Psy</h2>
@@ -236,14 +260,14 @@
                     </div>
                 </div>
                 <a href="https://educa-psy-haiti.web.app" target="_blank" class="btn-primary btn-large">
-                    Visiter le site officiel d'Educa-Psy
+                    Visiter l'entreprise Educa-Psy
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="container footer-content">
             <div class="footer-brand">
@@ -265,7 +289,7 @@
             <div class="footer-links">
                 <h4>Liens utiles</h4>
                 <ul>
-                    <li><a href="https://educa-psy-haiti.web.app" target="_blank">Site officiel</a></li>
+                    <li><a href="https://educa-psy-haiti.web.app" target="_blank">Entreprise</a></li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="#">Newsletter</a></li>
                 </ul>
@@ -278,4 +302,4 @@
 
     <script src="script.js"></script>
 </body>
-  </html>
+</html>
