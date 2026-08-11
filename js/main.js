@@ -26,13 +26,13 @@ const Icons = {
 
 /* ===================== NAV CONFIG ===================== */
 const navItems = [
-  { name: 'Accueil', href: 'pages/index.html' },
-  { name: 'Educa-Psy', href: 'pages/a-propos.html' },
-  { name: 'Expertises', href: 'pages/expertises.html' },
-  { name: 'Services', href: 'pages/services.html' },
+  { name: 'Accueil', href: '/pages/index.html' },
+  { name: 'Educa-Psy', href: '/pages/a-propos.html' },
+  { name: 'Expertises', href: '/pages/expertises.html' },
+  { name: 'Services', href: '/pages/services.html' },
   { name: 'Nouvelles', href: 'pages/actualites.html' },
-  { name: 'Partenaires', href: 'pages/partenaires.html' },
-  { name: 'Contact', href: 'pages/contact.html' },
+  { name: 'Partenaires', href: '/pages/partenaires.html' },
+  { name: 'Contact', href: '/pages/contact.html' },
 ];
 
 /* ===================== INJECT HEADER ===================== */
