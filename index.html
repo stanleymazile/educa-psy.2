@@ -1,394 +1,124 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educa-Psy | Éducation, Technologie, Science & Psychologie</title>
-    <meta property="og:title" content="Educa-Psy">
-    <meta property="og:description" content="Portail d'information sur l'éducation, la technologie, la science et la psychologie en Haïti.">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Educa-Psy — Éducation, technologie, science &amp; psychologie</title>
+<meta name="description" content="Educa-Psy publie des actualités et ressources en éducation, technologie, science et psychologie, ainsi que des opportunités d'emploi et de collaboration.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Ccircle%20cx='20'%20cy='20'%20r='18.5'%20fill='%23FAF6ED'%20stroke='%23B8912F'%20stroke-width='2'/%3E%3Ctext%20x='20'%20y='27'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='17'%20font-weight='700'%20fill='%23B8912F'%3EEP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- DARK MODE TOGGLE -->
-    <button onclick="toggleDark()" class="dark-toggle" title="Mode sombre">
-        <span id="dark-icon">🌙</span>
-    </button>
-
-    <!-- NAVIGATION -->
-    <nav class="navbar">
-        <div class="container nav-content">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">E-P</div>
-                <span>Educa-Psy</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#categories">Catégories</a></li>
-                <li><a href="#opportunites">Opportunités</a></li>
-                <li><a href="#apropos">À propos</a></li>
-            </ul>
-            <a href="https://educa-psy-haiti.web.app" target="_blank" class="btn-primary desktop-only">Entreprise</a>
-            <button class="hamburger" onclick="toggleDrawer()" aria-label="Menu">
-                <span id="bar1" class="hamburger-line"></span>
-                <span id="bar2" class="hamburger-line"></span>
-                <span id="bar3" class="hamburger-line"></span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Drawer Overlay -->
-    <div id="drawer-overlay" onclick="closeDrawer()" class="drawer-overlay hidden"></div>
-    <!-- Drawer -->
-    <div id="drawer" class="drawer">
-        <div class="drawer-header">
-            <span>Menu</span>
-            <button onclick="closeDrawer()" class="drawer-close">✕</button>
-        </div>
-        <div class="drawer-body">
-            <a href="#accueil" onclick="closeDrawer()">🏠 Accueil</a>
-            <a href="#categories" onclick="closeDrawer()">📰 Catégories</a>
-            <a href="#opportunites" onclick="closeDrawer()">💼 Opportunités</a>
-            <a href="#apropos" onclick="closeDrawer()">ℹ️ À propos</a>
-        </div>
-        <div class="drawer-footer">
-            <a href="https://educa-psy-haiti.web.app" target="_blank" onclick="closeDrawer()" class="btn-primary drawer-cta">Visiter l'entreprise</a>
-        </div>
+<header class="site-header">
+  <div class="masthead-top">
+    <div class="container">
+      <div class="masthead-top-inner">
+        <span id="today-date" class="masthead-date"></span>
+        <span class="masthead-tagline">Éducation · Technologie · Science · Psychologie</span>
+      </div>
     </div>
+  </div>
 
-    <!-- HERO COMPACT -->
-    <header id="accueil" class="hero">
-        <div class="container hero-content">
-            <span class="badge">Portail d'Information</span>
-            <h1>Votre fenêtre sur <span class="accent">l'Éducation & la Science</span></h1>
-            <p>Educa-Psy diffuse régulièrement des infos sur l'éducation, la technologie, la science, la psychologie, ainsi que des opportunités d'emplois et de collaborations.</p>
-            <div class="hero-buttons">
-                <a href="#categories" class="btn-primary">Explorer les articles</a>
-                <a href="#opportunites" class="btn-secondary">Voir les opportunités</a>
-            </div>
-        </div>
-    </header>
+  <div class="masthead-main">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <svg class="logo-mark" width="46" height="46" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="20" cy="20" r="18.5" fill="none" stroke="#B8912F" stroke-width="1.5"/>
+          <text x="20" y="27" text-anchor="middle" font-family="Georgia, serif" font-size="17" font-weight="700" fill="#B8912F">EP</text>
+        </svg>
+        <span class="logo-text">Educa-Psy</span>
+      </a>
+    </div>
+  </div>
 
-    <!-- ARTICLES — DENSE -->
-    <section id="categories" class="section">
-        <div class="container">
-            <div class="section-bar">
-                <div>
-                    <h2>Nos Catégories</h2>
-                    <p class="section-sub">Recherchez et filtrez nos derniers articles.</p>
-                </div>
-                <div class="search-box">
-                    <input type="text" id="article-search" placeholder="Rechercher..." oninput="searchArticles()">
-                    <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                </div>
-            </div>
+  <nav class="site-nav">
+    <div class="container">
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="index.html?cat=%C3%89ducation">Éducation</a></li>
+        <li><a href="index.html?cat=Technologie">Technologie</a></li>
+        <li><a href="index.html?cat=Science">Science</a></li>
+        <li><a href="index.html?cat=Psychologie">Psychologie</a></li>
+        <li><a href="emplois.html" class="nav-highlight">Emplois &amp; Collaborations</a></li>
+        <li><a href="a-propos.html">À propos</a></li>
+      </ul>
+    </div>
+  </nav>
 
-            <div class="filter-tabs" id="cat-tabs">
-                <button class="filter-btn active" data-cat="education">Éducation</button>
-                <button class="filter-btn" data-cat="technologie">Technologie</button>
-                <button class="filter-btn" data-cat="science">Science</button>
-                <button class="filter-btn" data-cat="psychologie">Psychologie</button>
-            </div>
+  <div class="spectrum-rule" aria-hidden="true">
+    <span class="spectrum-seg s-education"></span>
+    <span class="spectrum-seg s-technologie"></span>
+    <span class="spectrum-seg s-science"></span>
+    <span class="spectrum-seg s-psychologie"></span>
+  </div>
+</header>
 
-            <div class="articles-grid dense" id="articles-grid">
-                <!-- ÉDUCATION -->
-                <article class="article-card" data-category="education" data-title="réforme curriculum scolaire haïti">
-                    <div class="article-image"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop" alt="Éducation" loading="lazy"></div>
-                    <div class="article-body">
-                        <span class="tag tag-education">Éducation</span>
-                        <h3>Réforme du curriculum scolaire en Haïti</h3>
-                        <p>Analyse des nouvelles orientations pédagogiques et leur impact sur les écoles.</p>
-                        <a href="article.html" class="read-more">Lire →</a>
-                    </div>
-                </article>
-                <article class="article-card" data-category="education" data-title="apprentissage en ligne e-learning">
-                    <div class="article-image"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop" alt="E-learning" loading="lazy"></div>
-                    <div class="article-body">
-                        <span class="tag tag-education">Éducation</span>
-                        <h3>L'apprentissage en ligne en hausse</h3>
-                        <p>Les plateformes MOOC et le e-learning connaissent une croissance de 35%.</p>
-                        <a href="article.html" class="read-more">Lire →</a>
-                    </div>
-                </article>
-                <article class="article-card" data-category="education" data-title="alphabétisation rurale haïti">
-                    <div class="article-image"><img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=600&h=400&fit=crop" alt="Alphabétisation" loading="lazy"></div>
-                    <div class="article-body">
-                        <span class="tag tag-education">Éducation</span>
-                        <h3>Alphabétisation en milieu rural</h3>
-                        <p>Nouveaux centres d'alphabétisation ouvrent dans les zones rurales.</p>
-                        <a href="article.html" class="read-more">Lire →</a>
-                    </div>
-                </article>
-                <article class="article-card" data-category="education" data-title="bourses étudiants haïti 2026">
-                    <div class="article-image"><img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&h=400&fit=crop" alt="Bourses" loading="lazy"></div>
-                    <div class="article-body">
-                        <span class="tag tag-education">Éducation</span>
-                        <h3>Bourses d'études 2026</h3>
-                        <p>Guide complet des bourses disponibles pour les étudiants haïtiens.</p>
-                        <a href="article.html" class="read-more">Lire →</a>
-                    </div>
-                </article>
+<main>
 
-                <!-- TECHNOLOGIE -->
-                <article class="article-card" data-category="technologie" data-title="ia intelligence artificielle professeurs">
-                    <div class="article-image"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop" alt="IA" loading="lazy"></div>
-                    <div class="article-body">
-                        <span class="tag tag-technologie">Technologie</span>
-                        <h3>L'IA au service des professeurs</h3>
-                        <p>Comment l'intelligence artificielle transforme la préparation des cours.</p>
-                        <a href="article.html" class="read-more">Lire →</a>
-                    </div>
-                </article>
-                <article class="article-card" data-category="technologie" data-title="connectivité internet rural haïti">
-                    <div class="article-image"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop" alt="Connectivité" loading="lazy"></div>
-                    <div class="article-body">
-                        <span class="tag tag-technologie">Technologie</span>
-                        <h3>Connectivité rurale : un défi majeur</h3>
-                        <p>Les initiatives pour doter les zones rurales d'un accès internet stable.</p>
-                        <a href="article.html" class="read-more">Lire →</a>
-                    </div>
-                </article>
-                <article class="article-card" data-category="technologie" data-title="smartphones éducation haïti">
-                    <div class="article-image"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop" alt="Smartphones" loading="lazy"></div>
-                    <div class="article-body">
-                        <span class="tag tag-technologie">Technologie</span>
-                        <h3>Smartphones comme outil pédagogique</h3>
-                        <p>Comment les téléphones révolutionnent l'accès aux ressources éducatives.</p>
-                        <a href="article.html" class="read-more">Lire →</a>
-                    </div>
-                </article>
+  <section class="hero-section">
+    <div class="container">
+      <h1 class="page-title">À la une</h1>
+      <div id="featured-article" class="featured-wrap"></div>
+    </div>
+  </section>
 
-                <!-- SCIENCE -->
-                <article class="article-card" data-category="science" data-title="nouvelle espèce endémique grenouille haïti">
-                    <div class="article-image"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&h=400&fit=crop" alt="Science" loading="lazy"></div>
-                    <div class="article-body">
-                        <span class="tag tag-science">Science</span>
-                        <h3>Découverte d'une nouvelle espèce endémique</h3>
-                        <p>Des chercheurs haïtiens ont identifié une grenouille rare dans le massif de la Hotte.</p>
-                        <a href="article.html" class="read-more">Lire →</a>
-                    </div>
-                </article>
-                <article class="article-card" data-category="science" data-title="recherche scientifique haïti 2025">
-                    <div class="article-image"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=400&fit=crop" alt="Recherche" loading="lazy"></div>
-                    <div class="article-body">
-                        <span class="tag tag-science">Science</span>
-                        <h3>La recherche scientifique en Haïti</h3>
-                        <p>Bilan 2025 : hausse des publications et nouveaux partenariats internationaux.</p>
-                        <a href="article.html" class="read-more">Lire →</a>
-                    </div>
-                </article>
-                <article class="article-card" data-category="science" data-title="changement climatique caraïbes impact">
-                    <div class="article-image"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&h=400&fit=crop" alt="Climat" loading="lazy"></div>
-                    <div class="article-body">
-                        <span class="tag tag-science">Science</span>
-                        <h3>Le climat caraïbe en 2026</h3>
-                        <p>Étude des impacts du changement climatique sur les écosystèmes insulaires.</p>
-                        <a href="article.html" class="read-more">Lire →</a>
-                    </div>
-                </article>
+  <section class="filter-section">
+    <div class="container">
+      <div class="filter-tabs" role="tablist" aria-label="Filtrer par rubrique">
+        <button class="filter-tab" data-cat="Tous">Tous</button>
+        <button class="filter-tab" data-cat="Éducation">Éducation</button>
+        <button class="filter-tab" data-cat="Technologie">Technologie</button>
+        <button class="filter-tab" data-cat="Science">Science</button>
+        <button class="filter-tab" data-cat="Psychologie">Psychologie</button>
+      </div>
+    </div>
+  </section>
 
-                <!-- PSYCHOLOGIE -->
-                <article class="article-card" data-category="psychologie" data-title="santé mentale étudiants anxiété">
-                    <div class="article-image"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=400&fit=crop" alt="Psychologie" loading="lazy"></div>
-                    <div class="article-body">
-                        <span class="tag tag-psychologie">Psychologie</span>
-                        <h3>Santé mentale des étudiants</h3>
-                        <p>Une étude révèle que 40% des étudiants universitaires souffrent d'anxiété.</p>
-                        <a href="article.html" class="read-more">Lire →</a>
-                    </div>
-                </article>
-                <article class="article-card" data-category="psychologie" data-title="intelligence émotionnelle leadership travail">
-                    <div class="article-image"><img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=600&h=400&fit=crop" alt="Leadership" loading="lazy"></div>
-                    <div class="article-body">
-                        <span class="tag tag-psychologie">Psychologie</span>
-                        <h3>L'intelligence émotionnelle au travail</h3>
-                        <p>Pourquoi les entreprises investissent dans la formation au leadership empathique.</p>
-                        <a href="article.html" class="read-more">Lire →</a>
-                    </div>
-                </article>
-                <article class="article-card" data-category="psychologie" data-title="thérapie cognitivo comportementale haïti">
-                    <div class="article-image"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop" alt="Thérapie" loading="lazy"></div>
-                    <div class="article-body">
-                        <span class="tag tag-psychologie">Psychologie</span>
-                        <h3>La TCC en Haïti</h3>
-                        <p>Développement de la thérapie cognitivo-comportementale dans les centres de santé mentale.</p>
-                        <a href="article.html" class="read-more">Lire →</a>
-                    </div>
-                </article>
-            </div>
+  <section>
+    <div class="container">
+      <div id="articles-grid" class="articles-grid"></div>
+    </div>
+  </section>
 
-            <div class="pagination" id="pagination">
-                <button onclick="changePage(-1)" class="page-btn page-nav">←</button>
-                <div id="page-numbers" class="page-numbers"></div>
-                <button onclick="changePage(1)" class="page-btn page-nav">→</button>
-            </div>
-        </div>
-    </section>
+  <section class="opportunites-section">
+    <div class="container">
+      <div class="opportunites-header">
+        <h2>Opportunités du moment</h2>
+        <a href="emplois.html" class="see-all">Voir toutes les opportunités →</a>
+      </div>
+      <div id="opportunites-apercu" class="opportunites-apercu"></div>
+    </div>
+  </section>
 
-    <!-- OPPORTUNITÉS — DENSE -->
-    <section id="opportunites" class="section bg-light">
-        <div class="container">
-            <div class="section-bar">
-                <div>
-                    <h2>Opportunités</h2>
-                    <p class="section-sub">Emplois, stages, collaborations et bourses.</p>
-                </div>
-                <div class="search-box">
-                    <input type="text" id="opp-search" placeholder="Rechercher..." oninput="searchOpportunities()">
-                    <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                </div>
-            </div>
+</main>
 
-            <div class="filter-tabs opp-filter-tabs">
-                <button class="opp-filter-btn active" data-opp="tous">Tous</button>
-                <button class="opp-filter-btn" data-opp="emploi">Emploi</button>
-                <button class="opp-filter-btn" data-opp="stage">Stage</button>
-                <button class="opp-filter-btn" data-opp="collaboration">Collaboration</button>
-                <button class="opp-filter-btn" data-opp="bourse">Bourse</button>
-            </div>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-text small">Educa-Psy</span>
+        <p>Actualités et ressources en éducation, technologie, science et psychologie, ainsi que des opportunités professionnelles.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="emplois.html">Emplois &amp; Collaborations</a>
+        <a href="a-propos.html">À propos</a>
+        <a href="https://educa-psy-haiti.web.app" target="_blank" rel="noopener">Site officiel d'Educa-Psy ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Educa-Psy. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
 
-            <div class="opportunities-grid dense" id="opportunities-grid">
-                <div class="opportunity-card" data-opp-type="emploi" data-opp-title="chargé projet éducatif">
-                    <div class="opportunity-header">
-                        <span class="badge-opportunity badge-job">Emploi</span>
-                        <span class="date">8 août 2026</span>
-                    </div>
-                    <h3>Chargé(e) de projet éducatif</h3>
-                    <p>Coordination de programmes de formation dans le Nord d'Haïti. Bac+3 minimum.</p>
-                    <a href="opportunite.html" class="read-more">Postuler →</a>
-                </div>
-                <div class="opportunity-card" data-opp-type="collaboration" data-opp-title="partenariat recherche psychologie">
-                    <div class="opportunity-header">
-                        <span class="badge-opportunity badge-collab">Collaboration</span>
-                        <span class="date">5 août 2026</span>
-                    </div>
-                    <h3>Partenariat recherche en psychologie</h3>
-                    <p>Appel à collaboration pour une étude sur le bien-être mental des jeunes.</p>
-                    <a href="opportunite.html" class="read-more">En savoir plus →</a>
-                </div>
-                <div class="opportunity-card" data-opp-type="stage" data-opp-title="stagiaire communication digitale">
-                    <div class="opportunity-header">
-                        <span class="badge-opportunity badge-intern">Stage</span>
-                        <span class="date">2 août 2026</span>
-                    </div>
-                    <h3>Stagiaire en communication digitale</h3>
-                    <p>3 mois minimum. Gestion des réseaux sociaux et rédaction de contenus.</p>
-                    <a href="opportunite.html" class="read-more">Postuler →</a>
-                </div>
-                <div class="opportunity-card" data-opp-type="bourse" data-opp-title="bourse excellence sciences master">
-                    <div class="opportunity-header">
-                        <span class="badge-opportunity badge-scholarship">Bourse</span>
-                        <span class="date">28 juill. 2026</span>
-                    </div>
-                    <h3>Bourse d'excellence en sciences</h3>
-                    <p>10 bourses pour étudiants en Master 1 scientifique. Jusqu'au 30 septembre.</p>
-                    <a href="opportunite.html" class="read-more">En savoir plus →</a>
-                </div>
-                <div class="opportunity-card" data-opp-type="emploi" data-opp-title="psychologue clinicien centre santé">
-                    <div class="opportunity-header">
-                        <span class="badge-opportunity badge-job">Emploi</span>
-                        <span class="date">15 août 2026</span>
-                    </div>
-                    <h3>Psychologue clinicien</h3>
-                    <p>Centre de santé mentale de Port-au-Prince. Consultations adultes et enfants.</p>
-                    <a href="opportunite.html" class="read-more">Postuler →</a>
-                </div>
-                <div class="opportunity-card" data-opp-type="bourse" data-opp-title="bourse technologie innovation haïti">
-                    <div class="opportunity-header">
-                        <span class="badge-opportunity badge-scholarship">Bourse</span>
-                        <span class="date">10 août 2026</span>
-                    </div>
-                    <h3>Bourse Tech Innovation</h3>
-                    <p>Financement pour jeunes développeurs haïtiens avec projets à impact social.</p>
-                    <a href="opportunite.html" class="read-more">En savoir plus →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- À PROPOS — DENSE 2 COLONNES -->
-    <section id="apropos" class="section">
-        <div class="container about-split">
-            <div class="about-left">
-                <span class="section-label">À propos</span>
-                <h2>Qui est Educa-Psy ?</h2>
-                <p>Educa-Psy est une organisation dédiée à la promotion de l'éducation, de la science, de la technologie et de la psychologie en Haïti et dans la région caraïbe. Nous partageons analyses, actualités et opportunités pour bâtir une communauté apprenante.</p>
-                <div class="about-mini-features">
-                    <div class="mini-feat">
-                        <div class="mini-feat-icon">🎯</div>
-                        <div><h4>Mission</h4><p>Démocratiser l'information scientifique.</p></div>
-                    </div>
-                    <div class="mini-feat">
-                        <div class="mini-feat-icon">🚀</div>
-                        <div><h4>Projets</h4><p>Formations, ateliers et conférences.</p></div>
-                    </div>
-                    <div class="mini-feat">
-                        <div class="mini-feat-icon">🤝</div>
-                        <div><h4>Partenaires</h4><p>Institutions nationales et internationales.</p></div>
-                    </div>
-                </div>
-                <a href="https://educa-psy-haiti.web.app" target="_blank" class="btn-primary">Visiter l'entreprise Educa-Psy →</a>
-            </div>
-            <div class="about-right">
-                <div class="stats-card">
-                    <div class="stat-row"><span>Articles publiés</span><b>120+</b></div>
-                    <div class="stat-row"><span>Opportunités partagées</span><b>85+</b></div>
-                    <div class="stat-row"><span>Lecteurs mensuels</span><b>15K</b></div>
-                    <div class="stat-row"><span>Partenaires actifs</span><b>24</b></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- NEWSLETTER COMPACT -->
-    <section id="newsletter" class="newsletter-bar">
-        <div class="container newsletter-flex">
-            <div>
-                <h2>Restez informé</h2>
-                <p>Recevez nos articles et opportunités chaque semaine.</p>
-            </div>
-            <form class="newsletter-form" onsubmit="handleNewsletter(event)">
-                <input type="email" id="newsletter-email" placeholder="Votre email" required>
-                <button type="submit">S'abonner</button>
-            </form>
-        </div>
-        <p id="newsletter-success" class="newsletter-success">✅ Vous êtes abonné ! Merci.</p>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-brand">
-                <div class="logo"><div class="logo-icon small">E-P</div><span>Educa-Psy</span></div>
-                <p>Portail d'information indépendant dédié à l'éducation, la technologie, la science et la psychologie.</p>
-            </div>
-            <div class="footer-links">
-                <h4>Navigation</h4>
-                <ul>
-                    <li><a href="#accueil">Accueil</a></li>
-                    <li><a href="#categories">Articles</a></li>
-                    <li><a href="#opportunites">Opportunités</a></li>
-                    <li><a href="#apropos">À propos</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Liens utiles</h4>
-                <ul>
-                    <li><a href="https://educa-psy-haiti.web.app" target="_blank">Entreprise</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="#newsletter">Newsletter</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom"><p>© 2026 Educa-Psy. Tous droits réservés.</p></div>
-    </footer>
-
-    <!-- Scroll to Top -->
-    <button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="scroll-top">
-        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
-    </button>
-
-    <script src="script.js"></script>
+<script src="articles-data.js"></script>
+<script src="emplois-data.js"></script>
+<script src="main.js"></script>
 </body>
-                            </html>
+</html>
+
