@@ -1,88 +1,93 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Article | Educa-Psy</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article — Educa-Psy</title>
+<meta name="description" content="Actualités et ressources en éducation, technologie, science et psychologie — publié par Educa-Psy.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Ccircle%20cx='20'%20cy='20'%20r='18.5'%20fill='%23FAF6ED'%20stroke='%23B8912F'%20stroke-width='2'/%3E%3Ctext%20x='20'%20y='27'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='17'%20font-weight='700'%20fill='%23B8912F'%3EEP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <button onclick="toggleDark()" class="dark-toggle"><span id="dark-icon">🌙</span></button>
-
-    <nav class="navbar">
-        <div class="container nav-content">
-            <a href="index.html" class="logo"><div class="logo-icon">E-P</div><span>Educa-Psy</span></a>
-            <ul class="nav-links">
-                <li><a href="index.html#accueil">Accueil</a></li>
-                <li><a href="index.html#categories">Catégories</a></li>
-                <li><a href="index.html#opportunites">Opportunités</a></li>
-                <li><a href="index.html#apropos">À propos</a></li>
-            </ul>
-            <a href="https://educa-psy-haiti.web.app" target="_blank" class="btn-primary desktop-only">Entreprise</a>
-            <button class="hamburger" onclick="toggleDrawer()"><span id="bar1" class="hamburger-line"></span><span id="bar2" class="hamburger-line"></span><span id="bar3" class="hamburger-line"></span></button>
-        </div>
-    </nav>
-    <div id="drawer-overlay" onclick="closeDrawer()" class="drawer-overlay hidden"></div>
-    <div id="drawer" class="drawer">
-        <div class="drawer-header"><span>Menu</span><button onclick="closeDrawer()" class="drawer-close">✕</button></div>
-        <div class="drawer-body">
-            <a href="index.html#accueil" onclick="closeDrawer()">🏠 Accueil</a>
-            <a href="index.html#categories" onclick="closeDrawer()">📰 Catégories</a>
-            <a href="index.html#opportunites" onclick="closeDrawer()">💼 Opportunités</a>
-            <a href="index.html#apropos" onclick="closeDrawer()">ℹ️ À propos</a>
-        </div>
-        <div class="drawer-footer"><a href="https://educa-psy-haiti.web.app" target="_blank" onclick="closeDrawer()" class="btn-primary drawer-cta">Entreprise</a></div>
+<header class="site-header">
+  <div class="masthead-top">
+    <div class="container">
+      <div class="masthead-top-inner">
+        <span id="today-date" class="masthead-date"></span>
+        <span class="masthead-tagline">Éducation · Technologie · Science · Psychologie</span>
+      </div>
     </div>
+  </div>
 
-    <article class="article-page">
-        <div class="container article-header">
-            <span class="tag tag-education">Éducation</span>
-            <h1>Réforme du curriculum scolaire en Haïti</h1>
-            <div class="article-meta">
-                <span>✍️ Par Jean Baptiste</span>
-                <span>📅 8 août 2026</span>
-                <span>⏱️ 5 min</span>
-                <span>👁️ 1 240 vues</span>
-            </div>
-        </div>
-        <div class="article-hero-img">
-            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&h=600&fit=crop" alt="Éducation">
-        </div>
-        <div class="container article-body">
-            <p>Le ministère de l'Éducation nationale haïtienne a dévoilé en juin 2026 un ambitieux projet de réforme du curriculum scolaire, visant à moderniser l'enseignement primaire et secondaire sur l'ensemble du territoire.</p>
-            <h2>Un virage vers le numérique</h2>
-            <p>La nouvelle mouture du curriculum intègre pour la première fois des modules obligatoires d'initiation à la programmation informatique dès le cycle fondamental. Les élèves du CM1 et CM2 découvriront les bases de la logique algorithmique.</p>
-            <blockquote>"Cette réforme n'est pas seulement un changement de manuels, c'est une transformation de notre vision de l'école."<br>— Dr. Marie-Luce Joseph, Ministre de l'Éducation</blockquote>
-            <h2>Défis de mise en œuvre</h2>
-            <p>Malgré l'enthousiasme suscité par ces annonces, de nombreux défis demeurent. La formation des enseignants, le manque d'infrastructures dans les zones rurales et le coût des nouveaux manuels posent question.</p>
-            <p>Les écoles privées, qui accueillent près de 80% des élèves haïtiens, devront également s'adapter. Le gouvernement a promis un fonds de transition pour accompagner les établissements les plus démunis.</p>
-            <h2>Calendrier</h2>
-            <p>Le déploiement progressif du nouveau curriculum débutera à la rentrée scolaire de septembre 2026 dans 50 écoles pilotes réparties sur les 10 départements.</p>
-        </div>
-        <div class="container share-bar">
-            <a href="https://wa.me/?text=Article%20Educa-Psy" target="_blank" class="share-btn share-wa">📱 WhatsApp</a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank" class="share-btn share-fb">📘 Facebook</a>
-            <a href="https://twitter.com/intent/tweet?text=" target="_blank" class="share-btn share-x">🐦 X</a>
-            <a href="mailto:?subject=Article%20Educa-Psy" class="share-btn share-mail">✉️ Email</a>
-        </div>
-        <div class="container author-box">
-            <div class="author-avatar">JB</div>
-            <div class="author-info"><h4>Jean Baptiste</h4><p>Journaliste éducatif et consultant pédagogique. Spécialiste des politiques scolaires en Haïti.</p></div>
-        </div>
-        <div class="container back-link"><a href="index.html#categories">← Retour aux articles</a></div>
-    </article>
+  <div class="masthead-main">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <svg class="logo-mark" width="46" height="46" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="20" cy="20" r="18.5" fill="none" stroke="#B8912F" stroke-width="1.5"/>
+          <text x="20" y="27" text-anchor="middle" font-family="Georgia, serif" font-size="17" font-weight="700" fill="#B8912F">EP</text>
+        </svg>
+        <span class="logo-text">Educa-Psy</span>
+      </a>
+    </div>
+  </div>
 
-    <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-brand"><div class="logo"><div class="logo-icon small">E-P</div><span>Educa-Psy</span></div><p>Portail d'information indépendant.</p></div>
-            <div class="footer-links"><h4>Navigation</h4><ul><li><a href="index.html#accueil">Accueil</a></li><li><a href="index.html#categories">Articles</a></li><li><a href="index.html#opportunites">Opportunités</a></li><li><a href="index.html#apropos">À propos</a></li></ul></div>
-            <div class="footer-links"><h4>Liens utiles</h4><ul><li><a href="https://educa-psy-haiti.web.app" target="_blank">Entreprise</a></li><li><a href="contact.html">Contact</a></li><li><a href="index.html#newsletter">Newsletter</a></li></ul></div>
-        </div>
-        <div class="footer-bottom"><p>© 2026 Educa-Psy. Tous droits réservés.</p></div>
-    </footer>
+  <nav class="site-nav">
+    <div class="container">
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="index.html?cat=%C3%89ducation">Éducation</a></li>
+        <li><a href="index.html?cat=Technologie">Technologie</a></li>
+        <li><a href="index.html?cat=Science">Science</a></li>
+        <li><a href="index.html?cat=Psychologie">Psychologie</a></li>
+        <li><a href="emplois.html" class="nav-highlight">Emplois &amp; Collaborations</a></li>
+        <li><a href="a-propos.html">À propos</a></li>
+      </ul>
+    </div>
+  </nav>
 
-    <script src="script.js"></script>
+  <div class="spectrum-rule" aria-hidden="true">
+    <span class="spectrum-seg s-education"></span>
+    <span class="spectrum-seg s-technologie"></span>
+    <span class="spectrum-seg s-science"></span>
+    <span class="spectrum-seg s-psychologie"></span>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <section class="article-page">
+      <div id="article-content"></div>
+      <div id="articles-similaires" class="similaires-section"></div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-text small">Educa-Psy</span>
+        <p>Actualités et ressources en éducation, technologie, science et psychologie, ainsi que des opportunités professionnelles.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="emplois.html">Emplois &amp; Collaborations</a>
+        <a href="a-propos.html">À propos</a>
+        <a href="https://educa-psy-haiti.web.app" target="_blank" rel="noopener">Site officiel d'Educa-Psy ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Educa-Psy. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="articles-data.js"></script>
+<script src="emplois-data.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
