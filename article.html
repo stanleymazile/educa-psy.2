@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réforme du curriculum scolaire en Haïti | Educa-Psy</title>
+    <meta property="og:title" content="Réforme du curriculum scolaire en Haïti">
+    <meta property="og:description" content="Analyse des nouvelles orientations pédagogiques et leur impact sur les écoles publiques et privées du pays.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .article-hero { padding: 40px 20px 20px; text-align: center; }
+        .article-hero h1 { font-size: 2.2rem; font-weight: 800; max-width: 800px; margin: 0 auto 20px; color: var(--text); }
+        .article-meta { display: flex; justify-content: center; gap: 20px; color: var(--text-light); font-size: 0.9rem; margin-bottom: 30px; flex-wrap: wrap; }
+        .article-image-main { width: 100%; max-width: 900px; margin: 0 auto 40px; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); }
+        .article-image-main img { width: 100%; height: auto; display: block; }
+        .article-content { max-width: 720px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8; color: var(--text); }
+        .article-content h2 { font-size: 1.5rem; font-weight: 700; margin: 40px 0 16px; color: var(--primary); }
+        .article-content p { margin-bottom: 20px; }
+        .article-content blockquote { border-left: 4px solid var(--primary); padding-left: 20px; margin: 30px 0; font-style: italic; color: var(--text-light); background: var(--bg); padding: 20px 20px 20px 24px; border-radius: 0 var(--radius) var(--radius) 0; }
+        .share-bar { display: flex; gap: 10px; justify-content: center; margin: 50px 0 30px; flex-wrap: wrap; }
+        .share-btn { padding: 10px 20px; border-radius: var(--radius); font-weight: 600; font-size: 0.9rem; text-decoration: none; color: white; transition: transform 0.2s; }
+        .share-btn:hover { transform: translateY(-2px); }
+        .share-wa { background: #25d366; }
+        .share-fb { background: #1877f2; }
+        .share-x { background: #000; }
+        .share-mail { background: var(--primary); }
+        .back-link { text-align: center; margin-bottom: 40px; }
+        .back-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+        .author-box { max-width: 720px; margin: 50px auto; padding: 24px; background: var(--bg); border-radius: var(--radius-lg); border: 1px solid var(--border); display: flex; gap: 16px; align-items: center; }
+        .author-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; }
+        .author-info h4 { font-weight: 700; margin-bottom: 4px; color: var(--text); }
+        .author-info p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
+        @media (max-width: 768px) { .article-hero h1 { font-size: 1.6rem; } .article-content { font-size: 1rem; padding: 0 10px; } }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation (identique à index.html) -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">E-P</div>
+                <span>Educa-Psy</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#accueil">Accueil</a></li>
+                <li><a href="index.html#categories">Catégories</a></li>
+                <li><a href="index.html#opportunites">Opportunités</a></li>
+                <li><a href="index.html#apropos">À propos</a></li>
+            </ul>
+            <a href="https://educa-psy-haiti.web.app" target="_blank" class="btn-primary desktop-only">Entreprise</a>
+            <button class="hamburger" onclick="toggleDrawer()" aria-label="Menu">
+                <span id="bar1" class="hamburger-line"></span>
+                <span id="bar2" class="hamburger-line"></span>
+                <span id="bar3" class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+    <div id="drawer-overlay" onclick="closeDrawer()" class="drawer-overlay hidden"></div>
+    <div id="drawer" class="drawer">
+        <div class="drawer-header">
+            <span>Menu</span>
+            <button onclick="closeDrawer()" class="drawer-close">✕</button>
+        </div>
+        <div class="drawer-body">
+            <a href="index.html#accueil" onclick="closeDrawer()"><span>🏠</span> Accueil</a>
+            <a href="index.html#categories" onclick="closeDrawer()"><span>📰</span> Catégories</a>
+            <a href="index.html#opportunites" onclick="closeDrawer()"><span>💼</span> Opportunités</a>
+            <a href="index.html#apropos" onclick="closeDrawer()"><span>ℹ️</span> À propos</a>
+        </div>
+        <div class="drawer-footer">
+            <a href="https://educa-psy-haiti.web.app" target="_blank" onclick="closeDrawer()" class="btn-primary drawer-cta">Entreprise</a>
+        </div>
+    </div>
+
+    <!-- Article -->
+    <article class="article-hero">
+        <div class="container">
+            <span class="tag tag-education" style="display:inline-block; margin-bottom:16px;">Éducation</span>
+            <h1>Réforme du curriculum scolaire en Haïti</h1>
+            <div class="article-meta">
+                <span>✍️ Par Jean Baptiste</span>
+                <span>📅 8 août 2026</span>
+                <span>⏱️ 5 min de lecture</span>
+                <span>👁️ 1 240 vues</span>
+            </div>
+        </div>
+    </article>
+
+    <div class="article-image-main">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&h=600&fit=crop" alt="Éducation en Haïti">
+    </div>
+
+    <div class="article-content container">
+        <p>Le ministère de l'Éducation nationale haïtienne a dévoilé en juin 2026 un ambitieux projet de réforme du curriculum scolaire, visant à moderniser l'enseignement primaire et secondaire sur l'ensemble du territoire. Cette refonte, la plus importante depuis 2010, s'inscrit dans une volonté d'aligner le système éducatif haïtien sur les standards internationaux tout en préservant les spécificités culturelles du pays.</p>
+
+        <h2>Un virage vers le numérique</h2>
+        <p>La nouvelle mouture du curriculum intègre pour la première fois des modules obligatoires d'initiation à la programmation informatique dès le cycle fondamental. Les élèves du CM1 et CM2 découvriront les bases de la logique algorithmique à travers des outils pédagogiques adaptés et ludiques. Cette mesure vise à préparer la jeunesse haïtienne aux métiers de demain.</p>
+
+        <blockquote>
+            "Cette réforme n'est pas seulement un changement de manuels, c'est une transformation de notre vision de l'école. Nous voulons former des citoyens critiques, créatifs et adaptables."
+            <br>— Dr. Marie-Luce Joseph, Ministre de l'Éducation
+        </blockquote>
+
+        <h2>Défis de mise en œuvre</h2>
+        <p>Malgré l'enthousiasme suscité par ces annonces, de nombreux défis demeurent. La formation des enseignants, le manque d'infrastructures dans les zones rurales et le coût des nouveaux manuels posent question. Les syndicats d'enseignants réclament davantage de moyens et une formation préalable avant toute application.</p>
+
+        <p>Les écoles privées, qui accueillent près de 80% des élèves haïtiens, devront également s'adapter. Le gouvernement a promis un fonds de transition pour accompagner les établissements les plus démunis, mais le montant exact n'a pas encore été précisé.</p>
+
+        <h2>Calendrier et prochaines étapes</h2>
+        <p>Le déploiement progressif du nouveau curriculum débutera à la rentrée scolaire de septembre 2026 dans 50 écoles pilotes réparties sur les 10 départements. Une évaluation à mi-parcours est prévue en janvier 2027 avant une généralisation envisagée pour la rentrée 2027-2028.</p>
+    </div>
+
+    <!-- Partage -->
+    <div class="share-bar container">
+        <a href="https://wa.me/?text=Réforme%20du%20curriculum%20scolaire%20en%20Haïti%20-%20Educa-Psy" target="_blank" class="share-btn share-wa">📱 WhatsApp</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank" class="share-btn share-fb">📘 Facebook</a>
+        <a href="https://twitter.com/intent/tweet?text=" target="_blank" class="share-btn share-x">🐦 X</a>
+        <a href="mailto:?subject=Article%20Educa-Psy&body=" class="share-btn share-mail">✉️ Email</a>
+    </div>
+
+    <!-- Auteur -->
+    <div class="author-box container">
+        <div class="author-avatar">JB</div>
+        <div class="author-info">
+            <h4>Jean Baptiste</h4>
+            <p>Journaliste éducatif et consultant pédagogique. Spécialiste des politiques scolaires en Haïti et dans la Caraïbe.</p>
+        </div>
+    </div>
+
+    <div class="back-link">
+        <a href="index.html#categories">← Retour aux articles</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <div class="logo"><div class="logo-icon small">E-P</div><span>Educa-Psy</span></div>
+                <p>Portail d'information indépendant dédié à l'éducation, la technologie, la science et la psychologie.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html#accueil">Accueil</a></li>
+                    <li><a href="index.html#categories">Articles</a></li>
+                    <li><a href="index.html#opportunites">Opportunités</a></li>
+                    <li><a href="index.html#apropos">À propos</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Liens utiles</h4>
+                <ul>
+                    <li><a href="https://educa-psy-haiti.web.app" target="_blank">Entreprise</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="index.html#newsletter">Newsletter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>© 2026 Educa-Psy. Tous droits réservés.</p></div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
