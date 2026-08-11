@@ -26,8 +26,8 @@ const Icons = {
 
 /* ===================== NAV CONFIG ===================== */
 const navItems = [
-  { name: 'Accueil', href: 'index.html' },
-  { name: 'Educa-Psy', href: 'a-propos.html' },
+  { name: 'Accueil', href: 'pages/index.html' },
+  { name: 'Educa-Psy', href: 'pages/a-propos.html' },
   { name: 'Expertises', href: 'expertises.html' },
   { name: 'Services', href: 'services.html' },
   { name: 'Nouvelles', href: 'actualites.html' },
