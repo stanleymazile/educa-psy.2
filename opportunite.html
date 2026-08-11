@@ -3,35 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chargé(e) de projet éducatif | Opportunité Educa-Psy</title>
-    <meta property="og:title" content="Chargé(e) de projet éducatif - Educa-Psy">
-    <meta property="og:description" content="Recherche d'un(e) chargé(e) de projet pour coordonner des programmes de formation dans le Nord d'Haïti.">
+    <title>Opportunité | Educa-Psy</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .opp-hero { padding: 60px 20px 30px; text-align: center; background: linear-gradient(135deg, #dcfce7 0%, #ffffff 100%); }
-        .dark .opp-hero { background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%); }
-        .opp-hero h1 { font-size: 2rem; font-weight: 800; max-width: 700px; margin: 0 auto 16px; color: var(--text); }
-        .opp-badge-large { display: inline-block; background: #15803d; color: white; padding: 6px 18px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 16px; }
-        .opp-meta { color: var(--text-light); font-size: 0.95rem; margin-bottom: 10px; }
-        .opp-details { max-width: 720px; margin: 40px auto; padding: 0 20px; }
-        .detail-section { margin-bottom: 32px; }
-        .detail-section h3 { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
-        .detail-section p, .detail-section li { color: var(--text); line-height: 1.7; }
-        .detail-section ul { padding-left: 20px; }
-        .detail-section li { margin-bottom: 8px; }
-        .apply-box { max-width: 720px; margin: 40px auto 60px; padding: 32px; background: var(--bg); border-radius: var(--radius-lg); border: 2px solid var(--primary); text-align: center; }
-        .apply-box h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; color: var(--text); }
-        .apply-box p { color: var(--text-light); margin-bottom: 20px; }
-        .deadline { display: inline-flex; align-items: center; gap: 8px; background: #fef3c7; color: #92400e; padding: 10px 20px; border-radius: var(--radius); font-weight: 600; margin-bottom: 20px; }
-        .back-link { text-align: center; margin-bottom: 40px; }
-        .back-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
-        @media (max-width: 768px) { .opp-hero h1 { font-size: 1.5rem; } .apply-box { margin: 30px 20px 40px; } }
-    </style>
 </head>
 <body>
 
-    <!-- Navigation -->
+    <button onclick="toggleDark()" class="dark-toggle"><span id="dark-icon">🌙</span></button>
+
     <nav class="navbar">
         <div class="container nav-content">
             <a href="index.html" class="logo"><div class="logo-icon">E-P</div><span>Educa-Psy</span></a>
@@ -49,77 +28,40 @@
     <div id="drawer" class="drawer">
         <div class="drawer-header"><span>Menu</span><button onclick="closeDrawer()" class="drawer-close">✕</button></div>
         <div class="drawer-body">
-            <a href="index.html#accueil" onclick="closeDrawer()"><span>🏠</span> Accueil</a>
-            <a href="index.html#categories" onclick="closeDrawer()"><span>📰</span> Catégories</a>
-            <a href="index.html#opportunites" onclick="closeDrawer()"><span>💼</span> Opportunités</a>
-            <a href="index.html#apropos" onclick="closeDrawer()"><span>ℹ️</span> À propos</a>
+            <a href="index.html#accueil" onclick="closeDrawer()">🏠 Accueil</a>
+            <a href="index.html#categories" onclick="closeDrawer()">📰 Catégories</a>
+            <a href="index.html#opportunites" onclick="closeDrawer()">💼 Opportunités</a>
+            <a href="index.html#apropos" onclick="closeDrawer()">ℹ️ À propos</a>
         </div>
         <div class="drawer-footer"><a href="https://educa-psy-haiti.web.app" target="_blank" onclick="closeDrawer()" class="btn-primary drawer-cta">Entreprise</a></div>
     </div>
 
-    <!-- Hero -->
     <div class="opp-hero">
         <div class="container">
             <span class="opp-badge-large">Emploi</span>
             <h1>Chargé(e) de projet éducatif</h1>
-            <p class="opp-meta">📍 Nord d'Haïti &nbsp;•&nbsp; 💰 Salaire selon profil &nbsp;•&nbsp; 📅 Publié le 8 août 2026</p>
+            <p class="opp-meta">📍 Nord d'Haïti • 💰 Selon profil • 📅 8 août 2026</p>
         </div>
     </div>
 
-    <!-- Détails -->
-    <div class="opp-details">
-        <div class="detail-section">
-            <h3>📋 Description du poste</h3>
-            <p>Nous recherchons un(e) chargé(e) de projet éducatif passionné(e) pour coordonner nos programmes de formation dans le département du Nord. Vous serez responsable de la mise en œuvre, du suivi et de l'évaluation des activités pédagogiques sur le terrain.</p>
-        </div>
-
-        <div class="detail-section">
-            <h3>🎯 Responsabilités</h3>
-            <ul>
-                <li>Coordonner la mise en œuvre des programmes de formation dans 15 écoles partenaires</li>
-                <li>Superviser une équipe de 5 facilitateurs pédagogiques</li>
-                <li>Rédiger des rapports d'activités mensuels et trimestriels</li>
-                <li>Assurer le lien entre les partenaires institutionnels et l'organisation</li>
-                <li>Organiser des ateliers de formation continue pour les enseignants</li>
-            </ul>
-        </div>
-
-        <div class="detail-section">
-            <h3>✅ Prérequis</h3>
-            <ul>
-                <li>Bac+3 minimum en Sciences de l'Éducation, Gestion de projet ou domaine connexe</li>
-                <li>Minimum 2 ans d'expérience dans la coordination de projets éducatifs</li>
-                <li>Excellente maîtrise du français et du créole haïtien</li>
-                <li>Compétences avérées en gestion d'équipe et en communication</li>
-                <li>Maîtrise des outils bureautiques (Word, Excel, PowerPoint)</li>
-                <li>Disponibilité pour des déplacements fréquents dans le Nord</li>
-            </ul>
-        </div>
-
-        <div class="detail-section">
-            <h3>🎁 Avantages</h3>
-            <ul>
-                <li>Salaire compétitif selon expérience</li>
-                <li>Assurance santé</li>
-                <li>Formation continue prise en charge</li>
-                <li>Environnement de travail dynamique et impactant</li>
-            </ul>
-        </div>
+    <div class="container opp-details">
+        <div class="detail-section"><h3>📋 Description</h3><p>Nous recherchons un(e) chargé(e) de projet éducatif pour coordonner nos programmes de formation dans le département du Nord. Vous serez responsable de la mise en œuvre, du suivi et de l'évaluation des activités pédagogiques.</p></div>
+        <div class="detail-section"><h3>🎯 Responsabilités</h3><ul><li>Coordonner la mise en œuvre des programmes dans 15 écoles partenaires</li><li>Superviser une équipe de 5 facilitateurs pédagogiques</li><li>Rédiger des rapports d'activités mensuels et trimestriels</li><li>Assurer le lien entre les partenaires institutionnels et l'organisation</li></ul></div>
+        <div class="detail-section"><h3>✅ Prérequis</h3><ul><li>Bac+3 minimum en Sciences de l'Éducation ou domaine connexe</li><li>Minimum 2 ans d'expérience dans la coordination de projets éducatifs</li><li>Excellente maîtrise du français et du créole haïtien</li><li>Maîtrise des outils bureautiques</li></ul></div>
+        <div class="detail-section"><h3>🎁 Avantages</h3><ul><li>Salaire compétitif selon expérience</li><li>Assurance santé</li><li>Formation continue prise en charge</li></ul></div>
     </div>
 
-    <!-- Candidature -->
-    <div class="apply-box container">
+    <div class="container apply-box">
         <h3>🚀 Postuler maintenant</h3>
-        <p>Envoyez votre CV et lettre de motivation à l'adresse ci-dessous avant la date limite.</p>
+        <p>Envoyez votre CV et lettre de motivation avant la date limite.</p>
         <div class="deadline">⏰ Date limite : 30 août 2026</div>
         <br>
-        <a href="mailto:recrutement@educa-psy.org?subject=Candidature%20-%20Chargé%20de%20projet%20éducatif" class="btn-primary btn-large">📧 Envoyer ma candidature</a>
-        <p style="margin-top:16px; font-size:0.85rem; color:var(--text-light);">Ou contactez-nous via <a href="contact.html" style="color:var(--primary);">notre formulaire</a></p>
+        <a href="mailto:recrutement@educa-psy.org?subject=Candidature%20-%20Chargé%20de%20projet" class="btn-primary btn-large">📧 Envoyer ma candidature</a>
+        <p class="apply-alt">Ou contactez-nous via <a href="contact.html">notre formulaire</a></p>
     </div>
 
-    <div class="back-link"><a href="index.html#opportunites">← Retour aux opportunités</a></div>
+    <div class="container back-link"><a href="index.html#opportunites">← Retour aux opportunités</a></div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container footer-content">
             <div class="footer-brand"><div class="logo"><div class="logo-icon small">E-P</div><span>Educa-Psy</span></div><p>Portail d'information indépendant.</p></div>
