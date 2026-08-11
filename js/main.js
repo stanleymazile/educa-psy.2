@@ -24,35 +24,40 @@ const Icons = {
   users: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
 };
 
-/* ===================== NAV CONFIG ===================== */
+/* ===================== NAV CONFIG & PATHS ===================== */
+const isSubfolder = window.location.pathname.includes('/pages/');
+const basePath = isSubfolder ? '' : 'pages/';
+const homePath = isSubfolder ? '../index.html' : 'index.html';
+
 const navItems = [
-  { name: 'Accueil', href: 'index.html' },
-  { name: 'Educa-Psy', href: 'a-propos.html' },
-  { name: 'Expertises', href: 'expertises.html' },
-  { name: 'Services', href: 'services.html' },
-  { name: 'Nouvelles', href: 'actualites.html' },
-  { name: 'Partenaires', href: 'partenaires.html' },
-  { name: 'Contact', href: 'contact.html' },
+  { name: 'Accueil', href: homePath },
+  { name: 'Educa-Psy', href: `${basePath}a-propos.html` },
+  { name: 'Expertises', href: `${basePath}expertises.html` },
+  { name: 'Services', href: `${basePath}services.html` },
+  { name: 'Nouvelles', href: `${basePath}actualites.html` },
+  { name: 'Partenaires', href: `${basePath}partenaires.html` },
+  { name: 'Contact', href: `${basePath}contact.html` },
 ];
 
 /* ===================== INJECT HEADER ===================== */
 function injectHeader() {
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  
-  const navLinks = navItems.map(item => `
-    <a href="${item.href}" class="${currentPage === item.href ? 'active' : ''}">${item.name}</a>
-  `).join('');
+  const headerPlaceholder = document.getElementById('header-placeholder');
+  if (!headerPlaceholder) return;
 
-  const mobileNavLinks = navItems.map(item => `
-    <a href="${item.href}" class="${currentPage === item.href ? 'active' : ''}">${item.name}</a>
-  `).join('');
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+  const navLinks = navItems.map(item => {
+    const itemPage = item.href.split('/').pop();
+    const isActive = currentPage === itemPage;
+    return `<a href="${item.href}" class="${isActive ? 'active' : ''}">${item.name}</a>`;
+  }).join('');
 
   const headerHTML = `
     <header id="site-header">
       <div class="container header-inner">
         <div style="display:flex;align-items:center;gap:1rem;">
           <button class="btn-hamburger" id="mobile-toggle" aria-label="Menu">${Icons.menu}</button>
-          <a href="index.html" class="logo">Educa<span>-Psy</span></a>
+          <a href="${homePath}" class="logo">Educa<span>-Psy</span></a>
         </div>
         <nav class="desktop-nav">${navLinks}</nav>
         <div class="header-actions">
@@ -79,10 +84,10 @@ function injectHeader() {
     <div id="mobile-overlay"></div>
     <div id="mobile-menu">
       <div class="mobile-menu-head">
-        <a href="index.html" class="logo">Educa<span>-Psy</span></a>
+        <a href="${homePath}" class="logo">Educa<span>-Psy</span></a>
         <button id="mobile-close">${Icons.x}</button>
       </div>
-      <nav>${mobileNavLinks}</nav>
+      <nav>${navLinks}</nav>
       <div class="mobile-menu-footer">
         <a href="https://ademen.org/donate/" target="_blank" class="btn-donate">
           ${Icons.handshake} Faire un don
@@ -90,85 +95,92 @@ function injectHeader() {
       </div>
     </div>
   `;
-  document.body.insertAdjacentHTML('afterbegin', headerHTML);
 
-  // Scroll effect
+  headerPlaceholder.innerHTML = headerHTML;
+
+  // Header Scroll Effect
   const header = document.getElementById('site-header');
   window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 20);
+    if (header) header.classList.toggle('scrolled', window.scrollY > 20);
   });
 
-  // Search toggle
+  // Search Toggle
   const searchToggle = document.getElementById('search-toggle');
   const searchOverlay = document.getElementById('search-overlay');
   const searchClose = document.getElementById('search-close');
   const searchInput = document.getElementById('search-input');
-  searchToggle.addEventListener('click', () => {
-    searchOverlay.classList.toggle('open');
-    if (searchOverlay.classList.contains('open')) searchInput.focus();
-  });
-  searchClose.addEventListener('click', () => searchOverlay.classList.remove('open'));
 
-  // Mobile menu
+  if (searchToggle && searchOverlay) {
+    searchToggle.addEventListener('click', () => {
+      searchOverlay.classList.toggle('open');
+      if (searchOverlay.classList.contains('open') && searchInput) searchInput.focus();
+    });
+    if (searchClose) searchClose.addEventListener('click', () => searchOverlay.classList.remove('open'));
+  }
+
+  // Mobile Menu
   const mobileToggle = document.getElementById('mobile-toggle');
   const mobileClose = document.getElementById('mobile-close');
   const mobileOverlay = document.getElementById('mobile-overlay');
   const mobileMenu = document.getElementById('mobile-menu');
-  function openMobileMenu() {
-    mobileOverlay.classList.add('open');
-    mobileMenu.classList.add('open');
-    document.body.style.overflow = 'hidden';
+
+  if (mobileToggle && mobileMenu && mobileOverlay) {
+    const openMobileMenu = () => {
+      mobileOverlay.classList.add('open');
+      mobileMenu.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeMobileMenu = () => {
+      mobileOverlay.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
+    mobileToggle.addEventListener('click', openMobileMenu);
+    if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
+    mobileOverlay.addEventListener('click', closeMobileMenu);
   }
-  function closeMobileMenu() {
-    mobileOverlay.classList.remove('open');
-    mobileMenu.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  mobileToggle.addEventListener('click', openMobileMenu);
-  mobileClose.addEventListener('click', closeMobileMenu);
-  mobileOverlay.addEventListener('click', closeMobileMenu);
 }
 
 /* ===================== INJECT FOOTER ===================== */
 function injectFooter() {
+  const footerPlaceholder = document.getElementById('footer-placeholder');
+  if (!footerPlaceholder) return;
+
   const year = new Date().getFullYear();
   const footerHTML = `
     <footer id="site-footer">
       <div class="container">
         <div class="footer-grid">
-          <!-- Contact -->
           <div>
-            <a href="index.html" class="footer-logo">Educa<span>-Psy</span></a>
+            <a href="${homePath}" class="footer-logo">Educa<span>-Psy</span></a>
             <div class="footer-contact">
               <div class="footer-contact-item">${Icons.mapPin}<span>143, Avenue Christophe BP 2720 HT 6112 Port-au-Prince, Haïti</span></div>
               <div class="footer-contact-item">${Icons.phone}<span>(509) 2813-1694</span></div>
               <div class="footer-contact-item">${Icons.mail}<span>contact@educapsy.org</span></div>
             </div>
           </div>
-          <!-- Navigation -->
           <div class="footer-col">
             <h4>Navigation</h4>
             <ul>
-              <li><a href="index.html">Accueil</a></li>
-              <li><a href="a-propos.html">À propos</a></li>
-              <li><a href="expertises.html">Expertises</a></li>
-              <li><a href="services.html">Services</a></li>
-              <li><a href="actualites.html">Actualités</a></li>
-              <li><a href="contact.html">Contact</a></li>
+              <li><a href="${homePath}">Accueil</a></li>
+              <li><a href="${basePath}a-propos.html">À propos</a></li>
+              <li><a href="${basePath}expertises.html">Expertises</a></li>
+              <li><a href="${basePath}services.html">Services</a></li>
+              <li><a href="${basePath}actualites.html">Actualités</a></li>
+              <li><a href="${basePath}contact.html">Contact</a></li>
             </ul>
           </div>
-          <!-- Affiliates -->
           <div class="footer-col">
             <h4>Structures Affiliées</h4>
             <ul>
-              <li><a href="partenaires.html">Partenaires</a></li>
+              <li><a href="${basePath}partenaires.html">Partenaires</a></li>
               <li><a href="https://www.lecentredart.org/" target="_blank">Centre d'Art</a></li>
               <li><a href="https://egalego.org/" target="_blank">EGALEGO</a></li>
               <li><a href="https://kiskeyart.org/" target="_blank">Kiskeyart</a></li>
               <li><a href="https://www.parcdemartissant.org/" target="_blank">Parc de Martissant</a></li>
             </ul>
           </div>
-          <!-- Newsletter -->
           <div class="footer-newsletter">
             <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.5rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(255,255,255,0.08);">S'abonner à Educa-Psy</h4>
             <p>Restez informé de nos dernières actualités et expertises.</p>
@@ -179,7 +191,6 @@ function injectFooter() {
             </form>
           </div>
         </div>
-        <!-- Bottom -->
         <div class="footer-bottom">
           <div class="footer-socials">
             <a href="#" aria-label="Facebook">${Icons.facebook}</a>
@@ -192,7 +203,8 @@ function injectFooter() {
       </div>
     </footer>
   `;
-  document.getElementById('footer-placeholder').outerHTML = footerHTML;
+
+  footerPlaceholder.innerHTML = footerHTML;
 }
 
 /* ===================== HERO SLIDER ===================== */
@@ -202,15 +214,17 @@ function initSlider() {
 
   const slides = sliderEl.querySelectorAll('.slide');
   const dots = sliderEl.querySelectorAll('.slider-dot');
+  if (slides.length === 0) return;
+
   let current = 0;
   let timer;
 
   function goTo(idx) {
     slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
+    if (dots[current]) dots[current].classList.remove('active');
     current = (idx + slides.length) % slides.length;
     slides[current].classList.add('active');
-    dots[current].classList.add('active');
+    if (dots[current]) dots[current].classList.add('active');
   }
 
   function next() { goTo(current + 1); }
@@ -229,6 +243,8 @@ function initSlider() {
 /* ===================== SCROLL ANIMATIONS ===================== */
 function initAnimations() {
   const elements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right');
+  if (elements.length === 0) return;
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
