@@ -1,5 +1,6 @@
 /* ═══════════════════════════════════════════════ */
-/* ║  EDUCA-PSY  —  Design moderne & responsive   ║ */
+/* EDUCA-PSY — Design moderne, responsive & menu  */
+/* mobile déroulant + filtres opportunités        */
 /* ═══════════════════════════════════════════════ */
 
 :root {
@@ -86,6 +87,69 @@ body {
 }
 
 .nav-links a:hover { color: var(--primary); }
+
+.desktop-only { display: inline-flex; }
+
+/* ─── Mobile Toggle ─── */
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: var(--text);
+    border-radius: 8px;
+}
+
+.mobile-toggle:hover { background: var(--bg); }
+
+.mobile-toggle .icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* ─── Mobile Menu ─── */
+.mobile-menu {
+    display: none;
+    border-top: 1px solid var(--border);
+    background: white;
+    padding: 12px 20px;
+    animation: slideDown 0.2s ease-out;
+}
+
+.mobile-menu:not(.hidden) { display: flex; flex-direction: column; gap: 4px; }
+
+.mobile-menu a {
+    display: block;
+    padding: 12px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.mobile-menu a:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.mobile-menu .mobile-cta {
+    margin-top: 8px;
+    background: var(--primary);
+    color: white;
+    text-align: center;
+}
+
+.mobile-menu .mobile-cta:hover {
+    background: var(--primary-dark);
+    color: white;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
 /* ─── Boutons ─── */
 .btn-primary, .btn-secondary {
@@ -194,7 +258,7 @@ body {
     flex-wrap: wrap;
 }
 
-.filter-btn {
+.filter-btn, .opp-filter-btn {
     padding: 10px 24px;
     border-radius: 30px;
     border: none;
@@ -204,11 +268,12 @@ body {
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.2s;
+    white-space: nowrap;
 }
 
-.filter-btn:hover { background: var(--border); }
+.filter-btn:hover, .opp-filter-btn:hover { background: var(--border); }
 
-.filter-btn.active {
+.filter-btn.active, .opp-filter-btn.active {
     background: var(--primary);
     color: white;
     box-shadow: 0 4px 12px rgba(79,70,229,0.3);
@@ -227,7 +292,7 @@ body {
     border-radius: var(--radius-lg);
     overflow: hidden;
     transition: all 0.3s;
-    display: none; /* Caché par défaut, géré par JS */
+    display: none;
 }
 
 .article-card.active { display: block; }
@@ -307,6 +372,11 @@ body {
     border-radius: var(--radius-lg);
     padding: 28px;
     transition: all 0.3s;
+    display: none;
+}
+
+.opportunity-card.active {
+    display: block;
 }
 
 .opportunity-card:hover {
@@ -319,6 +389,8 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .badge-opportunity {
@@ -441,12 +513,28 @@ body {
     color: #64748b;
 }
 
-/* ─── Responsive ─── */
+/* ═══════════════════════════════════════════════ */
+/* RESPONSIVE — MOBILE                           */
+/* ═══════════════════════════════════════════════ */
 @media (max-width: 768px) {
     .nav-links { display: none; }
+    .desktop-only { display: none !important; }
+    .mobile-toggle { display: block; }
+    
     .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 1rem; }
+    
     .about-features { grid-template-columns: 1fr; }
     .footer-content { grid-template-columns: 1fr; gap: 30px; }
+    
     .hero-buttons { flex-direction: column; align-items: center; }
     .btn-primary, .btn-secondary { width: 100%; max-width: 280px; justify-content: center; }
-      }
+    
+    .filter-tabs { gap: 6px; }
+    .filter-btn, .opp-filter-btn { padding: 8px 16px; font-size: 0.85rem; }
+    
+    .articles-grid { grid-template-columns: 1fr; }
+    .opportunities-grid { grid-template-columns: 1fr; }
+    
+    .about-card { padding: 30px 20px; }
+}
