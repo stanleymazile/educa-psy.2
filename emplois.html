@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emplois &amp; Collaborations — Educa-Psy</title>
+<meta name="description" content="Découvrez les offres d'emploi, appels à collaboration, opportunités de bénévolat et de stage publiés par Educa-Psy et ses partenaires.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Ccircle%20cx='20'%20cy='20'%20r='18.5'%20fill='%23FAF6ED'%20stroke='%23B8912F'%20stroke-width='2'/%3E%3Ctext%20x='20'%20y='27'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='17'%20font-weight='700'%20fill='%23B8912F'%3EEP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="masthead-top">
+    <div class="container">
+      <div class="masthead-top-inner">
+        <span id="today-date" class="masthead-date"></span>
+        <span class="masthead-tagline">Éducation · Technologie · Science · Psychologie</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="masthead-main">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <svg class="logo-mark" width="46" height="46" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="20" cy="20" r="18.5" fill="none" stroke="#B8912F" stroke-width="1.5"/>
+          <text x="20" y="27" text-anchor="middle" font-family="Georgia, serif" font-size="17" font-weight="700" fill="#B8912F">EP</text>
+        </svg>
+        <span class="logo-text">Educa-Psy</span>
+      </a>
+    </div>
+  </div>
+
+  <nav class="site-nav">
+    <div class="container">
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="index.html?cat=%C3%89ducation">Éducation</a></li>
+        <li><a href="index.html?cat=Technologie">Technologie</a></li>
+        <li><a href="index.html?cat=Science">Science</a></li>
+        <li><a href="index.html?cat=Psychologie">Psychologie</a></li>
+        <li><a href="emplois.html" class="nav-highlight">Emplois &amp; Collaborations</a></li>
+        <li><a href="a-propos.html">À propos</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="spectrum-rule" aria-hidden="true">
+    <span class="spectrum-seg s-education"></span>
+    <span class="spectrum-seg s-technologie"></span>
+    <span class="spectrum-seg s-science"></span>
+    <span class="spectrum-seg s-psychologie"></span>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-header">
+    <div class="container">
+      <h1 class="page-title">Emplois &amp; Collaborations</h1>
+      <p class="page-subtitle">Offres d'emploi, appels à collaboration, bénévolat et stages en lien avec l'éducation, la psychologie, la culture et les droits humains.</p>
+    </div>
+  </section>
+
+  <section class="filter-section">
+    <div class="container">
+      <div class="filter-tabs" role="tablist" aria-label="Filtrer par type d'offre">
+        <button class="filter-tab active" data-type="Tous">Tous</button>
+        <button class="filter-tab" data-type="Emploi">Emploi</button>
+        <button class="filter-tab" data-type="Collaboration">Collaboration</button>
+        <button class="filter-tab" data-type="Bénévolat">Bénévolat</button>
+        <button class="filter-tab" data-type="Stage / Formation">Stage / Formation</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div id="emplois-grid" class="emplois-grid"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-text small">Educa-Psy</span>
+        <p>Actualités et ressources en éducation, technologie, science et psychologie, ainsi que des opportunités professionnelles.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="emplois.html">Emplois &amp; Collaborations</a>
+        <a href="a-propos.html">À propos</a>
+        <a href="https://educa-psy-haiti.web.app" target="_blank" rel="noopener">Site officiel d'Educa-Psy ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Educa-Psy. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="articles-data.js"></script>
+<script src="emplois-data.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
+
