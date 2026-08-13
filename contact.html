@@ -1,99 +1,169 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | Educa-Psy</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📧</text></svg>">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Educa-Psy</title>
+<meta name="description" content="Contactez l'équipe Educa-Psy pour toute question, proposition de collaboration ou opportunité.">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Educa-Psy">
+<meta property="og:title" content="Contact — Educa-Psy">
+<meta property="og:description" content="Contactez l'équipe Educa-Psy pour toute question, proposition de collaboration ou opportunité.">
+<meta property="og:image" content="https://VOTRE-SITE.web.app/og-image.png">
+<meta property="og:url" content="https://VOTRE-SITE.web.app/contact.html">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact — Educa-Psy">
+<meta name="twitter:image" content="https://VOTRE-SITE.web.app/og-image.png">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Ccircle%20cx='20'%20cy='20'%20r='18.5'%20fill='%23FAF6ED'%20stroke='%23B8912F'%20stroke-width='2'/%3E%3Ctext%20x='20'%20y='27'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='17'%20font-weight='700'%20fill='%23B8912F'%3EEP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="canonical" href="https://VOTRE-SITE.web.app/contact.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Educa-Psy",
+  "url": "https://VOTRE-SITE.web.app/",
+  "logo": "https://VOTRE-SITE.web.app/logo.svg",
+  "description": "Organisation sociale ha\u00eftienne d\u00e9di\u00e9e au soutien psychosocial, \u00e0 l'\u00e9ducation et aux droits humains.",
+  "sameAs": ["https://educa-psy-haiti.web.app"]
+}
+</script>
 </head>
 <body>
 
-    <button onclick="toggleDark()" class="dark-toggle"><span id="dark-icon">🌙</span></button>
-
-    <nav class="navbar">
-        <div class="container nav-content">
-            <a href="index.html" class="logo"><div class="logo-icon">E-P</div><span>Educa-Psy</span></a>
-            <ul class="nav-links">
-                <li><a href="index.html#accueil">Accueil</a></li>
-                <li><a href="index.html#categories">Catégories</a></li>
-                <li><a href="index.html#opportunites">Opportunités</a></li>
-                <li><a href="index.html#apropos">À propos</a></li>
-            </ul>
-            <a href="https://educa-psy-haiti.web.app" target="_blank" class="btn-primary desktop-only">Entreprise</a>
-            <button class="hamburger" onclick="toggleDrawer()"><span id="bar1" class="hamburger-line"></span><span id="bar2" class="hamburger-line"></span><span id="bar3" class="hamburger-line"></span></button>
+<header class="site-header">
+  <div class="masthead-top">
+    <div class="container">
+      <div class="masthead-top-inner">
+        <span id="today-date" class="masthead-date"></span>
+        <span class="masthead-tagline" data-i18n="tagline">Éducation · Technologie · Science · Psychologie</span>
+        <div class="masthead-utils">
+          <select id="lang-select" class="lang-select" aria-label="Langue / Language / Lang">
+            <option value="fr">FR</option>
+            <option value="en">EN</option>
+            <option value="ht">HT</option>
+          </select>
+          <button id="theme-toggle" class="util-btn" type="button">🌙 Sombre</button>
+          <span id="auth-zone" class="auth-zone"></span>
         </div>
-    </nav>
-    <div id="drawer-overlay" onclick="closeDrawer()" class="drawer-overlay hidden"></div>
-    <div id="drawer" class="drawer">
-        <div class="drawer-header"><span>Menu</span><button onclick="closeDrawer()" class="drawer-close">✕</button></div>
-        <div class="drawer-body">
-            <a href="index.html#accueil" onclick="closeDrawer()">🏠 Accueil</a>
-            <a href="index.html#categories" onclick="closeDrawer()">📰 Catégories</a>
-            <a href="index.html#opportunites" onclick="closeDrawer()">💼 Opportunités</a>
-            <a href="index.html#apropos" onclick="closeDrawer()">ℹ️ À propos</a>
-        </div>
-        <div class="drawer-footer"><a href="https://educa-psy-haiti.web.app" target="_blank" onclick="closeDrawer()" class="btn-primary drawer-cta">Entreprise</a></div>
+      </div>
     </div>
+  </div>
 
-    <div class="contact-hero">
-        <div class="container">
-            <h1>Contactez-nous</h1>
-            <p>Une question, une suggestion ou une proposition de collaboration ?</p>
-        </div>
+  <div class="masthead-main">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img class="logo-mark" src="logo.svg" alt="Educa-Psy">
+        <span class="logo-text">Educa-Psy</span>
+      </a>
     </div>
+  </div>
 
-    <div class="container contact-grid">
-        <div class="contact-form">
-            <div class="form-success" id="form-success">✅ Message envoyé ! Nous vous répondrons sous 48h.</div>
-            <form id="contact-form" onsubmit="handleContact(event)">
-                <div class="form-group"><label for="name">Nom complet *</label><input type="text" id="name" required placeholder="Votre nom"></div>
-                <div class="form-group"><label for="email">Email *</label><input type="email" id="email" required placeholder="votre@email.com"></div>
-                <div class="form-group"><label for="sujet">Sujet *</label>
-                    <select id="sujet" required>
-                        <option value="">Choisir un sujet</option>
-                        <option value="info">Demande d'information</option>
-                        <option value="collab">Proposition de collaboration</option>
-                        <option value="article">Proposer un article</option>
-                        <option value="pub">Publicité / Partenariat</option>
-                        <option value="autre">Autre</option>
-                    </select>
-                </div>
-                <div class="form-group"><label for="message">Message *</label><textarea id="message" required placeholder="Décrivez votre demande..."></textarea></div>
-                <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">📤 Envoyer</button>
-            </form>
-        </div>
-        <div class="contact-info">
-            <div class="info-card"><h3>📧 Email</h3><p>contact@educa-psy.org<br>opportunites@educa-psy.org</p></div>
-            <div class="info-card"><h3>📱 Téléphone</h3><p>+509 36 12 45 78<br>Lun-Ven, 8h - 16h</p></div>
-            <div class="info-card"><h3>📍 Adresse</h3><p>Port-au-Prince, Haïti<br>Département de l'Ouest</p></div>
-            <div class="info-card"><h3>🌐 Réseaux sociaux</h3>
-                <div class="social-links">
-                    <a href="#" title="Facebook">📘</a>
-                    <a href="#" title="WhatsApp">📱</a>
-                    <a href="#" title="Twitter/X">🐦</a>
-                    <a href="#" title="LinkedIn">💼</a>
-                </div>
-            </div>
-        </div>
+  <nav class="site-nav">
+    <div class="container">
+      <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">☰ Menu</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" data-i18n="nav_accueil">Accueil</a></li>
+        <li><a href="index.html?cat=%C3%89ducation" data-i18n="nav_education">Éducation</a></li>
+        <li><a href="index.html?cat=Technologie" data-i18n="nav_technologie">Technologie</a></li>
+        <li><a href="index.html?cat=Science" data-i18n="nav_science">Science</a></li>
+        <li><a href="index.html?cat=Psychologie" data-i18n="nav_psychologie">Psychologie</a></li>
+        <li><a href="emplois.html" class="nav-highlight" data-i18n="nav_emplois">Emplois &amp; Collaborations</a></li>
+        <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+        <li><a href="a-propos.html" data-i18n="nav_apropos">À propos</a></li>
+      </ul>
     </div>
+  </nav>
 
-    <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-brand"><div class="logo"><div class="logo-icon small">E-P</div><span>Educa-Psy</span></div><p>Portail d'information indépendant.</p></div>
-            <div class="footer-links"><h4>Navigation</h4><ul><li><a href="index.html#accueil">Accueil</a></li><li><a href="index.html#categories">Articles</a></li><li><a href="index.html#opportunites">Opportunités</a></li><li><a href="index.html#apropos">À propos</a></li></ul></div>
-            <div class="footer-links"><h4>Liens utiles</h4><ul><li><a href="https://educa-psy-haiti.web.app" target="_blank">Entreprise</a></li><li><a href="contact.html">Contact</a></li><li><a href="index.html#newsletter">Newsletter</a></li></ul></div>
+  <div class="spectrum-rule" aria-hidden="true">
+    <span class="spectrum-seg s-education"></span>
+    <span class="spectrum-seg s-technologie"></span>
+    <span class="spectrum-seg s-science"></span>
+    <span class="spectrum-seg s-psychologie"></span>
+  </div>
+
+  <div class="ticker-bar" id="ticker-bar">
+    <div class="ticker-inner">
+      <span class="ticker-label" data-i18n="a_la_une">À la une</span>
+      <div class="ticker-track" id="ticker-track"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <section class="page-header">
+      <h1 class="page-title" data-i18n="contact_titre">Contact</h1>
+      <p class="page-subtitle" data-i18n="contact_soustitre">Une question, une proposition de collaboration ? Écrivez-nous.</p>
+    </section>
+
+    <section class="contact-form-section">
+      <div id="contact-message"></div>
+      <form id="contact-form" class="formulaire" novalidate>
+        <div class="champ">
+          <label for="contact-nom" data-i18n="contact_nom">Nom</label>
+          <input type="text" id="contact-nom" name="nom" required autocomplete="name">
         </div>
-        <div class="footer-bottom"><p>© 2026 Educa-Psy. Tous droits réservés.</p></div>
-    </footer>
+        <div class="champ">
+          <label for="contact-email" data-i18n="contact_email">Adresse e-mail</label>
+          <input type="email" id="contact-email" name="email" required autocomplete="email">
+        </div>
+        <div class="champ">
+          <label for="contact-sujet" data-i18n="contact_sujet">Sujet</label>
+          <input type="text" id="contact-sujet" name="sujet" autocomplete="off">
+        </div>
+        <div class="champ">
+          <label for="contact-texte" data-i18n="contact_message">Message</label>
+          <textarea id="contact-texte" name="message" required></textarea>
+        </div>
+        <button type="submit" id="contact-submit" class="btn btn-primary" data-i18n="contact_envoyer">Envoyer le message</button>
+        <p class="formulaire-note">Votre message est transmis directement à l'équipe Educa-Psy.</p>
+      </form>
+    </section>
+  </div>
+</main>
 
-    <script src="script.js"></script>
-    <script>
-        function handleContact(e) {
-            e.preventDefault();
-            document.getElementById('form-success').style.display = 'block';
-            document.getElementById('contact-form').reset();
-        }
-    </script>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-text small">Educa-Psy</span>
+        <p data-i18n="footer_texte">Actualités et ressources en éducation, technologie, science et psychologie, ainsi que des opportunités professionnelles.</p>
+      </div>
+      <div class="newsletter-widget">
+        <h3 data-i18n="newsletter_titre">Abonnez-vous à notre newsletter</h3>
+        <p data-i18n="newsletter_texte">Recevez nos derniers articles et opportunités par e-mail.</p>
+        <form id="newsletter-form" class="newsletter-form" novalidate>
+          <input type="email" id="newsletter-email" data-i18n-placeholder="newsletter_placeholder" placeholder="Votre adresse e-mail" required>
+          <button type="submit" id="newsletter-submit" data-i18n="newsletter_bouton">S'abonner</button>
+        </form>
+        <div id="newsletter-message"></div>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="nav_accueil">Accueil</a>
+        <a href="emplois.html" data-i18n="nav_emplois">Emplois &amp; Collaborations</a>
+        <a href="contact.html" data-i18n="nav_contact">Contact</a>
+        <a href="a-propos.html" data-i18n="nav_apropos">À propos</a>
+        <a href="politique-de-confidentialite.html">Politique de confidentialité</a>
+        <a href="https://educa-psy-haiti.web.app" target="_blank" rel="noopener" data-i18n="footer_site_officiel">Site officiel d'Educa-Psy ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Educa-Psy. <span data-i18n="footer_droits">Tous droits réservés.</span></p>
+    </div>
+  </div>
+</footer>
+
+<script src="interface.js"></script>
+<script type="module" src="ticker.js"></script>
+<script type="module" src="auth-firebase.js"></script>
+<script type="module" src="contact-firebase.js"></script>
+<script type="module" src="newsletter-firebase.js"></script>
 </body>
 </html>
