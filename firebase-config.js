@@ -14,29 +14,6 @@
    de celui-ci (certaines valeurs comme apiKey, storageBucket et
    appId doivent être complètes — pas tronquées).
    ============================================================ */
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDn_IdagjN1w2cf4DkPmlfaEpMFfv5dRW4",
-    authDomain: "educa-psy.firebaseapp.com",
-    projectId: "educa-psy",
-    storageBucket: "educa-psy.firebasestorage.app",
-    messagingSenderId: "128787624540",
-    appId: "1:128787624540:web:fc41e949a2057709bfac99",
-    measurementId: "G-VJ557CD2MD"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
 
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
