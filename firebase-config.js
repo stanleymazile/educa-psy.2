@@ -14,6 +14,26 @@
    de celui-ci (certaines valeurs comme apiKey, storageBucket et
    appId doivent être complètes — pas tronquées).
    ============================================================ */
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDn_IdagjN1w2cf4DkPmlfaEpMFfv5dRW4",
+    authDomain: "educa-psy.firebaseapp.com",
+    projectId: "educa-psy",
+    storageBucket: "educa-psy.firebasestorage.app",
+    messagingSenderId: "128787624540",
+    appId: "1:128787624540:web:84b2bb3d23d7f718bfac99"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
+
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-lite.js";
@@ -39,5 +59,5 @@ export const storage = getStorage(app);
    laquelle vous vous inscrirez sur connexion.html. Vous pouvez en ajouter
    plusieurs, séparées par des virgules. Cette liste doit correspondre
    EXACTEMENT à celle du fichier firestore.rules et storage.rules. */
-export const ADMIN_EMAILS = ["VOTRE-EMAIL@exemple.com"];
+export const ADMIN_EMAILS = ["stanleymazile@gmail.com"];
 
