@@ -62,6 +62,13 @@ function initMenuMobile() {
   liens.querySelectorAll("a").forEach(a => {
     a.addEventListener("click", () => liens.classList.remove("ouvert"));
   });
+  // Referme le menu si on clique en dehors
+  document.addEventListener("click", (e) => {
+    if (liens.classList.contains("ouvert") && !liens.contains(e.target) && e.target !== bouton) {
+      liens.classList.remove("ouvert");
+      bouton.setAttribute("aria-expanded", "false");
+    }
+  });
 }
 
 /* ---------- Langue de l'interface (FR / EN / HT) ---------- */
@@ -107,7 +114,8 @@ const TRADUCTIONS = {
     newsletter_texte: "Recevez nos derniers articles et opportunités par e-mail.",
     newsletter_placeholder: "Votre adresse e-mail",
     newsletter_bouton: "S'abonner",
-    newsletter_succes: "Merci de votre inscription !"
+    newsletter_succes: "Merci de votre inscription !",
+    champs_obligatoires: "Merci de remplir tous les champs obligatoires."
   },
   en: {
     tagline: "Education · Technology · Science · Psychology",
@@ -149,7 +157,8 @@ const TRADUCTIONS = {
     newsletter_texte: "Get our latest articles and opportunities by email.",
     newsletter_placeholder: "Your email address",
     newsletter_bouton: "Subscribe",
-    newsletter_succes: "Thanks for subscribing!"
+    newsletter_succes: "Thanks for subscribing!",
+    champs_obligatoires: "Please fill in all required fields."
   },
   ht: {
     tagline: "Edikasyon · Teknoloji · Syans · Sikoloji",
@@ -191,7 +200,8 @@ const TRADUCTIONS = {
     newsletter_texte: "Resevwa dènye atik ak opòtinite nou yo pa imèl.",
     newsletter_placeholder: "Imèl ou",
     newsletter_bouton: "Abòne",
-    newsletter_succes: "Mèsi paske ou abòne!"
+    newsletter_succes: "Mèsi paske ou abòne!",
+    champs_obligatoires: "Tanpri ranpli tout chan obligatwa yo."
   }
 };
 
