@@ -28,7 +28,10 @@ function initFormulaireContact() {
     const sujet = document.getElementById("contact-sujet").value.trim();
     const message = document.getElementById("contact-texte").value.trim();
 
-    if (!nom || !email || !message) return;
+    if (!nom || !email || !message) {
+      messageZone.innerHTML = `<div class="formulaire-message erreur">${t("champs_obligatoires")}</div>`;
+      return;
+    }
 
     bouton.disabled = true;
     bouton.textContent = t("contact_envoi_cours");
@@ -53,4 +56,3 @@ function initFormulaireContact() {
 }
 
 document.addEventListener("DOMContentLoaded", initFormulaireContact);
-
