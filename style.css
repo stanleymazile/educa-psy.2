@@ -524,6 +524,8 @@ a:focus-visible, button:focus-visible {
   font-family: var(--police-interface);
 }
 .ticker-track a:hover { text-decoration: underline; }
+.ticker-bar:hover .ticker-track,
+.ticker-bar:focus-within .ticker-track { animation-play-state: paused; }
 @keyframes defilement {
   from { transform: translateX(0); }
   to { transform: translateX(-100%); }
