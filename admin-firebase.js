@@ -38,6 +38,14 @@ async function televerserFichier(file, dossier) {
   await uploadBytes(storageRef, file);
   return getDownloadURL(storageRef);
 }
+// Échappe le HTML : indispensable pour tout texte soumis publiquement
+// (messages de contact, e-mails newsletter) avant de l'insérer dans la
+// page, pour empêcher qu'un texte malveillant ne s'exécute comme du code.
+function echapperHTML(texte) {
+  const div = document.createElement("div");
+  div.textContent = texte == null ? "" : String(texte);
+  return div.innerHTML;
+}
 
 /* ---------- Accès ---------- */
 
@@ -309,9 +317,9 @@ async function rafraichirMessages() {
     zone.innerHTML = messages.map(m => `
       <div class="admin-liste-item">
         <div>
-          <div class="admin-liste-item-titre">${m.nom || ""} — ${m.email || ""}</div>
-          <div class="admin-liste-item-meta">${m.sujet || "(sans sujet)"} · ${formaterDateAffichage(m.date)}</div>
-          <p style="font-family:var(--police-lecture); margin-top:4px;">${m.message || ""}</p>
+          <div class="admin-liste-item-titre">${echapperHTML(m.nom)} — ${echapperHTML(m.email)}</div>
+          <div class="admin-liste-item-meta">${echapperHTML(m.sujet) || "(sans sujet)"} · ${formaterDateAffichage(m.date)}</div>
+          <p style="font-family:var(--police-lecture); margin-top:4px;">${echapperHTML(m.message)}</p>
         </div>
       </div>`).join("") || `<p class="empty-msg">Aucun message.</p>`;
   } catch (err) {
@@ -327,7 +335,7 @@ async function rafraichirNewsletter() {
     const snap = await getDocs(query(collection(db, "newsletter"), orderBy("date", "desc")));
     const abonnes = snap.docs.map(d => d.data());
     zone.innerHTML = `<p class="formulaire-note">${abonnes.length} abonné(e)(s)</p>` +
-      abonnes.map(a => `<div class="admin-liste-item"><div class="admin-liste-item-titre">${a.email}</div></div>`).join("");
+      abonnes.map(a => `<div class="admin-liste-item"><div class="admin-liste-item-titre">${echapperHTML(a.email)}</div></div>`).join("");
   } catch (err) {
     console.error(err);
     zone.innerHTML = `<p class="empty-msg">Erreur de chargement : ${err.message}</p>`;
@@ -348,4 +356,3 @@ document.addEventListener("DOMContentLoaded", () => {
   const annulerEmploi = document.getElementById("annuler-emploi");
   if (annulerEmploi) annulerEmploi.addEventListener("click", reinitialiserFormEmploi);
 });
-
