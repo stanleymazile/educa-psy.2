@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administration — Educa-Psy</title>
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Ccircle%20cx='20'%20cy='20'%20r='18.5'%20fill='%23FAF6ED'%20stroke='%23B8912F'%20stroke-width='2'/%3E%3Ctext%20x='20'%20y='27'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='17'%20font-weight='700'%20fill='%23B8912F'%3EEP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="masthead-top">
+    <div class="container">
+      <div class="masthead-top-inner">
+        <span id="today-date" class="masthead-date"></span>
+        <span class="masthead-tagline" data-i18n="tagline">Éducation · Technologie · Science · Psychologie</span>
+        <div class="masthead-utils">
+          <select id="lang-select" class="lang-select" aria-label="Langue / Language / Lang">
+            <option value="fr">FR</option>
+            <option value="en">EN</option>
+            <option value="ht">HT</option>
+          </select>
+          <button id="theme-toggle" class="util-btn" type="button">🌙 Sombre</button>
+          <span id="auth-zone" class="auth-zone"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="masthead-main">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img class="logo-mark" src="logo.svg" alt="Educa-Psy">
+        <span class="logo-text">Educa-Psy</span>
+      </a>
+    </div>
+  </div>
+
+  <nav class="site-nav">
+    <div class="container">
+      <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">☰ Menu</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" data-i18n="nav_accueil">Accueil</a></li>
+        <li><a href="index.html?cat=%C3%89ducation" data-i18n="nav_education">Éducation</a></li>
+        <li><a href="index.html?cat=Technologie" data-i18n="nav_technologie">Technologie</a></li>
+        <li><a href="index.html?cat=Science" data-i18n="nav_science">Science</a></li>
+        <li><a href="index.html?cat=Psychologie" data-i18n="nav_psychologie">Psychologie</a></li>
+        <li><a href="emplois.html" class="nav-highlight" data-i18n="nav_emplois">Emplois &amp; Collaborations</a></li>
+        <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+        <li><a href="a-propos.html" data-i18n="nav_apropos">À propos</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="spectrum-rule" aria-hidden="true">
+    <span class="spectrum-seg s-education"></span>
+    <span class="spectrum-seg s-technologie"></span>
+    <span class="spectrum-seg s-science"></span>
+    <span class="spectrum-seg s-psychologie"></span>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <section class="admin-section">
+      <div id="admin-verification">Vérification de l'accès…</div>
+
+      <div id="admin-refuse" class="admin-refuse" style="display:none;">
+        <h1>Accès réservé</h1>
+        <p>Cette page est réservée à l'équipe d'Educa-Psy. Connectez-vous avec un compte autorisé.</p>
+        <a class="btn btn-primary" href="connexion.html">Se connecter</a>
+      </div>
+
+      <div id="admin-contenu" style="display:none;">
+        <h1 class="page-title">Administration</h1>
+        <p class="page-subtitle">Connecté(e) en tant que <strong id="admin-connecte-comme"></strong> ·
+          <button type="button" id="admin-deconnexion" class="util-btn" style="color:var(--couleur-or-fonce); border-color:var(--couleur-ligne);">Se déconnecter</button>
+        </p>
+
+        <div class="admin-tabs">
+          <button type="button" class="admin-tab active" data-panneau="articles">Articles</button>
+          <button type="button" class="admin-tab" data-panneau="emplois">Emplois &amp; Collaborations</button>
+          <button type="button" class="admin-tab" data-panneau="messages">Messages</button>
+          <button type="button" class="admin-tab" data-panneau="newsletter">Newsletter</button>
+        </div>
+
+        <!-- ARTICLES -->
+        <div id="panneau-articles" class="admin-panneau">
+          <h2 id="titre-form-article">Ajouter un article</h2>
+          <div id="article-form-message"></div>
+          <form id="form-article" class="admin-form" novalidate>
+            <div class="champ">
+              <label for="article-titre">Titre</label>
+              <input type="text" id="article-titre" required>
+            </div>
+            <div class="champ champ-ligne">
+              <div>
+                <label for="article-categorie">Catégorie</label>
+                <select id="article-categorie">
+                  <option>Éducation</option>
+                  <option>Technologie</option>
+                  <option>Science</option>
+                  <option>Psychologie</option>
+                </select>
+              </div>
+              <div>
+                <label for="article-auteur">Auteur</label>
+                <input type="text" id="article-auteur" value="Équipe Educa-Psy">
+              </div>
+            </div>
+            <div class="champ">
+              <label for="article-date">Date</label>
+              <input type="date" id="article-date">
+            </div>
+            <div class="champ">
+              <label for="article-resume">Résumé (1-2 phrases)</label>
+              <textarea id="article-resume" rows="2"></textarea>
+            </div>
+            <div class="champ">
+              <label for="article-contenu">Contenu — un paragraphe par bloc, séparé par une ligne vide</label>
+              <textarea id="article-contenu" rows="8" required></textarea>
+            </div>
+            <div class="champ">
+              <label for="article-image">Image de l'article — URL (optionnel)</label>
+              <input type="url" id="article-image" placeholder="https://...">
+              <p class="aide">— ou téléversez directement un fichier ci-dessous —</p>
+              <input type="file" id="article-image-fichier" accept="image/*">
+            </div>
+            <div class="champ">
+              <label class="admin-checkbox"><input type="checkbox" id="article-alaune"> Mettre cet article à la une</label>
+            </div>
+            <div class="admin-form-actions">
+              <button type="submit" id="article-submit" class="btn btn-primary">Enregistrer</button>
+              <button type="button" id="annuler-article" class="btn btn-outline">Annuler / Nouveau</button>
+            </div>
+          </form>
+
+          <h2>Articles existants</h2>
+          <div id="liste-articles"></div>
+        </div>
+
+        <!-- EMPLOIS -->
+        <div id="panneau-emplois" class="admin-panneau" style="display:none;">
+          <h2 id="titre-form-emploi">Ajouter une offre</h2>
+          <div id="emploi-form-message"></div>
+          <form id="form-emploi" class="admin-form" novalidate>
+            <div class="champ">
+              <label for="emploi-titre">Titre</label>
+              <input type="text" id="emploi-titre" required>
+            </div>
+            <div class="champ champ-ligne">
+              <div>
+                <label for="emploi-type">Type</label>
+                <select id="emploi-type">
+                  <option>Emploi</option>
+                  <option>Collaboration</option>
+                  <option>Bénévolat</option>
+                  <option>Stage / Formation</option>
+                </select>
+              </div>
+              <div>
+                <label for="emploi-organisation">Organisation</label>
+                <input type="text" id="emploi-organisation">
+              </div>
+            </div>
+            <div class="champ champ-ligne">
+              <div>
+                <label for="emploi-lieu">Lieu</label>
+                <input type="text" id="emploi-lieu">
+              </div>
+              <div>
+                <label for="emploi-datelimite">Date limite (optionnel)</label>
+                <input type="date" id="emploi-datelimite">
+              </div>
+            </div>
+            <div class="champ">
+              <label for="emploi-description">Description</label>
+              <textarea id="emploi-description" rows="3"></textarea>
+            </div>
+            <div class="champ">
+              <label for="emploi-lien">Lien — postuler / en savoir plus (optionnel)</label>
+              <input type="url" id="emploi-lien" placeholder="https://... ou mailto:...">
+            </div>
+            <div class="champ">
+              <label for="emploi-pdf-fichier">Document PDF joint (optionnel, 10 Mo max)</label>
+              <input type="file" id="emploi-pdf-fichier" accept="application/pdf">
+            </div>
+            <div class="admin-form-actions">
+              <button type="submit" id="emploi-submit" class="btn btn-primary">Enregistrer</button>
+              <button type="button" id="annuler-emploi" class="btn btn-outline">Annuler / Nouveau</button>
+            </div>
+          </form>
+
+          <h2>Offres existantes</h2>
+          <div id="liste-emplois"></div>
+        </div>
+
+        <!-- MESSAGES -->
+        <div id="panneau-messages" class="admin-panneau" style="display:none;">
+          <h2>Messages reçus</h2>
+          <div id="liste-messages"></div>
+        </div>
+
+        <!-- NEWSLETTER -->
+        <div id="panneau-newsletter" class="admin-panneau" style="display:none;">
+          <h2>Abonnés newsletter</h2>
+          <div id="liste-newsletter"></div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Educa-Psy. <span data-i18n="footer_droits">Tous droits réservés.</span></p>
+    </div>
+  </div>
+</footer>
+
+<script src="interface.js"></script>
+<script type="module" src="admin-firebase.js"></script>
+<script type="module" src="auth-firebase.js"></script>
+</body>
+</html>
+
