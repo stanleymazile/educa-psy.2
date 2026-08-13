@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Politique de confidentialité — Educa-Psy</title>
+<meta name="description" content="Politique de confidentialité du site Educa-Psy : données collectées, utilisation, conservation et droits des utilisateurs.">
+<link rel="canonical" href="https://VOTRE-SITE.web.app/politique-de-confidentialite.html">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Ccircle%20cx='20'%20cy='20'%20r='18.5'%20fill='%23FAF6ED'%20stroke='%23B8912F'%20stroke-width='2'/%3E%3Ctext%20x='20'%20y='27'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='17'%20font-weight='700'%20fill='%23B8912F'%3EEP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="masthead-top">
+    <div class="container">
+      <div class="masthead-top-inner">
+        <span id="today-date" class="masthead-date"></span>
+        <span class="masthead-tagline" data-i18n="tagline">Éducation · Technologie · Science · Psychologie</span>
+        <div class="masthead-utils">
+          <select id="lang-select" class="lang-select" aria-label="Langue / Language / Lang">
+            <option value="fr">FR</option>
+            <option value="en">EN</option>
+            <option value="ht">HT</option>
+          </select>
+          <button id="theme-toggle" class="util-btn" type="button">🌙 Sombre</button>
+          <span id="auth-zone" class="auth-zone"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="masthead-main">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img class="logo-mark" src="logo.svg" alt="Educa-Psy">
+        <span class="logo-text">Educa-Psy</span>
+      </a>
+    </div>
+  </div>
+
+  <nav class="site-nav">
+    <div class="container">
+      <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">☰ Menu</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" data-i18n="nav_accueil">Accueil</a></li>
+        <li><a href="index.html?cat=%C3%89ducation" data-i18n="nav_education">Éducation</a></li>
+        <li><a href="index.html?cat=Technologie" data-i18n="nav_technologie">Technologie</a></li>
+        <li><a href="index.html?cat=Science" data-i18n="nav_science">Science</a></li>
+        <li><a href="index.html?cat=Psychologie" data-i18n="nav_psychologie">Psychologie</a></li>
+        <li><a href="emplois.html" class="nav-highlight" data-i18n="nav_emplois">Emplois &amp; Collaborations</a></li>
+        <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+        <li><a href="a-propos.html" data-i18n="nav_apropos">À propos</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="spectrum-rule" aria-hidden="true">
+    <span class="spectrum-seg s-education"></span>
+    <span class="spectrum-seg s-technologie"></span>
+    <span class="spectrum-seg s-science"></span>
+    <span class="spectrum-seg s-psychologie"></span>
+  </div>
+
+  <div class="ticker-bar" id="ticker-bar">
+    <div class="ticker-inner">
+      <span class="ticker-label" data-i18n="a_la_une">À la une</span>
+      <div class="ticker-track" id="ticker-track"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <section class="apropos-section">
+      <h1 class="page-title">Politique de confidentialité</h1>
+      <p class="apropos-note" style="text-align:left; font-style:normal; margin-bottom: var(--e6);">Dernière mise à jour : 13 août 2026</p>
+
+      <p class="apropos-intro">
+        Educa-Psy respecte votre vie privée. Cette page explique quelles données
+        sont collectées sur ce site, pourquoi, et comment vous pouvez les gérer.
+      </p>
+
+      <h2 class="section-heading">Données que nous collectons</h2>
+      <p style="font-family:var(--police-lecture); line-height:1.8; margin-bottom:var(--e3);"><strong>Formulaire de contact</strong> — nom, adresse e-mail, sujet et message, uniquement lorsque vous nous écrivez volontairement.</p>
+      <p style="font-family:var(--police-lecture); line-height:1.8; margin-bottom:var(--e3);"><strong>Newsletter</strong> — votre adresse e-mail, uniquement si vous vous abonnez.</p>
+      <p style="font-family:var(--police-lecture); line-height:1.8; margin-bottom:var(--e3);"><strong>Compte utilisateur</strong> — adresse e-mail et mot de passe (stocké de façon sécurisée et chiffrée par Firebase Authentication ; nous n'y avons jamais accès en clair), uniquement si vous créez un compte.</p>
+      <p style="font-family:var(--police-lecture); line-height:1.8; margin-bottom:var(--e6);"><strong>Préférences locales</strong> — votre choix de thème (clair/sombre) et de langue sont mémorisés dans votre navigateur (stockage local), pas transmis à nos serveurs.</p>
+
+      <h2 class="section-heading">Comment ces données sont utilisées</h2>
+      <p style="font-family:var(--police-lecture); line-height:1.8; margin-bottom:var(--e6);">
+        Exclusivement pour répondre à vos messages, vous envoyer la newsletter si
+        vous y êtes abonné(e), et gérer votre compte si vous en créez un. Nous ne
+        vendons ni ne partageons vos données avec des tiers à des fins commerciales.
+      </p>
+
+      <h2 class="section-heading">Hébergement</h2>
+      <p style="font-family:var(--police-lecture); line-height:1.8; margin-bottom:var(--e6);">
+        Les données sont hébergées via Firebase (Google). Leur traitement est donc
+        soumis aux garanties de sécurité de Google, en plus des règles d'accès
+        propres à Educa-Psy qui limitent la lecture de vos données à l'équipe autorisée.
+      </p>
+
+      <h2 class="section-heading">Vos droits</h2>
+      <p style="font-family:var(--police-lecture); line-height:1.8; margin-bottom:var(--e6);">
+        Vous pouvez demander à consulter, corriger ou supprimer vos données (message
+        envoyé, abonnement newsletter, compte utilisateur) à tout moment en nous
+        écrivant via la page <a href="contact.html">Contact</a>.
+      </p>
+
+      <h2 class="section-heading">Nous contacter</h2>
+      <p style="font-family:var(--police-lecture); line-height:1.8;">
+        Pour toute question sur cette politique, utilisez notre <a href="contact.html">formulaire de contact</a>.
+      </p>
+
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Educa-Psy. <span data-i18n="footer_droits">Tous droits réservés.</span></p>
+    </div>
+  </div>
+</footer>
+
+<script src="interface.js"></script>
+<script type="module" src="ticker.js"></script>
+<script type="module" src="auth-firebase.js"></script>
+</body>
+</html>
+
