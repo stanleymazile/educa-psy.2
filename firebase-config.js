@@ -40,5 +40,8 @@ export const storage = getStorage(app);
    laquelle vous vous inscrirez sur connexion.html. Vous pouvez en ajouter
    plusieurs, séparées par des virgules. Cette liste doit correspondre
    EXACTEMENT à celle du fichier firestore.rules et storage.rules. */
+export const ADMIN_EMAILS = [
+  "stanleymazile@gmail.com"
+];
 
 
