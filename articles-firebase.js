@@ -100,6 +100,8 @@ async function initAccueilFirebase() {
   const grille = document.getElementById("articles-grid");
   if (!grille) return; // pas sur la page d'accueil
 
+  const zoneFeatured = document.getElementById("featured-article");
+  if (zoneFeatured) zoneFeatured.innerHTML = `<p class="empty-msg">Chargement…</p>`;
   grille.innerHTML = `<p class="empty-msg">Chargement des articles…</p>`;
 
   let tous;
@@ -119,7 +121,6 @@ async function initAccueilFirebase() {
   const premier = tous.find(a => a.aLaUne === true) || tous[0];
   const reste = tous.filter(a => a.id !== premier.id);
 
-  const zoneFeatured = document.getElementById("featured-article");
   if (zoneFeatured) zoneFeatured.innerHTML = carteArticleHTML(premier, true);
 
   function afficher(categorie) {
