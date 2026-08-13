@@ -8,12 +8,14 @@
 
 :root {
   /* --- Couleurs principales (identité Educa-Psy) --- */
-  --couleur-fond: #F8F9FA;          /* fond ivoire/crème#FAF6ED remplace par le blanc*/
+  --couleur-fond: #FAF6ED;          /* fond ivoire/crème */
   --couleur-fond-alt: #F2EBDA;      /* fond légèrement plus foncé (cartes, sections) */
   --couleur-texte: #2A241C;         /* texte principal (brun-noir chaud) */
   --couleur-texte-attenue: #6B6252; /* texte secondaire (dates, méta) */
   --couleur-or: #B8912F;            /* or — accent principal */
-  --couleur-or-fonce: #8F701F;      /* or foncé — survols, liens */
+  --couleur-or-fonce: #82661B;      /* or foncé — survols, liens (contraste AA vérifié) */
+  --couleur-bouton-texte: #2A241C;  /* texte du bouton or — fixe, ne change pas avec le thème */
+  --couleur-bouton-survol-texte: #FFFFFF; /* texte au survol — s'adapte au thème (voir mode sombre) */
   --couleur-ligne: #DDD2B8;         /* lignes fines / séparateurs */
 
   /* --- Couleurs des 4 rubriques (portées dans tout le site) --- */
@@ -90,8 +92,9 @@ a:focus-visible, button:focus-visible {
 }
 .masthead-top-inner {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: var(--e4);
+  flex-wrap: wrap;
   padding: var(--e2) 0;
 }
 .masthead-date { text-transform: capitalize; opacity: 0.9; }
@@ -194,8 +197,8 @@ a:focus-visible, button:focus-visible {
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
 }
-.btn-primary { background: var(--couleur-or); color: #FFFFFF; }
-.btn-primary:hover { background: var(--couleur-or-fonce); }
+.btn-primary { background: var(--couleur-or); color: var(--couleur-bouton-texte); }
+.btn-primary:hover { background: var(--couleur-or-fonce); color: var(--couleur-bouton-survol-texte); }
 .btn-outline { border-color: var(--couleur-texte); color: var(--couleur-texte); background: transparent; }
 .btn-outline:hover { background: var(--couleur-texte); color: var(--couleur-fond); }
 
@@ -291,6 +294,7 @@ a:focus-visible, button:focus-visible {
   font-size: 0.83rem; padding-top: var(--e3); border-top: 1px solid var(--couleur-ligne); gap: var(--e2);
 }
 .job-deadline { color: var(--couleur-texte-attenue); }
+.job-card-liens { display: flex; gap: var(--e3); flex-wrap: wrap; }
 
 /* ============================================================
    PAGE ARTICLE
@@ -393,4 +397,305 @@ a:focus-visible, button:focus-visible {
   html { scroll-behavior: auto; }
   * { transition: none !important; }
 }
+
+/* ============================================================
+   MODE SOMBRE
+   ============================================================
+   Activé en ajoutant l'attribut data-theme="sombre" sur <html>
+   (géré automatiquement par interface.js). Toutes les couleurs
+   du site sont des variables : il suffit de les redéfinir ici.
+   ============================================================ */
+[data-theme="sombre"] {
+  --couleur-fond: #1E1A14;
+  --couleur-fond-alt: #2A251C;
+  --couleur-texte: #F2ECDD;
+  --couleur-texte-attenue: #C2B6A0;
+  --couleur-or-fonce: #E0B04E;
+  --couleur-bouton-survol-texte: #2A241C;
+  --couleur-ligne: #453E2F;
+
+  --couleur-education-fond: #1F3A32;
+  --couleur-education-texte: #A8CFC0;
+  --couleur-technologie-fond: #1E3040;
+  --couleur-technologie-texte: #A9C3D6;
+  --couleur-science-fond: #333B1A;
+  --couleur-science-texte: #C7D19B;
+  --couleur-psychologie-fond: #3E202A;
+  --couleur-psychologie-texte: #E3AFBC;
+  --couleur-emploi-fond: #3A2E14;
+}
+[data-theme="sombre"] .masthead-top { background: #12100C; }
+[data-theme="sombre"] .site-footer,
+[data-theme="sombre"] .cta-box { background: #15130E; }
+
+/* ============================================================
+   BARRE D'UTILITAIRES (thème, langue, connexion)
+   ============================================================ */
+.masthead-utils { display: flex; align-items: center; gap: var(--e3); margin-left: auto; }
+
+.util-btn {
+  background: none;
+  border: 1px solid rgba(250,246,237,0.35);
+  color: inherit;
+  font-family: var(--police-interface);
+  font-size: 0.76rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  line-height: 1.6;
+}
+.util-btn:hover { border-color: rgba(250,246,237,0.7); }
+
+.lang-select {
+  background: none;
+  border: 1px solid rgba(250,246,237,0.35);
+  color: inherit;
+  font-family: var(--police-interface);
+  font-size: 0.76rem;
+  padding: 3px 8px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.lang-select option { color: #2A241C; }
+
+.auth-zone { font-size: 0.78rem; display: flex; align-items: center; gap: var(--e2); }
+.auth-zone a, .auth-zone button.util-btn { white-space: nowrap; }
+.auth-user-email { opacity: 0.85; max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ============================================================
+   MENU MOBILE (menu déroulant)
+   ============================================================ */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--couleur-ligne);
+  border-radius: var(--rayon);
+  padding: 6px 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--couleur-texte);
+}
+
+@media (max-width: 700px) {
+  .nav-toggle { display: block; margin: var(--e3) auto 0; }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--e2);
+    padding-bottom: var(--e3);
+  }
+  .nav-links.ouvert { display: flex; }
+}
+
+/* ============================================================
+   BANDEAU DÉFILANT (dernières manchettes)
+   ============================================================ */
+.ticker-bar {
+  background: var(--couleur-texte);
+  color: var(--couleur-fond);
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+[data-theme="sombre"] .ticker-bar { background: #12100C; }
+.ticker-inner { display: flex; align-items: center; }
+.ticker-label {
+  flex-shrink: 0;
+  background: var(--couleur-or);
+  color: var(--couleur-bouton-texte);
+  font-family: var(--police-interface);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+}
+.ticker-track {
+  display: inline-flex;
+  gap: var(--e8);
+  padding-left: 100%;
+  animation: defilement 38s linear infinite;
+}
+.ticker-track a {
+  color: inherit;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-family: var(--police-interface);
+}
+.ticker-track a:hover { text-decoration: underline; }
+@keyframes defilement {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; padding-left: var(--e4); }
+}
+
+/* ============================================================
+   FORMULAIRE (contact, connexion, inscription)
+   ============================================================ */
+.contact-form-section { padding: var(--e5) 0 var(--e8); }
+.formulaire { max-width: 520px; }
+.champ { margin-bottom: var(--e5); }
+.champ label {
+  display: block;
+  font-family: var(--police-interface);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: var(--e2);
+}
+.champ input, .champ textarea, .champ select {
+  width: 100%;
+  font-family: var(--police-interface);
+  font-size: 0.95rem;
+  color: var(--couleur-texte);
+  background: var(--couleur-fond-alt);
+  border: 1px solid var(--couleur-ligne);
+  border-radius: var(--rayon);
+  padding: 11px 14px;
+}
+.champ input:focus, .champ textarea:focus, .champ select:focus {
+  outline: 2px solid var(--couleur-or);
+  outline-offset: 1px;
+}
+.champ textarea { resize: vertical; min-height: 130px; }
+.formulaire-message {
+  padding: var(--e3) var(--e4);
+  border-radius: var(--rayon);
+  font-size: 0.9rem;
+  margin-bottom: var(--e4);
+}
+.formulaire-message.succes { background: var(--couleur-education-fond); color: var(--couleur-education-texte); }
+.formulaire-message.erreur { background: var(--couleur-psychologie-fond); color: var(--couleur-psychologie-texte); }
+.formulaire-note { font-size: 0.82rem; color: var(--couleur-texte-attenue); margin-top: var(--e2); }
+
+/* ============================================================
+   AUTHENTIFICATION (connexion / inscription)
+   ============================================================ */
+.auth-section { max-width: 420px; padding: var(--e6) 0 var(--e8); }
+.auth-tabs { display: flex; gap: var(--e2); margin-bottom: var(--e5); }
+.auth-tab {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  background: var(--couleur-fond-alt);
+  border: 1px solid var(--couleur-ligne);
+  border-radius: var(--rayon);
+  cursor: pointer;
+  font-family: var(--police-interface);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--couleur-texte-attenue);
+}
+.auth-tab.active { background: var(--couleur-texte); color: var(--couleur-fond); border-color: var(--couleur-texte); }
+.auth-connecte {
+  text-align: center;
+  padding: var(--e7) var(--e5);
+  background: var(--couleur-fond-alt);
+  border-radius: var(--rayon);
+}
+.auth-connecte p { font-family: var(--police-lecture); margin-bottom: var(--e4); }
+
+/* ============================================================
+   IMAGE PRINCIPALE D'ARTICLE + IMAGES DANS LE TEXTE
+   ============================================================ */
+.article-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--rayon);
+  margin-bottom: var(--e5);
+}
+.article-card-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--rayon);
+  margin-bottom: var(--e3);
+}
+.article-body img {
+  max-width: 100%;
+  border-radius: var(--rayon);
+  margin: var(--e3) 0 var(--e5);
+}
+.article-body a { color: var(--couleur-or-fonce); text-decoration: underline; text-underline-offset: 2px; }
+
+/* ============================================================
+   LOGO (image remplaçable)
+   ============================================================ */
+.logo-mark { flex-shrink: 0; display: block; width: 46px; height: 46px; }
+
+/* ============================================================
+   NEWSLETTER (pied de page)
+   ============================================================ */
+.newsletter-widget { max-width: 360px; }
+.newsletter-widget h3 { font-size: 1.1rem; margin-bottom: var(--e2); }
+.newsletter-widget p { font-family: var(--police-lecture); font-size: 0.88rem; color: var(--couleur-texte-attenue); margin-bottom: var(--e3); }
+.newsletter-form { display: flex; gap: var(--e2); }
+.newsletter-form input {
+  flex: 1;
+  font-family: var(--police-interface);
+  font-size: 0.88rem;
+  padding: 9px 12px;
+  border: 1px solid var(--couleur-ligne);
+  border-radius: var(--rayon);
+  background: var(--couleur-fond);
+  color: var(--couleur-texte);
+}
+.newsletter-form button {
+  font-family: var(--police-interface);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 9px 16px;
+  border-radius: var(--rayon);
+  border: none;
+  background: var(--couleur-or);
+  color: var(--couleur-bouton-texte);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.newsletter-form button:hover { background: var(--couleur-or-fonce); color: var(--couleur-bouton-survol-texte); }
+.newsletter-widget .formulaire-message { margin-top: var(--e3); margin-bottom: 0; }
+
+/* ============================================================
+   ADMINISTRATION (admin.html)
+   ============================================================ */
+.admin-section { padding: var(--e6) 0 var(--e8); }
+.admin-tabs { display: flex; gap: var(--e3); margin: var(--e5) 0; flex-wrap: wrap; }
+.admin-tab {
+  padding: 9px 18px;
+  background: var(--couleur-fond-alt);
+  border: 1px solid var(--couleur-ligne);
+  border-radius: 999px;
+  font-family: var(--police-interface);
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  color: var(--couleur-texte-attenue);
+}
+.admin-tab.active { background: var(--couleur-texte); color: var(--couleur-fond); border-color: var(--couleur-texte); }
+.admin-panneau h2 { font-size: 1.4rem; margin: var(--e6) 0 var(--e4); }
+.admin-form { max-width: 640px; background: var(--couleur-fond-alt); padding: var(--e5); border-radius: var(--rayon); }
+.admin-form .champ-ligne { display: grid; grid-template-columns: 1fr 1fr; gap: var(--e4); }
+@media (max-width: 600px) { .admin-form .champ-ligne { grid-template-columns: 1fr; } }
+.admin-form .aide { font-size: 0.78rem; color: var(--couleur-texte-attenue); margin-top: 4px; }
+.admin-form-actions { display: flex; gap: var(--e3); align-items: center; }
+.admin-checkbox { display: flex; align-items: center; gap: var(--e2); font-weight: 500; }
+.admin-checkbox input { width: auto; }
+
+.admin-liste-item {
+  display: flex; justify-content: space-between; align-items: center; gap: var(--e3);
+  padding: var(--e3) 0; border-bottom: 1px solid var(--couleur-ligne);
+}
+.admin-liste-item-titre { font-family: var(--police-affichage); font-size: 1.05rem; }
+.admin-liste-item-meta { font-size: 0.8rem; color: var(--couleur-texte-attenue); }
+.admin-liste-actions { display: flex; gap: var(--e2); flex-shrink: 0; }
+.admin-liste-actions button {
+  font-family: var(--police-interface); font-size: 0.8rem; font-weight: 600;
+  padding: 6px 12px; border-radius: var(--rayon); cursor: pointer; border: 1px solid var(--couleur-ligne); background: var(--couleur-fond);
+}
+.admin-liste-actions .supprimer { color: var(--couleur-psychologie-texte); border-color: var(--couleur-psychologie-texte); }
+.admin-refuse { text-align: center; padding: var(--e8) var(--e5); }
+.admin-refuse p { font-family: var(--police-lecture); margin: var(--e3) 0 var(--e5); }
 
