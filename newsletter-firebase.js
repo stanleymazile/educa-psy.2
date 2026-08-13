@@ -30,7 +30,10 @@ function initNewsletter() {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const email = document.getElementById("newsletter-email").value.trim();
-    if (!email) return;
+    if (!email) {
+      messageZone.innerHTML = `<div class="formulaire-message erreur">${t("champs_obligatoires")}</div>`;
+      return;
+    }
 
     bouton.disabled = true;
     messageZone.innerHTML = "";
@@ -53,4 +56,3 @@ function initNewsletter() {
 }
 
 document.addEventListener("DOMContentLoaded", initNewsletter);
-
