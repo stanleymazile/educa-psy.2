@@ -123,24 +123,42 @@ async function initAccueilFirebase() {
 
   if (zoneFeatured) zoneFeatured.innerHTML = carteArticleHTML(premier, true);
 
-  function afficher(categorie) {
-    const filtres = categorie === "Tous" ? reste : reste.filter(a => a.categorie === categorie);
+  let catActuelle = "Tous";
+  let rechercheActuelle = "";
+
+  function afficher() {
+    let filtres = catActuelle === "Tous" ? reste : reste.filter(a => a.categorie === catActuelle);
+    if (rechercheActuelle) {
+      const q = rechercheActuelle.toLowerCase();
+      filtres = filtres.filter(a =>
+        (a.titre || "").toLowerCase().includes(q) || (a.resume || "").toLowerCase().includes(q));
+    }
     grille.innerHTML = filtres.map(a => carteArticleHTML(a)).join("")
-      || `<p class="empty-msg">Aucun article dans cette catégorie pour l'instant — revenez bientôt ou explorez une autre rubrique.</p>`;
+      || `<p class="empty-msg">Aucun article ne correspond pour l'instant — essayez une autre recherche ou une autre rubrique.</p>`;
   }
 
   const params = new URLSearchParams(window.location.search);
-  const catInitiale = params.get("cat") || "Tous";
+  catActuelle = params.get("cat") || "Tous";
   const onglets = document.querySelectorAll(".filter-tab[data-cat]");
   onglets.forEach(onglet => {
-    onglet.classList.toggle("active", onglet.dataset.cat === catInitiale);
+    onglet.classList.toggle("active", onglet.dataset.cat === catActuelle);
     onglet.addEventListener("click", () => {
       onglets.forEach(o => o.classList.remove("active"));
       onglet.classList.add("active");
-      afficher(onglet.dataset.cat);
+      catActuelle = onglet.dataset.cat;
+      afficher();
     });
   });
-  afficher(catInitiale);
+
+  const champRecherche = document.getElementById("recherche-articles");
+  if (champRecherche) {
+    champRecherche.addEventListener("input", () => {
+      rechercheActuelle = champRecherche.value.trim();
+      afficher();
+    });
+  }
+
+  afficher();
 }
 
 /* ---------- Page article ---------- */
@@ -186,7 +204,26 @@ async function initArticlePageFirebase() {
     <h1 class="article-title">${article.titre || ""}</h1>
     <div class="article-meta">Par ${article.auteur || "Équipe Educa-Psy"} · ${formaterDateFirestore(article.date)}</div>
     ${imageHero}
-    <div class="article-body">${contenu.length ? contenu.map(p => `<p>${formaterTexte(p)}</p>`).join("") : "<p><em>Cet article n'a pas encore de contenu (champ « contenu » manquant dans Firestore).</em></p>"}</div>`;
+    <div class="article-body">${contenu.length ? contenu.map(p => `<p>${formaterTexte(p)}</p>`).join("") : "<p><em>Cet article n'a pas encore de contenu (champ « contenu » manquant dans Firestore).</em></p>"}</div>
+    <button type="button" class="share-btn" id="btn-partager">↗ Partager</button>`;
+
+  const btnPartager = document.getElementById("btn-partager");
+  if (btnPartager) {
+    btnPartager.addEventListener("click", async () => {
+      const data = { title: article.titre || "Educa-Psy", text: article.resume || "", url: window.location.href };
+      if (navigator.share) {
+        try { await navigator.share(data); } catch (err) { /* annulé par l'utilisateur : rien à faire */ }
+      } else {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          btnPartager.textContent = "✓ Lien copié";
+          setTimeout(() => { btnPartager.textContent = "↗ Partager"; }, 2000);
+        } catch (err) {
+          console.error("Impossible de copier le lien :", err);
+        }
+      }
+    });
+  }
 
   const zoneSimilaires = document.getElementById("articles-similaires");
   if (zoneSimilaires) {
