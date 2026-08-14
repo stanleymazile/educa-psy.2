@@ -275,3 +275,4 @@ document.addEventListener("DOMContentLoaded", () => {
   initMenuMobile();
   initLangue();
 });
+
