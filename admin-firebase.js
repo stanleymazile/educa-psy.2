@@ -95,6 +95,7 @@ function reinitialiserFormArticle() {
   articleEnEdition = null;
   document.getElementById("form-article").reset();
   document.getElementById("titre-form-article").textContent = "Ajouter un article";
+  document.getElementById("article-image-actuelle").innerHTML = "";
 }
 
 function remplirFormArticle(a) {
@@ -108,6 +109,9 @@ function remplirFormArticle(a) {
   document.getElementById("article-image").value = a.image || "";
   document.getElementById("article-alaune").checked = !!a.aLaUne;
   document.getElementById("titre-form-article").textContent = "Modifier l'article";
+  document.getElementById("article-image-actuelle").innerHTML = a.image
+    ? `<div class="admin-apercu-actuel"><img src="${a.image}" alt=""><span>Image actuelle — un nouvel envoi la remplacera</span></div>`
+    : "";
   document.getElementById("form-article").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
@@ -203,6 +207,7 @@ function reinitialiserFormEmploi() {
   emploiEnEdition = null;
   document.getElementById("form-emploi").reset();
   document.getElementById("titre-form-emploi").textContent = "Ajouter une offre";
+  document.getElementById("emploi-pdf-actuel").innerHTML = "";
 }
 
 function remplirFormEmploi(o) {
@@ -214,6 +219,9 @@ function remplirFormEmploi(o) {
   document.getElementById("emploi-datelimite").value = dateVersInput(o.dateLimite);
   document.getElementById("emploi-description").value = o.description || "";
   document.getElementById("emploi-lien").value = o.lien || "";
+  document.getElementById("emploi-pdf-actuel").innerHTML = o.pdfUrl
+    ? `<div class="admin-apercu-actuel">📄 <a href="${o.pdfUrl}" target="_blank" rel="noopener">${o.pdfNom || "PDF actuel"}</a><span>— un nouvel envoi le remplacera</span></div>`
+    : "";
   document.getElementById("titre-form-emploi").textContent = "Modifier l'offre";
   document.getElementById("form-emploi").scrollIntoView({ behavior: "smooth", block: "start" });
 }
@@ -356,3 +364,4 @@ document.addEventListener("DOMContentLoaded", () => {
   const annulerEmploi = document.getElementById("annuler-emploi");
   if (annulerEmploi) annulerEmploi.addEventListener("click", reinitialiserFormEmploi);
 });
+
