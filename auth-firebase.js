@@ -16,7 +16,7 @@
 import { auth } from "./firebase-config.js";
 import {
   onAuthStateChanged, signOut,
-  signInWithEmailAndPassword, createUserWithEmailAndPassword
+  signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 function t(cle) {
@@ -100,6 +100,24 @@ function initAuthPage() {
       boutonSubmit.disabled = false;
     }
   });
+
+  const lienOublie = document.getElementById("mdp-oublie");
+  if (lienOublie) {
+    lienOublie.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("auth-email").value.trim();
+      if (!email) {
+        messageZone.innerHTML = `<div class="formulaire-message erreur">Indiquez d'abord votre adresse e-mail ci-dessus.</div>`;
+        return;
+      }
+      try {
+        await sendPasswordResetEmail(auth, email);
+        messageZone.innerHTML = `<div class="formulaire-message succes">E-mail de réinitialisation envoyé — vérifiez votre boîte de réception.</div>`;
+      } catch (err) {
+        messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
+      }
+    });
+  }
 }
 
 function traduireErreur(code) {
@@ -109,7 +127,9 @@ function traduireErreur(code) {
     "auth/wrong-password": "Mot de passe incorrect.",
     "auth/invalid-credential": "E-mail ou mot de passe incorrect.",
     "auth/email-already-in-use": "Un compte existe déjà avec cet e-mail.",
-    "auth/weak-password": "Le mot de passe doit contenir au moins 6 caractères."
+    "auth/weak-password": "Le mot de passe doit contenir au moins 6 caractères.",
+    "auth/missing-email": "Indiquez d'abord votre adresse e-mail ci-dessus.",
+    "auth/too-many-requests": "Trop de tentatives. Réessayez dans quelques minutes."
   };
   return messages[code] || "Une erreur est survenue. Réessayez.";
 }
