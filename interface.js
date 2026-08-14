@@ -115,7 +115,13 @@ const TRADUCTIONS = {
     newsletter_placeholder: "Votre adresse e-mail",
     newsletter_bouton: "S'abonner",
     newsletter_succes: "Merci de votre inscription !",
-    champs_obligatoires: "Merci de remplir tous les champs obligatoires."
+    champs_obligatoires: "Merci de remplir tous les champs obligatoires.",
+    desabo_titre: "Se désabonner",
+    desabo_texte: "Indiquez l'adresse e-mail à retirer de notre liste de diffusion.",
+    desabo_bouton: "Se désabonner",
+    desabo_succes: "Vous avez été désabonné(e) avec succès.",
+    desabo_erreur: "Cette adresse n'a pas été trouvée dans nos abonnés.",
+    lien_desabonnement: "Se désabonner de la newsletter"
   },
   en: {
     tagline: "Education · Technology · Science · Psychology",
@@ -158,7 +164,13 @@ const TRADUCTIONS = {
     newsletter_placeholder: "Your email address",
     newsletter_bouton: "Subscribe",
     newsletter_succes: "Thanks for subscribing!",
-    champs_obligatoires: "Please fill in all required fields."
+    champs_obligatoires: "Please fill in all required fields.",
+    desabo_titre: "Unsubscribe",
+    desabo_texte: "Enter the email address to remove from our mailing list.",
+    desabo_bouton: "Unsubscribe",
+    desabo_succes: "You have been successfully unsubscribed.",
+    desabo_erreur: "This address was not found in our subscribers.",
+    lien_desabonnement: "Unsubscribe from the newsletter"
   },
   ht: {
     tagline: "Edikasyon · Teknoloji · Syans · Sikoloji",
@@ -201,7 +213,13 @@ const TRADUCTIONS = {
     newsletter_placeholder: "Imèl ou",
     newsletter_bouton: "Abòne",
     newsletter_succes: "Mèsi paske ou abòne!",
-    champs_obligatoires: "Tanpri ranpli tout chan obligatwa yo."
+    champs_obligatoires: "Tanpri ranpli tout chan obligatwa yo.",
+    desabo_titre: "Dezabòne",
+    desabo_texte: "Antre imèl ou vle retire nan lis nou an.",
+    desabo_bouton: "Dezabòne",
+    desabo_succes: "Ou dezabòne avèk siksè.",
+    desabo_erreur: "Nou pa jwenn imèl sa a nan abòne nou yo.",
+    lien_desabonnement: "Dezabòne nan bilten an"
   }
 };
 
@@ -220,13 +238,21 @@ function appliquerTraductions(langue) {
 
 function initLangue() {
   const select = document.getElementById("lang-select");
-  const enregistree = localStorage.getItem("educapsy-langue") || "fr";
-  appliquerTraductions(enregistree);
+  const params = new URLSearchParams(window.location.search);
+  const langueURL = params.get("lang");
+  const langueChoisie = ["fr", "en", "ht"].includes(langueURL) ? langueURL : (localStorage.getItem("educapsy-langue") || "fr");
+
+  appliquerTraductions(langueChoisie);
+  localStorage.setItem("educapsy-langue", langueChoisie);
+
   if (select) {
-    select.value = enregistree;
+    select.value = langueChoisie;
     select.addEventListener("change", () => {
       localStorage.setItem("educapsy-langue", select.value);
       appliquerTraductions(select.value);
+      const url = new URL(window.location.href);
+      url.searchParams.set("lang", select.value);
+      window.history.replaceState({}, "", url);
     });
   }
 }
@@ -249,4 +275,3 @@ document.addEventListener("DOMContentLoaded", () => {
   initMenuMobile();
   initLangue();
 });
-
