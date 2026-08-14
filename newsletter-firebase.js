@@ -8,7 +8,7 @@
    ============================================================ */
 
 import { db } from "./firebase-config.js";
-import { doc, setDoc, Timestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-lite.js";
+import { doc, setDoc, updateDoc, Timestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-lite.js";
 
 function t(cle) {
   return window.EducaPsyI18n ? window.EducaPsyI18n.texte(cle) : cle;
@@ -55,4 +55,41 @@ function initNewsletter() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", initNewsletter);
+document.addEventListener("DOMContentLoaded", () => {
+  initNewsletter();
+  initDesabonnement();
+});
+
+/* ---------- Page desabonnement.html ---------- */
+
+function initDesabonnement() {
+  const form = document.getElementById("desabo-form");
+  if (!form) return;
+
+  const bouton = document.getElementById("desabo-submit");
+  const messageZone = document.getElementById("desabo-message");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("desabo-email").value.trim();
+    if (!email) {
+      messageZone.innerHTML = `<div class="formulaire-message erreur">${t("champs_obligatoires")}</div>`;
+      return;
+    }
+
+    bouton.disabled = true;
+    messageZone.innerHTML = "";
+
+    try {
+      await updateDoc(doc(db, "newsletter", idDepuisEmail(email)), { actif: false });
+      form.reset();
+      messageZone.innerHTML = `<div class="formulaire-message succes">${t("desabo_succes")}</div>`;
+    } catch (err) {
+      console.error("Erreur Firestore (désabonnement) :", err);
+      // Cas le plus courant : l'adresse n'a jamais été inscrite (le document n'existe pas).
+      messageZone.innerHTML = `<div class="formulaire-message erreur">${t("desabo_erreur")}</div>`;
+    } finally {
+      bouton.disabled = false;
+    }
+  });
+}
