@@ -10,32 +10,36 @@
 <meta property="og:site_name" content="Educa-Psy">
 <meta property="og:title" content="Article — Educa-Psy">
 <meta property="og:description" content="Actualités et ressources en éducation, technologie, science et psychologie — publié par Educa-Psy.">
-<meta property="og:image" content="https://VOTRE-SITE.web.app/og-image.png">
-<meta property="og:url" content="https://VOTRE-SITE.web.app/article.html">
+<meta property="og:image" content="https://educa-psy.web.app/og-image.png">
+<meta property="og:url" content="https://educa-psy.web.app/article.html">
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Article — Educa-Psy">
-<meta name="twitter:image" content="https://VOTRE-SITE.web.app/og-image.png">
+<meta name="twitter:image" content="https://educa-psy.web.app/og-image.png">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Ccircle%20cx='20'%20cy='20'%20r='18.5'%20fill='%23FAF6ED'%20stroke='%23B8912F'%20stroke-width='2'/%3E%3Ctext%20x='20'%20y='27'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='17'%20font-weight='700'%20fill='%23B8912F'%3EEP%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<link rel="canonical" href="https://VOTRE-SITE.web.app/article.html">
+<link rel="canonical" href="https://educa-psy.web.app/article.html">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Educa-Psy",
-  "url": "https://VOTRE-SITE.web.app/",
-  "logo": "https://VOTRE-SITE.web.app/logo.svg",
+  "url": "https://educa-psy.web.app/",
+  "logo": "https://educa-psy.web.app/logo.svg",
   "description": "Organisation sociale ha\u00eftienne d\u00e9di\u00e9e au soutien psychosocial, \u00e0 l'\u00e9ducation et aux droits humains.",
   "sameAs": ["https://educa-psy-haiti.web.app"]
 }
 </script>
 </head>
 <body>
+<a href="#contenu-principal" class="skip-link">Aller au contenu</a>
 
 <header class="site-header">
   <div class="masthead-top">
@@ -96,7 +100,7 @@
   </div>
 </header>
 
-<main>
+<main id="contenu-principal">
   <div class="container">
     <section class="article-page">
       <div id="article-content"></div>
@@ -111,7 +115,16 @@
       <div class="footer-brand">
         <span class="logo-text small">Educa-Psy</span>
         <p data-i18n="footer_texte">Actualités et ressources en éducation, technologie, science et psychologie, ainsi que des opportunités professionnelles.</p>
+            <div class="footer-social">
+        <a class="social-badge" href="https://facebook.com/educapsy" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        <a class="social-badge" href="https://instagram.com/VOTRE-COMPTE" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+        <a class="social-badge" href="https://x.com/VOTRE-COMPTE" target="_blank" rel="noopener" aria-label="X (Twitter)">x</a>
+        <a class="social-badge" href="https://tiktok.com/@educapsy" target="_blank" rel="noopener" aria-label="TikTok">tt</a>
+        <a class="social-badge" href="https://linkedin.com/company/educa-psy" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+        <a class="social-badge" href="https://youtube.com/@educapsy" target="_blank" rel="noopener" aria-label="YouTube">yt</a>
+        <a class="social-badge" href="https://wa.me/50936859685" target="_blank" rel="noopener" aria-label="WhatsApp">wa</a>
       </div>
+</div>
       <div class="newsletter-widget">
         <h3 data-i18n="newsletter_titre">Abonnez-vous à notre newsletter</h3>
         <p data-i18n="newsletter_texte">Recevez nos derniers articles et opportunités par e-mail.</p>
@@ -120,6 +133,7 @@
           <button type="submit" id="newsletter-submit" data-i18n="newsletter_bouton">S'abonner</button>
         </form>
         <div id="newsletter-message"></div>
+        <p class="formulaire-note"><a href="desabonnement.html" data-i18n="lien_desabonnement">Se désabonner de la newsletter</a></p>
       </div>
       <div class="footer-links">
         <a href="index.html" data-i18n="nav_accueil">Accueil</a>
@@ -143,3 +157,4 @@
 <script type="module" src="newsletter-firebase.js"></script>
 </body>
 </html>
+
