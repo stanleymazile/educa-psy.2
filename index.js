@@ -15,7 +15,7 @@ initializeApp();
 const db = getFirestore();
 
 // ⚠️ Remplacez par votre vraie adresse (la même que dans les fichiers HTML).
-const SITE_URL = "https://VOTRE-SITE.web.app";
+const SITE_URL = "https://educa-psy.web.app";
 
 function echapperXml(texte) {
   return String(texte || "").replace(/[<>&'"]/g, (c) => (
@@ -59,4 +59,3 @@ exports.rss = onRequest({ cors: true }, async (req, res) => {
     res.status(500).send("Erreur lors de la génération du flux RSS.");
   }
 });
-
