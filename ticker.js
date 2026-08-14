@@ -33,4 +33,3 @@ async function initTicker() {
 }
 
 document.addEventListener("DOMContentLoaded", initTicker);
-
