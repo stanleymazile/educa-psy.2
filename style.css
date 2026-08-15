@@ -391,7 +391,6 @@ a:focus-visible, button:focus-visible {
   .article-body p { font-size: 1.02rem; }
   .logo-text { font-size: 1.7rem; }
   .article-title { font-size: 1.6rem; }
-  .masthead-tagline { display: none; }
   .masthead-top-inner { gap: 6px; padding: var(--e2) 0; }
   .masthead-utils { gap: 6px; }
   .util-btn, .lang-select { font-size: 0.7rem; padding: 2px 8px; }
