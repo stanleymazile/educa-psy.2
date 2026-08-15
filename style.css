@@ -287,6 +287,8 @@ a:focus-visible, button:focus-visible {
 .job-card.type-stage-formation { border-top-color: var(--couleur-technologie-texte); }
 
 .job-card-title { font-size: 1.25rem; margin: var(--e2) 0 var(--e2); }
+.job-card-title a { color: var(--couleur-texte); text-decoration: none; }
+.job-card-title a:hover { color: var(--couleur-or-fonce); }
 .job-card-meta { font-size: 0.83rem; color: var(--couleur-texte-attenue); margin-bottom: var(--e3); }
 .job-card-desc { font-family: var(--police-lecture); line-height: 1.6; margin-bottom: var(--e4); flex-grow: 1; }
 .job-card-footer {
@@ -323,6 +325,7 @@ a:focus-visible, button:focus-visible {
 }
 .article-not-found { text-align: center; padding: var(--e8) 0; }
 .article-not-found p { font-family: var(--police-lecture); margin: var(--e3) 0 var(--e5); }
+.emploi-actions { display: flex; gap: var(--e3); flex-wrap: wrap; margin: var(--e5) 0; }
 
 .similaires-section { margin-top: var(--e8); padding-top: var(--e6); border-top: 1px solid var(--couleur-ligne); }
 .similaires-section h3 { font-size: 1.4rem; margin-bottom: var(--e4); }
@@ -388,6 +391,12 @@ a:focus-visible, button:focus-visible {
   .article-body p { font-size: 1.02rem; }
   .logo-text { font-size: 1.7rem; }
   .article-title { font-size: 1.6rem; }
+  .masthead-tagline { display: none; }
+  .masthead-top-inner { gap: 6px; padding: var(--e2) 0; }
+  .masthead-utils { gap: 6px; }
+  .util-btn, .lang-select { font-size: 0.7rem; padding: 2px 8px; }
+  .auth-zone { font-size: 0.7rem; }
+  .masthead-main { padding: var(--e4) 0 var(--e3); }
 }
 
 /* ============================================================
