@@ -475,18 +475,22 @@ a:focus-visible, button:focus-visible {
    ============================================================ */
 .nav-toggle {
   display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   background: none;
   border: 1px solid var(--couleur-ligne);
   border-radius: var(--rayon);
   padding: 6px 12px;
   font-size: 1rem;
+  line-height: 1;
   cursor: pointer;
   color: var(--couleur-texte);
 }
 
 @media (max-width: 700px) {
   .site-nav .container { display: flex; flex-direction: column; align-items: center; }
-  .nav-toggle { display: block; margin: var(--e3) 0 0; }
+  .nav-toggle { display: inline-flex; margin: var(--e3) 0; }
   .nav-links {
     display: none;
     flex-direction: column;
