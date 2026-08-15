@@ -218,6 +218,7 @@ function remplirFormEmploi(o) {
   document.getElementById("emploi-lieu").value = o.lieu || "";
   document.getElementById("emploi-datelimite").value = dateVersInput(o.dateLimite);
   document.getElementById("emploi-description").value = o.description || "";
+  document.getElementById("emploi-resume").value = o.resume || "";
   document.getElementById("emploi-lien").value = o.lien || "";
   document.getElementById("emploi-pdf-actuel").innerHTML = o.pdfUrl
     ? `<div class="admin-apercu-actuel">📄 <a href="${o.pdfUrl}" target="_blank" rel="noopener">${o.pdfNom || "PDF actuel"}</a><span>— un nouvel envoi le remplacera</span></div>`
@@ -288,6 +289,7 @@ async function enregistrerEmploi(e) {
       lieu: document.getElementById("emploi-lieu").value.trim(),
       dateLimite: inputVersTimestamp(document.getElementById("emploi-datelimite").value),
       description: document.getElementById("emploi-description").value.trim(),
+      resume: document.getElementById("emploi-resume").value.trim(),
       lien: document.getElementById("emploi-lien").value.trim() || null,
       datePublication: Timestamp.now()
     };
