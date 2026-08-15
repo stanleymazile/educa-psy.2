@@ -392,7 +392,7 @@ a:focus-visible, button:focus-visible {
   .logo-text { font-size: 1.7rem; }
   .article-title { font-size: 1.6rem; }
   .masthead-top-inner { gap: 6px; padding: var(--e2) 0; }
-  .masthead-utils { gap: 6px; }
+  .masthead-utils { gap: 6px; margin-left: 0; width: 100%; justify-content: center; }
   .util-btn, .lang-select { font-size: 0.7rem; padding: 2px 8px; }
   .auth-zone { font-size: 0.7rem; }
   .masthead-main { padding: var(--e4) 0 var(--e3); }
@@ -485,7 +485,8 @@ a:focus-visible, button:focus-visible {
 }
 
 @media (max-width: 700px) {
-  .nav-toggle { display: block; margin: var(--e3) auto 0; }
+  .site-nav .container { display: flex; flex-direction: column; align-items: center; }
+  .nav-toggle { display: block; margin: var(--e3) 0 0; }
   .nav-links {
     display: none;
     flex-direction: column;
