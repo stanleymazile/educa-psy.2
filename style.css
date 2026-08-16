@@ -799,3 +799,63 @@ a:focus-visible, button:focus-visible {
 }
 .social-badge:hover { background: var(--couleur-or); color: var(--couleur-bouton-texte); }
 
+/* ============================================================
+   SOUS-MENUS DE NAVIGATION (Articles, Opportunités)
+   ============================================================ */
+.nav-dropdown { position: relative; display: flex; align-items: center; gap: 2px; }
+.nav-dropdown-toggle {
+  background: none;
+  border: none;
+  font-family: var(--police-interface);
+  font-size: 0.7rem;
+  color: inherit;
+  padding: 4px;
+  cursor: pointer;
+  line-height: 1;
+}
+.nav-submenu {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: var(--e2) 0;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--couleur-fond);
+  border: 1px solid var(--couleur-ligne);
+  border-radius: var(--rayon);
+  min-width: 170px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  z-index: 30;
+}
+.nav-dropdown:hover .nav-submenu,
+.nav-dropdown:focus-within .nav-submenu,
+.nav-dropdown.ouvert .nav-submenu { display: block; }
+.nav-submenu a {
+  display: block;
+  padding: 9px 18px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  white-space: nowrap;
+  border-bottom: none !important;
+}
+.nav-submenu a:hover { background: var(--couleur-fond-alt); color: var(--couleur-or-fonce); }
+
+@media (max-width: 700px) {
+  .nav-dropdown { flex-direction: column; align-items: center; gap: 0; }
+  .nav-submenu {
+    position: static;
+    transform: none;
+    display: none;
+    border: none;
+    box-shadow: none;
+    background: none;
+    min-width: 0;
+    text-align: center;
+    padding: var(--e1) 0 var(--e2);
+  }
+  .nav-dropdown.ouvert .nav-submenu { display: block; }
+  .nav-submenu a { padding: 6px 0; font-size: 0.82rem; color: var(--couleur-texte-attenue); }
+}
+
