@@ -48,6 +48,33 @@ function initTheme() {
   }
 }
 
+function initSousMenus() {
+  document.querySelectorAll(".nav-dropdown-toggle").forEach(bouton => {
+    bouton.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const parent = bouton.closest(".nav-dropdown");
+      const etaitOuvert = parent.classList.contains("ouvert");
+      document.querySelectorAll(".nav-dropdown.ouvert").forEach(d => {
+        d.classList.remove("ouvert");
+        d.querySelector(".nav-dropdown-toggle").setAttribute("aria-expanded", "false");
+      });
+      if (!etaitOuvert) {
+        parent.classList.add("ouvert");
+        bouton.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".nav-dropdown")) {
+      document.querySelectorAll(".nav-dropdown.ouvert").forEach(d => {
+        d.classList.remove("ouvert");
+        d.querySelector(".nav-dropdown-toggle").setAttribute("aria-expanded", "false");
+      });
+    }
+  });
+}
+
 /* ---------- Menu mobile ---------- */
 
 function initMenuMobile() {
@@ -77,10 +104,16 @@ const TRADUCTIONS = {
   fr: {
     tagline: "Éducation · Technologie · Science · Psychologie",
     nav_accueil: "Accueil",
+    nav_articles: "Articles",
     nav_education: "Éducation",
     nav_technologie: "Technologie",
     nav_science: "Science",
     nav_psychologie: "Psychologie",
+    nav_opportunites: "Opportunités",
+    type_emploi: "Emploi",
+    type_collaboration: "Collaboration",
+    type_benevolat: "Bénévolat",
+    type_stage: "Stage",
     nav_emplois: "Emplois & Collaborations",
     nav_apropos: "À propos",
     nav_contact: "Contact",
@@ -126,10 +159,16 @@ const TRADUCTIONS = {
   en: {
     tagline: "Education · Technology · Science · Psychology",
     nav_accueil: "Home",
+    nav_articles: "Articles",
     nav_education: "Education",
     nav_technologie: "Technology",
     nav_science: "Science",
     nav_psychologie: "Psychology",
+    nav_opportunites: "Opportunities",
+    type_emploi: "Job",
+    type_collaboration: "Collaboration",
+    type_benevolat: "Volunteering",
+    type_stage: "Internship",
     nav_emplois: "Jobs & Collaborations",
     nav_apropos: "About",
     nav_contact: "Contact",
@@ -175,10 +214,16 @@ const TRADUCTIONS = {
   ht: {
     tagline: "Edikasyon · Teknoloji · Syans · Sikoloji",
     nav_accueil: "Akèy",
+    nav_articles: "Atik",
     nav_education: "Edikasyon",
     nav_technologie: "Teknoloji",
     nav_science: "Syans",
     nav_psychologie: "Sikoloji",
+    nav_opportunites: "Opòtinite",
+    type_emploi: "Travay",
+    type_collaboration: "Kolaborasyon",
+    type_benevolat: "Benevola",
+    type_stage: "Estaj",
     nav_emplois: "Travay & Kolaborasyon",
     nav_apropos: "Konsènan nou",
     nav_contact: "Kontak",
@@ -273,6 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initEnteteEtPied();
   initTheme();
   initMenuMobile();
+  initSousMenus();
   initLangue();
 });
 
