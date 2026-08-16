@@ -76,13 +76,28 @@
       <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">☰</button>
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html" data-i18n="nav_accueil">Accueil</a></li>
-        <li><a href="index.html?cat=%C3%89ducation" data-i18n="nav_education">Éducation</a></li>
-        <li><a href="index.html?cat=Technologie" data-i18n="nav_technologie">Technologie</a></li>
-        <li><a href="index.html?cat=Science" data-i18n="nav_science">Science</a></li>
-        <li><a href="index.html?cat=Psychologie" data-i18n="nav_psychologie">Psychologie</a></li>
-        <li><a href="emplois.html" class="nav-highlight" data-i18n="nav_emplois">Emplois &amp; Collaborations</a></li>
-        <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+        <li class="nav-dropdown">
+          <a href="index.html" data-i18n="nav_articles">Articles</a>
+          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Articles">▾</button>
+          <ul class="nav-submenu">
+            <li><a href="index.html?cat=%C3%89ducation" data-i18n="nav_education">Éducation</a></li>
+            <li><a href="index.html?cat=Technologie" data-i18n="nav_technologie">Technologie</a></li>
+            <li><a href="index.html?cat=Science" data-i18n="nav_science">Science</a></li>
+            <li><a href="index.html?cat=Psychologie" data-i18n="nav_psychologie">Psychologie</a></li>
+          </ul>
+        </li>
+        <li class="nav-dropdown">
+          <a href="emplois.html" class="nav-highlight" data-i18n="nav_opportunites">Opportunités</a>
+          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Opportunités">▾</button>
+          <ul class="nav-submenu">
+            <li><a href="emplois.html?type=Emploi" data-i18n="type_emploi">Emploi</a></li>
+            <li><a href="emplois.html?type=Collaboration" data-i18n="type_collaboration">Collaboration</a></li>
+            <li><a href="emplois.html?type=B%C3%A9n%C3%A9volat" data-i18n="type_benevolat">Bénévolat</a></li>
+            <li><a href="emplois.html?type=Stage%20%2F%20Formation" data-i18n="type_stage">Stage</a></li>
+          </ul>
+        </li>
         <li><a href="a-propos.html" data-i18n="nav_apropos">À propos</a></li>
+        <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
       </ul>
     </div>
   </nav>
