@@ -137,14 +137,17 @@ async function initEmploisPage() {
   }
 
   const onglets = document.querySelectorAll(".filter-tab[data-type]");
+  const params = new URLSearchParams(window.location.search);
+  const typeInitial = params.get("type") || "Tous";
   onglets.forEach(onglet => {
+    onglet.classList.toggle("active", onglet.dataset.type === typeInitial);
     onglet.addEventListener("click", () => {
       onglets.forEach(o => o.classList.remove("active"));
       onglet.classList.add("active");
       afficher(onglet.dataset.type);
     });
   });
-  afficher("Tous");
+  afficher(typeInitial);
 }
 
 /* ---------- Page emploi.html (détail) ---------- */
