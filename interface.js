@@ -38,7 +38,11 @@ function initTheme() {
     theme = t;
     if (t === "sombre") document.documentElement.setAttribute("data-theme", "sombre");
     else document.documentElement.removeAttribute("data-theme");
-    if (bouton) bouton.textContent = t === "sombre" ? "☀️ Clair" : "🌙 Sombre";
+    if (bouton) {
+      bouton.innerHTML = t === "sombre"
+        ? '<span class="icon">☀️</span><span class="label">Clair</span>'
+        : '<span class="icon">🌙</span><span class="label">Sombre</span>';
+    }
     localStorage.setItem("educapsy-theme", t);
   }
 
@@ -104,6 +108,8 @@ const TRADUCTIONS = {
   fr: {
     tagline: "Éducation · Technologie · Science · Psychologie",
     nav_accueil: "Accueil",
+    nav_actualites: "Actualités",
+    nav_newsletter: "Newsletter",
     nav_articles: "Articles",
     nav_education: "Éducation",
     nav_technologie: "Technologie",
@@ -159,6 +165,8 @@ const TRADUCTIONS = {
   en: {
     tagline: "Education · Technology · Science · Psychology",
     nav_accueil: "Home",
+    nav_actualites: "News",
+    nav_newsletter: "Newsletter",
     nav_articles: "Articles",
     nav_education: "Education",
     nav_technologie: "Technology",
@@ -214,6 +222,8 @@ const TRADUCTIONS = {
   ht: {
     tagline: "Edikasyon · Teknoloji · Syans · Sikoloji",
     nav_accueil: "Akèy",
+    nav_actualites: "Nouvèl",
+    nav_newsletter: "Bilten",
     nav_articles: "Atik",
     nav_education: "Edikasyon",
     nav_technologie: "Teknoloji",
