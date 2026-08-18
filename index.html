@@ -55,7 +55,7 @@
             <option value="en">EN</option>
             <option value="ht">HT</option>
           </select>
-          <button id="theme-toggle" class="util-btn" type="button">🌙 Sombre</button>
+          <button id="theme-toggle" class="util-btn" type="button"><span class="icon">🌙</span><span class="label">Sombre</span></button>
           <span id="auth-zone" class="auth-zone"></span>
         </div>
       </div>
@@ -64,16 +64,26 @@
 
   <div class="masthead-main">
     <div class="container">
-      <a href="index.html" class="logo">
-        <img class="logo-mark" src="logo.svg" alt="Educa-Psy">
-        <span class="logo-text">Educa-Psy</span>
-      </a>
+      <div class="masthead-main-row">
+        <button type="button" id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">☰</button>
+        <a href="index.html" class="logo">
+          <img class="logo-mark" src="logo.svg" alt="Educa-Psy">
+          <span class="logo-text">Educa-Psy</span>
+        </a>
+        <a href="connexion.html" class="auth-zone-mobile" aria-label="Connexion">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 
   <nav class="site-nav">
     <div class="container">
-      <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">☰</button>
+      <div class="mobile-quicknav">
+        <a href="index.html" data-i18n="nav_actualites">Actualités</a>
+        <a href="emplois.html" data-i18n="nav_opportunites">Opportunités</a>
+        <a href="#newsletter-form" class="newsletter-mini-btn" data-i18n="nav_newsletter">Newsletter</a>
+      </div>
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html" data-i18n="nav_accueil">Accueil</a></li>
         <li class="nav-dropdown">
