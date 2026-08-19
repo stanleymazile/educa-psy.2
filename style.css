@@ -537,10 +537,11 @@ a:focus-visible, button:focus-visible {
   }
   .auth-zone-mobile:hover { border-color: var(--couleur-or); color: var(--couleur-or-fonce); }
 
-  /* Topbar mobile : date à gauche, icônes à droite, auth-zone cachée */
+  /* Topbar mobile : date à gauche, icônes à droite, auth-zone et logo cachés */
   .masthead-top-inner { flex-wrap: nowrap; justify-content: space-between; }
   .auth-zone { display: none; }
-  .topbar-logo-icon { display: block; width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
+  .topbar-logo-icon { display: none; }          /* logo SVG retiré de la topbar */
+  .util-btn { background: none; border: none; } /* plus de fond/bordure sur le bouton mode sombre */
 
   /* lang-wrapper : globe SVG cliquable sur mobile */
   .lang-icon { display: inline-block; pointer-events: none; flex-shrink: 0; }
