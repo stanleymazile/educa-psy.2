@@ -388,6 +388,8 @@ a:focus-visible, button:focus-visible {
 }
 .mobile-quicknav { display: none; }
 .auth-zone-mobile { display: none; }
+.util-icon-btn { display: none; }
+.topbar-logo-icon { display: none; }
 
 @media (max-width: 480px) {
   .nav-links { gap: var(--e4); font-size: 0.82rem; }
@@ -398,8 +400,12 @@ a:focus-visible, button:focus-visible {
   /* Slogan masqué, ligne date/thème/langue minimaliste */
   .masthead-tagline { display: none; }
   .masthead-top-inner { justify-content: space-between; padding: var(--e2) 0; }
-  .masthead-utils { gap: 6px; margin-left: 0; width: auto; justify-content: flex-end; }
+  .masthead-utils { gap: var(--e3); margin-left: 0; width: auto; justify-content: flex-end; }
   .util-btn, .lang-select { font-size: 0.7rem; padding: 3px 8px; }
+  .util-btn { background: none; border: none; padding: 2px; }
+  .lang-select { background: none; border: none; padding: 2px 4px; }
+  .util-icon-btn { color: inherit; font-size: 1rem; line-height: 1; text-decoration: none; display: inline-flex; }
+  .topbar-logo-icon { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
   .util-btn .label { display: none; }
   .auth-zone { display: none; } /* remplacé par l'icône à côté du logo, voir .auth-zone-mobile */
 
