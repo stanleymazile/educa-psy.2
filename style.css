@@ -390,6 +390,7 @@ a:focus-visible, button:focus-visible {
 .auth-zone-mobile { display: none; }
 .util-icon-btn { display: none; }
 .topbar-logo-icon { display: none; }
+.topbar-auth { display: none; } /* visible uniquement sur mobile via 700px */
 
 @media (max-width: 480px) {
   .nav-links { gap: var(--e4); font-size: 0.82rem; }
@@ -522,20 +523,17 @@ a:focus-visible, button:focus-visible {
   /* masthead-main-row : grille ☰ | logo | 👤 dès 700 px (pas seulement 480 px) */
   .masthead-main { padding: var(--e4) 0 var(--e3); }
   .masthead-main-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
-  .masthead-main-row .nav-toggle { justify-self: start; margin: 0; }
-  .masthead-main-row .logo { justify-self: center; }   /* "Educa-Psy" reste visible et centré */
-  .logo-mark { display: none !important; }                /* image du logo cachée (priorité sur règle de base ligne 752) */
-  .auth-zone-mobile {
-    justify-self: end;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px; height: 34px;
-    border-radius: 50%;
-    border: 1px solid var(--couleur-ligne);
-    color: var(--couleur-texte);
-  }
-  .auth-zone-mobile:hover { border-color: var(--couleur-or); color: var(--couleur-or-fonce); }
+  /* Header mobile : Educa-Psy à gauche, ☰ à droite */
+  .masthead-main-row { display: flex; justify-content: space-between; align-items: center; }
+  .masthead-main-row .logo { justify-self: unset; }
+  .masthead-main-row .nav-toggle { margin: 0; }
+  .logo-mark { display: none !important; }
+
+  /* auth-zone-mobile retiré du header — connexion maintenant dans la topbar */
+  .auth-zone-mobile { display: none; }
+
+  /* Topbar : icône connexion visible sur mobile */
+  .topbar-auth { display: inline-flex; align-items: center; color: inherit; text-decoration: none; }
 
   /* Topbar mobile : date à gauche, icônes à droite, auth-zone et logo cachés */
   .masthead-top-inner { flex-direction: row; align-items: center; flex-wrap: nowrap; justify-content: space-between; text-align: left; }
