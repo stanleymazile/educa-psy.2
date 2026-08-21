@@ -967,3 +967,28 @@ a:focus-visible, button:focus-visible {
 }
 
 
+/* Bloc traductions admin */
+.traductions-bloc {
+  margin-top: 1.5rem;
+  border: 1px solid var(--couleur-ligne);
+  border-radius: 8px;
+  padding: 0;
+  overflow: hidden;
+}
+.traductions-bloc summary {
+  cursor: pointer;
+  padding: 0.85rem 1.25rem;
+  font-family: var(--police-interface);
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: var(--couleur-fond-alt, rgba(184,145,47,0.06));
+  border-bottom: 1px solid var(--couleur-ligne);
+  list-style: none;
+}
+.traductions-bloc summary::-webkit-details-marker { display: none; }
+.traductions-bloc[open] summary { border-bottom: 1px solid var(--couleur-ligne); }
+.traductions-bloc > *:not(summary) { padding: 0 1.25rem; }
+.trad-groupe { padding: 1rem 0; border-bottom: 1px solid var(--couleur-ligne); }
+.trad-groupe:last-child { border-bottom: none; }
+.trad-groupe h4 { font-family: var(--police-interface); font-size: 0.85rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--couleur-or-fonce); }
+
