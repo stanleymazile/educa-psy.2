@@ -16,40 +16,6 @@ import {
 const MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet",
                   "août","septembre","octobre","novembre","décembre"];
 
-/* ---------- Dictionnaire des auteurs ---------- */
-const AUTEURS = {
-  "Stanley Mazile": {
-    photo: "images/stanley-mazile.jpg", // remplacez par le vrai chemin si disponible
-    initiales: "SM",
-    bio: "Psychologue, consultant et fondateur d'Educa-Psy. Engagé depuis plus de 10 ans dans le développement psychosocial et éducatif des communautés haïtiennes vulnérables, dans les départements du Sud, de l'Ouest et de l'Artibonite."
-  },
-  "Équipe Educa-Psy": {
-    photo: null,
-    initiales: "EP",
-    bio: "L'équipe éditoriale d'Educa-Psy réunit des professionnels en psychologie, éducation et développement social, engagés pour l'information, la formation et l'inclusion en Haïti."
-  }
-};
-
-function auteurCardHTML(nomAuteur) {
-  const auteur = AUTEURS[nomAuteur] || {
-    photo: null,
-    initiales: (nomAuteur || "?").split(" ").map(m => m[0]).join("").slice(0, 2).toUpperCase(),
-    bio: ""
-  };
-  const avatar = auteur.photo
-    ? `<img class="author-avatar" src="${auteur.photo}" alt="${nomAuteur}">`
-    : `<div class="author-initiales">${auteur.initiales}</div>`;
-  return `
-  <div class="author-card">
-    ${avatar}
-    <div class="author-info">
-      <span class="author-label">Écrit par</span>
-      <strong class="author-name">${nomAuteur || "Équipe Educa-Psy"}</strong>
-      ${auteur.bio ? `<p class="author-bio">${auteur.bio}</p>` : ""}
-    </div>
-  </div>`;
-}
-
 function formaterDateFirestore(valeur) {
   if (!valeur) return "";
   const d = valeur.toDate ? valeur.toDate() : new Date(valeur);
@@ -239,7 +205,6 @@ async function initArticlePageFirebase() {
     <div class="article-meta">Par ${article.auteur || "Équipe Educa-Psy"} · ${formaterDateFirestore(article.date)}</div>
     ${imageHero}
     <div class="article-body">${contenu.length ? contenu.map(p => `<p>${formaterTexte(p)}</p>`).join("") : "<p><em>Cet article n'a pas encore de contenu (champ « contenu » manquant dans Firestore).</em></p>"}</div>
-    ${auteurCardHTML(article.auteur)}
     <button type="button" class="share-btn" id="btn-partager">↗ Partager</button>`;
 
   const btnPartager = document.getElementById("btn-partager");
