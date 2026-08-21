@@ -1,10 +1,6 @@
 /* ============================================================
    EDUCA-PSY — admin-firebase.js
-   ============================================================
-   Logique du panneau d'administration (admin.html) : accès
-   réservé aux e-mails listés dans ADMIN_EMAILS (firebase-config.js),
-   et appliqué aussi par firestore.rules / storage.rules — donc
-   protégé même si quelqu'un contournait cette page.
+   (modifié pour supporter les traductions EN / HT / ES)
    ============================================================ */
 
 import { db, auth, storage, ADMIN_EMAILS } from "./firebase-config.js";
@@ -13,8 +9,6 @@ import {
   collection, getDocs, doc, setDoc, addDoc, deleteDoc, query, orderBy, Timestamp
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-lite.js";
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
-
-/* ---------- Utilitaires ---------- */
 
 function dateVersInput(valeur) {
   if (!valeur) return "";
@@ -38,9 +32,6 @@ async function televerserFichier(file, dossier) {
   await uploadBytes(storageRef, file);
   return getDownloadURL(storageRef);
 }
-// Échappe le HTML : indispensable pour tout texte soumis publiquement
-// (messages de contact, e-mails newsletter) avant de l'insérer dans la
-// page, pour empêcher qu'un texte malveillant ne s'exécute comme du code.
 function echapperHTML(texte) {
   const div = document.createElement("div");
   div.textContent = texte == null ? "" : String(texte);
@@ -51,7 +42,7 @@ function echapperHTML(texte) {
 
 function initAccesAdmin() {
   const verif = document.getElementById("admin-verification");
-  if (!verif) return; // pas sur admin.html
+  if (!verif) return;
 
   onAuthStateChanged(auth, (user) => {
     const refuse = document.getElementById("admin-refuse");
@@ -89,6 +80,7 @@ function initAccesAdmin() {
    ARTICLES
    ============================================================ */
 
+const LANGUES = ["en", "ht", "es"];
 let articleEnEdition = null;
 
 function reinitialiserFormArticle() {
@@ -96,6 +88,11 @@ function reinitialiserFormArticle() {
   document.getElementById("form-article").reset();
   document.getElementById("titre-form-article").textContent = "Ajouter un article";
   document.getElementById("article-image-actuelle").innerHTML = "";
+  for (const lg of LANGUES) {
+    document.getElementById(`article-titre-${lg}`).value = "";
+    document.getElementById(`article-resume-${lg}`).value = "";
+    document.getElementById(`article-contenu-${lg}`).value = "";
+  }
 }
 
 function remplirFormArticle(a) {
@@ -108,6 +105,12 @@ function remplirFormArticle(a) {
   document.getElementById("article-contenu").value = Array.isArray(a.contenu) ? a.contenu.join("\n\n") : "";
   document.getElementById("article-image").value = a.image || "";
   document.getElementById("article-alaune").checked = !!a.aLaUne;
+  // Traductions EN / HT / ES
+  for (const lg of LANGUES) {
+    document.getElementById(`article-titre-${lg}`).value = a[`titre_${lg}`] || "";
+    document.getElementById(`article-resume-${lg}`).value = a[`resume_${lg}`] || "";
+    document.getElementById(`article-contenu-${lg}`).value = Array.isArray(a[`contenu_${lg}`]) ? a[`contenu_${lg}`].join("\n\n") : (a[`contenu_${lg}`] || "");
+  }
   document.getElementById("titre-form-article").textContent = "Modifier l'article";
   document.getElementById("article-image-actuelle").innerHTML = a.image
     ? `<div class="admin-apercu-actuel"><img src="${a.image}" alt=""><span>Image actuelle — un nouvel envoi la remplacera</span></div>`
@@ -126,7 +129,7 @@ async function rafraichirListeArticles() {
       <div class="admin-liste-item">
         <div>
           <div class="admin-liste-item-titre">${a.titre || "(sans titre)"}</div>
-          <div class="admin-liste-item-meta">${a.categorie || ""} · ${formaterDateAffichage(a.date)}${a.aLaUne ? " · À la une" : ""}</div>
+          <div class="admin-liste-item-meta">${a.categorie || ""} · ${formaterDateAffichage(a.date)}${a.aLaUne ? " · À la une" : ""}${LANGUES.filter(lg => a[`titre_${lg}`]).map(lg => ` · ${lg.toUpperCase()}✓`).join("")}</div>
         </div>
         <div class="admin-liste-actions">
           <button type="button" data-id="${a.id}" class="btn-modif-art">Modifier</button>
@@ -179,6 +182,17 @@ async function enregistrerArticle(e) {
       aLaUne: document.getElementById("article-alaune").checked
     };
     if (imageUrl) donnees.image = imageUrl;
+
+    // Traductions EN / HT / ES
+    for (const lg of LANGUES) {
+      const t = document.getElementById(`article-titre-${lg}`).value.trim();
+      const r = document.getElementById(`article-resume-${lg}`).value.trim();
+      const c = document.getElementById(`article-contenu-${lg}`).value
+        .split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+      if (t) donnees[`titre_${lg}`] = t;
+      if (r) donnees[`resume_${lg}`] = r;
+      if (c.length) donnees[`contenu_${lg}`] = c;
+    }
 
     if (articleEnEdition) {
       await setDoc(doc(db, "articles", articleEnEdition), donnees, { merge: true });
@@ -296,7 +310,6 @@ async function enregistrerEmploi(e) {
     if (pdfUrl) { donnees.pdfUrl = pdfUrl; donnees.pdfNom = pdfNom; }
 
     if (emploiEnEdition) {
-      // On ne veut pas écraser une date de publication existante en modifiant une offre :
       delete donnees.datePublication;
       await setDoc(doc(db, "emplois", emploiEnEdition), donnees, { merge: true });
     } else {
