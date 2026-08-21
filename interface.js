@@ -277,6 +277,63 @@ const TRADUCTIONS = {
     desabo_succes: "Ou dezabòne avèk siksè.",
     desabo_erreur: "Nou pa jwenn imèl sa a nan abòne nou yo.",
     lien_desabonnement: "Dezabòne nan bilten an"
+  },
+  es: {
+    tagline: "Educación · Tecnología · Ciencia · Psicología",
+    nav_accueil: "Inicio",
+    nav_actualites: "Noticias",
+    nav_newsletter: "Boletín",
+    nav_articles: "Artículos",
+    nav_education: "Educación",
+    nav_technologie: "Tecnología",
+    nav_science: "Ciencia",
+    nav_psychologie: "Psicología",
+    nav_opportunites: "Oportunidades",
+    type_emploi: "Empleo",
+    type_collaboration: "Colaboración",
+    type_benevolat: "Voluntariado",
+    type_stage: "Pasantía",
+    nav_emplois: "Empleos y Colaboraciones",
+    nav_apropos: "Acerca de",
+    nav_contact: "Contacto",
+    a_la_une: "Destacado",
+    tous: "Todos",
+    opportunites_titre: "Oportunidades actuales",
+    voir_opportunites: "Ver todas las oportunidades →",
+    footer_texte: "Noticias y recursos en educación, tecnología, ciencia y psicología, junto con oportunidades profesionales.",
+    footer_site_officiel: "Sitio oficial de Educa-Psy ↗",
+    footer_droits: "Todos los derechos reservados.",
+    contact_titre: "Contacto",
+    contact_soustitre: "¿Una pregunta o propuesta de colaboración? Escríbanos.",
+    contact_nom: "Nombre",
+    contact_email: "Correo electrónico",
+    contact_sujet: "Asunto",
+    contact_message: "Mensaje",
+    contact_envoyer: "Enviar mensaje",
+    contact_envoi_cours: "Enviando…",
+    contact_succes: "¡Gracias! Su mensaje ha sido enviado.",
+    contact_erreur: "Ocurrió un error. Inténtelo de nuevo.",
+    auth_connexion: "Iniciar sesión",
+    auth_inscription: "Registrarse",
+    auth_email: "Correo electrónico",
+    auth_mdp: "Contraseña",
+    auth_bouton_connexion: "Iniciar sesión",
+    auth_bouton_inscription: "Crear cuenta",
+    auth_deconnexion: "Cerrar sesión",
+    auth_connecte_comme: "Conectado como",
+    auth_lien: "Iniciar sesión",
+    newsletter_titre: "Suscríbase a nuestro boletín",
+    newsletter_texte: "Reciba nuestros últimos artículos y oportunidades por correo.",
+    newsletter_placeholder: "Su correo electrónico",
+    newsletter_bouton: "Suscribirse",
+    newsletter_succes: "¡Gracias por suscribirse!",
+    champs_obligatoires: "Por favor, complete todos los campos obligatorios.",
+    desabo_titre: "Cancelar suscripción",
+    desabo_texte: "Ingrese el correo que desea retirar de nuestra lista.",
+    desabo_bouton: "Cancelar suscripción",
+    desabo_succes: "Se ha cancelado su suscripción con éxito.",
+    desabo_erreur: "No encontramos este correo en nuestros suscriptores.",
+    lien_desabonnement: "Cancelar suscripción al boletín"
   }
 };
 
@@ -297,7 +354,7 @@ function initLangue() {
   const select = document.getElementById("lang-select");
   const params = new URLSearchParams(window.location.search);
   const langueURL = params.get("lang");
-  const langueChoisie = ["fr", "en", "ht"].includes(langueURL) ? langueURL : (localStorage.getItem("educapsy-langue") || "fr");
+  const langueChoisie = ["fr", "en", "ht", "es"].includes(langueURL) ? langueURL : (localStorage.getItem("educapsy-langue") || "fr");
 
   appliquerTraductions(langueChoisie);
   localStorage.setItem("educapsy-langue", langueChoisie);
