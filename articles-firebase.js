@@ -16,6 +16,12 @@ import {
 const MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet",
                   "août","septembre","octobre","novembre","décembre"];
 
+/* Retourne le champ dans la langue active, avec fallback français */
+function champLocale(article, champ, langue) {
+  if (!langue || langue === "fr") return article[champ] || "";
+  return article[`${champ}_${langue}`] || article[champ] || "";
+}
+
 function formaterDateFirestore(valeur) {
   if (!valeur) return "";
   const d = valeur.toDate ? valeur.toDate() : new Date(valeur);
@@ -68,14 +74,17 @@ async function chargerArticlesSimilaires(categorie, idAExclure, max = 2) {
 /* ---------- Gabarits HTML ---------- */
 
 function carteArticleHTML(article, featured = false) {
+  const langue = localStorage.getItem("educapsy-langue") || "fr";
   const slug = slugify(article.categorie || "");
+  const titre = champLocale(article, "titre", langue);
+  const resume = champLocale(article, "resume", langue);
   const image = article.image ? `<img class="article-card-image" src="${article.image}" alt="" loading="lazy">` : "";
   return `
     <article class="article-card ${featured ? "article-card--featured" : ""} cat-${slug}">
       ${image}
       <span class="tag tag-${slug}">${article.categorie || ""}</span>
-      <h2 class="article-card-title"><a href="article.html?id=${article.id}">${article.titre || "(sans titre)"}</a></h2>
-      <p class="article-card-resume">${article.resume || ""}</p>
+      <h2 class="article-card-title"><a href="article.html?id=${article.id}">${titre || "(sans titre)"}</a></h2>
+      <p class="article-card-resume">${resume}</p>
       <div class="article-card-meta">${article.auteur || "Équipe Educa-Psy"} · ${formaterDateFirestore(article.date)}</div>
       <a class="read-more" href="article.html?id=${article.id}">Lire l'article →</a>
     </article>`;
@@ -194,14 +203,18 @@ async function initArticlePageFirebase() {
   }
 
   document.title = `${article.titre} — Educa-Psy`;
+  const langue = localStorage.getItem("educapsy-langue") || "fr";
   const slug = slugify(article.categorie || "");
-  const contenu = Array.isArray(article.contenu) ? article.contenu : [];
-  const imageHero = article.image ? `<img class="article-image" src="${article.image}" alt="${article.titre || ""}">` : "";
+  const titre = champLocale(article, "titre", langue);
+  const contenu = Array.isArray(article[`contenu_${langue}`]) && article[`contenu_${langue}`].length
+    ? article[`contenu_${langue}`]
+    : (Array.isArray(article.contenu) ? article.contenu : []);
+  const imageHero = article.image ? `<img class="article-image" src="${article.image}" alt="${titre || ""}">` : "";
 
   zone.innerHTML = `
     <a class="back-link" href="index.html">← Retour à l'accueil</a>
     <span class="tag tag-${slug}">${article.categorie || ""}</span>
-    <h1 class="article-title">${article.titre || ""}</h1>
+    <h1 class="article-title">${titre || ""}</h1>
     <div class="article-meta">Par ${article.auteur || "Équipe Educa-Psy"} · ${formaterDateFirestore(article.date)}</div>
     ${imageHero}
     <div class="article-body">${contenu.length ? contenu.map(p => `<p>${formaterTexte(p)}</p>`).join("") : "<p><em>Cet article n'a pas encore de contenu (champ « contenu » manquant dans Firestore).</em></p>"}</div>
