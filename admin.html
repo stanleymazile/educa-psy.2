@@ -24,40 +24,68 @@
       <div class="masthead-top-inner">
         <span id="today-date" class="masthead-date"></span>
         <span class="masthead-tagline" data-i18n="tagline">Éducation · Technologie · Science · Psychologie</span>
-        <div class="masthead-utils">
-          <select id="lang-select" class="lang-select" aria-label="Langue / Language / Lang">
-            <option value="fr">FR</option>
-            <option value="en">EN</option>
-            <option value="ht">HT</option>
-          </select>
-          <button id="theme-toggle" class="util-btn" type="button">🌙 Sombre</button>
+                <div class="masthead-utils">
+          <div class="lang-wrapper">
+            <svg class="lang-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <select id="lang-select" class="lang-select" aria-label="Langue / Language / Lang">
+              <option value="fr">FR</option>
+              <option value="en">EN</option>
+              <option value="ht">HT</option>
+            </select>
+          </div>
+          <button id="theme-toggle" class="util-btn" type="button"><span class="icon">🌙</span><span class="label">Sombre</span></button>
+          <a href="index.html#recherche-articles" class="util-icon-btn" aria-label="Rechercher"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></a>
+          <a href="connexion.html" class="topbar-auth" aria-label="Connexion"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7"/></svg></a>
           <span id="auth-zone" class="auth-zone"></span>
         </div>
+      </div>
       </div>
     </div>
   </div>
 
-  <div class="masthead-main">
+    <div class="masthead-main">
     <div class="container">
-      <a href="index.html" class="logo">
-        <img class="logo-mark" src="logo.svg" alt="Educa-Psy">
-        <span class="logo-text">Educa-Psy</span>
-      </a>
+      <div class="masthead-main-row">
+        <a href="index.html" class="logo">
+          <img class="logo-mark" src="logo.svg" alt="Educa-Psy">
+          <span class="logo-text">Educa-Psy</span>
+        </a>
+        <button type="button" id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">☰</button>
+      </div>
     </div>
   </div>
 
-  <nav class="site-nav">
+    <nav class="site-nav">
     <div class="container">
-      <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">☰ Menu</button>
+      <div class="mobile-quicknav">
+        <a href="index.html" data-i18n="nav_actualites">Actualités</a>
+        <a href="emplois.html" data-i18n="nav_opportunites">Opportunités</a>
+        <a href="index.html#newsletter-form" class="newsletter-mini-btn" data-i18n="nav_newsletter">Newsletter</a>
+      </div>
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html" data-i18n="nav_accueil">Accueil</a></li>
-        <li><a href="index.html?cat=%C3%89ducation" data-i18n="nav_education">Éducation</a></li>
-        <li><a href="index.html?cat=Technologie" data-i18n="nav_technologie">Technologie</a></li>
-        <li><a href="index.html?cat=Science" data-i18n="nav_science">Science</a></li>
-        <li><a href="index.html?cat=Psychologie" data-i18n="nav_psychologie">Psychologie</a></li>
-        <li><a href="emplois.html" class="nav-highlight" data-i18n="nav_emplois">Emplois &amp; Collaborations</a></li>
-        <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+        <li class="nav-dropdown">
+          <a href="index.html" data-i18n="nav_articles">Articles</a>
+          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Articles">▾</button>
+          <ul class="nav-submenu">
+            <li><a href="index.html?cat=%C3%89ducation" data-i18n="nav_education">Éducation</a></li>
+            <li><a href="index.html?cat=Technologie" data-i18n="nav_technologie">Technologie</a></li>
+            <li><a href="index.html?cat=Science" data-i18n="nav_science">Science</a></li>
+            <li><a href="index.html?cat=Psychologie" data-i18n="nav_psychologie">Psychologie</a></li>
+          </ul>
+        </li>
+        <li class="nav-dropdown">
+          <a href="emplois.html" class="nav-highlight" data-i18n="nav_opportunites">Opportunités</a>
+          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Opportunités">▾</button>
+          <ul class="nav-submenu">
+            <li><a href="emplois.html?type=Emploi" data-i18n="type_emploi">Emploi</a></li>
+            <li><a href="emplois.html?type=Collaboration" data-i18n="type_collaboration">Collaboration</a></li>
+            <li><a href="emplois.html?type=B%C3%A9n%C3%A9volat" data-i18n="type_benevolat">Bénévolat</a></li>
+            <li><a href="emplois.html?type=Stage%20%2F%20Formation" data-i18n="type_stage">Stage</a></li>
+          </ul>
+        </li>
         <li><a href="a-propos.html" data-i18n="nav_apropos">À propos</a></li>
+        <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -241,4 +269,5 @@
 <script type="module" src="auth-firebase.js"></script>
 </body>
 </html>
+
 
