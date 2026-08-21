@@ -31,6 +31,7 @@
               <option value="fr">FR</option>
               <option value="en">EN</option>
               <option value="ht">HT</option>
+              <option value="es">ES</option>
             </select>
           </div>
           <button id="theme-toggle" class="util-btn" type="button"><span class="icon">🌙</span><span class="label">Sombre</span></button>
@@ -168,6 +169,33 @@
             <div class="champ">
               <label class="admin-checkbox"><input type="checkbox" id="article-alaune"> Mettre cet article à la une</label>
             </div>
+
+            <!-- ── Traductions ──────────────────────────────── -->
+            <details class="traductions-bloc">
+              <summary>🌐 Traductions (EN · HT · ES) — optionnel</summary>
+              <p class="aide" style="margin-bottom:1rem;">Si un champ est vide, la version française s'affiche par défaut.</p>
+
+              <div class="trad-groupe">
+                <h4>🇬🇧 English</h4>
+                <div class="champ"><label for="article-titre-en">Title</label><input type="text" id="article-titre-en" placeholder="English title"></div>
+                <div class="champ"><label for="article-resume-en">Summary</label><textarea id="article-resume-en" rows="2" placeholder="English summary…"></textarea></div>
+                <div class="champ"><label for="article-contenu-en">Content (one paragraph per block, separated by a blank line)</label><textarea id="article-contenu-en" rows="6" placeholder="English content…"></textarea></div>
+              </div>
+
+              <div class="trad-groupe">
+                <h4>🇭🇹 Kreyòl ayisyen</h4>
+                <div class="champ"><label for="article-titre-ht">Tit</label><input type="text" id="article-titre-ht" placeholder="Tit an kreyòl"></div>
+                <div class="champ"><label for="article-resume-ht">Rezime</label><textarea id="article-resume-ht" rows="2" placeholder="Rezime an kreyòl…"></textarea></div>
+                <div class="champ"><label for="article-contenu-ht">Kontni (yon paragraf pa blòk, separe pa yon liy vid)</label><textarea id="article-contenu-ht" rows="6" placeholder="Kontni an kreyòl…"></textarea></div>
+              </div>
+
+              <div class="trad-groupe">
+                <h4>🇪🇸 Español</h4>
+                <div class="champ"><label for="article-titre-es">Título</label><input type="text" id="article-titre-es" placeholder="Título en español"></div>
+                <div class="champ"><label for="article-resume-es">Resumen</label><textarea id="article-resume-es" rows="2" placeholder="Resumen en español…"></textarea></div>
+                <div class="champ"><label for="article-contenu-es">Contenido (un párrafo por bloque, separado por una línea en blanco)</label><textarea id="article-contenu-es" rows="6" placeholder="Contenido en español…"></textarea></div>
+              </div>
+            </details>
             <div class="admin-form-actions">
               <button type="submit" id="article-submit" class="btn btn-primary">Enregistrer</button>
               <button type="button" id="annuler-article" class="btn btn-outline">Annuler / Nouveau</button>
