@@ -966,4 +966,73 @@ a:focus-visible, button:focus-visible {
   .nav-submenu a { padding: 6px 0; font-size: 0.82rem; color: var(--couleur-texte-attenue); }
 }
 
+/* ============================================================
+   CARTE AUTEUR (après chaque article)
+   ============================================================ */
+
+.author-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin: 3rem 0 2rem;
+  padding: 1.5rem;
+  border-top: 2px solid var(--couleur-or);
+  border-bottom: 1px solid var(--couleur-ligne);
+  border-radius: 8px;
+  background: var(--couleur-fond-alt, rgba(184,145,47,0.06));
+}
+
+.author-avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid var(--couleur-or);
+}
+
+.author-initiales {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--couleur-or);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--police-titres);
+  font-size: 1.5rem; font-weight: 700;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+
+.author-info { flex: 1; min-width: 0; }
+
+.author-label {
+  display: block;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--couleur-or-fonce);
+  font-family: var(--police-interface);
+  margin-bottom: 0.3rem;
+}
+
+.author-name {
+  display: block;
+  font-family: var(--police-titres);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--couleur-secondaire);
+  margin-bottom: 0.4rem;
+}
+
+.author-bio {
+  font-family: var(--police-lecture);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--couleur-texte-attenue);
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .author-card { flex-direction: column; align-items: center; text-align: center; gap: 1rem; }
+}
+
 
