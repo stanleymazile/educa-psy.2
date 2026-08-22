@@ -44,21 +44,17 @@ function initAuthZone() {
 /* ---------- Connexion Google ---------- */
 
 async function initGoogleSignIn() {
-  // Toujours appeler getRedirectResult pour compléter un éventuel
-  // sign-in via redirect (retour depuis Google sur mobile)
+  // getRedirectResult complète un éventuel sign-in via redirect (mobile)
+  // Les erreurs sont ignorées silencieusement — elles sont normales
+  // quand il n'y a pas de redirect en attente
   try {
     const result = await getRedirectResult(auth);
     if (result && result.user) {
       console.log("Google redirect complété :", result.user.email);
-      // onAuthStateChanged met à jour l'UI automatiquement
     }
   } catch (err) {
-    if (err.code && err.code !== "auth/no-auth-event") {
-      const messageZone = document.getElementById("auth-message");
-      if (messageZone) {
-        messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
-      }
-    }
+    // Erreur normale si aucun redirect en attente — on ignore
+    console.warn("getRedirectResult (ignoré) :", err.code);
   }
 
   const btnGoogle = document.getElementById("btn-google");
