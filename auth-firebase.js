@@ -18,7 +18,7 @@ import {
   onAuthStateChanged, signOut,
   signInWithEmailAndPassword, createUserWithEmailAndPassword,
   sendPasswordResetEmail, GoogleAuthProvider,
-  signInWithPopup, signInWithRedirect, getRedirectResult
+  signInWithRedirect, getRedirectResult
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 function t(cle) {
@@ -47,7 +47,7 @@ function initAuthZone() {
 /* ---------- Connexion Google ---------- */
 
 async function initGoogleSignIn() {
-  // Toujours vérifier le résultat d'une éventuelle redirection Google au chargement
+  // Traiter le résultat au retour de Google (toutes les pages)
   try {
     const result = await getRedirectResult(auth);
     if (result && result.user) {
@@ -63,6 +63,7 @@ async function initGoogleSignIn() {
     }
   }
 
+  // Bouton Google → redirection directe (fonctionne sur tous les appareils)
   const btnGoogle = document.getElementById("btn-google");
   if (!btnGoogle) return;
 
@@ -70,27 +71,12 @@ async function initGoogleSignIn() {
     const messageZone = document.getElementById("auth-message");
     btnGoogle.disabled = true;
     messageZone.innerHTML = "";
-
-    const provider = new GoogleAuthProvider();
     try {
-      // Popup d'abord (fonctionne sur desktop)
-      const result = await signInWithPopup(auth, provider);
-      if (result && result.user) {
-        messageZone.innerHTML = `<div class="formulaire-message succes">✓ Connecté(e) avec Google — bienvenue ${result.user.displayName || result.user.email} !</div>`;
-      }
+      const provider = new GoogleAuthProvider();
+      await signInWithRedirect(auth, provider);
     } catch (err) {
-      if (err.code === "auth/popup-blocked" || err.code === "auth/popup-closed-by-user" || err.code === "auth/cancelled-popup-request") {
-        // Popup bloquée (mobile) → fallback redirect
-        try {
-          await signInWithRedirect(auth, provider);
-        } catch (redirectErr) {
-          messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(redirectErr.code)}</div>`;
-          btnGoogle.disabled = false;
-        }
-      } else {
-        messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
-        btnGoogle.disabled = false;
-      }
+      messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
+      btnGoogle.disabled = false;
     }
   });
 }
