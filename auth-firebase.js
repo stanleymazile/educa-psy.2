@@ -68,30 +68,23 @@ async function initGoogleSignIn() {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
 
-    try {
-      // Popup d'abord (desktop)
-      const result = await signInWithPopup(auth, provider);
-      console.log("Google popup complété :", result.user.email);
-    } catch (err) {
-      console.error("Erreur Google Sign-In :", err.code, err.message);
-      if (
-        err.code === "auth/popup-blocked" ||
-        err.code === "auth/popup-closed-by-user" ||
-        err.code === "auth/cancelled-popup-request"
-      ) {
-        // Fallback redirect pour mobile
-        try {
-          await signInWithRedirect(auth, provider);
-        } catch (redirectErr) {
-          if (messageZone) {
-            messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(redirectErr.code)}</div>`;
-          }
-          btnGoogle.disabled = false;
-        }
-      } else {
-        if (messageZone) {
-          messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
-        }
+    // Sur mobile → redirect direct (Chrome bloque les popups)
+    // Sur desktop → popup (plus rapide et sans rechargement)
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      try {
+        await signInWithRedirect(auth, provider);
+      } catch (err) {
+        if (messageZone) messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
+        btnGoogle.disabled = false;
+      }
+    } else {
+      try {
+        await signInWithPopup(auth, provider);
+      } catch (err) {
+        console.error("Erreur Google Sign-In :", err.code, err.message);
+        if (messageZone) messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
         btnGoogle.disabled = false;
       }
     }
