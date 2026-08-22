@@ -53,9 +53,7 @@ async function initGoogleSignIn() {
   // Récupère le résultat après le retour de la redirection Google
   try {
     const result = await getRedirectResult(auth);
-    if (result && result.user) {
-      // Connexion réussie — onAuthStateChanged prend le relais
-    }
+    // onAuthStateChanged prend le relais et affiche l'état connecté
   } catch (err) {
     const messageZone = document.getElementById("auth-message");
     if (messageZone) {
