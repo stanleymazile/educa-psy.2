@@ -47,35 +47,37 @@ function initAuthZone() {
 /* ---------- Connexion Google ---------- */
 
 async function initGoogleSignIn() {
-  // Traiter le résultat au retour de Google (toutes les pages)
+  // getRedirectResult EST OBLIGATOIRE pour compléter le sign-in
+  // dans Firebase SDK 12.x — sans lui onAuthStateChanged ne reçoit pas l'utilisateur
   try {
     const result = await getRedirectResult(auth);
     if (result && result.user) {
-      const messageZone = document.getElementById("auth-message");
-      if (messageZone) {
-        messageZone.innerHTML = `<div class="formulaire-message succes">✓ Connecté(e) avec Google — bienvenue ${result.user.displayName || result.user.email} !</div>`;
-      }
+      // Le sign-in est complété — onAuthStateChanged va mettre à jour l'UI
+      console.log("Google sign-in complété :", result.user.email);
     }
   } catch (err) {
-    const messageZone = document.getElementById("auth-message");
-    if (messageZone) {
-      messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
+    if (err.code && err.code !== "auth/no-auth-event") {
+      const messageZone = document.getElementById("auth-message");
+      if (messageZone) {
+        messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
+      }
     }
   }
 
-  // Bouton Google → redirection directe (fonctionne sur tous les appareils)
   const btnGoogle = document.getElementById("btn-google");
   if (!btnGoogle) return;
 
   btnGoogle.addEventListener("click", async () => {
     const messageZone = document.getElementById("auth-message");
     btnGoogle.disabled = true;
-    messageZone.innerHTML = "";
+    if (messageZone) messageZone.innerHTML = "";
     try {
       const provider = new GoogleAuthProvider();
       await signInWithRedirect(auth, provider);
     } catch (err) {
-      messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
+      if (messageZone) {
+        messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
+      }
       btnGoogle.disabled = false;
     }
   });
