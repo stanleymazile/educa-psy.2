@@ -16,7 +16,8 @@
 import { auth } from "./firebase-config.js";
 import {
   onAuthStateChanged, signOut,
-  signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail
+  signInWithEmailAndPassword, createUserWithEmailAndPassword,
+  sendPasswordResetEmail, GoogleAuthProvider, signInWithPopup
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 function t(cle) {
@@ -38,6 +39,29 @@ function initAuthZone() {
       if (btn) btn.addEventListener("click", () => signOut(auth));
     } else {
       zone.innerHTML = `<a class="util-btn" href="connexion.html" data-i18n="auth_lien">${t("auth_lien")}</a>`;
+    }
+  });
+}
+
+/* ---------- Connexion Google ---------- */
+
+async function initGoogleSignIn() {
+  const btnGoogle = document.getElementById("btn-google");
+  if (!btnGoogle) return;
+
+  btnGoogle.addEventListener("click", async () => {
+    const messageZone = document.getElementById("auth-message");
+    btnGoogle.disabled = true;
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      // onAuthStateChanged prend le relais automatiquement
+    } catch (err) {
+      if (err.code !== "auth/popup-closed-by-user") {
+        messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
+      }
+    } finally {
+      btnGoogle.disabled = false;
     }
   });
 }
@@ -139,5 +163,7 @@ function traduireErreur(code) {
 document.addEventListener("DOMContentLoaded", () => {
   initAuthZone();
   initAuthPage();
+  initGoogleSignIn();
 });
+
 
