@@ -1,8 +1,8 @@
 /* ============================================================
    EDUCA-PSY — auth-firebase.js
    ============================================================
-   Gère la connexion / inscription par e-mail + mot de passe 
-   ainsi que la connexion avec Google via Pop-up.
+   Connexion email/mot de passe + Google (popup sur desktop,
+   redirect automatique sur mobile si popup bloquée).
    ============================================================ */
 
 import { auth } from "./firebase-config.js";
@@ -13,7 +13,9 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   GoogleAuthProvider,
-  signInWithPopup
+  signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 function t(cle) {
@@ -39,9 +41,26 @@ function initAuthZone() {
   });
 }
 
-/* ---------- Connexion Google via Popup ---------- */
+/* ---------- Connexion Google ---------- */
 
 async function initGoogleSignIn() {
+  // Toujours appeler getRedirectResult pour compléter un éventuel
+  // sign-in via redirect (retour depuis Google sur mobile)
+  try {
+    const result = await getRedirectResult(auth);
+    if (result && result.user) {
+      console.log("Google redirect complété :", result.user.email);
+      // onAuthStateChanged met à jour l'UI automatiquement
+    }
+  } catch (err) {
+    if (err.code && err.code !== "auth/no-auth-event") {
+      const messageZone = document.getElementById("auth-message");
+      if (messageZone) {
+        messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
+      }
+    }
+  }
+
   const btnGoogle = document.getElementById("btn-google");
   if (!btnGoogle) return;
 
@@ -50,20 +69,35 @@ async function initGoogleSignIn() {
     btnGoogle.disabled = true;
     if (messageZone) messageZone.innerHTML = "";
 
-    try {
-      const provider = new GoogleAuthProvider();
-      // Force le choix du compte Google à chaque clic
-      provider.setCustomParameters({ prompt: "select_account" });
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
 
+    try {
+      // Popup d'abord (desktop)
       const result = await signInWithPopup(auth, provider);
-      console.log("Google sign-in complété :", result.user.email);
+      console.log("Google popup complété :", result.user.email);
     } catch (err) {
       console.error("Erreur Google Sign-In :", err.code, err.message);
-      if (messageZone) {
-        messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
+      if (
+        err.code === "auth/popup-blocked" ||
+        err.code === "auth/popup-closed-by-user" ||
+        err.code === "auth/cancelled-popup-request"
+      ) {
+        // Fallback redirect pour mobile
+        try {
+          await signInWithRedirect(auth, provider);
+        } catch (redirectErr) {
+          if (messageZone) {
+            messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(redirectErr.code)}</div>`;
+          }
+          btnGoogle.disabled = false;
+        }
+      } else {
+        if (messageZone) {
+          messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
+        }
+        btnGoogle.disabled = false;
       }
-    } finally {
-      btnGoogle.disabled = false;
     }
   });
 }
@@ -72,7 +106,7 @@ async function initGoogleSignIn() {
 
 function initAuthPage() {
   const form = document.getElementById("auth-form");
-  if (!form) return; // pas sur la page connexion
+  if (!form) return;
 
   const ongletConnexion = document.getElementById("onglet-connexion");
   const ongletInscription = document.getElementById("onglet-inscription");
@@ -158,7 +192,7 @@ function traduireErreur(code) {
     "auth/weak-password": "Le mot de passe doit contenir au moins 6 caractères.",
     "auth/missing-email": "Indiquez d'abord votre adresse e-mail ci-dessus.",
     "auth/too-many-requests": "Trop de tentatives. Réessayez dans quelques minutes.",
-    "auth/popup-blocked": "Le navigateur a bloqué la fenêtre pop-up. Autorisez les fenêtres surgissantes.",
+    "auth/popup-blocked": "Fenêtre bloquée — redirection vers Google en cours…",
     "auth/popup-closed-by-user": "Connexion annulée avant la fin.",
     "auth/unauthorized-domain": "Ce domaine n'est pas autorisé dans Firebase Console."
   };
