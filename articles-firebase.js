@@ -1,175 +1,285 @@
 /* ============================================================
-   EDUCA-PSY — auth-firebase.js
+   EDUCA-PSY — articles-firebase.js
    ============================================================
-   Gère la connexion / inscription par e-mail + mot de passe 
-   ainsi que la connexion avec Google via Pop-up.
+   Les articles sont lus en direct depuis Firestore (collection
+   "articles") : toute modification faite dans la console
+   Firebase apparaît immédiatement sur le site, sans redéploiement.
+
+   Vous n'avez normalement pas besoin de modifier ce fichier.
    ============================================================ */
 
-import { auth } from "./firebase-config.js";
+import { db } from "./firebase-config.js";
 import {
-  onAuthStateChanged,
-  signOut,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
-  GoogleAuthProvider,
-  signInWithPopup
-} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+  collection, getDocs, doc, getDoc, query, orderBy, where
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-lite.js";
 
-function t(cle) {
-  return window.EducaPsyI18n ? window.EducaPsyI18n.texte(cle) : cle;
+const MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet",
+                  "août","septembre","octobre","novembre","décembre"];
+
+/* Retourne le champ dans la langue active, avec fallback français */
+function champLocale(article, champ, langue) {
+  if (!langue || langue === "fr") return article[champ] || "";
+  return article[`${champ}_${langue}`] || article[champ] || "";
 }
 
-/* ---------- Zone "connexion" commune à toutes les pages ---------- */
-
-function initAuthZone() {
-  const zone = document.getElementById("auth-zone");
-  if (!zone) return;
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      zone.innerHTML = `
-        <span class="auth-user-email" title="${user.email}">${user.email}</span>
-        <button class="util-btn" id="btn-deconnexion" data-i18n="auth_deconnexion">${t("auth_deconnexion")}</button>`;
-      const btn = document.getElementById("btn-deconnexion");
-      if (btn) btn.addEventListener("click", () => signOut(auth));
-    } else {
-      zone.innerHTML = `<a class="util-btn" href="connexion.html" data-i18n="auth_lien">${t("auth_lien")}</a>`;
-    }
-  });
+function formaterDateFirestore(valeur) {
+  if (!valeur) return "";
+  const d = valeur.toDate ? valeur.toDate() : new Date(valeur);
+  if (isNaN(d.getTime())) return "";
+  return `${d.getUTCDate()} ${MOIS_FR[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
 }
 
-/* ---------- Connexion Google via Popup ---------- */
-
-async function initGoogleSignIn() {
-  const btnGoogle = document.getElementById("btn-google");
-  if (!btnGoogle) return;
-
-  btnGoogle.addEventListener("click", async () => {
-    const messageZone = document.getElementById("auth-message");
-    btnGoogle.disabled = true;
-    if (messageZone) messageZone.innerHTML = "";
-
-    try {
-      const provider = new GoogleAuthProvider();
-      // Force le choix du compte Google à chaque clic
-      provider.setCustomParameters({ prompt: "select_account" });
-
-      const result = await signInWithPopup(auth, provider);
-      console.log("Google sign-in complété :", result.user.email);
-    } catch (err) {
-      console.error("Erreur Google Sign-In :", err.code, err.message);
-      if (messageZone) {
-        messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
-      }
-    } finally {
-      btnGoogle.disabled = false;
-    }
-  });
+function slugify(texte) {
+  return texte
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 }
 
-/* ---------- Page connexion.html ---------- */
+/* Dans un paragraphe de "contenu", permet d'écrire :
+     [texte du lien](https://exemple.com)   -> devient un lien cliquable
+     ![texte alternatif](https://image.jpg) -> devient une image
+   Le HTML brut (ex: <a href="...">) fonctionne aussi tel quel. */
+function formaterTexte(texte) {
+  if (!texte) return "";
+  return texte
+    .replace(/!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)/g, '<img src="$2" alt="$1" loading="lazy">')
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+}
 
-function initAuthPage() {
-  const form = document.getElementById("auth-form");
-  if (!form) return; // pas sur la page connexion
+/* ---------- Accès Firestore ---------- */
 
-  const ongletConnexion = document.getElementById("onglet-connexion");
-  const ongletInscription = document.getElementById("onglet-inscription");
-  const boutonSubmit = document.getElementById("auth-submit");
-  const messageZone = document.getElementById("auth-message");
-  const zoneConnecte = document.getElementById("auth-deja-connecte");
+async function chargerArticles() {
+  const q = query(collection(db, "articles"), orderBy("date", "desc"));
+  const snap = await getDocs(q);
+  return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+}
 
-  let mode = "connexion";
+async function chargerArticleParId(id) {
+  const ref = doc(db, "articles", id);
+  const snap = await getDoc(ref);
+  return snap.exists() ? { id: snap.id, ...snap.data() } : null;
+}
 
-  function majOnglets() {
-    ongletConnexion.classList.toggle("active", mode === "connexion");
-    ongletInscription.classList.toggle("active", mode === "inscription");
-    boutonSubmit.textContent = mode === "connexion" ? t("auth_bouton_connexion") : t("auth_bouton_inscription");
-    messageZone.innerHTML = "";
+async function chargerArticlesSimilaires(categorie, idAExclure, max = 2) {
+  const q = query(collection(db, "articles"), where("categorie", "==", categorie));
+  const snap = await getDocs(q);
+  return snap.docs
+    .map(d => ({ id: d.id, ...d.data() }))
+    .filter(a => a.id !== idAExclure)
+    .slice(0, max);
+}
+
+/* ---------- Gabarits HTML ---------- */
+
+function carteArticleHTML(article, featured = false) {
+  const langue = localStorage.getItem("educapsy-langue") || "fr";
+  const slug = slugify(article.categorie || "");
+  const titre = champLocale(article, "titre", langue);
+  const resume = champLocale(article, "resume", langue);
+  const image = article.image ? `<img class="article-card-image" src="${article.image}" alt="" loading="lazy">` : "";
+  return `
+    <article class="article-card ${featured ? "article-card--featured" : ""} cat-${slug}">
+      ${image}
+      <span class="tag tag-${slug}">${article.categorie || ""}</span>
+      <h2 class="article-card-title"><a href="article.html?id=${article.id}">${titre || "(sans titre)"}</a></h2>
+      <p class="article-card-resume">${resume}</p>
+      <div class="article-card-meta">${article.auteur || "Équipe Educa-Psy"} · ${formaterDateFirestore(article.date)}</div>
+      <a class="read-more" href="article.html?id=${article.id}">Lire l'article →</a>
+    </article>`;
+}
+
+function articleIntrouvableHTML() {
+  return `
+    <div class="article-not-found">
+      <h1>Article introuvable</h1>
+      <p>L'article que vous cherchez n'existe pas ou a été déplacé.</p>
+      <a class="btn btn-primary" href="index.html">← Retour à l'accueil</a>
+    </div>`;
+}
+
+function erreurChargementHTML() {
+  return `<p class="empty-msg">Impossible de charger les articles pour le moment. Vérifiez la configuration dans firebase-config.js et les règles de sécurité Firestore (voir FIREBASE-GUIDE.md).</p>`;
+}
+
+/* ---------- Page d'accueil ---------- */
+
+async function initAccueilFirebase() {
+  const grille = document.getElementById("articles-grid");
+  if (!grille) return; // pas sur la page d'accueil
+
+  const zoneFeatured = document.getElementById("featured-article");
+  if (zoneFeatured) zoneFeatured.innerHTML = `<p class="empty-msg">Chargement…</p>`;
+  grille.innerHTML = `<p class="empty-msg">Chargement des articles…</p>`;
+
+  let tous;
+  try {
+    tous = await chargerArticles();
+  } catch (err) {
+    console.error("Erreur Firestore (chargerArticles) :", err);
+    grille.innerHTML = erreurChargementHTML();
+    return;
   }
 
-  ongletConnexion.addEventListener("click", () => { mode = "connexion"; majOnglets(); });
-  ongletInscription.addEventListener("click", () => { mode = "inscription"; majOnglets(); });
-  majOnglets();
+  if (!tous.length) {
+    grille.innerHTML = `<p class="empty-msg">Aucun article publié pour le moment.</p>`;
+    return;
+  }
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      form.style.display = "none";
-      zoneConnecte.style.display = "block";
-      zoneConnecte.innerHTML = `
-        <p>${t("auth_connecte_comme")} <strong>${user.email}</strong></p>
-        <button class="btn btn-outline" id="btn-deconnexion-page">${t("auth_deconnexion")}</button>`;
-      document.getElementById("btn-deconnexion-page").addEventListener("click", () => signOut(auth));
-    } else {
-      form.style.display = "block";
-      zoneConnecte.style.display = "none";
+  const premier = tous.find(a => a.aLaUne === true) || tous[0];
+  const reste = tous.filter(a => a.id !== premier.id);
+
+  if (zoneFeatured) zoneFeatured.innerHTML = carteArticleHTML(premier, true);
+
+  let catActuelle = "Tous";
+  let rechercheActuelle = "";
+
+  function afficher() {
+    let filtres = catActuelle === "Tous" ? reste : reste.filter(a => a.categorie === catActuelle);
+    if (rechercheActuelle) {
+      const q = rechercheActuelle.toLowerCase();
+      filtres = filtres.filter(a =>
+        (a.titre || "").toLowerCase().includes(q) || (a.resume || "").toLowerCase().includes(q));
     }
+    grille.innerHTML = filtres.map(a => carteArticleHTML(a)).join("")
+      || `<p class="empty-msg">Aucun article ne correspond pour l'instant — essayez une autre recherche ou une autre rubrique.</p>`;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  catActuelle = params.get("cat") || "Tous";
+  const onglets = document.querySelectorAll(".filter-tab[data-cat]");
+  onglets.forEach(onglet => {
+    onglet.classList.toggle("active", onglet.dataset.cat === catActuelle);
+    onglet.addEventListener("click", () => {
+      onglets.forEach(o => o.classList.remove("active"));
+      onglet.classList.add("active");
+      catActuelle = onglet.dataset.cat;
+      afficher();
+    });
   });
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = document.getElementById("auth-email").value.trim();
-    const motDePasse = document.getElementById("auth-mdp").value;
-    boutonSubmit.disabled = true;
-    messageZone.innerHTML = "";
+  const champRecherche = document.getElementById("recherche-articles");
+  if (champRecherche) {
+    champRecherche.addEventListener("input", () => {
+      rechercheActuelle = champRecherche.value.trim();
+      afficher();
+    });
+  }
 
-    try {
-      if (mode === "connexion") {
-        await signInWithEmailAndPassword(auth, email, motDePasse);
+  afficher();
+}
+
+/* ---------- Page article ---------- */
+
+async function initArticlePageFirebase() {
+  const zone = document.getElementById("article-content");
+  if (!zone) return; // pas sur la page article
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  if (!id) {
+    zone.innerHTML = articleIntrouvableHTML();
+    document.title = "Article introuvable — Educa-Psy";
+    return;
+  }
+
+  zone.innerHTML = `<p class="empty-msg">Chargement de l'article…</p>`;
+
+  let article;
+  try {
+    article = await chargerArticleParId(id);
+  } catch (err) {
+    console.error("Erreur Firestore (chargerArticleParId) :", err);
+    zone.innerHTML = erreurChargementHTML();
+    return;
+  }
+
+  if (!article) {
+    zone.innerHTML = articleIntrouvableHTML();
+    document.title = "Article introuvable — Educa-Psy";
+    return;
+  }
+
+  document.title = `${article.titre} — Educa-Psy`;
+  const langue = localStorage.getItem("educapsy-langue") || "fr";
+  const slug = slugify(article.categorie || "");
+  const titre = champLocale(article, "titre", langue);
+  const contenu = Array.isArray(article[`contenu_${langue}`]) && article[`contenu_${langue}`].length
+    ? article[`contenu_${langue}`]
+    : (Array.isArray(article.contenu) ? article.contenu : []);
+  const imageHero = article.image ? `<img class="article-image" src="${article.image}" alt="${titre || ""}">` : "";
+
+  zone.innerHTML = `
+    <a class="back-link" href="index.html">← Retour à l'accueil</a>
+    <span class="tag tag-${slug}">${article.categorie || ""}</span>
+    <h1 class="article-title">${titre || ""}</h1>
+    <div class="article-meta">Par ${article.auteur || "Équipe Educa-Psy"} · ${formaterDateFirestore(article.date)}</div>
+    ${imageHero}
+    <div class="article-body">${contenu.length ? contenu.map(p => `<p>${formaterTexte(p)}</p>`).join("") : "<p><em>Cet article n'a pas encore de contenu (champ « contenu » manquant dans Firestore).</em></p>"}</div>
+    <button type="button" class="share-btn" id="btn-partager">↗ Partager</button>`;
+
+  const btnPartager = document.getElementById("btn-partager");
+  if (btnPartager) {
+    btnPartager.addEventListener("click", async () => {
+      const data = { title: article.titre || "Educa-Psy", text: article.resume || "", url: window.location.href };
+      if (navigator.share) {
+        try { await navigator.share(data); } catch (err) { /* annulé par l'utilisateur : rien à faire */ }
       } else {
-        await createUserWithEmailAndPassword(auth, email, motDePasse);
-      }
-    } catch (err) {
-      messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
-    } finally {
-      boutonSubmit.disabled = false;
-    }
-  });
-
-  const lienOublie = document.getElementById("mdp-oublie");
-  if (lienOublie) {
-    lienOublie.addEventListener("click", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("auth-email").value.trim();
-      if (!email) {
-        messageZone.innerHTML = `<div class="formulaire-message erreur">Indiquez d'abord votre adresse e-mail ci-dessus.</div>`;
-        return;
-      }
-      try {
-        await sendPasswordResetEmail(auth, email);
-        messageZone.innerHTML = `<div class="formulaire-message succes">E-mail de réinitialisation envoyé — vérifiez votre boîte de réception.</div>`;
-      } catch (err) {
-        messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          btnPartager.textContent = "✓ Lien copié";
+          setTimeout(() => { btnPartager.textContent = "↗ Partager"; }, 2000);
+        } catch (err) {
+          console.error("Impossible de copier le lien :", err);
+        }
       }
     });
   }
+
+  const zoneSimilaires = document.getElementById("articles-similaires");
+  if (zoneSimilaires) {
+    try {
+      const similaires = await chargerArticlesSimilaires(article.categorie, article.id, 2);
+      if (similaires.length) {
+        zoneSimilaires.innerHTML = `
+          <h3>Articles similaires</h3>
+          <div class="articles-grid articles-grid--compact">
+            ${similaires.map(a => carteArticleHTML(a)).join("")}
+          </div>`;
+      }
+    } catch (err) {
+      console.error("Erreur Firestore (articles similaires) :", err); // non bloquant
+    }
+  }
+
+  injecterDonneesStructurees(article);
 }
 
-/* ---------- Traduction des erreurs Firebase ---------- */
-
-function traduireErreur(code) {
-  const messages = {
-    "auth/invalid-email": "Adresse e-mail invalide.",
-    "auth/user-not-found": "Aucun compte ne correspond à cet e-mail.",
-    "auth/wrong-password": "Mot de passe incorrect.",
-    "auth/invalid-credential": "E-mail ou mot de passe incorrect.",
-    "auth/email-already-in-use": "Un compte existe déjà avec cet e-mail.",
-    "auth/weak-password": "Le mot de passe doit contenir au moins 6 caractères.",
-    "auth/missing-email": "Indiquez d'abord votre adresse e-mail ci-dessus.",
-    "auth/too-many-requests": "Trop de tentatives. Réessayez dans quelques minutes.",
-    "auth/popup-blocked": "Le navigateur a bloqué la fenêtre pop-up. Autorisez les fenêtres surgissantes.",
-    "auth/popup-closed-by-user": "Connexion annulée avant la fin.",
-    "auth/unauthorized-domain": "Ce domaine n'est pas autorisé dans Firebase Console."
-  };
-  return messages[code] || "Une erreur est survenue. Réessayez.";
+function injecterDonneesStructurees(article) {
+  const ancien = document.getElementById("jsonld-article");
+  if (ancien) ancien.remove();
+  const d = article.date && article.date.toDate ? article.date.toDate() : null;
+  const script = document.createElement("script");
+  script.type = "application/ld+json";
+  script.id = "jsonld-article";
+  script.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": article.titre || "",
+    "description": article.resume || "",
+    "author": { "@type": "Organization", "name": article.auteur || "Équipe Educa-Psy" },
+    "publisher": { "@type": "Organization", "name": "Educa-Psy" },
+    "datePublished": d ? d.toISOString().slice(0, 10) : undefined,
+    "image": article.image || undefined
+  });
+  document.head.appendChild(script);
 }
 
 /* ---------- Lancement ---------- */
 
 document.addEventListener("DOMContentLoaded", () => {
-  initAuthZone();
-  initAuthPage();
-  initGoogleSignIn();
+  initAccueilFirebase();
+  initArticlePageFirebase();
 });
-
