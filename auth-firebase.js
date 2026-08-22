@@ -1,24 +1,19 @@
 /* ============================================================
    EDUCA-PSY — auth-firebase.js
    ============================================================
-   Gère la connexion / inscription par e-mail + mot de passe.
-
-   ⚠️ Avant que cela fonctionne, activez le fournisseur
-   "E-mail/Mot de passe" dans Firebase Console → Authentication →
-   Sign-in method.
-
-   Ce fichier gère uniquement le COMPTE (créer/se connecter/se
-   déconnecter). Il ne restreint l'accès à aucun contenu du site
-   pour l'instant — à adapter selon l'usage prévu (espace membre,
-   commentaires, accès rédacteur, etc.).
+   Gère la connexion / inscription par e-mail + mot de passe 
+   ainsi que la connexion avec Google via Pop-up.
    ============================================================ */
 
 import { auth } from "./firebase-config.js";
 import {
-  onAuthStateChanged, signOut,
-  signInWithEmailAndPassword, createUserWithEmailAndPassword,
-  sendPasswordResetEmail, GoogleAuthProvider,
-  signInWithRedirect, getRedirectResult
+  onAuthStateChanged,
+  signOut,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithPopup
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 function t(cle) {
@@ -44,26 +39,9 @@ function initAuthZone() {
   });
 }
 
-/* ---------- Connexion Google ---------- */
+/* ---------- Connexion Google via Popup ---------- */
 
 async function initGoogleSignIn() {
-  // getRedirectResult EST OBLIGATOIRE pour compléter le sign-in
-  // dans Firebase SDK 12.x — sans lui onAuthStateChanged ne reçoit pas l'utilisateur
-  try {
-    const result = await getRedirectResult(auth);
-    if (result && result.user) {
-      // Le sign-in est complété — onAuthStateChanged va mettre à jour l'UI
-      console.log("Google sign-in complété :", result.user.email);
-    }
-  } catch (err) {
-    if (err.code && err.code !== "auth/no-auth-event") {
-      const messageZone = document.getElementById("auth-message");
-      if (messageZone) {
-        messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
-      }
-    }
-  }
-
   const btnGoogle = document.getElementById("btn-google");
   if (!btnGoogle) return;
 
@@ -71,13 +49,20 @@ async function initGoogleSignIn() {
     const messageZone = document.getElementById("auth-message");
     btnGoogle.disabled = true;
     if (messageZone) messageZone.innerHTML = "";
+
     try {
       const provider = new GoogleAuthProvider();
-      await signInWithRedirect(auth, provider);
+      // Force le choix du compte Google à chaque clic
+      provider.setCustomParameters({ prompt: "select_account" });
+
+      const result = await signInWithPopup(auth, provider);
+      console.log("Google sign-in complété :", result.user.email);
     } catch (err) {
+      console.error("Erreur Google Sign-In :", err.code, err.message);
       if (messageZone) {
         messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
       }
+    } finally {
       btnGoogle.disabled = false;
     }
   });
@@ -161,6 +146,8 @@ function initAuthPage() {
   }
 }
 
+/* ---------- Traduction des erreurs Firebase ---------- */
+
 function traduireErreur(code) {
   const messages = {
     "auth/invalid-email": "Adresse e-mail invalide.",
@@ -170,7 +157,10 @@ function traduireErreur(code) {
     "auth/email-already-in-use": "Un compte existe déjà avec cet e-mail.",
     "auth/weak-password": "Le mot de passe doit contenir au moins 6 caractères.",
     "auth/missing-email": "Indiquez d'abord votre adresse e-mail ci-dessus.",
-    "auth/too-many-requests": "Trop de tentatives. Réessayez dans quelques minutes."
+    "auth/too-many-requests": "Trop de tentatives. Réessayez dans quelques minutes.",
+    "auth/popup-blocked": "Le navigateur a bloqué la fenêtre pop-up. Autorisez les fenêtres surgissantes.",
+    "auth/popup-closed-by-user": "Connexion annulée avant la fin.",
+    "auth/unauthorized-domain": "Ce domaine n'est pas autorisé dans Firebase Console."
   };
   return messages[code] || "Une erreur est survenue. Réessayez.";
 }
@@ -182,5 +172,4 @@ document.addEventListener("DOMContentLoaded", () => {
   initAuthPage();
   initGoogleSignIn();
 });
-
 
