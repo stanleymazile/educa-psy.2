@@ -53,7 +53,12 @@ async function initGoogleSignIn() {
   // Récupère le résultat après le retour de la redirection Google
   try {
     const result = await getRedirectResult(auth);
-    // onAuthStateChanged prend le relais et affiche l'état connecté
+    if (result && result.user) {
+      const messageZone = document.getElementById("auth-message");
+      if (messageZone) {
+        messageZone.innerHTML = `<div class="formulaire-message succes">✓ Connecté(e) avec Google — bienvenue ${result.user.displayName || result.user.email} !</div>`;
+      }
+    }
   } catch (err) {
     const messageZone = document.getElementById("auth-message");
     if (messageZone) {
