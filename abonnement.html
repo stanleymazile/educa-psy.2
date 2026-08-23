@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S'abonner à la newsletter — Educa-Psy</title>
+<meta name="description" content="Abonnez-vous à la newsletter Educa-Psy et recevez chaque semaine nos derniers articles et opportunités.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Ccircle%20cx='20'%20cy='20'%20r='18.5'%20fill='%23FAF6ED'%20stroke='%23B8912F'%20stroke-width='2'/%3E%3Ctext%20x='20'%20y='27'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='17'%20font-weight='700'%20fill='%23B8912F'%3EEP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a href="#contenu-principal" class="skip-link">Aller au contenu</a>
+
+<header class="site-header">
+  <div class="masthead-top">
+    <div class="container">
+      <div class="masthead-top-inner">
+        <span id="today-date" class="masthead-date"></span>
+        <span class="masthead-tagline" data-i18n="tagline">Éducation · Technologie · Science · Psychologie</span>
+        <div class="masthead-utils">
+          <div class="lang-wrapper">
+            <svg class="lang-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <select id="lang-select" class="lang-select" aria-label="Langue / Language / Lang">
+              <option value="fr">FR</option>
+              <option value="en">EN</option>
+              <option value="ht">HT</option>
+              <option value="es">ES</option>
+            </select>
+          </div>
+          <button id="theme-toggle" class="util-btn" type="button"><span class="icon">🌙</span><span class="label">Sombre</span></button>
+          <a href="index.html#recherche-articles" class="util-icon-btn" aria-label="Rechercher"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></a>
+          <a href="connexion.html" class="topbar-auth" aria-label="Connexion"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7"/></svg></a>
+          <span id="auth-zone" class="auth-zone"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="masthead-main">
+    <div class="container">
+      <div class="masthead-main-row">
+        <a href="index.html" class="logo">
+          <img class="logo-mark" src="logo.svg" alt="Educa-Psy">
+          <span class="logo-text">Educa-Psy</span>
+        </a>
+        <button type="button" id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </div>
+  <nav class="site-nav">
+    <div class="container">
+      <div class="mobile-quicknav">
+        <a href="index.html" data-i18n="nav_actualites">Actualités</a>
+        <a href="emplois.html" data-i18n="nav_opportunites">Opportunités</a>
+        <a href="abonnement.html" class="newsletter-mini-btn" data-i18n="nav_newsletter">Newsletter</a>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" data-i18n="nav_accueil">Accueil</a></li>
+        <li class="nav-dropdown">
+          <a href="index.html" data-i18n="nav_articles">Articles</a>
+          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Articles">▾</button>
+          <ul class="nav-submenu">
+            <li><a href="index.html?cat=%C3%89ducation" data-i18n="nav_education">Éducation</a></li>
+            <li><a href="index.html?cat=Technologie" data-i18n="nav_technologie">Technologie</a></li>
+            <li><a href="index.html?cat=Science" data-i18n="nav_science">Science</a></li>
+            <li><a href="index.html?cat=Psychologie" data-i18n="nav_psychologie">Psychologie</a></li>
+          </ul>
+        </li>
+        <li class="nav-dropdown">
+          <a href="emplois.html" class="nav-highlight" data-i18n="nav_opportunites">Opportunités</a>
+          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Opportunités">▾</button>
+          <ul class="nav-submenu">
+            <li><a href="emplois.html?type=Emploi" data-i18n="type_emploi">Emploi</a></li>
+            <li><a href="emplois.html?type=Collaboration" data-i18n="type_collaboration">Collaboration</a></li>
+            <li><a href="emplois.html?type=B%C3%A9n%C3%A9volat" data-i18n="type_benevolat">Bénévolat</a></li>
+            <li><a href="emplois.html?type=Stage%20%2F%20Formation" data-i18n="type_stage">Stage</a></li>
+          </ul>
+        </li>
+        <li><a href="a-propos.html" data-i18n="nav_apropos">À propos</a></li>
+        <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="spectrum-rule" aria-hidden="true">
+    <span class="spectrum-seg s-education"></span>
+    <span class="spectrum-seg s-technologie"></span>
+    <span class="spectrum-seg s-science"></span>
+    <span class="spectrum-seg s-psychologie"></span>
+  </div>
+  <div class="ticker-bar" id="ticker-bar">
+    <div class="ticker-inner">
+      <span class="ticker-label" data-i18n="a_la_une">À la une</span>
+      <div class="ticker-track" id="ticker-track"></div>
+    </div>
+  </div>
+</header>
+
+<main id="contenu-principal">
+  <div class="container">
+    <section class="page-header" style="text-align:center; max-width:560px; margin:0 auto;">
+      <h1 class="page-title">📬 Newsletter Educa-Psy</h1>
+      <p class="page-subtitle">Recevez chaque semaine nos derniers articles et opportunités en éducation, psychologie, technologie et science.</p>
+    </section>
+
+    <section class="contact-form-section" style="max-width:480px; margin:2rem auto 4rem;">
+      <div id="abonnement-message"></div>
+      <form id="abonnement-form" class="formulaire" novalidate>
+        <div class="champ">
+          <label for="abonnement-email">Votre adresse e-mail</label>
+          <input type="email" id="abonnement-email" placeholder="exemple@email.com" required autocomplete="email">
+        </div>
+        <button type="submit" id="abonnement-submit" class="btn btn-primary" style="width:100%;">
+          S'abonner gratuitement
+        </button>
+        <p class="formulaire-note" style="text-align:center;">
+          Gratuit · Sans spam · <a href="desabonnement.html">Se désabonner</a> à tout moment
+        </p>
+      </form>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Educa-Psy. <span data-i18n="footer_droits">Tous droits réservés.</span></p>
+    </div>
+  </div>
+</footer>
+
+<script src="interface.js"></script>
+<script type="module" src="abonnement-firebase.js"></script>
+<script type="module" src="ticker.js"></script>
+<script type="module" src="auth-firebase.js"></script>
+</body>
+</html>
+
