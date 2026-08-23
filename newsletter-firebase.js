@@ -144,27 +144,9 @@ function initDesabonnement() {
           ${t("desabo_succes")}<br>
           <small style="margin-top:0.5rem;display:block;">
             Vous pouvez vous réabonner à tout moment — 
-            <a href="#" id="lien-reabonnement" style="color:inherit;font-weight:600;">cliquez ici</a>.
+            <a href="abonnement.html?email=${encodeURIComponent(email)}" style="color:inherit;font-weight:600;">cliquez ici</a>.
           </small>
         </div>`;
-
-      // Lien réabonnement
-      const lienReabo = document.getElementById("lien-reabonnement");
-      if (lienReabo) {
-        lienReabo.addEventListener("click", async (ev) => {
-          ev.preventDefault();
-          try {
-            await setDoc(doc(db, "newsletter", idDepuisEmail(email)), {
-              email, date: Timestamp.now(), actif: true
-            });
-            await envoyerEmailBienvenue(email);
-            await ajouterDansBrevo(email);
-            messageZone.innerHTML = `<div class="formulaire-message succes">${t("newsletter_succes")}</div>`;
-          } catch (err) {
-            console.error("Erreur réabonnement :", err);
-          }
-        });
-      }
     } catch (err) {
       console.error("Erreur désabonnement :", err);
       messageZone.innerHTML = `<div class="formulaire-message erreur">${t("desabo_erreur")}</div>`;
