@@ -1,24 +1,61 @@
 /* ============================================================
    EDUCA-PSY — newsletter-firebase.js
    ============================================================
-   Widget d'inscription à la newsletter (présent dans le pied de
-   page de toutes les pages). Enregistre l'e-mail dans Firestore,
-   collection "newsletter" — consultable dans le panneau
-   d'administration (admin.html) ou la console Firebase.
+   Inscription newsletter → Firestore + email de bienvenue
+   via EmailJS (gratuit, 200 emails/mois).
    ============================================================ */
 
 import { db } from "./firebase-config.js";
 import { doc, setDoc, updateDoc, Timestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-lite.js";
 
+const EMAILJS_SERVICE_ID  = "service_ncxaav8";
+const EMAILJS_TEMPLATE_ID = "template_qvl72nk";
+const EMAILJS_PUBLIC_KEY  = "jk3i1fiiAn_HcLZf2";
+
 function t(cle) {
   return window.EducaPsyI18n ? window.EducaPsyI18n.texte(cle) : cle;
 }
 
-// Identifiant de document stable à partir de l'e-mail : une même adresse
-// qui s'inscrit deux fois met simplement à jour le même document, sans doublon.
 function idDepuisEmail(email) {
   return email.trim().toLowerCase().replace(/[^a-z0-9@._-]/g, "_");
 }
+
+/* Charge le SDK EmailJS dynamiquement (pas besoin de modifier les HTML) */
+function chargerEmailJS() {
+  return new Promise((resolve) => {
+    if (window.emailjs) {
+      resolve();
+      return;
+    }
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
+    script.onload = () => {
+      window.emailjs.init(EMAILJS_PUBLIC_KEY);
+      resolve();
+    };
+    script.onerror = () => {
+      console.warn("EmailJS non chargé — email de bienvenue non envoyé.");
+      resolve(); // on continue même si EmailJS échoue
+    };
+    document.head.appendChild(script);
+  });
+}
+
+/* Envoie l'email de bienvenue via EmailJS */
+async function envoyerEmailBienvenue(email) {
+  try {
+    await chargerEmailJS();
+    await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email: email
+    });
+    console.log("Email de bienvenue envoyé à :", email);
+  } catch (err) {
+    console.warn("Erreur EmailJS (non bloquant) :", err);
+    // L'abonnement Firestore est déjà enregistré — on ne bloque pas l'utilisateur
+  }
+}
+
+/* ---------- Widget newsletter (toutes les pages) ---------- */
 
 function initNewsletter() {
   const form = document.getElementById("newsletter-form");
@@ -39,26 +76,26 @@ function initNewsletter() {
     messageZone.innerHTML = "";
 
     try {
+      // 1. Enregistrer dans Firestore
       await setDoc(doc(db, "newsletter", idDepuisEmail(email)), {
         email,
         date: Timestamp.now(),
         actif: true
       });
+
+      // 2. Envoyer l'email de bienvenue
+      await envoyerEmailBienvenue(email);
+
       form.reset();
       messageZone.innerHTML = `<div class="formulaire-message succes">${t("newsletter_succes")}</div>`;
     } catch (err) {
-      console.error("Erreur Firestore (newsletter) :", err);
+      console.error("Erreur newsletter :", err);
       messageZone.innerHTML = `<div class="formulaire-message erreur">${t("contact_erreur")}</div>`;
     } finally {
       bouton.disabled = false;
     }
   });
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  initNewsletter();
-  initDesabonnement();
-});
 
 /* ---------- Page desabonnement.html ---------- */
 
@@ -85,11 +122,17 @@ function initDesabonnement() {
       form.reset();
       messageZone.innerHTML = `<div class="formulaire-message succes">${t("desabo_succes")}</div>`;
     } catch (err) {
-      console.error("Erreur Firestore (désabonnement) :", err);
-      // Cas le plus courant : l'adresse n'a jamais été inscrite (le document n'existe pas).
+      console.error("Erreur désabonnement :", err);
       messageZone.innerHTML = `<div class="formulaire-message erreur">${t("desabo_erreur")}</div>`;
     } finally {
       bouton.disabled = false;
     }
   });
 }
+
+/* ---------- Lancement ---------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+  initNewsletter();
+  initDesabonnement();
+});
