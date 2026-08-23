@@ -4,7 +4,7 @@
    ============================================================ */
 
 import { db } from "./firebase-config.js";
-import { doc, setDoc, Timestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-lite.js";
+import { doc, setDoc, updateDoc, getDoc, Timestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-lite.js";
 
 const EMAILJS_SERVICE_ID  = "service_ncxaav8";
 const EMAILJS_TEMPLATE_ID = "template_qvl72nk";
@@ -72,9 +72,16 @@ document.addEventListener("DOMContentLoaded", () => {
     messageZone.innerHTML = "";
 
     try {
-      await setDoc(doc(db, "newsletter", idDepuisEmail(email)), {
-        email, date: Timestamp.now(), actif: true
-      });
+      const docRef = doc(db, "newsletter", idDepuisEmail(email));
+      const existing = await getDoc(docRef);
+
+      if (existing.exists()) {
+        // Réabonnement : met à jour seulement actif et date
+        await updateDoc(docRef, { actif: true, date: Timestamp.now() });
+      } else {
+        // Nouvel abonné : crée le document complet
+        await setDoc(docRef, { email, date: Timestamp.now(), actif: true });
+      }
       await envoyerEmailBienvenue(email);
       await ajouterDansBrevo(email);
 
@@ -93,4 +100,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
