@@ -120,7 +120,38 @@ function initDesabonnement() {
     try {
       await updateDoc(doc(db, "newsletter", idDepuisEmail(email)), { actif: false });
       form.reset();
-      messageZone.innerHTML = `<div class="formulaire-message succes">${t("desabo_succes")}</div>`;
+      messageZone.innerHTML = `
+        <div class="formulaire-message succes">
+          ${t("desabo_succes")}<br>
+          <small style="margin-top:0.5rem;display:block;">
+            Vous pouvez vous réabonner à tout moment — 
+            <a href="#" id="lien-reabonnement" style="color:inherit;font-weight:600;">cliquez ici</a>.
+          </small>
+        </div>`;
+
+      // Clic sur "cliquez ici" → réaffiche le formulaire pré-rempli
+      const lienReabo = document.getElementById("lien-reabonnement");
+      if (lienReabo) {
+        lienReabo.addEventListener("click", async (e) => {
+          e.preventDefault();
+          const emailPrecedent = document.getElementById("desabo-email")?.value || "";
+          messageZone.innerHTML = "";
+          form.style.display = "block";
+
+          // Si on est sur desabonnement.html, on peut proposer de re-s'abonner via Firestore
+          try {
+            await setDoc(doc(db, "newsletter", idDepuisEmail(email)), {
+              email,
+              date: Timestamp.now(),
+              actif: true
+            });
+            await envoyerEmailBienvenue(email);
+            messageZone.innerHTML = `<div class="formulaire-message succes">${t("newsletter_succes")}</div>`;
+          } catch (err) {
+            console.error("Erreur réabonnement :", err);
+          }
+        });
+      }
     } catch (err) {
       console.error("Erreur désabonnement :", err);
       messageZone.innerHTML = `<div class="formulaire-message erreur">${t("desabo_erreur")}</div>`;
@@ -136,3 +167,4 @@ document.addEventListener("DOMContentLoaded", () => {
   initNewsletter();
   initDesabonnement();
 });
+
