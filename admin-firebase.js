@@ -356,9 +356,11 @@ async function rafraichirNewsletter() {
   if (!zone) return;
   try {
     const snap = await getDocs(query(collection(db, "newsletter"), orderBy("date", "desc")));
-    const abonnes = snap.docs.map(d => d.data());
-    zone.innerHTML = `<p class="formulaire-note">${abonnes.length} abonné(e)(s)</p>` +
-      abonnes.map(a => `<div class="admin-liste-item"><div class="admin-liste-item-titre">${echapperHTML(a.email)}</div></div>`).join("");
+    const tous = snap.docs.map(d => d.data());
+    const actifs = tous.filter(a => a.actif !== false); // exclut les désabonnés
+    zone.innerHTML = `<p class="formulaire-note">${actifs.length} abonné(e)(s) actif(s)</p>` +
+      actifs.map(a => `<div class="admin-liste-item"><div class="admin-liste-item-titre">${echapperHTML(a.email)}</div></div>`).join("")
+      || `<p class="empty-msg">Aucun abonné actif.</p>`;
   } catch (err) {
     console.error(err);
     zone.innerHTML = `<p class="empty-msg">Erreur de chargement : ${err.message}</p>`;
