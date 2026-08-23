@@ -8,7 +8,7 @@
    ============================================================ */
 
 import { db } from "./firebase-config.js";
-import { doc, setDoc, updateDoc, Timestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-lite.js";
+import { doc, setDoc, updateDoc, getDoc, Timestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-lite.js";
 
 /* ── Clés ─────────────────────────────────────────────────── */
 const EMAILJS_SERVICE_ID  = "service_ncxaav8";
@@ -89,12 +89,14 @@ function initNewsletter() {
     messageZone.innerHTML = "";
 
     try {
-      // 1. Firestore
-      await setDoc(doc(db, "newsletter", idDepuisEmail(email)), {
-        email,
-        date: Timestamp.now(),
-        actif: true
-      });
+      // 1. Firestore — créer ou réactiver
+      const docRef = doc(db, "newsletter", idDepuisEmail(email));
+      const existing = await getDoc(docRef);
+      if (existing.exists()) {
+        await updateDoc(docRef, { actif: true, date: Timestamp.now() });
+      } else {
+        await setDoc(docRef, { email, date: Timestamp.now(), actif: true });
+      }
 
       // 2. Email de bienvenue
       await envoyerEmailBienvenue(email);
