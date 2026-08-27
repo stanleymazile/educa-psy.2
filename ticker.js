@@ -6,7 +6,7 @@
    ============================================================ */
 
 import { db } from "./firebase-config.js";
-import { collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-lite.js";
+import { collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
 async function initTicker() {
   const zone = document.getElementById("ticker-track");
