@@ -389,6 +389,39 @@ document.addEventListener("DOMContentLoaded", () => {
   initMenuMobile();
   initSousMenus();
   initLangue();
+  initPlusCategories();
 });
+
+/* ---------- Bouton + catégories supplémentaires ---------- */
+
+function initPlusCategories() {
+  const btn = document.getElementById("btn-plus-cats");
+  const dropdown = document.getElementById("plus-dropdown");
+  if (!btn || !dropdown) return;
+
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const ouvert = dropdown.classList.toggle("ouvert");
+    btn.setAttribute("aria-expanded", ouvert ? "true" : "false");
+  });
+
+  // Fermer si clic en dehors
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".filter-plus-wrap")) {
+      dropdown.classList.remove("ouvert");
+      btn.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  // Fermer après sélection d'une catégorie
+  dropdown.querySelectorAll(".filter-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      dropdown.classList.remove("ouvert");
+      btn.setAttribute("aria-expanded", "false");
+      // Mettre le + en actif si une catégorie du dropdown est sélectionnée
+      btn.classList.add("active");
+    });
+  });
+}
 
 
