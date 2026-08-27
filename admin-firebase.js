@@ -7,7 +7,7 @@ import { db, auth, storage, ADMIN_EMAILS } from "./firebase-config.js";
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 import {
   collection, getDocs, doc, setDoc, addDoc, deleteDoc, query, orderBy, Timestamp
-} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-lite.js";
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
 
 function dateVersInput(valeur) {
