@@ -1,8 +1,7 @@
 /* ============================================================
    EDUCA-PSY — auth-firebase.js
    ============================================================
-   Connexion email/mot de passe + Google (popup sur desktop,
-   redirect automatique sur mobile si popup bloquée).
+   Connexion email/mot de passe + Google via popup
    ============================================================ */
 
 import { auth } from "./firebase-config.js";
@@ -14,7 +13,6 @@ import {
   sendPasswordResetEmail,
   GoogleAuthProvider,
   signInWithPopup,
-  signInWithRedirect,
   getRedirectResult
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
@@ -44,16 +42,13 @@ function initAuthZone() {
 /* ---------- Connexion Google ---------- */
 
 async function initGoogleSignIn() {
-  // getRedirectResult complète un éventuel sign-in via redirect (mobile)
-  // Les erreurs sont ignorées silencieusement — elles sont normales
-  // quand il n'y a pas de redirect en attente
+  // getRedirectResult conservé au cas où une ancienne redirection traînerait
   try {
     const result = await getRedirectResult(auth);
     if (result && result.user) {
       console.log("Google redirect complété :", result.user.email);
     }
   } catch (err) {
-    // Erreur normale si aucun redirect en attente — on ignore
     console.warn("getRedirectResult (ignoré) :", err.code);
   }
 
@@ -68,25 +63,14 @@ async function initGoogleSignIn() {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
 
-    // Sur mobile → redirect direct (Chrome bloque les popups)
-    // Sur desktop → popup (plus rapide et sans rechargement)
-    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-
-    if (isMobile) {
-      try {
-        await signInWithRedirect(auth, provider);
-      } catch (err) {
-        if (messageZone) messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
-        btnGoogle.disabled = false;
-      }
-    } else {
-      try {
-        await signInWithPopup(auth, provider);
-      } catch (err) {
-        console.error("Erreur Google Sign-In :", err.code, err.message);
-        if (messageZone) messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
-        btnGoogle.disabled = false;
-      }
+    try {
+      // ✅ Utilisation systématique de la popup pour assurer la stabilité sur GitHub Pages
+      await signInWithPopup(auth, provider);
+    } catch (err) {
+      console.error("Erreur Google Sign-In :", err.code, err.message);
+      if (messageZone) messageZone.innerHTML = `<div class="formulaire-message erreur">${traduireErreur(err.code)}</div>`;
+    } finally {
+      btnGoogle.disabled = false;
     }
   });
 }
@@ -181,7 +165,7 @@ function traduireErreur(code) {
     "auth/weak-password": "Le mot de passe doit contenir au moins 6 caractères.",
     "auth/missing-email": "Indiquez d'abord votre adresse e-mail ci-dessus.",
     "auth/too-many-requests": "Trop de tentatives. Réessayez dans quelques minutes.",
-    "auth/popup-blocked": "Fenêtre bloquée — redirection vers Google en cours…",
+    "auth/popup-blocked": "La fenêtre pop-up a été bloquée par votre navigateur. Veuillez autoriser les pop-ups pour ce site.",
     "auth/popup-closed-by-user": "Connexion annulée avant la fin.",
     "auth/unauthorized-domain": "Ce domaine n'est pas autorisé dans Firebase Console."
   };
