@@ -136,8 +136,15 @@ function initDesabonnement() {
     messageZone.innerHTML = "";
 
     try {
-      // 1. Firestore
-      await updateDoc(doc(db, "newsletter", idDepuisEmail(email)), { actif: false });
+      // 1. Firestore — vérification de l'existence avant désactivation
+      const docRef = doc(db, "newsletter", idDepuisEmail(email));
+      const existing = await getDoc(docRef);
+
+      if (existing.exists()) {
+        await updateDoc(docRef, { actif: false, date: Timestamp.now() });
+      } else {
+        await setDoc(docRef, { email, date: Timestamp.now(), actif: false });
+      }
       // Note : la désinscription Brevo se fait via le lien en bas de chaque newsletter
 
       form.reset();
