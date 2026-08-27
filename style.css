@@ -8,7 +8,7 @@
 
 :root {
   /* --- Couleurs principales (identité Educa-Psy) --- */
-  --couleur-fond: #FAF6ED;          /* fond ivoire/crème */
+  --couleur-fond: #F8F8F8;          /* fond ivoire/crème  #FAF6ED */
   --couleur-fond-alt: #F2EBDA;      /* fond légèrement plus foncé (cartes, sections) */
   --couleur-texte: #2A241C;         /* texte principal (brun-noir chaud) */
   --couleur-texte-attenue: #6B6252; /* texte secondaire (dates, méta) */
