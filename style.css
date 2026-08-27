@@ -207,7 +207,7 @@ a:focus-visible, button:focus-visible {
    ============================================================ */
 .page-title { font-size: 2.3rem; margin: var(--e2) 0 var(--e2); }
 .page-subtitle { color: var(--couleur-texte-attenue); font-size: 1.05rem; max-width: 640px; font-family: var(--police-lecture); }
-.hero-section, .page-header { padding-top: var(--e6); }
+.hero-section, .page-header { padding-top: var(--e3); }
 
 /* ============================================================
    CARTES D'ARTICLE
@@ -253,7 +253,7 @@ a:focus-visible, button:focus-visible {
   padding-bottom: var(--e6);
   margin-bottom: var(--e6);
 }
-.article-card--featured { border-top-width: 6px; padding-top: 0; border-bottom: none; margin-bottom: 0; }
+.article-card--featured { border-top-width: 6px; padding-top: 16px; border-bottom: none; margin-bottom: 0; }
 .article-card--featured .article-card-title { font-size: 2.3rem; }
 .article-card--featured .article-card-resume { font-size: 1.08rem; }
 
