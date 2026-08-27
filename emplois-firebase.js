@@ -13,7 +13,7 @@
 import { db } from "./firebase-config.js";
 import {
   collection, getDocs, doc, getDoc, query, orderBy
-} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-lite.js";
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
 const MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet",
                   "août","septembre","octobre","novembre","décembre"];
