@@ -4,7 +4,7 @@
    ============================================================ */
 
 import { db } from "./firebase-config.js";
-import { doc, setDoc, updateDoc, getDoc, Timestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-lite.js";
+import { doc, setDoc, updateDoc, getDoc, Timestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
 const EMAILJS_SERVICE_ID  = "service_ncxaav8";
 const EMAILJS_TEMPLATE_ID = "template_qvl72nk";
