@@ -1,5 +1,5 @@
 /* ============================================================
-   EDUCA-PSY — Feuille de style principale
+   EDUCA-PSY — Feuille de style principale (Version Finale & Optimisée)
    ============================================================
    Toutes les couleurs et polices du site se règlent ICI, dans
    la section :root ci-dessous. Modifiez une valeur et elle se
@@ -40,6 +40,10 @@
 
   --largeur-max: 1140px;
   --rayon: 4px;
+
+  /* --- Variables additionnelles UI & Ombrages --- */
+  --ombre-douce: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --ombre-survol: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 /* ============================================================
@@ -58,7 +62,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
 ul { list-style: none; margin: 0; padding: 0; }
 h1, h2, h3, h4 { font-family: var(--police-affichage); font-weight: 600; margin: 0; }
@@ -70,7 +74,7 @@ p { margin: 0; }
   padding: 0 var(--e5);
 }
 
-a:focus-visible, button:focus-visible {
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
   outline: 2px solid var(--couleur-or);
   outline-offset: 3px;
 }
@@ -80,6 +84,19 @@ a:focus-visible, button:focus-visible {
   font-style: italic;
   padding: var(--e6) 0;
 }
+
+/* Classes utilitaires de mise en page & formulaires */
+.grid-2-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--e5);
+}
+@media (max-width: 768px) {
+  .grid-2-cols { grid-template-columns: 1fr; }
+}
+
+.required { color: var(--couleur-psychologie-texte); margin-left: 2px; }
+.btn-block { width: 100%; text-align: center; }
 
 /* ============================================================
    EN-TÊTE / MASTHEAD
@@ -101,8 +118,15 @@ a:focus-visible, button:focus-visible {
 .masthead-tagline { letter-spacing: 0.04em; opacity: 0.75; }
 
 .masthead-main { padding: var(--e6) 0 var(--e4); text-align: center; }
+.masthead-main-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 .logo { display: inline-flex; align-items: center; gap: var(--e3); text-decoration: none; }
-.logo-mark { flex-shrink: 0; }
+.logo-mark { flex-shrink: 0; display: block; width: 46px; height: 46px; }
 .logo-text {
   font-family: var(--police-affichage);
   font-size: 2.9rem;
@@ -133,7 +157,7 @@ a:focus-visible, button:focus-visible {
 .nav-links a:hover { border-color: var(--couleur-or); color: var(--couleur-or-fonce); }
 .nav-highlight { color: var(--couleur-or-fonce) !important; }
 
-/* Bandeau signature : une couleur par rubrique, à l'image des 4 axes du site */
+/* Bandeau signature : une couleur par rubrique */
 .spectrum-rule { display: flex; width: 100%; height: 6px; }
 .spectrum-seg { flex: 1; }
 .spectrum-seg.s-education { background: var(--couleur-education-texte); }
@@ -165,9 +189,9 @@ a:focus-visible, button:focus-visible {
 .tag-stage-formation { background: var(--couleur-technologie-fond); color: var(--couleur-technologie-texte); }
 
 /* ============================================================
-   FILTRES (pastilles cliquables)
+   FILTRES & CATÉGORIES SUPPLÉMENTAIRES
    ============================================================ */
-.filter-tabs { display: flex; gap: var(--e3); flex-wrap: wrap; padding: var(--e5) 0 var(--e4); }
+.filter-tabs { display: flex; gap: var(--e3); flex-wrap: wrap; padding: var(--e5) 0 var(--e4); align-items: center; }
 .filter-tab {
   font-family: var(--police-interface);
   background: none;
@@ -182,6 +206,46 @@ a:focus-visible, button:focus-visible {
 .filter-tab:hover { border-color: var(--couleur-or); }
 .filter-tab.active { background: var(--couleur-texte); color: var(--couleur-fond); border-color: var(--couleur-texte); }
 
+.filter-plus-wrap { position: relative; display: inline-flex; }
+.filter-plus-btn { font-size: 1.2rem; font-weight: 400; min-width: 36px; padding: 6px 10px; line-height: 1; }
+.filter-plus-btn.active { background: var(--couleur-or); color: #fff; border-color: var(--couleur-or); }
+
+.plus-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 200;
+  background: var(--couleur-fond);
+  border: 1.5px solid var(--couleur-ligne);
+  border-radius: 10px;
+  box-shadow: var(--ombre-survol);
+  list-style: none;
+  padding: 6px;
+  min-width: 220px;
+  flex-direction: column;
+  gap: 2px;
+}
+.plus-dropdown.ouvert { display: flex; }
+.plus-dropdown li { display: block; }
+.plus-dropdown .filter-tab {
+  width: 100%;
+  text-align: left;
+  border-radius: 6px;
+  border: none;
+  background: none;
+  padding: 8px 12px;
+  font-size: 0.88rem;
+  color: var(--couleur-texte);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.plus-dropdown .filter-tab:hover,
+.plus-dropdown .filter-tab.active {
+  background: var(--couleur-or);
+  color: #ffffff;
+}
+
 /* ============================================================
    BOUTONS
    ============================================================ */
@@ -195,22 +259,23 @@ a:focus-visible, button:focus-visible {
   font-size: 0.94rem;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
 }
+.btn:active { transform: translateY(1px); }
 .btn-primary { background: var(--couleur-or); color: var(--couleur-bouton-texte); }
 .btn-primary:hover { background: var(--couleur-or-fonce); color: var(--couleur-bouton-survol-texte); }
 .btn-outline { border-color: var(--couleur-texte); color: var(--couleur-texte); background: transparent; }
 .btn-outline:hover { background: var(--couleur-texte); color: var(--couleur-fond); }
 
 /* ============================================================
-   PAGE / SECTION — titres génériques
+   PAGE / SECTION — TITRES GÉNÉRIQUES
    ============================================================ */
 .page-title { font-size: 2.3rem; margin: var(--e2) 0 var(--e2); }
 .page-subtitle { color: var(--couleur-texte-attenue); font-size: 1.05rem; max-width: 640px; font-family: var(--police-lecture); }
 .hero-section, .page-header { padding-top: var(--e3); }
 
 /* ============================================================
-   CARTES D'ARTICLE
+   CARTES D'ARTICLE & OPTIMISATION GOOGLE DISCOVER
    ============================================================ */
 .articles-grid {
   display: grid;
@@ -229,6 +294,15 @@ a:focus-visible, button:focus-visible {
 .article-card.cat-technologie { border-top-color: var(--couleur-technologie-texte); }
 .article-card.cat-science { border-top-color: var(--couleur-science-texte); }
 .article-card.cat-psychologie { border-top-color: var(--couleur-psychologie-texte); }
+
+.article-card-image, .article-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--rayon);
+  margin-bottom: var(--e3);
+  background: var(--couleur-fond-alt);
+}
 
 .article-card-title {
   font-size: 1.45rem;
@@ -258,7 +332,7 @@ a:focus-visible, button:focus-visible {
 .article-card--featured .article-card-resume { font-size: 1.08rem; }
 
 /* ============================================================
-   OPPORTUNITÉS (aperçu accueil + page emplois)
+   OPPORTUNITÉS (EMPLOIS & COLLABORATIONS)
    ============================================================ */
 .opportunites-section { background: var(--couleur-fond-alt); padding: var(--e7) 0; margin-top: var(--e7); }
 .opportunites-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: var(--e2); margin-bottom: var(--e5); }
@@ -323,6 +397,16 @@ a:focus-visible, button:focus-visible {
   line-height: 0.82;
   margin: 6px 8px 0 0;
 }
+.article-body img { max-width: 100%; border-radius: var(--rayon); margin: var(--e3) 0 var(--e5); }
+.article-body a { color: var(--couleur-or-fonce); text-decoration: underline; text-underline-offset: 2px; }
+.article-body blockquote {
+  margin: var(--e5) 0;
+  padding: var(--e4) var(--e5);
+  border-left: 4px solid var(--couleur-or);
+  background: var(--couleur-fond-alt);
+  font-style: italic;
+  font-size: 1.15rem;
+}
 .article-not-found { text-align: center; padding: var(--e8) 0; }
 .article-not-found p { font-family: var(--police-lecture); margin: var(--e3) 0 var(--e5); }
 .emploi-actions { display: flex; gap: var(--e3); flex-wrap: wrap; margin: var(--e5) 0; }
@@ -331,7 +415,7 @@ a:focus-visible, button:focus-visible {
 .similaires-section h3 { font-size: 1.4rem; margin-bottom: var(--e4); }
 
 /* ============================================================
-   PAGE À PROPOS
+   PAGE À PROPOS & CONTACT (INFORMATIONS & CARTE)
    ============================================================ */
 .apropos-section { max-width: 760px; padding: var(--e6) 0 var(--e8); }
 .apropos-intro { font-family: var(--police-lecture); font-size: 1.15rem; line-height: 1.8; margin-bottom: var(--e6); }
@@ -358,10 +442,16 @@ a:focus-visible, button:focus-visible {
 .cta-box h2 { font-size: 1.7rem; margin-bottom: var(--e3); }
 .cta-box p { font-family: var(--police-lecture); max-width: 480px; margin: 0 auto var(--e5); opacity: 0.88; line-height: 1.6; }
 
-.apropos-note {
-  font-family: var(--police-lecture); font-size: 0.92rem; color: var(--couleur-texte-attenue);
-  font-style: italic; text-align: center;
+.coordonnees-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--e5); margin: var(--e7) 0 var(--e6); max-width: 720px;
 }
+.coordonnee-item h3 { font-size: 1rem; margin-bottom: var(--e2); }
+.coordonnee-item p { font-family: var(--police-lecture); }
+.coordonnee-item a { color: var(--couleur-or-fonce); text-decoration: none; }
+.coordonnee-item a:hover { text-decoration: underline; }
+.carte-wrap { max-width: 720px; margin-bottom: var(--e6); }
+.carte-wrap iframe { display: block; width: 100%; border: none; border-radius: var(--rayon); margin-bottom: var(--e3); }
 
 /* ============================================================
    PIED DE PAGE
@@ -374,88 +464,23 @@ a:focus-visible, button:focus-visible {
 .footer-links a:hover { color: var(--couleur-or-fonce); }
 .footer-bottom { border-top: 1px solid var(--couleur-ligne); padding-top: var(--e4); font-size: 0.8rem; color: var(--couleur-texte-attenue); }
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 768px) {
-  .logo-text { font-size: 2.1rem; }
-  .article-title { font-size: 1.9rem; }
-  .article-card--featured .article-card-title { font-size: 1.7rem; }
-  .footer-inner { flex-direction: column; }
-  .cta-box { padding: var(--e6) var(--e4); }
-  .masthead-top-inner { flex-direction: column; gap: 4px; text-align: center; padding: var(--e3) 0; }
-  .opportunites-header { flex-direction: column; align-items: flex-start; }
+.footer-social { display: flex; gap: var(--e3); margin-top: var(--e4); }
+.social-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1.5px solid var(--couleur-or); color: var(--couleur-or-fonce);
+  font-family: var(--police-interface); font-size: 0.7rem; font-weight: 700;
+  text-decoration: none; text-transform: uppercase;
+  transition: background 0.2s ease, color 0.2s ease;
 }
-.mobile-quicknav { display: none; }
-.auth-zone-mobile { display: none; }
-.util-icon-btn { display: none; }
-.topbar-logo-icon { display: none; }
-.topbar-auth { display: none; } /* visible uniquement sur mobile via 700px */
-
-@media (max-width: 480px) {
-  .nav-links { gap: var(--e4); font-size: 0.82rem; }
-  .article-body p { font-size: 1.02rem; }
-  .logo-text { font-size: 1.7rem; }
-  .article-title { font-size: 1.6rem; }
-
-  /* Slogan masqué, ligne date/thème/langue minimaliste */
-  .masthead-tagline { display: none; }
-  .masthead-top-inner { justify-content: space-between; padding: var(--e2) 0; }
-  .masthead-utils { gap: var(--e3); margin-left: 0; width: auto; justify-content: flex-end; }
-  .util-btn, .lang-select { font-size: 0.7rem; padding: 3px 8px; }
-  .util-btn { background: none; border: none; padding: 2px; }
-  .lang-select { background: none; border: none; padding: 2px 4px; }
-  .util-icon-btn { color: inherit; font-size: 1rem; line-height: 1; text-decoration: none; display: inline-flex; }
-  .util-btn .label { display: none; }
-  /* topbar-logo-icon, auth-zone, logo-mark et auth-zone-mobile gérés dans le bloc 700px */
-}
+.social-badge:hover { background: var(--couleur-or); color: var(--couleur-bouton-texte); }
 
 /* ============================================================
-   ACCESSIBILITÉ — mouvement réduit
-   ============================================================ */
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  * { transition: none !important; }
-}
-
-/* ============================================================
-   MODE SOMBRE
-   ============================================================
-   Activé en ajoutant l'attribut data-theme="sombre" sur <html>
-   (géré automatiquement par interface.js). Toutes les couleurs
-   du site sont des variables : il suffit de les redéfinir ici.
-   ============================================================ */
-[data-theme="sombre"] {
-  --couleur-fond: #1E1A14;
-  --couleur-fond-alt: #2A251C;
-  --couleur-texte: #F2ECDD;
-  --couleur-texte-attenue: #C2B6A0;
-  --couleur-or-fonce: #E0B04E;
-  --couleur-bouton-survol-texte: #2A241C;
-  --couleur-ligne: #453E2F;
-
-  --couleur-education-fond: #1F3A32;
-  --couleur-education-texte: #A8CFC0;
-  --couleur-technologie-fond: #1E3040;
-  --couleur-technologie-texte: #A9C3D6;
-  --couleur-science-fond: #333B1A;
-  --couleur-science-texte: #C7D19B;
-  --couleur-psychologie-fond: #3E202A;
-  --couleur-psychologie-texte: #E3AFBC;
-  --couleur-emploi-fond: #3A2E14;
-}
-[data-theme="sombre"] .masthead-top { background: #12100C; }
-[data-theme="sombre"] .site-footer,
-[data-theme="sombre"] .cta-box { background: #15130E; }
-
-/* ============================================================
-   BARRE D'UTILITAIRES (thème, langue, connexion)
+   BARRE D'UTILITAIRES & AUTHENTIFICATION
    ============================================================ */
 .masthead-utils { display: flex; align-items: center; gap: var(--e3); margin-left: auto; }
-
-/* Lang wrapper : globe SVG sur mobile, select visible sur desktop */
 .lang-wrapper { position: relative; display: inline-flex; align-items: center; }
-.lang-icon { display: none; } /* caché sur desktop, visible sur mobile via 700px */
+.lang-icon { display: none; }
 
 .util-btn {
   display: inline-flex;
@@ -489,89 +514,89 @@ a:focus-visible, button:focus-visible {
 .auth-zone a, .auth-zone button.util-btn { white-space: nowrap; }
 .auth-user-email { opacity: 0.85; max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-/* ============================================================
-   MENU MOBILE (menu déroulant)
-   ============================================================ */
-.nav-toggle {
-  display: none;
+/* Bouton Google Sign-In */
+.btn-google {
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: fit-content;
-  background: none;
-  border: 1px solid var(--couleur-ligne);
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--couleur-ligne);
   border-radius: var(--rayon);
-  padding: 6px 12px;
-  font-family: var(--police-interface);
-  font-size: 1rem;
-  line-height: 1;
-  cursor: pointer;
+  background: var(--couleur-fond);
   color: var(--couleur-texte);
+  font-family: var(--police-interface);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 0.5rem;
 }
+.btn-google:hover { border-color: #4285F4; box-shadow: 0 2px 8px rgba(66,133,244,0.25); }
+.btn-google:disabled { opacity: 0.6; cursor: not-allowed; }
 
-@media (max-width: 700px) {
-  .site-nav .container { display: flex; flex-direction: column; align-items: center; }
-  .nav-toggle { display: inline-flex; margin: var(--e3) 0; }
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--e2);
-    padding-bottom: var(--e3);
-  }
-  .nav-links.ouvert { display: flex; }
-
-  /* masthead-main-row : grille ☰ | logo | 👤 dès 700 px (pas seulement 480 px) */
-  .masthead-main { padding: var(--e4) 0 var(--e3); }
-  .masthead-main-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
-  /* Header mobile : Educa-Psy à gauche, ☰ à droite */
-  .masthead-main-row { display: flex; justify-content: space-between; align-items: center; }
-  .masthead-main-row .logo { justify-self: unset; }
-  .masthead-main-row .nav-toggle { margin: 0; }
-  .logo-mark { display: none !important; }
-
-  /* auth-zone-mobile retiré du header — connexion maintenant dans la topbar */
-  .auth-zone-mobile { display: none; }
-
-  /* Topbar : icône connexion visible sur mobile */
-  .topbar-auth { display: inline-flex; align-items: center; color: inherit; text-decoration: none; }
-
-  /* Topbar mobile : date à gauche, icônes à droite, auth-zone et logo cachés */
-  .masthead-top-inner { flex-direction: row; align-items: center; flex-wrap: nowrap; justify-content: space-between; text-align: left; }
-  .auth-zone { display: none; }
-  .topbar-logo-icon { display: none; }          /* logo SVG retiré de la topbar */
-  .util-btn { background: none; border: none; } /* plus de fond/bordure sur le bouton mode sombre */
-
-  /* lang-wrapper : globe SVG cliquable sur mobile */
-  .lang-icon { display: inline-block; pointer-events: none; flex-shrink: 0; }
-  .lang-wrapper .lang-select {
-    position: absolute; inset: 0; opacity: 0;
-    width: 100%; height: 100%; cursor: pointer; z-index: 1;
-  }
-
-  /* mobile-quicknav visible dès 700 px (était limité à 480 px) */
-  .mobile-quicknav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--e3);
-    padding: var(--e3) 0;
-    font-family: var(--police-interface);
-  }
-  .mobile-quicknav a { text-decoration: none; color: var(--couleur-texte); font-weight: 600; font-size: 0.85rem; }
-  .mobile-quicknav a:hover { color: var(--couleur-or-fonce); }
-  .newsletter-mini-btn {
-    background: var(--couleur-or);
-    color: var(--couleur-bouton-texte) !important;
-    padding: 6px 12px;
-    border-radius: 999px;
-    font-size: 0.78rem !important;
-    white-space: nowrap;
-  }
-  .newsletter-mini-btn:hover { background: var(--couleur-or-fonce); color: var(--couleur-bouton-survol-texte) !important; }
+.ou-separateur {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.25rem 0;
+  font-family: var(--police-interface);
+  font-size: 0.8rem;
+  color: var(--couleur-texte-attenue);
+}
+.ou-separateur::before, .ou-separateur::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--couleur-ligne);
 }
 
 /* ============================================================
-   BANDEAU DÉFILANT (dernières manchettes)
+   SOUS-MENUS DE NAVIGATION
+   ============================================================ */
+.nav-dropdown { position: relative; display: flex; align-items: center; gap: 2px; }
+.nav-dropdown-toggle {
+  background: none;
+  border: none;
+  font-family: var(--police-interface);
+  font-size: 0.7rem;
+  color: inherit;
+  padding: 4px;
+  cursor: pointer;
+  line-height: 1;
+}
+.nav-submenu {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: var(--e2) 0;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--couleur-fond);
+  border: 1px solid var(--couleur-ligne);
+  border-radius: var(--rayon);
+  min-width: 170px;
+  box-shadow: var(--ombre-douce);
+  z-index: 30;
+}
+.nav-dropdown:hover .nav-submenu,
+.nav-dropdown:focus-within .nav-submenu,
+.nav-dropdown.ouvert .nav-submenu { display: block; }
+.nav-submenu a {
+  display: block;
+  padding: 9px 18px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  white-space: nowrap;
+  border-bottom: none !important;
+}
+.nav-submenu a:hover { background: var(--couleur-fond-alt); color: var(--couleur-or-fonce); }
+
+/* ============================================================
+   BANDEAU DÉFILANT (TICKER)
    ============================================================ */
 .ticker-bar {
   background: var(--couleur-texte);
@@ -581,7 +606,6 @@ a:focus-visible, button:focus-visible {
   position: relative;
   border-bottom: 1px solid rgba(184,145,47,0.3);
 }
-[data-theme="sombre"] .ticker-bar { background: #12100C; }
 .ticker-bar::after {
   content: "";
   position: absolute;
@@ -591,7 +615,6 @@ a:focus-visible, button:focus-visible {
   pointer-events: none;
   z-index: 2;
 }
-[data-theme="sombre"] .ticker-bar::after { background: linear-gradient(to right, transparent, #12100C); }
 .ticker-inner { display: flex; align-items: center; }
 .ticker-label {
   flex-shrink: 0;
@@ -650,13 +673,9 @@ a:focus-visible, button:focus-visible {
   from { transform: translateX(0); }
   to { transform: translateX(-100%); }
 }
-@media (prefers-reduced-motion: reduce) {
-  .ticker-track { animation: none; padding-left: var(--e4); }
-  .ticker-label::before { animation: none; }
-}
 
 /* ============================================================
-   FORMULAIRE (contact, connexion, inscription)
+   FORMULAIRES & NOTIFICATIONS FIREBASE
    ============================================================ */
 .contact-form-section { padding: var(--e5) 0 var(--e8); }
 .formulaire { max-width: 520px; }
@@ -678,80 +697,32 @@ a:focus-visible, button:focus-visible {
   border-radius: var(--rayon);
   padding: 11px 14px;
 }
-.champ input:focus, .champ textarea:focus, .champ select:focus {
-  outline: 2px solid var(--couleur-or);
-  outline-offset: 1px;
-}
 .champ textarea { resize: vertical; min-height: 130px; }
-.formulaire-message {
+
+.message-container, .formulaire-message {
   padding: var(--e3) var(--e4);
   border-radius: var(--rayon);
   font-size: 0.9rem;
   margin-bottom: var(--e4);
 }
-.formulaire-message.succes { background: var(--couleur-education-fond); color: var(--couleur-education-texte); }
-.formulaire-message.erreur { background: var(--couleur-psychologie-fond); color: var(--couleur-psychologie-texte); }
-.formulaire-note { font-size: 0.82rem; color: var(--couleur-texte-attenue); margin-top: var(--e2); }
+.message-succes, .formulaire-message.succes { background: var(--couleur-education-fond); color: var(--couleur-education-texte); border: 1px solid var(--couleur-education-texte); }
+.message-erreur, .formulaire-message.erreur { background: var(--couleur-psychologie-fond); color: var(--couleur-psychologie-texte); border: 1px solid var(--couleur-psychologie-texte); }
 
-/* ============================================================
-   AUTHENTIFICATION (connexion / inscription)
-   ============================================================ */
-.auth-section { max-width: 420px; padding: var(--e6) 0 var(--e8); }
-.auth-tabs { display: flex; gap: var(--e2); margin-bottom: var(--e5); }
-.auth-tab {
-  flex: 1;
-  padding: 10px;
-  text-align: center;
-  background: var(--couleur-fond-alt);
-  border: 1px solid var(--couleur-ligne);
-  border-radius: var(--rayon);
-  cursor: pointer;
-  font-family: var(--police-interface);
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--couleur-texte-attenue);
+/* Indicateur de chargement (Spinner) */
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: spin 0.8s linear infinite;
 }
-.auth-tab.active { background: var(--couleur-texte); color: var(--couleur-fond); border-color: var(--couleur-texte); }
-.auth-connecte {
-  text-align: center;
-  padding: var(--e7) var(--e5);
-  background: var(--couleur-fond-alt);
-  border-radius: var(--rayon);
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
-.auth-connecte p { font-family: var(--police-lecture); margin-bottom: var(--e4); }
 
-/* ============================================================
-   IMAGE PRINCIPALE D'ARTICLE + IMAGES DANS LE TEXTE
-   ============================================================ */
-.article-image {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: var(--rayon);
-  margin-bottom: var(--e5);
-}
-.article-card-image {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: var(--rayon);
-  margin-bottom: var(--e3);
-}
-.article-body img {
-  max-width: 100%;
-  border-radius: var(--rayon);
-  margin: var(--e3) 0 var(--e5);
-}
-.article-body a { color: var(--couleur-or-fonce); text-decoration: underline; text-underline-offset: 2px; }
-
-/* ============================================================
-   LOGO (image remplaçable)
-   ============================================================ */
-.logo-mark { flex-shrink: 0; display: block; width: 46px; height: 46px; }
-
-/* ============================================================
-   NEWSLETTER (pied de page)
-   ============================================================ */
+/* Newsletter Widget */
 .newsletter-widget { max-width: 360px; }
 .newsletter-widget h3 { font-size: 1.1rem; margin-bottom: var(--e2); }
 .newsletter-widget p { font-family: var(--police-lecture); font-size: 0.88rem; color: var(--couleur-texte-attenue); margin-bottom: var(--e3); }
@@ -766,20 +737,6 @@ a:focus-visible, button:focus-visible {
   background: var(--couleur-fond);
   color: var(--couleur-texte);
 }
-.newsletter-form button {
-  font-family: var(--police-interface);
-  font-weight: 600;
-  font-size: 0.85rem;
-  padding: 9px 16px;
-  border-radius: var(--rayon);
-  border: none;
-  background: var(--couleur-or);
-  color: var(--couleur-bouton-texte);
-  cursor: pointer;
-  white-space: nowrap;
-}
-.newsletter-form button:hover { background: var(--couleur-or-fonce); color: var(--couleur-bouton-survol-texte); }
-.newsletter-widget .formulaire-message { margin-top: var(--e3); margin-bottom: 0; }
 
 /* ============================================================
    ADMINISTRATION (admin.html)
@@ -801,9 +758,8 @@ a:focus-visible, button:focus-visible {
 .admin-panneau h2 { font-size: 1.4rem; margin: var(--e6) 0 var(--e4); }
 .admin-form { max-width: 640px; background: var(--couleur-fond-alt); padding: var(--e5); border-radius: var(--rayon); }
 .admin-form .champ-ligne { display: grid; grid-template-columns: 1fr 1fr; gap: var(--e4); }
-@media (max-width: 600px) { .admin-form .champ-ligne { grid-template-columns: 1fr; } }
 .admin-form .aide { font-size: 0.78rem; color: var(--couleur-texte-attenue); margin-top: 4px; }
-.admin-form-actions { display: flex; gap: var(--e3); align-items: center; }
+.admin-form-actions { display: flex; gap: var(--e3); align-items: center; margin-top: var(--e4); }
 .admin-checkbox { display: flex; align-items: center; gap: var(--e2); font-weight: 500; }
 .admin-checkbox input { width: auto; }
 
@@ -819,11 +775,52 @@ a:focus-visible, button:focus-visible {
   padding: 6px 12px; border-radius: var(--rayon); cursor: pointer; border: 1px solid var(--couleur-ligne); background: var(--couleur-fond);
 }
 .admin-liste-actions .supprimer { color: var(--couleur-psychologie-texte); border-color: var(--couleur-psychologie-texte); }
-.admin-refuse { text-align: center; padding: var(--e8) var(--e5); }
-.admin-refuse p { font-family: var(--police-lecture); margin: var(--e3) 0 var(--e5); }
+
+/* Bloc traductions admin */
+.traductions-bloc {
+  margin-top: 1.5rem;
+  border: 1px solid var(--couleur-ligne);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.traductions-bloc summary {
+  cursor: pointer;
+  padding: 0.85rem 1.25rem;
+  font-family: var(--police-interface);
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: var(--couleur-fond-alt);
+  border-bottom: 1px solid var(--couleur-ligne);
+  list-style: none;
+}
+.traductions-bloc summary::-webkit-details-marker { display: none; }
+.traductions-bloc > *:not(summary) { padding: 0 1.25rem; }
+.trad-groupe { padding: 1rem 0; border-bottom: 1px solid var(--couleur-ligne); }
+.trad-groupe:last-child { border-bottom: none; }
+.trad-groupe h4 { font-family: var(--police-interface); font-size: 0.85rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--couleur-or-fonce); }
+
+/* RECHERCHE & PARTAGE */
+.search-wrap { margin-bottom: var(--e4); }
+.search-wrap input {
+  width: 100%;
+  max-width: 420px;
+  font-family: var(--police-interface);
+  font-size: 0.95rem;
+  padding: 10px 16px;
+  border: 1px solid var(--couleur-ligne);
+  border-radius: 999px;
+  background: var(--couleur-fond-alt);
+  color: var(--couleur-texte);
+}
+.share-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: none; border: 1px solid var(--couleur-ligne); border-radius: 999px;
+  padding: 7px 16px; font-family: var(--police-interface); font-size: 0.85rem; font-weight: 600;
+  color: var(--couleur-texte); cursor: pointer; margin-top: var(--e4);
+}
 
 /* ============================================================
-   ACCESSIBILITÉ — lien d'évitement ("aller au contenu")
+   ACCESSIBILITÉ — LINK & REDUCED MOTION
    ============================================================ */
 .skip-link {
   position: absolute;
@@ -839,117 +836,68 @@ a:focus-visible, button:focus-visible {
   text-decoration: none;
   z-index: 1000;
 }
-.skip-link:focus {
-  left: var(--e4);
-  top: var(--e4);
+.skip-link:focus { left: var(--e4); top: var(--e4); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; animation: none !important; }
+  .ticker-track { padding-left: var(--e4); }
 }
 
 /* ============================================================
-   RECHERCHE D'ARTICLES
+   RESPONSIVE & RENDER MOBILE
    ============================================================ */
-.search-wrap { margin-bottom: var(--e4); }
-.search-wrap input {
-  width: 100%;
-  max-width: 420px;
-  font-family: var(--police-interface);
-  font-size: 0.95rem;
-  padding: 10px 16px;
-  border: 1px solid var(--couleur-ligne);
-  border-radius: 999px;
-  background: var(--couleur-fond-alt);
-  color: var(--couleur-texte);
-}
-.search-wrap input:focus { outline: 2px solid var(--couleur-or); outline-offset: 1px; }
-
-/* ============================================================
-   PARTAGE D'ARTICLE + APERÇU ADMIN
-   ============================================================ */
-.share-btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: none; border: 1px solid var(--couleur-ligne); border-radius: 999px;
-  padding: 7px 16px; font-family: var(--police-interface); font-size: 0.85rem; font-weight: 600;
-  color: var(--couleur-texte); cursor: pointer; margin-top: var(--e4);
-}
-.share-btn:hover { border-color: var(--couleur-or); color: var(--couleur-or-fonce); }
-.admin-apercu-actuel {
-  display: flex; align-items: center; gap: var(--e3);
-  font-size: 0.85rem; color: var(--couleur-texte-attenue);
-  margin: var(--e2) 0 var(--e3); padding: var(--e2) var(--e3);
-  background: var(--couleur-fond); border-radius: var(--rayon);
-}
-.admin-apercu-actuel img { width: 48px; height: 48px; object-fit: cover; border-radius: 4px; }
-
-/* ============================================================
-   COORDONNÉES & CARTE (page contact)
-   ============================================================ */
-.coordonnees-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--e5); margin: var(--e7) 0 var(--e6); max-width: 720px;
-}
-.coordonnee-item h3 { font-size: 1rem; margin-bottom: var(--e2); }
-.coordonnee-item p { font-family: var(--police-lecture); }
-.coordonnee-item a { color: var(--couleur-or-fonce); text-decoration: none; }
-.coordonnee-item a:hover { text-decoration: underline; }
-.carte-wrap { max-width: 720px; margin-bottom: var(--e6); }
-.carte-wrap iframe { display: block; border-radius: var(--rayon); margin-bottom: var(--e3); }
-
-/* ============================================================
-   RÉSEAUX SOCIAUX (pied de page)
-   ============================================================ */
-.footer-social { display: flex; gap: var(--e3); margin-top: var(--e4); }
-.social-badge {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 34px; height: 34px; border-radius: 50%;
-  border: 1.5px solid var(--couleur-or); color: var(--couleur-or-fonce);
-  font-family: var(--police-interface); font-size: 0.7rem; font-weight: 700;
-  text-decoration: none; text-transform: uppercase;
-}
-.social-badge:hover { background: var(--couleur-or); color: var(--couleur-bouton-texte); }
-
-/* ============================================================
-   SOUS-MENUS DE NAVIGATION (Articles, Opportunités)
-   ============================================================ */
-.nav-dropdown { position: relative; display: flex; align-items: center; gap: 2px; }
-.nav-dropdown-toggle {
-  background: none;
-  border: none;
-  font-family: var(--police-interface);
-  font-size: 0.7rem;
-  color: inherit;
-  padding: 4px;
-  cursor: pointer;
-  line-height: 1;
-}
-.nav-submenu {
+.nav-toggle {
   display: none;
-  list-style: none;
-  margin: 0;
-  padding: var(--e2) 0;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--couleur-fond);
+  align-items: center;
+  justify-content: center;
+  background: none;
   border: 1px solid var(--couleur-ligne);
   border-radius: var(--rayon);
-  min-width: 170px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-  z-index: 30;
+  padding: 6px 12px;
+  font-family: var(--police-interface);
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--couleur-texte);
 }
-.nav-dropdown:hover .nav-submenu,
-.nav-dropdown:focus-within .nav-submenu,
-.nav-dropdown.ouvert .nav-submenu { display: block; }
-.nav-submenu a {
-  display: block;
-  padding: 9px 18px;
-  font-size: 0.88rem;
-  font-weight: 500;
-  white-space: nowrap;
-  border-bottom: none !important;
+
+@media (max-width: 768px) {
+  .logo-text { font-size: 2.1rem; }
+  .article-title { font-size: 1.9rem; }
+  .article-card--featured .article-card-title { font-size: 1.7rem; }
+  .footer-inner { flex-direction: column; }
+  .cta-box { padding: var(--e6) var(--e4); }
+  .masthead-top-inner { flex-direction: column; gap: 4px; text-align: center; padding: var(--e3) 0; }
+  .opportunites-header { flex-direction: column; align-items: flex-start; }
+  .admin-form .champ-ligne { grid-template-columns: 1fr; }
 }
-.nav-submenu a:hover { background: var(--couleur-fond-alt); color: var(--couleur-or-fonce); }
 
 @media (max-width: 700px) {
+  .site-nav .container { display: flex; flex-direction: column; align-items: center; }
+  .nav-toggle { display: inline-flex; margin: var(--e3) 0; }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--e2);
+    padding-bottom: var(--e3);
+  }
+  .nav-links.ouvert { display: flex; }
+
+  .masthead-main { padding: var(--e4) 0 var(--e3); }
+  .logo-mark { display: none !important; }
+
+  .topbar-auth { display: inline-flex; align-items: center; color: inherit; text-decoration: none; }
+  .masthead-top-inner { flex-direction: row; align-items: center; flex-wrap: nowrap; justify-content: space-between; text-align: left; }
+  .auth-zone { display: none; }
+  .util-btn { background: none; border: none; }
+
+  .lang-icon { display: inline-block; pointer-events: none; flex-shrink: 0; }
+  .lang-wrapper .lang-select {
+    position: absolute; inset: 0; opacity: 0;
+    width: 100%; height: 100%; cursor: pointer; z-index: 1;
+  }
+
   .nav-dropdown { flex-direction: column; align-items: center; gap: 0; }
   .nav-submenu {
     position: static;
@@ -966,134 +914,42 @@ a:focus-visible, button:focus-visible {
   .nav-submenu a { padding: 6px 0; font-size: 0.82rem; color: var(--couleur-texte-attenue); }
 }
 
-
-/* Bloc traductions admin */
-.traductions-bloc {
-  margin-top: 1.5rem;
-  border: 1px solid var(--couleur-ligne);
-  border-radius: 8px;
-  padding: 0;
-  overflow: hidden;
-}
-.traductions-bloc summary {
-  cursor: pointer;
-  padding: 0.85rem 1.25rem;
-  font-family: var(--police-interface);
-  font-weight: 600;
-  font-size: 0.9rem;
-  background: var(--couleur-fond-alt, rgba(184,145,47,0.06));
-  border-bottom: 1px solid var(--couleur-ligne);
-  list-style: none;
-}
-.traductions-bloc summary::-webkit-details-marker { display: none; }
-.traductions-bloc[open] summary { border-bottom: 1px solid var(--couleur-ligne); }
-.traductions-bloc > *:not(summary) { padding: 0 1.25rem; }
-.trad-groupe { padding: 1rem 0; border-bottom: 1px solid var(--couleur-ligne); }
-.trad-groupe:last-child { border-bottom: none; }
-.trad-groupe h4 { font-family: var(--police-interface); font-size: 0.85rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--couleur-or-fonce); }
-
-/* Bouton Google Sign-In */
-.btn-google {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1.5px solid var(--couleur-ligne);
-  border-radius: 8px;
-  background: var(--couleur-fond);
-  color: var(--couleur-texte);
-  font-family: var(--police-interface);
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  margin-bottom: 0.5rem;
-}
-.btn-google:hover { border-color: #4285F4; box-shadow: 0 1px 6px rgba(66,133,244,0.2); }
-.btn-google:disabled { opacity: 0.6; cursor: not-allowed; }
-
-/* Séparateur "ou" */
-.ou-separateur {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 1.25rem 0;
-  font-family: var(--police-interface);
-  font-size: 0.8rem;
-  color: var(--couleur-texte-attenue);
-}
-.ou-separateur::before,
-.ou-separateur::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--couleur-ligne);
+@media (max-width: 480px) {
+  .nav-links { gap: var(--e4); font-size: 0.82rem; }
+  .article-body p { font-size: 1.02rem; }
+  .logo-text { font-size: 1.7rem; }
+  .article-title { font-size: 1.6rem; }
+  .masthead-tagline { display: none; }
 }
 
 /* ============================================================
-   BOUTON + CATÉGORIES SUPPLÉMENTAIRES
+   MODE SOMBRE
    ============================================================ */
+[data-theme="sombre"] {
+  --couleur-fond: #1E1A14;
+  --couleur-fond-alt: #2A251C;
+  --couleur-texte: #F2ECDD;
+  --couleur-texte-attenue: #C2B6A0;
+  --couleur-or-fonce: #E0B04E;
+  --couleur-bouton-survol-texte: #2A241C;
+  --couleur-ligne: #453E2F;
 
-.filter-plus-wrap {
-  position: relative;
-  display: inline-flex;
+  --couleur-education-fond: #1F3A32;
+  --couleur-education-texte: #A8CFC0;
+  --couleur-technologie-fond: #1E3040;
+  --couleur-technologie-texte: #A9C3D6;
+  --couleur-science-fond: #333B1A;
+  --couleur-science-texte: #C7D19B;
+  --couleur-psychologie-fond: #3E202A;
+  --couleur-psychologie-texte: #E3AFBC;
+  --couleur-emploi-fond: #3A2E14;
+
+  --ombre-douce: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --ombre-survol: 0 8px 30px rgba(0, 0, 0, 0.6);
 }
 
-.filter-plus-btn {
-  font-size: 1.2rem;
-  font-weight: 400;
-  min-width: 36px;
-  padding: 6px 10px;
-  line-height: 1;
-}
-
-.filter-plus-btn.active {
-  background: var(--couleur-or);
-  color: #fff;
-  border-color: var(--couleur-or);
-}
-
-.plus-dropdown {
-  display: none;
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  z-index: 200;
-  background: var(--couleur-fond);
-  border: 1.5px solid var(--couleur-ligne);
-  border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
-  list-style: none;
-  padding: 6px;
-  min-width: 220px;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.plus-dropdown.ouvert {
-  display: flex;
-}
-
-.plus-dropdown li { display: block; }
-
-.plus-dropdown .filter-tab {
-  width: 100%;
-  text-align: left;
-  border-radius: 6px;
-  border: none;
-  background: none;
-  padding: 8px 12px;
-  font-size: 0.88rem;
-  color: var(--couleur-texte);
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.plus-dropdown .filter-tab:hover,
-.plus-dropdown .filter-tab.active {
-  background: var(--couleur-or);
-  color: #fff;
-}
-
+[data-theme="sombre"] .masthead-top { background: #12100C; }
+[data-theme="sombre"] .site-footer,
+[data-theme="sombre"] .cta-box { background: #15130E; }
+[data-theme="sombre"] .ticker-bar { background: #12100C; }
+[data-theme="sombre"] .ticker-bar::after { background: linear-gradient(to right, transparent, #12100C); }
