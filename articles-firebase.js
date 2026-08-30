@@ -1,23 +1,17 @@
 /* ============================================================
-   EDUCA-PSY — articles-firebase.js (Version optimisée)
-   ============================================================
-   Les articles sont lus en direct depuis Firestore (collection
-   "articles") : toute modification faite dans la console
-   Firebase apparaît immédiatement sur le site, sans redéploiement.
+   EDUCA-PSY — articles-firebase.js (Version optimisée SEO & Discover)
    ============================================================ */
 
 import { db } from "./firebase-config.js";
 import {
-  collection, getDocs, doc, getDoc, query, orderBy, where
+  collection, getDocs, doc, getDoc, query, orderBy
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
 const MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet",
                   "août","septembre","octobre","novembre","décembre"];
 
-/* Cache local pour éviter de re-télécharger les articles lors des changements de filtre/langue */
 let cacheArticles = null;
 
-/* Retourne le champ dans la langue active, avec fallback français */
 function champLocale(article, champ, langue) {
   if (!langue || langue === "fr") return article[champ] || "";
   return article[`${champ}_${langue}`] || article[champ] || "";
@@ -38,10 +32,6 @@ function slugify(texte) {
     .replace(/(^-|-$)/g, "");
 }
 
-/* Dans un paragraphe de "contenu", permet d'écrire :
-     [texte du lien](https://exemple.com)   -> devient un lien cliquable
-     ![texte alternatif](https://image.jpg) -> devient une image
-   Le HTML brut (ex: <a href="...">) fonctionne aussi tel quel. */
 function formaterTexte(texte) {
   if (!texte) return "";
   return texte
@@ -79,7 +69,7 @@ function carteArticleHTML(article, featured = false) {
   const slug = slugify(article.categorie || "");
   const titre = champLocale(article, "titre", langue);
   const resume = champLocale(article, "resume", langue);
-  const image = article.image ? `<img class="article-card-image" src="${article.image}" alt="" loading="lazy">` : "";
+  const image = article.image ? `<img class="article-card-image" src="${article.image}" alt="${titre || ''}" loading="lazy">` : "";
   return `
     <article class="article-card ${featured ? "article-card--featured" : ""} cat-${slug}">
       ${image}
@@ -101,14 +91,14 @@ function articleIntrouvableHTML() {
 }
 
 function erreurChargementHTML() {
-  return `<p class="empty-msg">Impossible de charger les articles pour le moment. Vérifiez la configuration dans firebase-config.js et les règles de sécurité Firestore (voir FIREBASE-GUIDE.md).</p>`;
+  return `<p class="empty-msg">Impossible de charger les articles pour le moment. Vérifiez la configuration de votre base de données.</p>`;
 }
 
 /* ---------- Page d'accueil ---------- */
 
 async function initAccueilFirebase() {
   const grille = document.getElementById("articles-grid");
-  if (!grille) return; // pas sur la page d'accueil
+  if (!grille) return;
 
   const zoneFeatured = document.getElementById("featured-article");
   if (zoneFeatured && !zoneFeatured.children.length) {
@@ -191,11 +181,76 @@ async function initAccueilFirebase() {
   afficher();
 }
 
-/* ---------- Page article ---------- */
+/* ---------- Optimisations SEO, Open Graph & Schema NewsArticle ---------- */
+
+function mettreAJourMetaTags(article, titre, resume) {
+  const urlArticle = window.location.href;
+  const imageArticle = article.image || "https://educa-psy.web.app/og-image.png";
+
+  document.querySelector('meta[name="description"]')?.setAttribute('content', resume);
+
+  document.querySelector('meta[property="og:title"]')?.setAttribute('content', `${titre} — Educa-Psy`);
+  document.querySelector('meta[property="og:description"]')?.setAttribute('content', resume);
+  document.querySelector('meta[property="og:image"]')?.setAttribute('content', imageArticle);
+  document.querySelector('meta[property="og:url"]')?.setAttribute('content', urlArticle);
+
+  document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', `${titre} — Educa-Psy`);
+  document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', resume);
+  document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', imageArticle);
+
+  let canonicalLink = document.querySelector('link[rel="canonical"]');
+  if (canonicalLink) {
+    canonicalLink.setAttribute('href', urlArticle);
+  }
+}
+
+function injecterDonneesStructurees(article, titre, resume) {
+  const ancien = document.getElementById("jsonld-article");
+  if (ancien) ancien.remove();
+
+  const d = article.date && article.date.toDate ? article.date.toDate() : new Date(article.date || Date.now());
+  const dateIso = !isNaN(d.getTime()) ? d.toISOString() : new Date().toISOString();
+
+  const script = document.createElement("script");
+  script.type = "application/ld+json";
+  script.id = "jsonld-article";
+  
+  script.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": window.location.href
+    },
+    "headline": titre || article.titre || "",
+    "description": resume || article.resume || "",
+    "image": article.image ? [article.image] : ["https://educa-psy.web.app/og-image.png"],
+    "datePublished": dateIso,
+    "dateModified": article.dateModif ? new Date(article.dateModif).toISOString() : dateIso,
+    "author": [{
+      "@type": "Person",
+      "name": article.auteur || "Équipe Educa-Psy",
+      "url": "https://educa-psy.web.app/a-propos.html"
+    }],
+    "publisher": {
+      "@type": "Organization",
+      "name": "Educa-Psy",
+      "url": "https://educa-psy.web.app/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://educa-psy.web.app/logo.png"
+      }
+    }
+  });
+
+  document.head.appendChild(script);
+}
+
+/* ---------- Page Article ---------- */
 
 async function initArticlePageFirebase() {
   const zone = document.getElementById("article-content");
-  if (!zone) return; // pas sur la page article
+  if (!zone) return;
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
@@ -228,26 +283,44 @@ async function initArticlePageFirebase() {
   const langue = localStorage.getItem("educapsy-langue") || "fr";
   const slug = slugify(article.categorie || "");
   const titre = champLocale(article, "titre", langue);
+  const resume = champLocale(article, "resume", langue);
+
   document.title = `${titre || article.titre} — Educa-Psy`;
+  mettreAJourMetaTags(article, titre, resume);
 
   const contenu = Array.isArray(article[`contenu_${langue}`]) && article[`contenu_${langue}`].length
     ? article[`contenu_${langue}`]
     : (Array.isArray(article.contenu) ? article.contenu : []);
-  const imageHero = article.image ? `<img class="article-image" src="${article.image}" alt="${titre || ""}">` : "";
+
+  const imageHero = article.image 
+    ? `<figure class="article-hero">
+        <img class="article-image" src="${article.image}" alt="${titre || ""}" fetchpriority="high">
+       </figure>` 
+    : "";
+
+  const dateObj = article.date && article.date.toDate ? article.date.toDate() : new Date(article.date);
+  const dateIso = !isNaN(dateObj.getTime()) ? dateObj.toISOString() : "";
 
   zone.innerHTML = `
-    <a class="back-link" href="index.html">← Retour à l'accueil</a>
-    <span class="tag tag-${slug}">${article.categorie || ""}</span>
-    <h1 class="article-title">${titre || ""}</h1>
-    <div class="article-meta">Par ${article.auteur || "Équipe Educa-Psy"} · ${formaterDateFirestore(article.date)}</div>
-    ${imageHero}
-    <div class="article-body">${contenu.length ? contenu.map(p => `<p>${formaterTexte(p)}</p>`).join("") : "<p><em>Cet article n'a pas encore de contenu (champ « contenu » manquant dans Firestore).</em></p>"}</div>
-    <button type="button" class="share-btn" id="btn-partager">↗ Partager</button>`;
+    <article class="single-article">
+      <a class="back-link" href="index.html">← Retour à l'accueil</a>
+      <span class="tag tag-${slug}">${article.categorie || ""}</span>
+      <h1 class="article-title">${titre || ""}</h1>
+      <div class="article-meta">
+        Par <strong>${article.auteur || "Équipe Educa-Psy"}</strong> · 
+        <time datetime="${dateIso}">${formaterDateFirestore(article.date)}</time>
+      </div>
+      ${imageHero}
+      <div class="article-body">
+        ${contenu.length ? contenu.map(p => `<p>${formaterTexte(p)}</p>`).join("") : "<p><em>Cet article n'a pas encore de contenu.</em></p>"}
+      </div>
+      <button type="button" class="share-btn" id="btn-partager">↗ Partager</button>
+    </article>`;
 
   const btnPartager = document.getElementById("btn-partager");
   if (btnPartager) {
     btnPartager.addEventListener("click", async () => {
-      const data = { title: article.titre || "Educa-Psy", text: article.resume || "", url: window.location.href };
+      const data = { title: titre || "Educa-Psy", text: resume || "", url: window.location.href };
       if (navigator.share) {
         try { await navigator.share(data); } catch (err) { /* annulé par l'utilisateur */ }
       } else {
@@ -278,30 +351,10 @@ async function initArticlePageFirebase() {
     }
   }
 
-  injecterDonneesStructurees(article);
+  injecterDonneesStructurees(article, titre, resume);
 }
 
-function injecterDonneesStructurees(article) {
-  const ancien = document.getElementById("jsonld-article");
-  if (ancien) ancien.remove();
-  const d = article.date && article.date.toDate ? article.date.toDate() : null;
-  const script = document.createElement("script");
-  script.type = "application/ld+json";
-  script.id = "jsonld-article";
-  script.textContent = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": article.titre || "",
-    "description": article.resume || "",
-    "author": { "@type": "Organization", "name": article.auteur || "Équipe Educa-Psy" },
-    "publisher": { "@type": "Organization", "name": "Educa-Psy" },
-    "datePublished": d ? d.toISOString().slice(0, 10) : undefined,
-    "image": article.image || undefined
-  });
-  document.head.appendChild(script);
-}
-
-/* ---------- Écoute des événements & Lancement ---------- */
+/* ---------- Lancement ---------- */
 
 function rechargerContenu() {
   if (document.getElementById("articles-grid")) {
@@ -312,7 +365,6 @@ function rechargerContenu() {
   }
 }
 
-// Re-rendu automatique lors du changement de langue
 window.addEventListener("educapsy-langue-changee", rechargerContenu);
 
 document.addEventListener("DOMContentLoaded", () => {
