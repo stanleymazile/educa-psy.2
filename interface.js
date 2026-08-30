@@ -2,7 +2,7 @@
    EDUCA-PSY — interface.js
    ============================================================
    Comportements communs à toutes les pages : mode sombre, 
-   menu mobile, sous-menus, filtres de thèmes et i18n.
+   menu mobile, sous-menus, filtres horizontaux et i18n.
    ============================================================ */
 
 /* ---------- En-tête / pied de page (date + année) ---------- */
@@ -112,7 +112,7 @@ function initMenuMobile() {
   });
 }
 
-/* ---------- Sélection des thèmes / catégories ---------- */
+/* ---------- Sélection et défilement des filtres horizontaux ---------- */
 
 function initFiltresCategories() {
   const tabs = document.querySelectorAll(".filter-tab");
@@ -120,10 +120,14 @@ function initFiltresCategories() {
 
   tabs.forEach(tab => {
     tab.addEventListener("click", () => {
+      // 1. Mise à jour des états visuels
       tabs.forEach(t => t.classList.remove("active"));
       tab.classList.add("active");
 
-      // Transmet la catégorie sélectionnée si une fonction globale existe sur la page
+      // 2. Centrage automatique de l'élément cliqué dans la barre horizontale
+      tab.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+
+      // 3. Filtrage dynamique si la fonction de page existe
       const categorie = tab.dataset.category || tab.dataset.filter;
       if (categorie && typeof window.filtrerArticles === "function") {
         window.filtrerArticles(categorie);
