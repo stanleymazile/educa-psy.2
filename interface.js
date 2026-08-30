@@ -1,26 +1,23 @@
 /* ============================================================
    EDUCA-PSY — interface.js
    ============================================================
-   Comportements communs à toutes les pages, sans dépendance à
-   Firebase : mode sombre, menu mobile, changement de langue.
-
-   La traduction couvre l'interface du site (menus, boutons,
-   titres de page). Le CONTENU des articles (dans Firestore)
-   reste dans la langue où vous l'avez écrit — ce fichier ne le
-   traduit pas automatiquement.
+   Comportements communs à toutes les pages : mode sombre, 
+   menu mobile, sous-menus, filtres de thèmes et i18n.
    ============================================================ */
 
 /* ---------- En-tête / pied de page (date + année) ---------- */
 
-const MOIS_FR_DATE = ["janvier","février","mars","avril","mai","juin","juillet",
-                       "août","septembre","octobre","novembre","décembre"];
-const JOURS_FR = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
-
-function initEnteteEtPied() {
+function initEnteteEtPied(langue = "fr") {
   const dateEl = document.getElementById("today-date");
   if (dateEl) {
     const auj = new Date();
-    dateEl.textContent = `${JOURS_FR[auj.getDay()]} ${auj.getDate()} ${MOIS_FR_DATE[auj.getMonth()]} ${auj.getFullYear()}`;
+    const localesMap = { fr: "fr-FR", en: "en-US", ht: "ht-HT", es: "es-ES" };
+    const locale = localesMap[langue] || "fr-FR";
+    const options = { weekday: "long", day: "numeric", month: "long", year: "numeric" };
+    
+    // Capitalisation de la première lettre
+    const dateFormatted = auj.toLocaleDateString(locale, options);
+    dateEl.textContent = dateFormatted.charAt(0).toUpperCase() + dateFormatted.slice(1);
   }
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -38,12 +35,17 @@ function initTheme() {
     theme = t;
     if (t === "sombre") document.documentElement.setAttribute("data-theme", "sombre");
     else document.documentElement.removeAttribute("data-theme");
+    
     if (bouton) {
       const svgSoleil = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
       const svgLune = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+      
+      const labelSoleil = window.EducaPsyI18n ? window.EducaPsyI18n.texte("theme_clair") : "Clair";
+      const labelLune = window.EducaPsyI18n ? window.EducaPsyI18n.texte("theme_sombre") : "Sombre";
+      
       bouton.innerHTML = t === "sombre"
-        ? `${svgSoleil}<span class="label">Clair</span>`
-        : `${svgLune}<span class="label">Sombre</span>`;
+        ? `${svgSoleil}<span class="label">${labelSoleil}</span>`
+        : `${svgLune}<span class="label">${labelLune}</span>`;
     }
     localStorage.setItem("educapsy-theme", t);
   }
@@ -54,6 +56,8 @@ function initTheme() {
   }
 }
 
+/* ---------- Sous-menus de navigation ---------- */
+
 function initSousMenus() {
   document.querySelectorAll(".nav-dropdown-toggle").forEach(bouton => {
     bouton.addEventListener("click", (e) => {
@@ -61,16 +65,19 @@ function initSousMenus() {
       e.stopPropagation();
       const parent = bouton.closest(".nav-dropdown");
       const etaitOuvert = parent.classList.contains("ouvert");
+      
       document.querySelectorAll(".nav-dropdown.ouvert").forEach(d => {
         d.classList.remove("ouvert");
         d.querySelector(".nav-dropdown-toggle").setAttribute("aria-expanded", "false");
       });
+      
       if (!etaitOuvert) {
         parent.classList.add("ouvert");
         bouton.setAttribute("aria-expanded", "true");
       }
     });
   });
+
   document.addEventListener("click", (e) => {
     if (!e.target.closest(".nav-dropdown")) {
       document.querySelectorAll(".nav-dropdown.ouvert").forEach(d => {
@@ -87,15 +94,16 @@ function initMenuMobile() {
   const bouton = document.getElementById("nav-toggle");
   const liens = document.getElementById("nav-links");
   if (!bouton || !liens) return;
+
   bouton.addEventListener("click", () => {
     const ouvert = liens.classList.toggle("ouvert");
     bouton.setAttribute("aria-expanded", ouvert ? "true" : "false");
   });
-  // Referme le menu après avoir cliqué un lien (mobile)
+
   liens.querySelectorAll("a").forEach(a => {
     a.addEventListener("click", () => liens.classList.remove("ouvert"));
   });
-  // Referme le menu si on clique en dehors
+
   document.addEventListener("click", (e) => {
     if (liens.classList.contains("ouvert") && !liens.contains(e.target) && e.target !== bouton) {
       liens.classList.remove("ouvert");
@@ -104,11 +112,33 @@ function initMenuMobile() {
   });
 }
 
-/* ---------- Langue de l'interface (FR / EN / HT) ---------- */
+/* ---------- Sélection des thèmes / catégories ---------- */
+
+function initFiltresCategories() {
+  const tabs = document.querySelectorAll(".filter-tab");
+  if (!tabs.length) return;
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      // Transmet la catégorie sélectionnée si une fonction globale existe sur la page
+      const categorie = tab.dataset.category || tab.dataset.filter;
+      if (categorie && typeof window.filtrerArticles === "function") {
+        window.filtrerArticles(categorie);
+      }
+    });
+  });
+}
+
+/* ---------- Dictionnaires de traduction (FR / EN / HT / ES) ---------- */
 
 const TRADUCTIONS = {
   fr: {
     tagline: "Éducation · Technologie · Science · Psychologie",
+    theme_clair: "Clair",
+    theme_sombre: "Sombre",
     nav_accueil: "Accueil",
     nav_actualites: "Actualités",
     nav_newsletter: "Newsletter",
@@ -166,6 +196,8 @@ const TRADUCTIONS = {
   },
   en: {
     tagline: "Education · Technology · Science · Psychology",
+    theme_clair: "Light",
+    theme_sombre: "Dark",
     nav_accueil: "Home",
     nav_actualites: "News",
     nav_newsletter: "Newsletter",
@@ -223,6 +255,8 @@ const TRADUCTIONS = {
   },
   ht: {
     tagline: "Edikasyon · Teknoloji · Syans · Sikoloji",
+    theme_clair: "Klè",
+    theme_sombre: "Foske",
     nav_accueil: "Akèy",
     nav_actualites: "Nouvèl",
     nav_newsletter: "Bilten",
@@ -280,6 +314,8 @@ const TRADUCTIONS = {
   },
   es: {
     tagline: "Educación · Tecnología · Ciencia · Psicología",
+    theme_clair: "Claro",
+    theme_sombre: "Oscuro",
     nav_accueil: "Inicio",
     nav_actualites: "Noticias",
     nav_newsletter: "Boletín",
@@ -339,22 +375,28 @@ const TRADUCTIONS = {
 
 function appliquerTraductions(langue) {
   const dico = TRADUCTIONS[langue] || TRADUCTIONS.fr;
+  
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const cle = el.dataset.i18n;
     if (dico[cle]) el.textContent = dico[cle];
   });
+  
   document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
     const cle = el.dataset.i18nPlaceholder;
     if (dico[cle]) el.setAttribute("placeholder", dico[cle]);
   });
+  
   document.documentElement.lang = langue;
+  initEnteteEtPied(langue);
 }
 
 function initLangue() {
   const select = document.getElementById("lang-select");
   const params = new URLSearchParams(window.location.search);
   const langueURL = params.get("lang");
-  const langueChoisie = ["fr", "en", "ht", "es"].includes(langueURL) ? langueURL : (localStorage.getItem("educapsy-langue") || "fr");
+  const langueChoisie = ["fr", "en", "ht", "es"].includes(langueURL) 
+    ? langueURL 
+    : (localStorage.getItem("educapsy-langue") || "fr");
 
   appliquerTraductions(langueChoisie);
   localStorage.setItem("educapsy-langue", langueChoisie);
@@ -362,17 +404,17 @@ function initLangue() {
   if (select) {
     select.value = langueChoisie;
     select.addEventListener("change", () => {
-      localStorage.setItem("educapsy-langue", select.value);
-      appliquerTraductions(select.value);
+      const nouvelleLangue = select.value;
+      localStorage.setItem("educapsy-langue", nouvelleLangue);
+      appliquerTraductions(nouvelleLangue);
+      
       const url = new URL(window.location.href);
-      url.searchParams.set("lang", select.value);
+      url.searchParams.set("lang", nouvelleLangue);
       window.history.replaceState({}, "", url);
     });
   }
 }
 
-/* Expose pour que d'autres scripts (contact-firebase.js, auth-firebase.js)
-   puissent afficher des messages traduits dynamiquement */
 window.EducaPsyI18n = {
   texte(cle) {
     const langue = localStorage.getItem("educapsy-langue") || "fr";
@@ -384,44 +426,10 @@ window.EducaPsyI18n = {
 /* ---------- Lancement ---------- */
 
 document.addEventListener("DOMContentLoaded", () => {
-  initEnteteEtPied();
   initTheme();
   initMenuMobile();
   initSousMenus();
+  initFiltresCategories();
   initLangue();
-  initPlusCategories();
 });
-
-/* ---------- Bouton + catégories supplémentaires ---------- */
-
-function initPlusCategories() {
-  const btn = document.getElementById("btn-plus-cats");
-  const dropdown = document.getElementById("plus-dropdown");
-  if (!btn || !dropdown) return;
-
-  btn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    const ouvert = dropdown.classList.toggle("ouvert");
-    btn.setAttribute("aria-expanded", ouvert ? "true" : "false");
-  });
-
-  // Fermer si clic en dehors
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest(".filter-plus-wrap")) {
-      dropdown.classList.remove("ouvert");
-      btn.setAttribute("aria-expanded", "false");
-    }
-  });
-
-  // Fermer après sélection d'une catégorie
-  dropdown.querySelectorAll(".filter-tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      dropdown.classList.remove("ouvert");
-      btn.setAttribute("aria-expanded", "false");
-      // Mettre le + en actif si une catégorie du dropdown est sélectionnée
-      btn.classList.add("active");
-    });
-  });
-}
-
 
