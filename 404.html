@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<a href="#contenu-principal" class="skip-link">Aller au contenu</a>
+<a href="#contenu-principal" class="skip-link" data-i18n="skip_link">Aller au contenu</a>
 
 <header class="site-header">
   <div class="masthead-top">
@@ -23,9 +23,9 @@
       <div class="masthead-top-inner">
         <span id="today-date" class="masthead-date"></span>
         <span class="masthead-tagline" data-i18n="tagline">Éducation · Technologie · Science · Psychologie</span>
-                <div class="masthead-utils">
+        <div class="masthead-utils">
           <div class="lang-wrapper">
-            <svg class="lang-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <svg class="lang-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             <select id="lang-select" class="lang-select" aria-label="Langue / Language / Lang">
               <option value="fr">FR</option>
               <option value="en">EN</option>
@@ -33,21 +33,20 @@
               <option value="es">ES</option>
             </select>
           </div>
-          <button id="theme-toggle" class="util-btn" type="button"><span class="icon">🌙</span><span class="label">Sombre</span></button>
-          <a href="index.html#recherche-articles" class="util-icon-btn" aria-label="Rechercher"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></a>
-          <a href="connexion.html" class="topbar-auth" aria-label="Connexion"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7"/></svg></a>
+          <button id="theme-toggle" class="util-btn" type="button"><span class="icon" aria-hidden="true">🌙</span><span class="label" data-i18n="theme_label">Sombre</span></button>
+          <a href="index.html#recherche-articles" class="util-icon-btn" aria-label="Rechercher"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></a>
+          <a href="connexion.html" class="topbar-auth" aria-label="Connexion"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7"/></svg></a>
           <span id="auth-zone" class="auth-zone"></span>
         </div>
-      </div>
       </div>
     </div>
   </div>
 
-    <div class="masthead-main">
+  <div class="masthead-main">
     <div class="container">
       <div class="masthead-main-row">
         <a href="index.html" class="logo">
-          <img class="logo-mark" src="logo.svg" alt="Educa-Psy">
+          <img class="logo-mark" src="logo.svg" alt="Logo Educa-Psy" width="40" height="40">
           <span class="logo-text">Educa-Psy</span>
         </a>
         <button type="button" id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">☰</button>
@@ -55,7 +54,7 @@
     </div>
   </div>
 
-    <nav class="site-nav">
+  <nav class="site-nav">
     <div class="container">
       <div class="mobile-quicknav">
         <a href="index.html" data-i18n="nav_actualites">Actualités</a>
@@ -108,9 +107,9 @@
 <main id="contenu-principal">
   <div class="container">
     <section class="article-not-found">
-      <h1>Page introuvable</h1>
-      <p style="font-family:var(--police-lecture);">La page que vous cherchez n'existe pas ou a été déplacée.</p>
-      <a class="btn btn-primary" href="index.html">← Retour à l'accueil</a>
+      <h1 data-i18n="err_404_title">Page introuvable</h1>
+      <p style="font-family:var(--police-lecture);" data-i18n="err_404_desc">La page que vous cherchez n'existe pas ou a été déplacée.</p>
+      <a class="btn btn-primary" href="index.html" data-i18n="err_404_btn">← Retour à l'accueil</a>
     </section>
   </div>
 </main>
@@ -128,5 +127,3 @@
 <script type="module" src="auth-firebase.js"></script>
 </body>
 </html>
-
-
