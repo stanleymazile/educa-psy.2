@@ -1,11 +1,9 @@
 /* ============================================================
-   EDUCA-PSY — articles-firebase.js
+   EDUCA-PSY — articles-firebase.js (Version optimisée)
    ============================================================
    Les articles sont lus en direct depuis Firestore (collection
    "articles") : toute modification faite dans la console
    Firebase apparaît immédiatement sur le site, sans redéploiement.
-
-   Vous n'avez normalement pas besoin de modifier ce fichier.
    ============================================================ */
 
 import { db } from "./firebase-config.js";
@@ -15,6 +13,9 @@ import {
 
 const MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet",
                   "août","septembre","octobre","novembre","décembre"];
+
+/* Cache local pour éviter de re-télécharger les articles lors des changements de filtre/langue */
+let cacheArticles = null;
 
 /* Retourne le champ dans la langue active, avec fallback français */
 function champLocale(article, champ, langue) {
@@ -51,9 +52,11 @@ function formaterTexte(texte) {
 /* ---------- Accès Firestore ---------- */
 
 async function chargerArticles() {
+  if (cacheArticles) return cacheArticles;
   const q = query(collection(db, "articles"), orderBy("date", "desc"));
   const snap = await getDocs(q);
-  return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  cacheArticles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  return cacheArticles;
 }
 
 async function chargerArticleParId(id) {
@@ -63,11 +66,9 @@ async function chargerArticleParId(id) {
 }
 
 async function chargerArticlesSimilaires(categorie, idAExclure, max = 2) {
-  const q = query(collection(db, "articles"), where("categorie", "==", categorie));
-  const snap = await getDocs(q);
-  return snap.docs
-    .map(d => ({ id: d.id, ...d.data() }))
-    .filter(a => a.id !== idAExclure)
+  const tous = await chargerArticles();
+  return tous
+    .filter(a => a.categorie === categorie && a.id !== idAExclure)
     .slice(0, max);
 }
 
@@ -110,8 +111,12 @@ async function initAccueilFirebase() {
   if (!grille) return; // pas sur la page d'accueil
 
   const zoneFeatured = document.getElementById("featured-article");
-  if (zoneFeatured) zoneFeatured.innerHTML = `<p class="empty-msg">Chargement…</p>`;
-  grille.innerHTML = `<p class="empty-msg">Chargement des articles…</p>`;
+  if (zoneFeatured && !zoneFeatured.children.length) {
+    zoneFeatured.innerHTML = `<p class="empty-msg">Chargement…</p>`;
+  }
+  if (!grille.children.length) {
+    grille.innerHTML = `<p class="empty-msg">Chargement des articles…</p>`;
+  }
 
   let tous;
   try {
@@ -148,13 +153,29 @@ async function initAccueilFirebase() {
 
   const params = new URLSearchParams(window.location.search);
   catActuelle = params.get("cat") || "Tous";
+
+  const btnPlusCats = document.getElementById("btn-plus-cats");
   const onglets = document.querySelectorAll(".filter-tab[data-cat]");
+
   onglets.forEach(onglet => {
-    onglet.classList.toggle("active", onglet.dataset.cat === catActuelle);
+    const isSelected = onglet.dataset.cat === catActuelle;
+    onglet.classList.toggle("active", isSelected);
+
+    if (isSelected && btnPlusCats) {
+      const estDansDropdown = onglet.closest(".dropdown-menu") !== null;
+      btnPlusCats.classList.toggle("active", estDansDropdown);
+    }
+
     onglet.addEventListener("click", () => {
       onglets.forEach(o => o.classList.remove("active"));
       onglet.classList.add("active");
       catActuelle = onglet.dataset.cat;
+
+      if (btnPlusCats) {
+        const estDansDropdown = onglet.closest(".dropdown-menu") !== null;
+        btnPlusCats.classList.toggle("active", estDansDropdown);
+      }
+
       afficher();
     });
   });
@@ -185,7 +206,9 @@ async function initArticlePageFirebase() {
     return;
   }
 
-  zone.innerHTML = `<p class="empty-msg">Chargement de l'article…</p>`;
+  if (!zone.querySelector(".article-title")) {
+    zone.innerHTML = `<p class="empty-msg">Chargement de l'article…</p>`;
+  }
 
   let article;
   try {
@@ -202,10 +225,11 @@ async function initArticlePageFirebase() {
     return;
   }
 
-  document.title = `${article.titre} — Educa-Psy`;
   const langue = localStorage.getItem("educapsy-langue") || "fr";
   const slug = slugify(article.categorie || "");
   const titre = champLocale(article, "titre", langue);
+  document.title = `${titre || article.titre} — Educa-Psy`;
+
   const contenu = Array.isArray(article[`contenu_${langue}`]) && article[`contenu_${langue}`].length
     ? article[`contenu_${langue}`]
     : (Array.isArray(article.contenu) ? article.contenu : []);
@@ -225,7 +249,7 @@ async function initArticlePageFirebase() {
     btnPartager.addEventListener("click", async () => {
       const data = { title: article.titre || "Educa-Psy", text: article.resume || "", url: window.location.href };
       if (navigator.share) {
-        try { await navigator.share(data); } catch (err) { /* annulé par l'utilisateur : rien à faire */ }
+        try { await navigator.share(data); } catch (err) { /* annulé par l'utilisateur */ }
       } else {
         try {
           await navigator.clipboard.writeText(window.location.href);
@@ -250,7 +274,7 @@ async function initArticlePageFirebase() {
           </div>`;
       }
     } catch (err) {
-      console.error("Erreur Firestore (articles similaires) :", err); // non bloquant
+      console.error("Erreur Firestore (articles similaires) :", err);
     }
   }
 
@@ -277,9 +301,21 @@ function injecterDonneesStructurees(article) {
   document.head.appendChild(script);
 }
 
-/* ---------- Lancement ---------- */
+/* ---------- Écoute des événements & Lancement ---------- */
+
+function rechargerContenu() {
+  if (document.getElementById("articles-grid")) {
+    initAccueilFirebase();
+  }
+  if (document.getElementById("article-content")) {
+    initArticlePageFirebase();
+  }
+}
+
+// Re-rendu automatique lors du changement de langue
+window.addEventListener("educapsy-langue-changee", rechargerContenu);
 
 document.addEventListener("DOMContentLoaded", () => {
-  initAccueilFirebase();
-  initArticlePageFirebase();
+  rechargerContenu();
 });
+
