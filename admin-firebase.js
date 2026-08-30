@@ -1,13 +1,13 @@
 /* ============================================================
-   EDUCA-PSY — admin-firebase.js (Version corrigée & optimisée)
+   EDUCA-PSY — admin-firebase.js (Version Optimisée & SEO/Discover)
    ============================================================ */
 
 import { db, auth, storage, ADMIN_EMAILS } from "./firebase-config.js";
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 import {
-  collection, getDocs, doc, setDoc, addDoc, deleteDoc, query, orderBy, Timestamp
+  collection, getDocs, doc, setDoc, addDoc, deleteDoc, query, orderBy, Timestamp, deleteField
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
-import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
+import { ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
 
 /* ---------- Outils & Helpers ---------- */
 
@@ -15,19 +15,28 @@ function dateVersInput(valeur) {
   if (!valeur) return "";
   const d = valeur.toDate ? valeur.toDate() : new Date(valeur);
   if (isNaN(d.getTime())) return "";
-  return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}-${String(d.getUTCDate()).padStart(2, "0")}`;
+  const annee = d.getFullYear();
+  const mois = String(d.getMonth() + 1).padStart(2, "0");
+  const jour = String(d.getDate()).padStart(2, "0");
+  return `${annee}-${mois}-${jour}`;
 }
 
 function inputVersTimestamp(valeur) {
   if (!valeur) return null;
-  return Timestamp.fromDate(new Date(valeur + "T00:00:00Z"));
+  const [annee, mois, jour] = valeur.split("-").map(Number);
+  if (!annee || !mois || !jour) return null;
+  return Timestamp.fromDate(new Date(annee, mois - 1, jour, 12, 0, 0));
 }
 
 function formaterDateAffichage(valeur) {
   if (!valeur) return "";
   const d = valeur.toDate ? valeur.toDate() : new Date(valeur);
   if (isNaN(d.getTime())) return "";
-  return d.toISOString().slice(0, 10);
+  return d.toLocaleDateString("fr-FR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
 }
 
 async function televerserFichier(file, dossier) {
@@ -37,10 +46,27 @@ async function televerserFichier(file, dossier) {
   return getDownloadURL(storageRef);
 }
 
+async function supprimerFichierStorageParUrl(url) {
+  if (!url || !url.includes("firebasestorage.googleapis.com")) return;
+  try {
+    const storageRef = ref(storage, url);
+    await deleteObject(storageRef);
+  } catch (err) {
+    console.warn("Avertissement : Impossible de supprimer le fichier du Storage :", err.message);
+  }
+}
+
 function echapperHTML(texte) {
   const div = document.createElement("div");
   div.textContent = texte == null ? "" : String(texte);
   return div.innerHTML;
+}
+
+function afficherMessageSysteme(elementId, message, estErreur = false) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  const classeMsg = estErreur ? "erreur" : "succes";
+  el.innerHTML = `<div class="formulaire-message ${classeMsg}">${echapperHTML(message)}</div>`;
 }
 
 /* ---------- Accès & Authentification ---------- */
@@ -86,7 +112,7 @@ function initAccesAdmin() {
 }
 
 /* ============================================================
-   ARTICLES (Multilingue : FR / EN / HT / ES)
+   ARTICLES (Multilingue : FR / EN / HT / ES + SEO & Discover)
    ============================================================ */
 
 const LANGUES = ["en", "ht", "es"];
@@ -104,6 +130,9 @@ function reinitialiserFormArticle() {
   const elApercu = document.getElementById("article-image-actuelle");
   if (elApercu) elApercu.innerHTML = "";
 
+  const messageZone = document.getElementById("article-form-message");
+  if (messageZone) messageZone.innerHTML = "";
+
   for (const lg of LANGUES) {
     const elT = document.getElementById(`article-titre-${lg}`);
     const elR = document.getElementById(`article-resume-${lg}`);
@@ -117,7 +146,6 @@ function reinitialiserFormArticle() {
 function remplirFormArticle(a) {
   articleEnEdition = a.id;
 
-  // Remplissage sécurisé des champs FR / Généraux
   const elTitre = document.getElementById("article-titre");
   const elCat = document.getElementById("article-categorie");
   const elAuteur = document.getElementById("article-auteur");
@@ -136,7 +164,6 @@ function remplirFormArticle(a) {
   if (elImg) elImg.value = a.image || "";
   if (elALaUne) elALaUne.checked = !!a.aLaUne;
 
-  // Remplissage sécurisé des traductions
   for (const lg of LANGUES) {
     const elT = document.getElementById(`article-titre-${lg}`);
     const elR = document.getElementById(`article-resume-${lg}`);
@@ -153,7 +180,7 @@ function remplirFormArticle(a) {
   const elApercu = document.getElementById("article-image-actuelle");
   if (elApercu) {
     elApercu.innerHTML = a.image
-      ? `<div class="admin-apercu-actuel"><img src="${a.image}" alt=""><span>Image actuelle — un nouvel envoi la remplacera</span></div>`
+      ? `<div class="admin-apercu-actuel"><img src="${a.image}" alt=""><span>Image actuelle — un nouvel envoi ou une URL la remplacera</span></div>`
       : "";
   }
 
@@ -187,15 +214,24 @@ async function rafraichirListeArticles() {
       b.addEventListener("click", () => supprimerArticle(b.dataset.id)));
   } catch (err) {
     console.error("Erreur chargement articles :", err);
-    zone.innerHTML = `<p class="empty-msg">Erreur de chargement : ${err.message}</p>`;
+    zone.innerHTML = `<p class="empty-msg">Erreur de chargement : ${echapperHTML(err.message)}</p>`;
   }
 }
 
 async function supprimerArticle(id) {
   if (!confirm("Supprimer définitivement cet article ?")) return;
-  await deleteDoc(doc(db, "articles", id));
-  if (articleEnEdition === id) reinitialiserFormArticle();
-  await rafraichirListeArticles();
+  try {
+    const art = cacheArticles.find(a => a.id === id);
+    if (art && art.image) {
+      await supprimerFichierStorageParUrl(art.image);
+    }
+    await deleteDoc(doc(db, "articles", id));
+    if (articleEnEdition === id) reinitialiserFormArticle();
+    await rafraichirListeArticles();
+  } catch (err) {
+    console.error("Erreur lors de la suppression de l'article :", err);
+    afficherMessageSysteme("article-form-message", "Erreur lors de la suppression : " + err.message, true);
+  }
 }
 
 async function enregistrerArticle(e) {
@@ -210,11 +246,15 @@ async function enregistrerArticle(e) {
     const elFichier = document.getElementById("article-image-fichier");
     let imageUrl = elImg ? elImg.value.trim() : "";
 
+    const artExistant = articleEnEdition ? cacheArticles.find(a => a.id === articleEnEdition) : null;
+
     if (elFichier && elFichier.files[0]) {
       imageUrl = await televerserFichier(elFichier.files[0], "articles");
-    } else if (!imageUrl && articleEnEdition) {
-      const artExistant = cacheArticles.find(a => a.id === articleEnEdition);
-      if (artExistant && artExistant.image) imageUrl = artExistant.image;
+      if (artExistant && artExistant.image && artExistant.image !== imageUrl) {
+        await supprimerFichierStorageParUrl(artExistant.image);
+      }
+    } else if (!imageUrl && artExistant && artExistant.image) {
+      imageUrl = artExistant.image;
     }
 
     const elContenu = document.getElementById("article-contenu");
@@ -233,19 +273,30 @@ async function enregistrerArticle(e) {
     const elResume = document.getElementById("article-resume");
     const elALaUne = document.getElementById("article-alaune");
 
+    let resumeGenere = elResume ? elResume.value.trim() : "";
+    if (!resumeGenere && contenu.length > 0) {
+      resumeGenere = contenu[0].slice(0, 155) + (contenu[0].length > 155 ? "..." : "");
+    }
+
+    const dateAujourdhui = Timestamp.now();
+
     const donnees = {
       titre,
       categorie: elCat ? elCat.value : "Éducation",
       auteur: elAuteur && elAuteur.value.trim() ? elAuteur.value.trim() : "Équipe Educa-Psy",
-      date: elDate ? inputVersTimestamp(elDate.value) || Timestamp.now() : Timestamp.now(),
-      resume: elResume ? elResume.value.trim() : "",
+      date: elDate && elDate.value ? (inputVersTimestamp(elDate.value) || dateAujourdhui) : dateAujourdhui,
+      dateModification: dateAujourdhui,
+      resume: resumeGenere,
       contenu,
       aLaUne: elALaUne ? elALaUne.checked : false
     };
 
-    if (imageUrl) donnees.image = imageUrl;
+    if (imageUrl) {
+      donnees.image = imageUrl;
+    } else {
+      donnees.image = deleteField();
+    }
 
-    // Récupération des traductions EN / HT / ES
     for (const lg of LANGUES) {
       const elT = document.getElementById(`article-titre-${lg}`);
       const elR = document.getElementById(`article-resume-${lg}`);
@@ -255,9 +306,9 @@ async function enregistrerArticle(e) {
       const r = elR ? elR.value.trim() : "";
       const c = elC ? elC.value.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean) : [];
 
-      if (t) donnees[`titre_${lg}`] = t;
-      if (r) donnees[`resume_${lg}`] = r;
-      if (c.length) donnees[`contenu_${lg}`] = c;
+      if (t) donnees[`titre_${lg}`] = t; else donnees[`titre_${lg}`] = deleteField();
+      if (r) donnees[`resume_${lg}`] = r; else donnees[`resume_${lg}`] = deleteField();
+      if (c.length) donnees[`contenu_${lg}`] = c; else donnees[`contenu_${lg}`] = deleteField();
     }
 
     if (articleEnEdition) {
@@ -266,12 +317,12 @@ async function enregistrerArticle(e) {
       await addDoc(collection(db, "articles"), donnees);
     }
 
-    if (messageZone) messageZone.innerHTML = `<div class="formulaire-message succes">Article enregistré avec succès.</div>`;
+    afficherMessageSysteme("article-form-message", "Article enregistré avec succès.");
     reinitialiserFormArticle();
     await rafraichirListeArticles();
   } catch (err) {
     console.error("Erreur enregistrement article :", err);
-    if (messageZone) messageZone.innerHTML = `<div class="formulaire-message erreur">Erreur : ${err.message}</div>`;
+    afficherMessageSysteme("article-form-message", "Erreur : " + err.message, true);
   } finally {
     if (bouton) bouton.disabled = false;
   }
@@ -294,6 +345,9 @@ function reinitialiserFormEmploi() {
 
   const elPdfActuel = document.getElementById("emploi-pdf-actuel");
   if (elPdfActuel) elPdfActuel.innerHTML = "";
+
+  const messageZone = document.getElementById("emploi-form-message");
+  if (messageZone) messageZone.innerHTML = "";
 }
 
 function remplirFormEmploi(o) {
@@ -320,7 +374,7 @@ function remplirFormEmploi(o) {
   const elPdfActuel = document.getElementById("emploi-pdf-actuel");
   if (elPdfActuel) {
     elPdfActuel.innerHTML = o.pdfUrl
-      ? `<div class="admin-apercu-actuel">📄 <a href="${o.pdfUrl}" target="_blank" rel="noopener">${o.pdfNom || "PDF actuel"}</a><span>— un nouvel envoi le remplacera</span></div>`
+      ? `<div class="admin-apercu-actuel">📄 <a href="${o.pdfUrl}" target="_blank" rel="noopener">${echapperHTML(o.pdfNom || "PDF actuel")}</a><span> — un nouvel envoi le remplacera</span></div>`
       : "";
   }
 
@@ -357,15 +411,24 @@ async function rafraichirListeEmplois() {
       b.addEventListener("click", () => supprimerEmploi(b.dataset.id)));
   } catch (err) {
     console.error("Erreur chargement emplois :", err);
-    zone.innerHTML = `<p class="empty-msg">Erreur de chargement : ${err.message}</p>`;
+    zone.innerHTML = `<p class="empty-msg">Erreur de chargement : ${echapperHTML(err.message)}</p>`;
   }
 }
 
 async function supprimerEmploi(id) {
   if (!confirm("Supprimer définitivement cette offre ?")) return;
-  await deleteDoc(doc(db, "emplois", id));
-  if (emploiEnEdition === id) reinitialiserFormEmploi();
-  await rafraichirListeEmplois();
+  try {
+    const emp = cacheEmplois.find(o => o.id === id);
+    if (emp && emp.pdfUrl) {
+      await supprimerFichierStorageParUrl(emp.pdfUrl);
+    }
+    await deleteDoc(doc(db, "emplois", id));
+    if (emploiEnEdition === id) reinitialiserFormEmploi();
+    await rafraichirListeEmplois();
+  } catch (err) {
+    console.error("Erreur lors de la suppression de l'offre :", err);
+    afficherMessageSysteme("emploi-form-message", "Erreur lors de la suppression : " + err.message, true);
+  }
 }
 
 async function enregistrerEmploi(e) {
@@ -384,16 +447,19 @@ async function enregistrerEmploi(e) {
     const elFichier = document.getElementById("emploi-pdf-fichier");
     const fichier = elFichier ? elFichier.files[0] : null;
 
+    const empExistant = emploiEnEdition ? cacheEmplois.find(o => o.id === emploiEnEdition) : null;
+
     if (fichier) {
       if (fichier.type !== "application/pdf") throw new Error("Le fichier joint doit être un PDF.");
       pdfUrl = await televerserFichier(fichier, "emplois");
       pdfNom = fichier.name;
-    } else if (emploiEnEdition) {
-      const empExistant = cacheEmplois.find(o => o.id === emploiEnEdition);
+
       if (empExistant && empExistant.pdfUrl) {
-        pdfUrl = empExistant.pdfUrl;
-        pdfNom = empExistant.pdfNom || "PDF actuel";
+        await supprimerFichierStorageParUrl(empExistant.pdfUrl);
       }
+    } else if (empExistant && empExistant.pdfUrl) {
+      pdfUrl = empExistant.pdfUrl;
+      pdfNom = empExistant.pdfNom || "PDF actuel";
     }
 
     const elType = document.getElementById("emploi-type");
@@ -409,31 +475,33 @@ async function enregistrerEmploi(e) {
       type: elType ? elType.value : "Emploi",
       organisation: elOrg ? elOrg.value.trim() : "",
       lieu: elLieu ? elLieu.value.trim() : "",
-      dateLimite: elDate ? inputVersTimestamp(elDate.value) : null,
+      dateLimite: elDate && elDate.value ? inputVersTimestamp(elDate.value) : null,
       description: elDesc ? elDesc.value.trim() : "",
       resume: elResume ? elResume.value.trim() : "",
-      lien: elLien ? elLien.value.trim() || null : null,
-      datePublication: Timestamp.now()
+      lien: elLien && elLien.value.trim() ? elLien.value.trim() : null
     };
 
     if (pdfUrl) {
       donnees.pdfUrl = pdfUrl;
       donnees.pdfNom = pdfNom;
+    } else {
+      donnees.pdfUrl = deleteField();
+      donnees.pdfNom = deleteField();
     }
 
     if (emploiEnEdition) {
-      delete donnees.datePublication;
       await setDoc(doc(db, "emplois", emploiEnEdition), donnees, { merge: true });
     } else {
+      donnees.datePublication = Timestamp.now();
       await addDoc(collection(db, "emplois"), donnees);
     }
 
-    if (messageZone) messageZone.innerHTML = `<div class="formulaire-message succes">Offre enregistrée avec succès.</div>`;
+    afficherMessageSysteme("emploi-form-message", "Offre enregistrée avec succès.");
     reinitialiserFormEmploi();
     await rafraichirListeEmplois();
   } catch (err) {
     console.error("Erreur enregistrement emploi :", err);
-    if (messageZone) messageZone.innerHTML = `<div class="formulaire-message erreur">Erreur : ${err.message}</div>`;
+    afficherMessageSysteme("emploi-form-message", "Erreur : " + err.message, true);
   } finally {
     if (bouton) bouton.disabled = false;
   }
@@ -459,7 +527,7 @@ async function rafraichirMessages() {
       </div>`).join("") || `<p class="empty-msg">Aucun message.</p>`;
   } catch (err) {
     console.error("Erreur chargement messages :", err);
-    zone.innerHTML = `<p class="empty-msg">Erreur de chargement : ${err.message}</p>`;
+    zone.innerHTML = `<p class="empty-msg">Erreur de chargement : ${echapperHTML(err.message)}</p>`;
   }
 }
 
@@ -476,7 +544,7 @@ async function rafraichirNewsletter() {
       || `<p class="empty-msg">Aucun abonné actif.</p>`);
   } catch (err) {
     console.error("Erreur chargement newsletter :", err);
-    zone.innerHTML = `<p class="empty-msg">Erreur de chargement : ${err.message}</p>`;
+    zone.innerHTML = `<p class="empty-msg">Erreur de chargement : ${echapperHTML(err.message)}</p>`;
   }
 }
 
@@ -497,4 +565,3 @@ document.addEventListener("DOMContentLoaded", () => {
   const annulerEmploi = document.getElementById("annuler-emploi");
   if (annulerEmploi) annulerEmploi.addEventListener("click", reinitialiserFormEmploi);
 });
-
