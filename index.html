@@ -184,31 +184,25 @@
       <div class="search-wrap">
         <input type="search" id="recherche-articles" placeholder="Rechercher un article…" aria-label="Rechercher un article">
       </div>
+      <!-- Tous les thèmes sont désormais alignés directement pour un défilement horizontal -->
       <div class="filter-tabs" role="tablist" aria-label="Filtrer par rubrique">
         <button class="filter-tab" data-cat="Tous" data-i18n="tous">Tous</button>
         <button class="filter-tab" data-cat="Éducation" data-i18n="nav_education">Éducation</button>
         <button class="filter-tab" data-cat="Technologie" data-i18n="nav_technologie">Technologie</button>
         <button class="filter-tab" data-cat="Science" data-i18n="nav_science">Science</button>
         <button class="filter-tab" data-cat="Psychologie" data-i18n="nav_psychologie">Psychologie</button>
-
-        <!-- Bouton + avec catégories supplémentaires -->
-        <div class="filter-plus-wrap">
-          <button class="filter-tab filter-plus-btn" id="btn-plus-cats" aria-expanded="false" aria-haspopup="true">+</button>
-          <ul class="plus-dropdown" id="plus-dropdown" role="listbox">
-            <li><button class="filter-tab" data-cat="Culture">Culture</button></li>
-            <li><button class="filter-tab" data-cat="IA">IA / Intelligence artificielle</button></li>
-            <li><button class="filter-tab" data-cat="Société">Société</button></li>
-            <li><button class="filter-tab" data-cat="Humanitaire">Humanitaire</button></li>
-            <li><button class="filter-tab" data-cat="Politique">Politique</button></li>
-            <li><button class="filter-tab" data-cat="Histoire">Histoire</button></li>
-            <li><button class="filter-tab" data-cat="Environnement">Environnement</button></li>
-            <li><button class="filter-tab" data-cat="Climat">Climat</button></li>
-            <li><button class="filter-tab" data-cat="Jeunesse">Jeunesse</button></li>
-            <li><button class="filter-tab" data-cat="Réseaux sociaux">Réseaux sociaux</button></li>
-            <li><button class="filter-tab" data-cat="Sexualité">Sexualité</button></li>
-            <li><button class="filter-tab" data-cat="Autre">Autre</button></li>
-          </ul>
-        </div>
+        <button class="filter-tab" data-cat="Culture">Culture</button>
+        <button class="filter-tab" data-cat="IA">IA / Intelligence artificielle</button>
+        <button class="filter-tab" data-cat="Société">Société</button>
+        <button class="filter-tab" data-cat="Humanitaire">Humanitaire</button>
+        <button class="filter-tab" data-cat="Politique">Politique</button>
+        <button class="filter-tab" data-cat="Histoire">Histoire</button>
+        <button class="filter-tab" data-cat="Environnement">Environnement</button>
+        <button class="filter-tab" data-cat="Climat">Climat</button>
+        <button class="filter-tab" data-cat="Jeunesse">Jeunesse</button>
+        <button class="filter-tab" data-cat="Réseaux sociaux">Réseaux sociaux</button>
+        <button class="filter-tab" data-cat="Sexualité">Sexualité</button>
+        <button class="filter-tab" data-cat="Autre">Autre</button>
       </div>
     </div>
   </section>
@@ -293,29 +287,6 @@
 <script type="module" src="auth-firebase.js"></script>
 <script type="module" src="newsletter-firebase.js"></script>
 
-<!-- Script pour le menu déroulant "+" des catégories supplémentaires -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const btnPlus = document.getElementById("btn-plus-cats");
-  const dropdown = document.getElementById("plus-dropdown");
-
-  if (btnPlus && dropdown) {
-    btnPlus.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const isOpen = dropdown.classList.contains("show");
-      dropdown.classList.toggle("show", !isOpen);
-      btnPlus.setAttribute("aria-expanded", !isOpen);
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!dropdown.contains(e.target) && e.target !== btnPlus) {
-        dropdown.classList.remove("show");
-        btnPlus.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
-});
-</script>
 </body>
 </html>
 
