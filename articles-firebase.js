@@ -1,5 +1,5 @@
 /* ============================================================
-   EDUCA-PSY — articles-firebase.js (Version optimisée SEO & Discover)
+   EDUCA-PSY — articles-firebase.js (Version complète : SEO, UX, Sous-titres, Liens & YouTube)
    ============================================================ */
 
 import { db } from "./firebase-config.js";
@@ -32,11 +32,37 @@ function slugify(texte) {
     .replace(/(^-|-$)/g, "");
 }
 
+function calculerTempsLecture(contenuArray) {
+  if (!contenuArray || !contenuArray.length) return "1 min de lecture";
+  const texteTotal = contenuArray.join(" ");
+  const mots = texteTotal.trim().split(/\s+/).length;
+  const minutes = Math.max(1, Math.ceil(mots / 200));
+  return `${minutes} min de lecture`;
+}
+
 function formaterTexte(texte) {
   if (!texte) return "";
+  
+  // 1. Transformation des sous-titres (## )
+  if (texte.startsWith("## ")) {
+    const titreSousSection = texte.replace("## ", "").trim();
+    return `<h2 class="article-subtitle">${titreSousSection}</h2>`;
+  }
+
+  // 2. Transformation d'une ligne vidéo YouTube : ![youtube](URL)
+  if (texte.startsWith("![youtube](")) {
+    const match = texte.match(/!\[youtube\]\((https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^\s)]+))\)/);
+    if (match && match[1]) {
+      const cleanId = match[2].split('&')[0];
+      return `<div class="video-container"><iframe src="https://www.youtube-nocookie.com/embed/${cleanId}" title="Vidéo YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>`;
+    }
+  }
+
+  // 3. Paragraphe classique avec formatages Markdown internes
   return texte
-    .replace(/!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)/g, '<img src="$2" alt="$1" loading="lazy">')
-    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    .replace(/!\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<img src="$2" alt="$1" loading="lazy">')
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/==([^=]+)==/g, '<mark class="article-highlight">$1</mark>');
 }
 
 /* ---------- Accès Firestore ---------- */
@@ -292,6 +318,8 @@ async function initArticlePageFirebase() {
     ? article[`contenu_${langue}`]
     : (Array.isArray(article.contenu) ? article.contenu : []);
 
+  const tempsLecture = calculerTempsLecture(contenu);
+
   const imageHero = article.image 
     ? `<figure class="article-hero">
         <img class="article-image" src="${article.image}" alt="${titre || ""}" fetchpriority="high">
@@ -308,11 +336,19 @@ async function initArticlePageFirebase() {
       <h1 class="article-title">${titre || ""}</h1>
       <div class="article-meta">
         Par <strong>${article.auteur || "Équipe Educa-Psy"}</strong> · 
-        <time datetime="${dateIso}">${formaterDateFirestore(article.date)}</time>
+        <time datetime="${dateIso}">${formaterDateFirestore(article.date)}</time> · 
+        <span class="reading-time">${tempsLecture}</span>
       </div>
       ${imageHero}
       <div class="article-body">
-        ${contenu.length ? contenu.map(p => `<p>${formaterTexte(p)}</p>`).join("") : "<p><em>Cet article n'a pas encore de contenu.</em></p>"}
+        ${contenu.length ? contenu.map(p => {
+          const resultatFormatte = formaterTexte(p);
+          // Si c'est un sous-titre (h2) ou un conteneur vidéo (div), on ne l'enferme pas dans un <p>
+          if (resultatFormatte.startsWith("<h2") || resultatFormatte.startsWith("<div")) {
+            return resultatFormatte;
+          }
+          return `<p>${resultatFormatte}</p>`;
+        }).join("") : "<p><em>Cet article n'a pas encore de contenu.</em></p>"}
       </div>
       <button type="button" class="share-btn" id="btn-partager">↗ Partager</button>
     </article>`;
