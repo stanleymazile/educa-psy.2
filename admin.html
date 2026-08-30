@@ -24,7 +24,7 @@
       <div class="masthead-top-inner">
         <span id="today-date" class="masthead-date"></span>
         <span class="masthead-tagline" data-i18n="tagline">Éducation · Technologie · Science · Psychologie</span>
-        <div class="masthead-utils">
+                <div class="masthead-utils">
           <div class="lang-wrapper">
             <svg class="lang-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             <select id="lang-select" class="lang-select" aria-label="Langue / Language / Lang">
@@ -40,10 +40,11 @@
           <span id="auth-zone" class="auth-zone"></span>
         </div>
       </div>
+      </div>
     </div>
   </div>
 
-  <div class="masthead-main">
+    <div class="masthead-main">
     <div class="container">
       <div class="masthead-main-row">
         <a href="index.html" class="logo">
@@ -55,7 +56,7 @@
     </div>
   </div>
 
-  <nav class="site-nav">
+    <nav class="site-nav">
     <div class="container">
       <div class="mobile-quicknav">
         <a href="index.html" data-i18n="nav_actualites">Actualités</a>
@@ -115,22 +116,18 @@
           <button type="button" id="admin-deconnexion" class="util-btn" style="color:var(--couleur-or-fonce); border-color:var(--couleur-ligne);">Se déconnecter</button>
         </p>
 
-        <!-- Accessibilité améliorée : attributs ARIA pour la barre d'onglets -->
-        <div class="admin-tabs" role="tablist" aria-label="Gestion de l'administration">
-          <button type="button" class="admin-tab active" role="tab" id="tab-articles" aria-selected="true" aria-controls="panneau-articles" data-panneau="articles">Articles</button>
-          <button type="button" class="admin-tab" role="tab" id="tab-emplois" aria-selected="false" aria-controls="panneau-emplois" data-panneau="emplois">Emplois &amp; Collaborations</button>
-          <button type="button" class="admin-tab" role="tab" id="tab-messages" aria-selected="false" aria-controls="panneau-messages" data-panneau="messages">Messages</button>
-          <button type="button" class="admin-tab" role="tab" id="tab-newsletter" aria-selected="false" aria-controls="panneau-newsletter" data-panneau="newsletter">Newsletter</button>
+        <div class="admin-tabs">
+          <button type="button" class="admin-tab active" data-panneau="articles">Articles</button>
+          <button type="button" class="admin-tab" data-panneau="emplois">Emplois &amp; Collaborations</button>
+          <button type="button" class="admin-tab" data-panneau="messages">Messages</button>
+          <button type="button" class="admin-tab" data-panneau="newsletter">Newsletter</button>
         </div>
 
         <!-- ARTICLES -->
-        <div id="panneau-articles" class="admin-panneau" role="tabpanel" aria-labelledby="tab-articles">
+        <div id="panneau-articles" class="admin-panneau">
           <h2 id="titre-form-article">Ajouter un article</h2>
-          <div id="article-form-message" aria-live="polite"></div>
+          <div id="article-form-message"></div>
           <form id="form-article" class="admin-form" novalidate>
-            <!-- Champ masque indispensable pour gerer les modifications (UPDATE vs CREATE dans Firestore) -->
-            <input type="hidden" id="article-id" value="">
-
             <div class="champ">
               <label for="article-titre">Titre</label>
               <input type="text" id="article-titre" required>
@@ -171,7 +168,7 @@
               <input type="date" id="article-date">
             </div>
             <div class="champ">
-              <label for="article-resume">Résumé (1-2 phrases — Recommandé pour Google Discover)</label>
+              <label for="article-resume">Résumé (1-2 phrases)</label>
               <textarea id="article-resume" rows="2"></textarea>
             </div>
             <div class="champ">
@@ -182,8 +179,8 @@
               <label for="article-image">Image de l'article — URL (optionnel)</label>
               <div id="article-image-actuelle"></div>
               <input type="url" id="article-image" placeholder="https://...">
-              <p class="aide">— ou téléversez directement un fichier ci-dessous (Format recommandé : WebP/JPG, 1200x675px pour Google Discover, max 2 Mo) —</p>
-              <input type="file" id="article-image-fichier" accept="image/png, image/jpeg, image/webp">
+              <p class="aide">— ou téléversez directement un fichier ci-dessous —</p>
+              <input type="file" id="article-image-fichier" accept="image/*">
             </div>
             <div class="champ">
               <label class="admin-checkbox"><input type="checkbox" id="article-alaune"> Mettre cet article à la une</label>
@@ -226,13 +223,10 @@
         </div>
 
         <!-- EMPLOIS -->
-        <div id="panneau-emplois" class="admin-panneau" role="tabpanel" aria-labelledby="tab-emplois" style="display:none;">
+        <div id="panneau-emplois" class="admin-panneau" style="display:none;">
           <h2 id="titre-form-emploi">Ajouter une offre</h2>
-          <div id="emploi-form-message" aria-live="polite"></div>
+          <div id="emploi-form-message"></div>
           <form id="form-emploi" class="admin-form" novalidate>
-            <!-- Champ masque pour gerer la modification des offres dans Firestore -->
-            <input type="hidden" id="emploi-id" value="">
-
             <div class="champ">
               <label for="emploi-titre">Titre</label>
               <input type="text" id="emploi-titre" required>
@@ -275,7 +269,7 @@
               <input type="url" id="emploi-lien" placeholder="https://... ou mailto:...">
             </div>
             <div class="champ">
-              <label for="emploi-pdf-fichier">Document PDF joint (optionnel, format PDF uniquement, 10 Mo max)</label>
+              <label for="emploi-pdf-fichier">Document PDF joint (optionnel, 10 Mo max)</label>
               <div id="emploi-pdf-actuel"></div>
               <input type="file" id="emploi-pdf-fichier" accept="application/pdf">
             </div>
@@ -290,13 +284,13 @@
         </div>
 
         <!-- MESSAGES -->
-        <div id="panneau-messages" class="admin-panneau" role="tabpanel" aria-labelledby="tab-messages" style="display:none;">
+        <div id="panneau-messages" class="admin-panneau" style="display:none;">
           <h2>Messages reçus</h2>
           <div id="liste-messages"></div>
         </div>
 
         <!-- NEWSLETTER -->
-        <div id="panneau-newsletter" class="admin-panneau" role="tabpanel" aria-labelledby="tab-newsletter" style="display:none;">
+        <div id="panneau-newsletter" class="admin-panneau" style="display:none;">
           <h2>Abonnés newsletter</h2>
           <div id="liste-newsletter"></div>
         </div>
