@@ -4,8 +4,7 @@
    Les articles sont lus en direct depuis Firestore (collection
    "articles") : toute modification faite dans la console
    Firebase apparaît immédiatement sur le site, sans redéploiement.
-
-   Vous n'avez normalement pas besoin de modifier ce fichier.
+   Optimisé pour l'accessibilité, le SEO dynamique et Google Discover.
    ============================================================ */
 
 import { db } from "./firebase-config.js";
@@ -13,8 +12,13 @@ import {
   collection, getDocs, doc, getDoc, query, orderBy, where
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
-const MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet",
-                  "août","septembre","octobre","novembre","décembre"];
+/* Mois selon la langue active */
+const MOIS_LANG = {
+  fr: ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"],
+  ht: ["janvye","fevriye","mas","avril","mè","jen","jiyè","out","septanm","oktòb","novanm","desanm"],
+  en: ["January","February","March","April","May","June","July","August","September","October","November","December"],
+  es: ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"]
+};
 
 /* Retourne le champ dans la langue active, avec fallback français */
 function champLocale(article, champ, langue) {
@@ -22,11 +26,14 @@ function champLocale(article, champ, langue) {
   return article[`${champ}_${langue}`] || article[champ] || "";
 }
 
+/* Formate la date Firestore selon la langue de l'utilisateur */
 function formaterDateFirestore(valeur) {
   if (!valeur) return "";
   const d = valeur.toDate ? valeur.toDate() : new Date(valeur);
   if (isNaN(d.getTime())) return "";
-  return `${d.getUTCDate()} ${MOIS_FR[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+  const langue = localStorage.getItem("educapsy-langue") || "fr";
+  const listeMois = MOIS_LANG[langue] || MOIS_LANG.fr;
+  return `${d.getUTCDate()} ${listeMois[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
 }
 
 function slugify(texte) {
@@ -37,10 +44,7 @@ function slugify(texte) {
     .replace(/(^-|-$)/g, "");
 }
 
-/* Dans un paragraphe de "contenu", permet d'écrire :
-     [texte du lien](https://exemple.com)   -> devient un lien cliquable
-     ![texte alternatif](https://image.jpg) -> devient une image
-   Le HTML brut (ex: <a href="...">) fonctionne aussi tel quel. */
+/* Formatage du texte enrichi (images et liens Markdown + HTML) */
 function formaterTexte(texte) {
   if (!texte) return "";
   return texte
@@ -78,7 +82,8 @@ function carteArticleHTML(article, featured = false) {
   const slug = slugify(article.categorie || "");
   const titre = champLocale(article, "titre", langue);
   const resume = champLocale(article, "resume", langue);
-  const image = article.image ? `<img class="article-card-image" src="${article.image}" alt="" loading="lazy">` : "";
+  const imageAlt = titre ? `Illustration pour : ${titre}` : "Illustration d'article";
+  const image = article.image ? `<img class="article-card-image" src="${article.image}" alt="${imageAlt}" loading="lazy">` : "";
   return `
     <article class="article-card ${featured ? "article-card--featured" : ""} cat-${slug}">
       ${image}
@@ -107,7 +112,7 @@ function erreurChargementHTML() {
 
 async function initAccueilFirebase() {
   const grille = document.getElementById("articles-grid");
-  if (!grille) return; // pas sur la page d'accueil
+  if (!grille) return; // Pas sur la page d'accueil
 
   const zoneFeatured = document.getElementById("featured-article");
   if (zoneFeatured) zoneFeatured.innerHTML = `<p class="empty-msg">Chargement…</p>`;
@@ -174,7 +179,7 @@ async function initAccueilFirebase() {
 
 async function initArticlePageFirebase() {
   const zone = document.getElementById("article-content");
-  if (!zone) return; // pas sur la page article
+  if (!zone) return; // Pas sur la page article
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
@@ -202,14 +207,26 @@ async function initArticlePageFirebase() {
     return;
   }
 
-  document.title = `${article.titre} — Educa-Psy`;
   const langue = localStorage.getItem("educapsy-langue") || "fr";
   const slug = slugify(article.categorie || "");
   const titre = champLocale(article, "titre", langue);
-  const contenu = Array.isArray(article[`contenu_${langue}`]) && article[`contenu_${langue}`].length
-    ? article[`contenu_${langue}`]
-    : (Array.isArray(article.contenu) ? article.contenu : []);
-  const imageHero = article.image ? `<img class="article-image" src="${article.image}" alt="${titre || ""}">` : "";
+  const resume = champLocale(article, "resume", langue);
+  
+  // Prise en charge robuste : tableau ou texte simple
+  let contenuBrut = article[`contenu_${langue}`] || article.contenu || [];
+  let contenuArray = [];
+  if (Array.isArray(contenuBrut)) {
+    contenuArray = contenuBrut;
+  } else if (typeof contenuBrut === "string" && contenuBrut.trim() !== "") {
+    contenuArray = contenuBrut.split(/\n\s*\n/);
+  }
+
+  document.title = `${titre || "Article"} — Educa-Psy`;
+
+  // Mise à jour des balises Open Graph et Méta-description dynamiques pour Discover & Réseaux Sociaux
+  mettreAJourMetaTags(titre, resume, article.image);
+
+  const imageHero = article.image ? `<img class="article-image" src="${article.image}" alt="${titre || "Illustration de l'article"}">` : "";
 
   zone.innerHTML = `
     <a class="back-link" href="index.html">← Retour à l'accueil</a>
@@ -217,15 +234,15 @@ async function initArticlePageFirebase() {
     <h1 class="article-title">${titre || ""}</h1>
     <div class="article-meta">Par ${article.auteur || "Équipe Educa-Psy"} · ${formaterDateFirestore(article.date)}</div>
     ${imageHero}
-    <div class="article-body">${contenu.length ? contenu.map(p => `<p>${formaterTexte(p)}</p>`).join("") : "<p><em>Cet article n'a pas encore de contenu (champ « contenu » manquant dans Firestore).</em></p>"}</div>
+    <div class="article-body">${contenuArray.length ? contenuArray.map(p => `<p>${formaterTexte(p)}</p>`).join("") : "<p><em>Cet article n'a pas encore de contenu (champ « contenu » manquant dans Firestore).</em></p>"}</div>
     <button type="button" class="share-btn" id="btn-partager">↗ Partager</button>`;
 
   const btnPartager = document.getElementById("btn-partager");
   if (btnPartager) {
     btnPartager.addEventListener("click", async () => {
-      const data = { title: article.titre || "Educa-Psy", text: article.resume || "", url: window.location.href };
+      const data = { title: titre || "Educa-Psy", text: resume || "", url: window.location.href };
       if (navigator.share) {
-        try { await navigator.share(data); } catch (err) { /* annulé par l'utilisateur : rien à faire */ }
+        try { await navigator.share(data); } catch (err) { /* Annulé par l'utilisateur */ }
       } else {
         try {
           await navigator.clipboard.writeText(window.location.href);
@@ -250,31 +267,77 @@ async function initArticlePageFirebase() {
           </div>`;
       }
     } catch (err) {
-      console.error("Erreur Firestore (articles similaires) :", err); // non bloquant
+      console.error("Erreur Firestore (articles similaires) :", err);
     }
   }
 
-  injecterDonneesStructurees(article);
+  // Mettre à jour le JSON-LD pour Google Search et Discover
+  injecterDonneesStructurees(article, titre, resume);
 }
 
-function injecterDonneesStructurees(article) {
-  const ancien = document.getElementById("jsonld-article");
-  if (ancien) ancien.remove();
-  const d = article.date && article.date.toDate ? article.date.toDate() : null;
-  const script = document.createElement("script");
-  script.type = "application/ld+json";
-  script.id = "jsonld-article";
-  script.textContent = JSON.stringify({
+/* Mise à jour dynamique des balises SEO / Social dans le <head> */
+function mettreAJourMetaTags(titre, resume, image) {
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc && resume) metaDesc.setAttribute("content", resume);
+
+  const ogTitre = document.querySelector('meta[property="og:title"]');
+  if (ogTitre && titre) ogTitre.setAttribute("content", `${titre} — Educa-Psy`);
+
+  const ogDesc = document.querySelector('meta[property="og:description"]');
+  if (ogDesc && resume) ogDesc.setAttribute("content", resume);
+
+  const ogUrl = document.querySelector('meta[property="og:url"]');
+  if (ogUrl) ogUrl.setAttribute("content", window.location.href);
+
+  if (image) {
+    const ogImg = document.querySelector('meta[property="og:image"]');
+    if (ogImg) ogImg.setAttribute("content", image);
+
+    const twImg = document.querySelector('meta[name="twitter:image"]');
+    if (twImg) twImg.setAttribute("content", image);
+  }
+}
+
+/* Injection/Mise à jour dynamique de la structure NewsArticle JSON-LD pour Discover */
+function injecterDonneesStructurees(article, titre, resume) {
+  let script = document.getElementById("schema-article");
+  if (!script) {
+    script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.id = "schema-article";
+    document.head.appendChild(script);
+  }
+
+  const d = article.date && article.date.toDate ? article.date.toDate() : (article.date ? new Date(article.date) : null);
+  
+  const schemaData = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": article.titre || "",
-    "description": article.resume || "",
-    "author": { "@type": "Organization", "name": article.auteur || "Équipe Educa-Psy" },
-    "publisher": { "@type": "Organization", "name": "Educa-Psy" },
-    "datePublished": d ? d.toISOString().slice(0, 10) : undefined,
-    "image": article.image || undefined
-  });
-  document.head.appendChild(script);
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": window.location.href
+    },
+    "headline": titre || article.titre || "",
+    "description": resume || article.resume || "",
+    "image": article.image ? [article.image] : ["https://educa-psy.web.app/og-image.png"],
+    "datePublished": d && !isNaN(d.getTime()) ? d.toISOString() : new Date().toISOString(),
+    "dateModified": d && !isNaN(d.getTime()) ? d.toISOString() : new Date().toISOString(),
+    "publisher": {
+      "@type": "Organization",
+      "name": "Educa-Psy",
+      "url": "https://educa-psy.web.app/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://educa-psy.web.app/logo.svg"
+      }
+    },
+    "author": {
+      "@type": "Organization",
+      "name": article.auteur || "Équipe Educa-Psy"
+    }
+  };
+
+  script.textContent = JSON.stringify(schemaData);
 }
 
 /* ---------- Lancement ---------- */
