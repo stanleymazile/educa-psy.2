@@ -56,6 +56,7 @@ body {
   font-size: 16px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 img { max-width: 100%; display: block; }
@@ -407,7 +408,6 @@ a:focus-visible, button:focus-visible {
   .lang-select { background: none; border: none; padding: 2px 4px; }
   .util-icon-btn { color: inherit; font-size: 1rem; line-height: 1; text-decoration: none; display: inline-flex; }
   .util-btn .label { display: none; }
-  /* topbar-logo-icon, auth-zone, logo-mark et auth-zone-mobile gérés dans le bloc 700px */
 }
 
 /* ============================================================
@@ -422,8 +422,6 @@ a:focus-visible, button:focus-visible {
    MODE SOMBRE
    ============================================================
    Activé en ajoutant l'attribut data-theme="sombre" sur <html>
-   (géré automatiquement par interface.js). Toutes les couleurs
-   du site sont des variables : il suffit de les redéfinir ici.
    ============================================================ */
 [data-theme="sombre"] {
   --couleur-fond: #1E1A14;
@@ -447,6 +445,7 @@ a:focus-visible, button:focus-visible {
 [data-theme="sombre"] .masthead-top { background: #12100C; }
 [data-theme="sombre"] .site-footer,
 [data-theme="sombre"] .cta-box { background: #15130E; }
+[data-theme="sombre"] .btn-google { background: var(--couleur-fond-alt); }
 
 /* ============================================================
    BARRE D'UTILITAIRES (thème, langue, connexion)
@@ -455,7 +454,7 @@ a:focus-visible, button:focus-visible {
 
 /* Lang wrapper : globe SVG sur mobile, select visible sur desktop */
 .lang-wrapper { position: relative; display: inline-flex; align-items: center; }
-.lang-icon { display: none; } /* caché sur desktop, visible sur mobile via 700px */
+.lang-icon { display: none; }
 
 .util-btn {
   display: inline-flex;
@@ -520,35 +519,29 @@ a:focus-visible, button:focus-visible {
   }
   .nav-links.ouvert { display: flex; }
 
-  /* masthead-main-row : grille ☰ | logo | 👤 dès 700 px (pas seulement 480 px) */
-  .masthead-main { padding: var(--e4) 0 var(--e3); }
-  .masthead-main-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
   /* Header mobile : Educa-Psy à gauche, ☰ à droite */
+  .masthead-main { padding: var(--e4) 0 var(--e3); }
   .masthead-main-row { display: flex; justify-content: space-between; align-items: center; }
   .masthead-main-row .logo { justify-self: unset; }
   .masthead-main-row .nav-toggle { margin: 0; }
   .logo-mark { display: none !important; }
 
-  /* auth-zone-mobile retiré du header — connexion maintenant dans la topbar */
   .auth-zone-mobile { display: none; }
-
-  /* Topbar : icône connexion visible sur mobile */
   .topbar-auth { display: inline-flex; align-items: center; color: inherit; text-decoration: none; }
 
-  /* Topbar mobile : date à gauche, icônes à droite, auth-zone et logo cachés */
+  /* Topbar mobile */
   .masthead-top-inner { flex-direction: row; align-items: center; flex-wrap: nowrap; justify-content: space-between; text-align: left; }
   .auth-zone { display: none; }
-  .topbar-logo-icon { display: none; }          /* logo SVG retiré de la topbar */
-  .util-btn { background: none; border: none; } /* plus de fond/bordure sur le bouton mode sombre */
+  .topbar-logo-icon { display: none; }
+  .util-btn { background: none; border: none; }
 
-  /* lang-wrapper : globe SVG cliquable sur mobile */
+  /* lang-wrapper */
   .lang-icon { display: inline-block; pointer-events: none; flex-shrink: 0; }
   .lang-wrapper .lang-select {
     position: absolute; inset: 0; opacity: 0;
     width: 100%; height: 100%; cursor: pointer; z-index: 1;
   }
 
-  /* mobile-quicknav visible dès 700 px (était limité à 480 px) */
   .mobile-quicknav {
     display: flex;
     align-items: center;
@@ -760,7 +753,7 @@ a:focus-visible, button:focus-visible {
   flex: 1;
   font-family: var(--police-interface);
   font-size: 0.88rem;
-  padding: 9px 12px;
+  padding: 99px 12px;
   border: 1px solid var(--couleur-ligne);
   border-radius: var(--rayon);
   background: var(--couleur-fond);
@@ -966,7 +959,6 @@ a:focus-visible, button:focus-visible {
   .nav-submenu a { padding: 6px 0; font-size: 0.82rem; color: var(--couleur-texte-attenue); }
 }
 
-
 /* Bloc traductions admin */
 .traductions-bloc {
   margin-top: 1.5rem;
@@ -1035,7 +1027,6 @@ a:focus-visible, button:focus-visible {
 /* ============================================================
    BOUTON + CATÉGORIES SUPPLÉMENTAIRES
    ============================================================ */
-
 .filter-plus-wrap {
   position: relative;
   display: inline-flex;
@@ -1096,5 +1087,4 @@ a:focus-visible, button:focus-visible {
   background: var(--couleur-or);
   color: #fff;
 }
-
 
