@@ -62,7 +62,7 @@ function formaterTexte(texte) {
   return texte
     .replace(/!\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<img src="$2" alt="$1" loading="lazy">')
     .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
-    .replace(/==([^=]+)==/g, '<mark class="article-highlight">$1</mark>');
+    .replace(/==([^=]+)==/g, '<span style="color: var(--couleur-or-fonce, #B8912F); font-weight: 600;">$1</span>');
 }
 
 /* ---------- Accès Firestore ---------- */
