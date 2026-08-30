@@ -707,13 +707,22 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* ============================================================
    IMAGE PRINCIPALE D'ARTICLE + IMAGES DANS LE TEXTE
    ============================================================ */
+.article-hero {
+  width: 100%;
+  margin: var(--e5) 0 var(--e6) 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: var(--rayon);
+}
+
 .article-image {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  max-width: 100%;
+  height: auto;
+  display: block;
   object-fit: cover;
-  border-radius: var(--rayon);
-  margin-bottom: var(--e5);
 }
+
 .article-card-image {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -721,12 +730,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   border-radius: var(--rayon);
   margin-bottom: var(--e3);
 }
+
 .article-body img {
   max-width: 100%;
   border-radius: var(--rayon);
   margin: var(--e3) 0 var(--e5);
 }
-.article-body a { color: var(--couleur-or-fonce); text-decoration: underline; text-underline-offset: 2px; }
+
+.article-body a { 
+  color: var(--couleur-or-fonce); 
+  text-decoration: underline; 
+  text-underline-offset: 2px; 
+}
 
 /* ============================================================
    NEWSLETTER (pied de page)
