@@ -8,15 +8,15 @@
 
 :root {
   /* --- Couleurs principales (identité Educa-Psy) --- */
-  --couleur-fond: #FFFFFF         /* fond ivoire/crème #FAF6ED*/
-  --couleur-fond-alt: #F4F4F6;      /* fond légèrement plus foncé (cartes, sections) #F2EBDA*/
-  --couleur-texte: #1A1A1A;         /* texte principal (brun-noir chaud) #2A241C*/
+  --couleur-fond:  #FAF6ED        /* fond ivoire/crème*/
+  --couleur-fond-alt: #F2EBDA;      /* fond légèrement plus foncé (cartes, sections) */
+  --couleur-texte: #2A241C;         /* texte principal (brun-noir chaud) */
   --couleur-texte-attenue: #6B6252; /* texte secondaire (dates, méta) */
   --couleur-or: #B8912F;            /* or — accent principal */
   --couleur-or-fonce: #82661B;      /* or foncé — survols, liens (contraste AA vérifié) */
   --couleur-bouton-texte: #2A241C;  /* texte du bouton or — fixe */
   --couleur-bouton-survol-texte: #FFFFFF; /* texte au survol */
-  --couleur-ligne: #E2E2E6;         /* lignes fines / séparateurs #DDD2B8*/
+  --couleur-ligne: #DDD2B8;         /* lignes fines / séparateurs */
 
   /* --- Couleurs des 4 rubriques (portées dans tout le site) --- */
   --couleur-education-fond: #E8F0EC;
