@@ -8,15 +8,15 @@
 
 :root {
   /* --- Couleurs principales (identité Educa-Psy) --- */
-  --couleur-fond:  #FAF6ED;        /* fond ivoire/crème*/
-  --couleur-fond-alt: #F2EBDA;      /* fond légèrement plus foncé (cartes, sections) */
-  --couleur-texte: #2A241C;         /* texte principal (brun-noir chaud) */
-  --couleur-texte-attenue: #6B6252; /* texte secondaire (dates, méta) */
+  --couleur-fond:  #FFFFFF;         /* fond blanc pur */
+  --couleur-fond-alt: #F4F4F6;      /* fond légèrement plus gris/clair (cartes, sections) */
+  --couleur-texte: #1A1A1A;         /* texte principal (noir chaud / anthracite) */
+  --couleur-texte-attenue: #595959; /* texte secondaire (dates, méta) */
   --couleur-or: #B8912F;            /* or — accent principal */
   --couleur-or-fonce: #82661B;      /* or foncé — survols, liens (contraste AA vérifié) */
   --couleur-bouton-texte: #2A241C;  /* texte du bouton or — fixe */
   --couleur-bouton-survol-texte: #FFFFFF; /* texte au survol */
-  --couleur-ligne: #DDD2B8;         /* lignes fines / séparateurs */
+  --couleur-ligne: #E2E2E6;         /* lignes fines / séparateurs clairs */
 
   /* --- Couleurs des 4 rubriques (portées dans tout le site) --- */
   --couleur-education-fond: #E8F0EC;
@@ -183,7 +183,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .filter-tab {
   font-family: var(--police-interface);
-  background: var(--couleur-fond);
+  background: var(--couleur-fond-alt);
   border: 1px solid var(--couleur-ligne);
   color: var(--couleur-texte);
   padding: 7px 17px;
@@ -382,10 +382,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* ============================================================
    PAGE ARTICLE
    ============================================================ */
-/* ============================================================
-   PAGE ARTICLE
-   ============================================================ */
-
 .article-page { max-width: 720px; padding-top: var(--e6); padding-bottom: var(--e8); }
 .back-link {
   display: inline-block; margin-bottom: var(--e5);
@@ -457,7 +453,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .similaires-section { margin-top: var(--e8); padding-top: var(--e6); border-top: 1px solid var(--couleur-ligne); }
 .similaires-section h3 { font-size: 1.4rem; margin-bottom: var(--e4); }
-
 
 /* ============================================================
    PAGE À PROPOS
