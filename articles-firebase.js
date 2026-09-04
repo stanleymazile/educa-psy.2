@@ -1,5 +1,5 @@
 /* ============================================================
-   EDUCA-PSY — articles-firebase.js (Version complète : SEO, UX, Sous-titres, Liens & YouTube)
+   EDUCA-PSY — articles-firebase.js (Version complète : SEO, UX, Sous-titres, Listes & YouTube)
    ============================================================ */
 
 import { db } from "./firebase-config.js";
@@ -49,7 +49,19 @@ function formaterTexte(texte) {
     return `<h2 class="article-subtitle">${titreSousSection}</h2>`;
   }
 
-  // 2. Transformation d'une ligne vidéo YouTube : ![youtube](URL)
+  // 2. Transformation d'une ligne d'énumération / puce (* ou - )
+  if (texte.startsWith("* ") || texte.startsWith("- ")) {
+    const contenuPuce = texte.substring(2).trim();
+    // Gérer le gras potentiel à l'intérieur de la puce (ex: **Mot** : texte)
+    const contenuFormate = contenuPuce
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/==([^=]+)==/g, '<span style="color: var(--couleur-or-fonce, #B8912F); font-weight: 600;">$1</span>')
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    
+    return `<ul class="article-list"><li>${contenuFormate}</li></ul>`;
+  }
+
+  // 3. Transformation d'une ligne vidéo YouTube : ![youtube](URL)
   if (texte.startsWith("![youtube](")) {
     const match = texte.match(/!\[youtube\]\((https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^\s)]+))\)/);
     if (match && match[1]) {
@@ -58,10 +70,11 @@ function formaterTexte(texte) {
     }
   }
 
-  // 3. Paragraphe classique avec formatages Markdown internes
+  // 4. Paragraphe classique avec formatages Markdown internes
   return texte
     .replace(/!\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<img src="$2" alt="$1" loading="lazy">')
     .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/==([^=]+)==/g, '<span style="color: var(--couleur-or-fonce, #B8912F); font-weight: 600;">$1</span>');
 }
 
@@ -343,8 +356,8 @@ async function initArticlePageFirebase() {
       <div class="article-body">
         ${contenu.length ? contenu.map(p => {
           const resultatFormatte = formaterTexte(p);
-          // Si c'est un sous-titre (h2) ou un conteneur vidéo (div), on ne l'enferme pas dans un <p>
-          if (resultatFormatte.startsWith("<h2") || resultatFormatte.startsWith("<div")) {
+          // Si c'est un sous-titre (h2), une liste (ul) ou un conteneur vidéo (div), on ne l'enferme pas dans un <p>
+          if (resultatFormatte.startsWith("<h2") || resultatFormatte.startsWith("<ul") || resultatFormatte.startsWith("<div")) {
             return resultatFormatte;
           }
           return `<p>${resultatFormatte}</p>`;
