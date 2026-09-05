@@ -24,12 +24,39 @@ function formaterDateFirestore(valeur) {
   return `${d.getUTCDate()} ${MOIS_FR[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
 }
 
+function retirerAccents(texte) {
+  return texte.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
 function slugify(texte) {
-  return texte
-    .toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+  return retirerAccents(texte.toLowerCase())
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
+}
+
+/* Table de correspondance : nom complet de catégorie -> slug court
+   utilisé pour les classes CSS de couleur (tag-*, cat-*).
+   IMPORTANT : ces 4 slugs doivent rester synchronisés avec les
+   classes définies dans style.css (tag-education, tag-psychologie,
+   tag-bien-etre, tag-emotions) et avec le bandeau .spectrum-rule
+   (s-education, s-psychologie, s-bien-etre, s-emotions). */
+const CATEGORIES_SLUGS_COURTS = {
+  "education": "education",
+  "psychologie": "psychologie",
+  "bien-etre et sante mentale": "bien-etre",
+  "emotions": "emotions"
+};
+
+function slugifyCategorie(categorie) {
+  if (!categorie) return "";
+  const cleNormalisee = retirerAccents(categorie.toLowerCase()).trim();
+  if (CATEGORIES_SLUGS_COURTS[cleNormalisee]) {
+    return CATEGORIES_SLUGS_COURTS[cleNormalisee];
+  }
+  // Repli générique pour toute catégorie non cartographiée
+  // (ex. "Santé mentale et soutien psychosocial") : elle recevra
+  // sa propre classe, sans couleur de thème dédiée pour l'instant.
+  return slugify(categorie);
 }
 
 function calculerTempsLecture(contenuArray) {
@@ -104,7 +131,7 @@ async function chargerArticlesSimilaires(categorie, idAExclure, max = 2) {
 
 function carteArticleHTML(article, featured = false) {
   const langue = localStorage.getItem("educapsy-langue") || "fr";
-  const slug = slugify(article.categorie || "");
+  const slug = slugifyCategorie(article.categorie || "");
   const titre = champLocale(article, "titre", langue);
   const resume = champLocale(article, "resume", langue);
   const image = article.image ? `<img class="article-card-image" src="${article.image}" alt="${titre || ''}" loading="lazy">` : "";
@@ -319,7 +346,7 @@ async function initArticlePageFirebase() {
   }
 
   const langue = localStorage.getItem("educapsy-langue") || "fr";
-  const slug = slugify(article.categorie || "");
+  const slug = slugifyCategorie(article.categorie || "");
   const titre = champLocale(article, "titre", langue);
   const resume = champLocale(article, "resume", langue);
 
