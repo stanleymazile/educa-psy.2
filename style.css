@@ -18,7 +18,7 @@
   --couleur-bouton-survol-texte: #FFFFFF; /* texte au survol */
   --couleur-ligne: #E2E2E6;         /* lignes fines / séparateurs clairs */
 
-  /* --- Couleurs des 4 rubriques (portées dans tout le site) --- */
+  /* --- Couleurs des rubriques (portées dans tout le site) --- */
   --couleur-education-fond: #E8F0EC;
   --couleur-education-texte: #2F5D50;
   --couleur-technologie-fond: #E7ECF2;
@@ -172,11 +172,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
    ============================================================ */
 .filter-tabs {
   display: flex;
-  gap: var(--e3);
-  flex-wrap: nowrap;
+  flex-direction: row;
+  flex-wrap: nowrap !important;
   overflow-x: auto;
+  overflow-y: hidden;
   width: 100%;
   max-width: 100%;
+  gap: var(--e3);
   padding: var(--e4) 2px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -193,8 +195,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   font-size: 0.86rem;
   font-weight: 500;
   cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 .filter-tab:hover { border-color: var(--couleur-or); }
@@ -206,7 +208,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .filter-plus-wrap {
   position: relative;
   display: inline-flex;
-  flex-shrink: 0;
+  flex-shrink: 0 !important;
 }
 
 .filter-plus-btn {
@@ -411,7 +413,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   margin: 6px 8px 0 0;
 }
 
-/* Nouveaux styles intégrés pour les sous-titres, vidéos et surlignages */
 .article-body .article-subtitle {
   font-size: 1.5rem;
   font-weight: 700;
