@@ -128,7 +128,7 @@ function initFiltresCategories() {
       tab.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
 
       // 3. Filtrage dynamique si la fonction de page existe
-      const categorie = tab.dataset.category || tab.dataset.filter;
+      const categorie = tab.dataset.cat || tab.dataset.category || tab.dataset.filter;
       if (categorie && typeof window.filtrerArticles === "function") {
         window.filtrerArticles(categorie);
       }
@@ -140,7 +140,7 @@ function initFiltresCategories() {
 
 const TRADUCTIONS = {
   fr: {
-    tagline: "Éducation · Technologie · Science · Psychologie",
+    tagline: "Éducation · Psychologie · Bien-être et santé mentale · Émotions · Santé mentale et soutien psychosocial",
     theme_clair: "Clair",
     theme_sombre: "Sombre",
     nav_accueil: "Accueil",
@@ -148,9 +148,10 @@ const TRADUCTIONS = {
     nav_newsletter: "Newsletter",
     nav_articles: "Articles",
     nav_education: "Éducation",
-    nav_technologie: "Technologie",
-    nav_science: "Science",
     nav_psychologie: "Psychologie",
+    nav_bien_etre: "Bien-être et santé mentale",
+    nav_emotions: "Émotions",
+    nav_soutien_psychosocial: "Santé mentale et soutien psychosocial",
     nav_opportunites: "Opportunités",
     type_emploi: "Emploi",
     type_collaboration: "Collaboration",
@@ -163,7 +164,7 @@ const TRADUCTIONS = {
     tous: "Tous",
     opportunites_titre: "Opportunités du moment",
     voir_opportunites: "Voir toutes les opportunités →",
-    footer_texte: "Actualités et ressources en éducation, technologie, science et psychologie, ainsi que des opportunités professionnelles.",
+    footer_texte: "Actualités et ressources en éducation, psychologie, bien-être et santé mentale, émotions, et santé mentale et soutien psychosocial.",
     footer_site_officiel: "Site officiel d'Educa-Psy ↗",
     footer_droits: "Tous droits réservés.",
     contact_titre: "Contact",
@@ -199,7 +200,7 @@ const TRADUCTIONS = {
     lien_desabonnement: "Se désabonner de la newsletter"
   },
   en: {
-    tagline: "Education · Technology · Science · Psychology",
+    tagline: "Education · Psychology · Mental Health & Wellbeing · Emotions · Mental Health and Psychosocial Support",
     theme_clair: "Light",
     theme_sombre: "Dark",
     nav_accueil: "Home",
@@ -207,9 +208,10 @@ const TRADUCTIONS = {
     nav_newsletter: "Newsletter",
     nav_articles: "Articles",
     nav_education: "Education",
-    nav_technologie: "Technology",
-    nav_science: "Science",
     nav_psychologie: "Psychology",
+    nav_bien_etre: "Mental Health & Wellbeing",
+    nav_emotions: "Emotions",
+    nav_soutien_psychosocial: "Mental Health and Psychosocial Support",
     nav_opportunites: "Opportunities",
     type_emploi: "Job",
     type_collaboration: "Collaboration",
@@ -222,7 +224,7 @@ const TRADUCTIONS = {
     tous: "All",
     opportunites_titre: "Current opportunities",
     voir_opportunites: "See all opportunities →",
-    footer_texte: "News and resources on education, technology, science and psychology, along with professional opportunities.",
+    footer_texte: "News and resources on education, psychology, mental health and wellbeing, emotions, and mental health and psychosocial support.",
     footer_site_officiel: "Educa-Psy official website ↗",
     footer_droits: "All rights reserved.",
     contact_titre: "Contact",
@@ -258,7 +260,7 @@ const TRADUCTIONS = {
     lien_desabonnement: "Unsubscribe from the newsletter"
   },
   ht: {
-    tagline: "Edikasyon · Teknoloji · Syans · Sikoloji",
+    tagline: "Edikasyon · Sikoloji · Byennèt ak Sante Mantal · Emosyon · Sante Mantal ak Sipò Sikososyal",
     theme_clair: "Klè",
     theme_sombre: "Foske",
     nav_accueil: "Akèy",
@@ -266,9 +268,10 @@ const TRADUCTIONS = {
     nav_newsletter: "Bilten",
     nav_articles: "Atik",
     nav_education: "Edikasyon",
-    nav_technologie: "Teknoloji",
-    nav_science: "Syans",
     nav_psychologie: "Sikoloji",
+    nav_bien_etre: "Byennèt ak Sante Mantal",
+    nav_emotions: "Emosyon",
+    nav_soutien_psychosocial: "Sante Mantal ak Sipò Sikososyal",
     nav_opportunites: "Opòtinite",
     type_emploi: "Travay",
     type_collaboration: "Kolaborasyon",
@@ -281,7 +284,7 @@ const TRADUCTIONS = {
     tous: "Tout",
     opportunites_titre: "Opòtinite aktyèl yo",
     voir_opportunites: "Wè tout opòtinite yo →",
-    footer_texte: "Nouvèl ak resous nan edikasyon, teknoloji, syans ak sikoloji, ansanm ak opòtinite pwofesyonèl.",
+    footer_texte: "Nouvèl ak resous nan edikasyon, sikoloji, byennèt ak sante mantal, emosyon, ak sante mantal ak sipò sikososyal.",
     footer_site_officiel: "Sit ofisyèl Educa-Psy ↗",
     footer_droits: "Tout dwa rezève.",
     contact_titre: "Kontak",
@@ -317,7 +320,7 @@ const TRADUCTIONS = {
     lien_desabonnement: "Dezabòne nan bilten an"
   },
   es: {
-    tagline: "Educación · Tecnología · Ciencia · Psicología",
+    tagline: "Educación · Psicología · Bienestar y Salud Mental · Emociones · Salud Mental y Apoyo Psicosocial",
     theme_clair: "Claro",
     theme_sombre: "Oscuro",
     nav_accueil: "Inicio",
@@ -325,9 +328,10 @@ const TRADUCTIONS = {
     nav_newsletter: "Boletín",
     nav_articles: "Artículos",
     nav_education: "Educación",
-    nav_technologie: "Tecnología",
-    nav_science: "Ciencia",
     nav_psychologie: "Psicología",
+    nav_bien_etre: "Bienestar y Salud Mental",
+    nav_emotions: "Emociones",
+    nav_soutien_psychosocial: "Salud Mental y Apoyo Psicosocial",
     nav_opportunites: "Oportunidades",
     type_emploi: "Empleo",
     type_collaboration: "Colaboración",
@@ -340,7 +344,7 @@ const TRADUCTIONS = {
     tous: "Todos",
     opportunites_titre: "Oportunidades actuales",
     voir_opportunites: "Ver todas las oportunidades →",
-    footer_texte: "Noticias y recursos en educación, tecnología, ciencia y psicología, junto con oportunidades profesionales.",
+    footer_texte: "Noticias y recursos en educación, psicología, bienestar y salud mental, emociones, y salud mental y apoyo psicosocial.",
     footer_site_officiel: "Sitio oficial de Educa-Psy ↗",
     footer_droits: "Todos los derechos reservados.",
     contact_titre: "Contacto",
