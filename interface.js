@@ -140,7 +140,7 @@ function initFiltresCategories() {
 
 const TRADUCTIONS = {
   fr: {
-    tagline: "Éducation · Psychologie · Bien-être et santé mentale · Émotions · Santé mentale et soutien psychosocial",
+    tagline: "Éducation · Psychologie",
     theme_clair: "Clair",
     theme_sombre: "Sombre",
     nav_accueil: "Accueil",
@@ -200,7 +200,7 @@ const TRADUCTIONS = {
     lien_desabonnement: "Se désabonner de la newsletter"
   },
   en: {
-    tagline: "Education · Psychology · Mental Health & Wellbeing · Emotions · Mental Health and Psychosocial Support",
+    tagline: "Education · Psychology",
     theme_clair: "Light",
     theme_sombre: "Dark",
     nav_accueil: "Home",
@@ -260,7 +260,7 @@ const TRADUCTIONS = {
     lien_desabonnement: "Unsubscribe from the newsletter"
   },
   ht: {
-    tagline: "Edikasyon · Sikoloji · Byennèt ak Sante Mantal · Emosyon · Sante Mantal ak Sipò Sikososyal",
+    tagline: "Edikasyon · Sikoloji",
     theme_clair: "Klè",
     theme_sombre: "Foske",
     nav_accueil: "Akèy",
@@ -320,7 +320,7 @@ const TRADUCTIONS = {
     lien_desabonnement: "Dezabòne nan bilten an"
   },
   es: {
-    tagline: "Educación · Psicología · Bienestar y Salud Mental · Emociones · Salud Mental y Apoyo Psicosocial",
+    tagline: "Educación · Psicología",
     theme_clair: "Claro",
     theme_sombre: "Oscuro",
     nav_accueil: "Inicio",
