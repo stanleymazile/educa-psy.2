@@ -21,10 +21,10 @@
   /* --- Couleurs des rubriques (portées dans tout le site) --- */
   --couleur-education-fond: #E8F0EC;
   --couleur-education-texte: #2F5D50;
-  --couleur-technologie-fond: #E7ECF2;
-  --couleur-technologie-texte: #2C4A63;
-  --couleur-science-fond: #EEF1E1;
-  --couleur-science-texte: #5C6B2F;
+  --couleur-bien-etre-fond: #E7ECF2;
+  --couleur-bien-etre-texte: #2C4A63;
+  --couleur-emotions-fond: #EEF1E1;
+  --couleur-emotions-texte: #5C6B2F;
   --couleur-psychologie-fond: #F2E6E9;
   --couleur-psychologie-texte: #7A3B4A;
   --couleur-emploi-fond: #F5EEDA;
@@ -140,8 +140,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .spectrum-rule { display: flex; width: 100%; height: 6px; }
 .spectrum-seg { flex: 1; }
 .spectrum-seg.s-education { background: var(--couleur-education-texte); }
-.spectrum-seg.s-technologie { background: var(--couleur-technologie-texte); }
-.spectrum-seg.s-science { background: var(--couleur-science-texte); }
+.spectrum-seg.s-bien-etre { background: var(--couleur-bien-etre-texte); }
+.spectrum-seg.s-emotions { background: var(--couleur-emotions-texte); }
 .spectrum-seg.s-psychologie { background: var(--couleur-psychologie-texte); }
 
 /* ============================================================
@@ -159,13 +159,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   margin-bottom: var(--e3);
 }
 .tag-education { background: var(--couleur-education-fond); color: var(--couleur-education-texte); }
-.tag-technologie { background: var(--couleur-technologie-fond); color: var(--couleur-technologie-texte); }
-.tag-science { background: var(--couleur-science-fond); color: var(--couleur-science-texte); }
+.tag-bien-etre { background: var(--couleur-bien-etre-fond); color: var(--couleur-bien-etre-texte); }
+.tag-emotions { background: var(--couleur-emotions-fond); color: var(--couleur-emotions-texte); }
 .tag-psychologie { background: var(--couleur-psychologie-fond); color: var(--couleur-psychologie-texte); }
 .tag-emploi { background: var(--couleur-emploi-fond); color: var(--couleur-or-fonce); }
 .tag-collaboration { background: var(--couleur-education-fond); color: var(--couleur-education-texte); }
 .tag-benevolat { background: var(--couleur-psychologie-fond); color: var(--couleur-psychologie-texte); }
-.tag-stage-formation { background: var(--couleur-technologie-fond); color: var(--couleur-technologie-texte); }
+.tag-stage-formation { background: var(--couleur-bien-etre-fond); color: var(--couleur-bien-etre-texte); }
 
 /* ============================================================
    FILTRES (pastilles cliquables avec défilement horizontal)
@@ -329,8 +329,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   margin-bottom: var(--e5);
 }
 .article-card.cat-education { border-top-color: var(--couleur-education-texte); }
-.article-card.cat-technologie { border-top-color: var(--couleur-technologie-texte); }
-.article-card.cat-science { border-top-color: var(--couleur-science-texte); }
+.article-card.cat-bien-etre { border-top-color: var(--couleur-bien-etre-texte); }
+.article-card.cat-emotions { border-top-color: var(--couleur-emotions-texte); }
 .article-card.cat-psychologie { border-top-color: var(--couleur-psychologie-texte); }
 
 .article-card-title {
@@ -387,7 +387,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .job-card.type-emploi { border-top-color: var(--couleur-or-fonce); }
 .job-card.type-collaboration { border-top-color: var(--couleur-education-texte); }
 .job-card.type-benevolat { border-top-color: var(--couleur-psychologie-texte); }
-.job-card.type-stage-formation { border-top-color: var(--couleur-technologie-texte); }
+.job-card.type-stage-formation { border-top-color: var(--couleur-bien-etre-texte); }
 
 .job-card-title { font-size: 1.25rem; margin: var(--e2) 0 var(--e2); }
 .job-card-title a { color: var(--couleur-texte); text-decoration: none; }
@@ -1156,10 +1156,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
   --couleur-education-fond: #1F3A32;
   --couleur-education-texte: #A8CFC0;
-  --couleur-technologie-fond: #1E3040;
-  --couleur-technologie-texte: #A9C3D6;
-  --couleur-science-fond: #333B1A;
-  --couleur-science-texte: #C7D19B;
+  --couleur-bien-etre-fond: #1E3040;
+  --couleur-bien-etre-texte: #A9C3D6;
+  --couleur-emotions-fond: #333B1A;
+  --couleur-emotions-texte: #C7D19B;
   --couleur-psychologie-fond: #3E202A;
   --couleur-psychologie-texte: #E3AFBC;
   --couleur-emploi-fond: #3A2E14;
