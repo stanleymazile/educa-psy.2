@@ -23,8 +23,8 @@
     <div class="container">
       <div class="masthead-top-inner">
         <span id="today-date" class="masthead-date"></span>
-        <span class="masthead-tagline" data-i18n="tagline">Éducation · Technologie · Science · Psychologie</span>
-                <div class="masthead-utils">
+        <span class="masthead-tagline" data-i18n="tagline">Éducation · Psychologie · Bien-être et santé mentale · Émotions · Santé mentale et soutien psychosocial</span>
+        <div class="masthead-utils">
           <div class="lang-wrapper">
             <svg class="lang-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             <select id="lang-select" class="lang-select" aria-label="Langue / Language / Lang">
@@ -69,10 +69,11 @@
           <a href="index.html" data-i18n="nav_articles">Articles</a>
           <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Articles">▾</button>
           <ul class="nav-submenu">
-            <li><a href="index.html?cat=%C3%89ducation" data-i18n="nav_education">Éducation</a></li>
-            <li><a href="index.html?cat=Technologie" data-i18n="nav_technologie">Technologie</a></li>
-            <li><a href="index.html?cat=Science" data-i18n="nav_science">Science</a></li>
-            <li><a href="index.html?cat=Psychologie" data-i18n="nav_psychologie">Psychologie</a></li>
+            <li><a href="index.html?cat=%C3%89ducation">Éducation</a></li>
+            <li><a href="index.html?cat=Psychologie">Psychologie</a></li>
+            <li><a href="index.html?cat=Bien-%C3%AAtre%20et%20Sant%C3%A9%20Mentale">Bien-être et santé mentale</a></li>
+            <li><a href="index.html?cat=%C3%89motions">Émotions</a></li>
+            <li><a href="index.html?cat=Sant%C3%A9%20Mentale%20et%20Soutien%20Psychosociale">Santé mentale et soutien psychosocial</a></li>
           </ul>
         </li>
         <li class="nav-dropdown">
@@ -93,9 +94,9 @@
 
   <div class="spectrum-rule" aria-hidden="true">
     <span class="spectrum-seg s-education"></span>
-    <span class="spectrum-seg s-technologie"></span>
-    <span class="spectrum-seg s-science"></span>
     <span class="spectrum-seg s-psychologie"></span>
+    <span class="spectrum-seg s-bien-etre"></span>
+    <span class="spectrum-seg s-emotions"></span>
   </div>
 </header>
 
@@ -138,11 +139,14 @@
                 <select id="article-categorie">
                   <optgroup label="Catégories principales">
                     <option>Éducation</option>
-                    <option>Technologie</option>
-                    <option>Science</option>
                     <option>Psychologie</option>
+                    <option>Bien-être et santé mentale</option>
+                    <option>Émotions</option>
+                    <option>Santé mentale et soutien psychosocial</option>
                   </optgroup>
                   <optgroup label="Catégories supplémentaires">
+                    <option>Technologie</option>
+                    <option>Science</option>
                     <option>Culture</option>
                     <option>IA</option>
                     <option>Société</option>
@@ -313,3 +317,4 @@
 <script type="module" src="auth-firebase.js"></script>
 </body>
 </html>
+
