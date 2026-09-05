@@ -1,5 +1,5 @@
 /* ============================================================
-   EDUCA-PSY — articles-firebase.js (Version complète : SEO, UX, Sous-titres, Listes & YouTube)
+   EDUCA-PSY — articles-firebase.js (Version finale : 5 thématiques, SEO, UX, Listes & YouTube)
    ============================================================ */
 
 import { db } from "./firebase-config.js";
@@ -52,7 +52,6 @@ function formaterTexte(texte) {
   // 2. Transformation d'une ligne d'énumération / puce (* ou - )
   if (texte.startsWith("* ") || texte.startsWith("- ")) {
     const contenuPuce = texte.substring(2).trim();
-    // Gérer le gras potentiel à l'intérieur de la puce (ex: **Mot** : texte)
     const contenuFormate = contenuPuce
       .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
       .replace(/==([^=]+)==/g, '<span style="color: var(--couleur-or-fonce, #B8912F); font-weight: 600;">$1</span>')
@@ -356,7 +355,6 @@ async function initArticlePageFirebase() {
       <div class="article-body">
         ${contenu.length ? contenu.map(p => {
           const resultatFormatte = formaterTexte(p);
-          // Si c'est un sous-titre (h2), une liste (ul) ou un conteneur vidéo (div), on ne l'enferme pas dans un <p>
           if (resultatFormatte.startsWith("<h2") || resultatFormatte.startsWith("<ul") || resultatFormatte.startsWith("<div")) {
             return resultatFormatte;
           }
