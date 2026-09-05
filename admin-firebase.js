@@ -1,5 +1,5 @@
 /* ============================================================
-   EDUCA-PSY — admin-firebase.js (Version corrigée & optimisée)
+   EDUCA-PSY — admin-firebase.js (Version corrigée, optimisée & multithème)
    ============================================================ */
 
 import { db, auth, storage, ADMIN_EMAILS } from "./firebase-config.js";
@@ -41,6 +41,36 @@ function echapperHTML(texte) {
   const div = document.createElement("div");
   div.textContent = texte == null ? "" : String(texte);
   return div.innerHTML;
+}
+
+/* ---------- Gestionnaire de Thème Admin ---------- */
+
+function initThemeAdmin() {
+  const btnTheme = document.getElementById("admin-theme-toggle");
+  const themeActuel = localStorage.getItem("educapsy-theme") || "clair";
+  
+  if (themeActuel === "sombre") {
+    document.documentElement.setAttribute("data-theme", "sombre");
+    if (btnTheme) btnTheme.textContent = "☀️ Mode clair";
+  } else {
+    document.documentElement.removeAttribute("data-theme");
+    if (btnTheme) btnTheme.textContent = "🌙 Mode sombre";
+  }
+
+  if (btnTheme) {
+    btnTheme.addEventListener("click", () => {
+      const estSombre = document.documentElement.getAttribute("data-theme") === "sombre";
+      if (estSombre) {
+        document.documentElement.removeAttribute("data-theme");
+        localStorage.setItem("educapsy-theme", "clair");
+        btnTheme.textContent = "🌙 Mode sombre";
+      } else {
+        document.documentElement.setAttribute("data-theme", "sombre");
+        localStorage.setItem("educapsy-theme", "sombre");
+        btnTheme.textContent = "☀️ Mode clair";
+      }
+    });
+  }
 }
 
 /* ---------- Accès & Authentification ---------- */
@@ -117,7 +147,6 @@ function reinitialiserFormArticle() {
 function remplirFormArticle(a) {
   articleEnEdition = a.id;
 
-  // Remplissage sécurisé des champs FR / Généraux
   const elTitre = document.getElementById("article-titre");
   const elCat = document.getElementById("article-categorie");
   const elAuteur = document.getElementById("article-auteur");
@@ -136,7 +165,6 @@ function remplirFormArticle(a) {
   if (elImg) elImg.value = a.image || "";
   if (elALaUne) elALaUne.checked = !!a.aLaUne;
 
-  // Remplissage sécurisé des traductions
   for (const lg of LANGUES) {
     const elT = document.getElementById(`article-titre-${lg}`);
     const elR = document.getElementById(`article-resume-${lg}`);
@@ -245,7 +273,6 @@ async function enregistrerArticle(e) {
 
     if (imageUrl) donnees.image = imageUrl;
 
-    // Récupération des traductions EN / HT / ES
     for (const lg of LANGUES) {
       const elT = document.getElementById(`article-titre-${lg}`);
       const elR = document.getElementById(`article-resume-${lg}`);
@@ -483,6 +510,7 @@ async function rafraichirNewsletter() {
 /* ---------- Initialisation au chargement de la page ---------- */
 
 document.addEventListener("DOMContentLoaded", () => {
+  initThemeAdmin();
   initAccesAdmin();
 
   const formArticle = document.getElementById("form-article");
@@ -497,5 +525,4 @@ document.addEventListener("DOMContentLoaded", () => {
   const annulerEmploi = document.getElementById("annuler-emploi");
   if (annulerEmploi) annulerEmploi.addEventListener("click", reinitialiserFormEmploi);
 });
-
 
