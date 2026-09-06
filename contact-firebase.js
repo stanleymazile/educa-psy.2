@@ -7,9 +7,6 @@
    ============================================================ */
 
 import { db } from "./firebase-config.js";
-// ✅ SDK complet (comme partout ailleurs sur le site), pas firestore-lite :
-//    db est initialisé via initializeFirestore() du SDK complet dans
-//    firebase-config.js, incompatible avec les fonctions du build "lite".
 import { collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
 function t(cle) {
