@@ -72,7 +72,7 @@
     "url": "https://educa-psy.web.app/",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://educa-psy.web.app/index.html?search={search_term_string}",
+      "target": "https://educa-psy.web.app/articles.html?search={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   }
@@ -112,7 +112,7 @@
             </select>
           </div>
           <button id="theme-toggle" class="util-btn" type="button"><span class="icon">🌙</span><span class="label">Sombre</span></button>
-          <a href="index.html#recherche-articles" class="util-icon-btn" aria-label="Rechercher"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></a>
+          <a href="articles.html#recherche-articles" class="util-icon-btn" aria-label="Rechercher"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></a>
           <a href="connexion.html" class="topbar-auth" aria-label="Connexion"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7"/></svg></a>
           <span id="auth-zone" class="auth-zone"></span>
           <img src="logo.svg" class="topbar-logo-icon" alt="Educa-Psy">
@@ -143,14 +143,14 @@
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html" data-i18n="nav_accueil">Accueil</a></li>
         <li class="nav-dropdown">
-          <a href="index.html" data-i18n="nav_articles">Articles</a>
+          <a href="articles.html" data-i18n="nav_articles">Articles</a>
           <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Articles">▾</button>
           <ul class="nav-submenu">
-            <li><a href="index.html?cat=%C3%89ducation">Éducation</a></li>
-            <li><a href="index.html?cat=Psychologie">Psychologie</a></li>
-            <li><a href="index.html?cat=Bien-%C3%AAtre%20et%20Sant%C3%A9%20Mentale">Bien-être et santé mentale</a></li>
-            <li><a href="index.html?cat=%C3%89motions">Émotions</a></li>
-            <li><a href="index.html?cat=Sant%C3%A9%20Mentale%20et%20Soutien%20Psychosociale">Santé mentale et soutien psychosocial</a></li>
+            <li><a href="articles.html?cat=%C3%89ducation">Éducation</a></li>
+            <li><a href="articles.html?cat=Psychologie">Psychologie</a></li>
+            <li><a href="articles.html?cat=Bien-%C3%AAtre%20et%20Sant%C3%A9%20Mentale">Bien-être et santé mentale</a></li>
+            <li><a href="articles.html?cat=%C3%89motions">Émotions</a></li>
+            <li><a href="articles.html?cat=Sant%C3%A9%20Mentale%20et%20Soutien%20Psychosociale">Santé mentale et soutien psychosocial</a></li>
           </ul>
         </li>
         <li class="nav-dropdown">
@@ -193,25 +193,13 @@
     </div>
   </section>
 
-  <section class="filter-section">
+  <section class="opportunites-section" style="margin-top:0;">
     <div class="container">
-      <div class="search-wrap">
-        <input type="search" id="recherche-articles" placeholder="Rechercher un article…" aria-label="Rechercher un article">
+      <div class="opportunites-header">
+        <h2>Articles récents</h2>
+        <a href="articles.html" class="see-all">Voir tous les articles →</a>
       </div>
-      <div class="filter-tabs-container">
-        <button type="button" class="filter-tab active" data-cat="Tous">Tous</button>
-        <button type="button" class="filter-tab" data-cat="Éducation">Éducation</button>
-        <button type="button" class="filter-tab" data-cat="Psychologie">Psychologie</button>
-        <button type="button" class="filter-tab" data-cat="Bien-être et santé mentale">Bien-être et santé mentale</button>
-        <button type="button" class="filter-tab" data-cat="Émotions">Émotions</button>
-        <button type="button" class="filter-tab" data-cat="Santé mentale et soutien psychosocial">Santé mentale et soutien psychosocial</button>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div id="articles-grid" class="articles-grid"></div>
+      <div id="articles-recents" class="articles-grid"></div>
     </div>
   </section>
 
@@ -269,6 +257,7 @@
       </div>
       <div class="footer-links">
         <a href="index.html" data-i18n="nav_accueil">Accueil</a>
+        <a href="articles.html" data-i18n="nav_articles">Articles</a>
         <a href="emplois.html" data-i18n="nav_emplois">Emplois &amp; Collaborations</a>
         <a href="contact.html" data-i18n="nav_contact">Contact</a>
         <a href="a-propos.html" data-i18n="nav_apropos">À propos</a>
