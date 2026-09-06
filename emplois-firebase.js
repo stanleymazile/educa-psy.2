@@ -8,15 +8,20 @@
    Les cartes (accueil + liste) montrent un résumé et renvoient
    vers emploi.html?id=... pour le détail complet (description,
    lien, PDF) — même principe que les articles.
+
+   Optimisée : pagination + requêtes ciblées (moins de données
+   transférées), même approche que articles-firebase.js.
    ============================================================ */
 
 import { db } from "./firebase-config.js";
 import {
-  collection, getDocs, doc, getDoc, query, orderBy
+  collection, getDocs, doc, getDoc, query, orderBy, limit, startAfter, where
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
 const MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet",
                   "août","septembre","octobre","novembre","décembre"];
+
+const TAILLE_PAGE = 9; // nombre d'offres chargées par page sur emplois.html
 
 function formaterDateFirestore(valeur) {
   if (!valeur) return "";
@@ -48,21 +53,63 @@ function formaterTexte(texte) {
 
 /* ---------- Accès Firestore ---------- */
 
-async function chargerEmplois() {
-  const q = query(collection(db, "emplois"), orderBy("datePublication", "desc"));
-  const snap = await getDocs(q);
-  return snap.docs.map(d => ({ id: d.id, ...d.data() }));
-}
-
 async function chargerEmploiParId(id) {
   const ref = doc(db, "emplois", id);
   const snap = await getDoc(ref);
   return snap.exists() ? { id: snap.id, ...snap.data() } : null;
 }
 
+/* Aperçu accueil : seulement les 2 offres les plus récentes,
+   requête directe avec limite plutôt que charger toute la
+   collection pour n'en garder que 2. */
+async function chargerApercuEmplois(max = 2) {
+  const q = query(collection(db, "emplois"), orderBy("datePublication", "desc"), limit(max));
+  const snap = await getDocs(q);
+  return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+}
+
+/* Page emplois.html : une page d'offres (9 par défaut), filtrée
+   par type si besoin, à partir d'un curseur de pagination.
+   NOTE : filtrer par type + trier par date peut demander à
+   Firestore de créer un index composite — la console affichera
+   un lien direct pour le créer en un clic si besoin. */
+async function chargerPageEmplois({ type = "Tous", curseur = null } = {}) {
+  const contraintes = [];
+  if (type && type !== "Tous") {
+    contraintes.push(where("type", "==", type));
+  }
+  contraintes.push(orderBy("datePublication", "desc"));
+  if (curseur) contraintes.push(startAfter(curseur));
+  contraintes.push(limit(TAILLE_PAGE));
+
+  const q = query(collection(db, "emplois"), ...contraintes);
+  const snap = await getDocs(q);
+  const offres = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  const nouveauCurseur = snap.docs.length ? snap.docs[snap.docs.length - 1] : null;
+  const fin = snap.docs.length < TAILLE_PAGE;
+  return { offres, curseur: nouveauCurseur, fin };
+}
+
+/* Offres similaires : requête ciblée sur le type plutôt que de
+   charger toute la collection pour filtrer ensuite en JS. */
 async function chargerEmploisSimilaires(type, idAExclure, max = 2) {
-  const tous = await chargerEmplois();
-  return tous.filter(o => o.type === type && o.id !== idAExclure).slice(0, max);
+  if (!type) return [];
+  try {
+    const q = query(
+      collection(db, "emplois"),
+      where("type", "==", type),
+      orderBy("datePublication", "desc"),
+      limit(max + 1)
+    );
+    const snap = await getDocs(q);
+    return snap.docs
+      .map(d => ({ id: d.id, ...d.data() }))
+      .filter(o => o.id !== idAExclure)
+      .slice(0, max);
+  } catch (err) {
+    console.error("Erreur Firestore (offres similaires) :", err);
+    return [];
+  }
 }
 
 /* ---------- Gabarits HTML ---------- */
@@ -104,8 +151,8 @@ async function initApercuOpportunites() {
   const apercu = document.getElementById("opportunites-apercu");
   if (!apercu) return;
   try {
-    const tous = await chargerEmplois();
-    apercu.innerHTML = tous.slice(0, 2).map(o => carteEmploiHTML(o, true)).join("")
+    const recentes = await chargerApercuEmplois(2);
+    apercu.innerHTML = recentes.map(o => carteEmploiHTML(o, true)).join("")
       || `<p class="empty-msg">Aucune offre publiée pour le moment.</p>`;
   } catch (err) {
     console.error("Erreur Firestore (aperçu emplois) :", err);
@@ -119,35 +166,80 @@ async function initEmploisPage() {
   const grille = document.getElementById("emplois-grid");
   if (!grille) return;
 
-  grille.innerHTML = `<p class="empty-msg">Chargement des offres…</p>`;
+  let typeActuel = new URLSearchParams(window.location.search).get("type") || "Tous";
+  let curseur = null;
+  let fin = false;
 
-  let tous;
-  try {
-    tous = await chargerEmplois();
-  } catch (err) {
-    console.error("Erreur Firestore (chargerEmplois) :", err);
-    grille.innerHTML = erreurHTML();
-    return;
+  function creerBoutonChargerPlus() {
+    let bouton = document.getElementById("btn-charger-plus-emplois");
+    if (!bouton) {
+      bouton = document.createElement("button");
+      bouton.type = "button";
+      bouton.id = "btn-charger-plus-emplois";
+      bouton.className = "btn btn-outline";
+      bouton.style.display = "block";
+      bouton.style.margin = "var(--e6) auto 0";
+      bouton.textContent = "Charger plus d'offres";
+      grille.insertAdjacentElement("afterend", bouton);
+      bouton.addEventListener("click", chargerEtAfficherSuite);
+    }
+    return bouton;
   }
 
-  function afficher(type) {
-    const filtres = type === "Tous" ? tous : tous.filter(o => o.type === type);
-    grille.innerHTML = filtres.map(o => carteEmploiHTML(o)).join("")
-      || `<p class="empty-msg">Aucune offre dans cette catégorie pour l'instant — consultez les autres catégories ou revenez bientôt.</p>`;
+  function mettreAJourBoutonChargerPlus() {
+    const bouton = document.getElementById("btn-charger-plus-emplois");
+    if (!bouton) return;
+    bouton.style.display = fin ? "none" : "inline-block";
+  }
+
+  async function chargerEtAfficherPremierePage() {
+    curseur = null;
+    fin = false;
+    grille.innerHTML = `<p class="empty-msg">Chargement des offres…</p>`;
+    try {
+      const resultat = await chargerPageEmplois({ type: typeActuel, curseur: null });
+      curseur = resultat.curseur;
+      fin = resultat.fin;
+      grille.innerHTML = resultat.offres.length
+        ? resultat.offres.map(o => carteEmploiHTML(o)).join("")
+        : `<p class="empty-msg">Aucune offre dans cette catégorie pour l'instant — consultez les autres catégories ou revenez bientôt.</p>`;
+      creerBoutonChargerPlus();
+      mettreAJourBoutonChargerPlus();
+    } catch (err) {
+      console.error("Erreur Firestore (chargerPageEmplois) :", err);
+      grille.innerHTML = erreurHTML();
+    }
+  }
+
+  async function chargerEtAfficherSuite() {
+    if (fin || !curseur) return;
+    const bouton = document.getElementById("btn-charger-plus-emplois");
+    if (bouton) { bouton.disabled = true; bouton.textContent = "Chargement…"; }
+    try {
+      const resultat = await chargerPageEmplois({ type: typeActuel, curseur });
+      curseur = resultat.curseur;
+      fin = resultat.fin;
+      grille.insertAdjacentHTML("beforeend", resultat.offres.map(o => carteEmploiHTML(o)).join(""));
+    } catch (err) {
+      console.error("Erreur Firestore (page suivante emplois) :", err);
+    } finally {
+      if (bouton) { bouton.disabled = false; bouton.textContent = "Charger plus d'offres"; }
+      mettreAJourBoutonChargerPlus();
+    }
   }
 
   const onglets = document.querySelectorAll(".filter-tab[data-type]");
-  const params = new URLSearchParams(window.location.search);
-  const typeInitial = params.get("type") || "Tous";
   onglets.forEach(onglet => {
-    onglet.classList.toggle("active", onglet.dataset.type === typeInitial);
+    onglet.classList.toggle("active", onglet.dataset.type === typeActuel);
     onglet.addEventListener("click", () => {
       onglets.forEach(o => o.classList.remove("active"));
       onglet.classList.add("active");
-      afficher(onglet.dataset.type);
+      typeActuel = onglet.dataset.type;
+      chargerEtAfficherPremierePage();
     });
   });
-  afficher(typeInitial);
+
+  await chargerEtAfficherPremierePage();
 }
 
 /* ---------- Page emploi.html (détail) ---------- */
@@ -219,15 +311,11 @@ async function initEmploiPage() {
 
   const zoneSimilaires = document.getElementById("emplois-similaires");
   if (zoneSimilaires) {
-    try {
-      const similaires = await chargerEmploisSimilaires(offre.type, offre.id, 2);
-      if (similaires.length) {
-        zoneSimilaires.innerHTML = `
-          <h3>Autres offres — ${offre.type}</h3>
-          <div class="emplois-grid">${similaires.map(o => carteEmploiHTML(o)).join("")}</div>`;
-      }
-    } catch (err) {
-      console.error("Erreur Firestore (offres similaires) :", err); // non bloquant
+    const similaires = await chargerEmploisSimilaires(offre.type, offre.id, 2);
+    if (similaires.length) {
+      zoneSimilaires.innerHTML = `
+        <h3>Autres offres — ${offre.type}</h3>
+        <div class="emplois-grid">${similaires.map(o => carteEmploiHTML(o)).join("")}</div>`;
     }
   }
 
