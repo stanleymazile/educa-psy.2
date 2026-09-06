@@ -7,7 +7,10 @@
    ============================================================ */
 
 import { db } from "./firebase-config.js";
-import { collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-lite.js";
+// ✅ SDK complet (comme partout ailleurs sur le site), pas firestore-lite :
+//    db est initialisé via initializeFirestore() du SDK complet dans
+//    firebase-config.js, incompatible avec les fonctions du build "lite".
+import { collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
 function t(cle) {
   return window.EducaPsyI18n ? window.EducaPsyI18n.texte(cle) : cle;
