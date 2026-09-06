@@ -1,5 +1,11 @@
 /* ============================================================
-   EDUCA-PSY — articles-firebase.js (Version finale : 5 thématiques, SEO, UX, Listes & YouTube)
+   EDUCA-PSY — articles-firebase.js
+   ============================================================
+   Accueil (index.html) : à la une + quelques articles récents.
+   Page dédiée (articles.html) : liste complète, filtres,
+   recherche et bouton "Voir plus" — tout se fait ici côté
+   client sur la liste déjà chargée en mémoire (chargerArticles),
+   sans requête Firestore supplémentaire ni index composite.
    ============================================================ */
 
 import { db } from "./firebase-config.js";
@@ -9,6 +15,9 @@ import {
 
 const MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet",
                   "août","septembre","octobre","novembre","décembre"];
+
+const NB_RECENTS_ACCUEIL = 3;   // nombre d'articles récents affichés sur l'accueil
+const TAILLE_PAGE_ARTICLES = 9; // nombre d'articles affichés par "page" sur articles.html
 
 let cacheArticles = null;
 
@@ -69,7 +78,7 @@ function calculerTempsLecture(contenuArray) {
 
 function formaterTexte(texte) {
   if (!texte) return "";
-  
+
   // 1. Transformation des sous-titres (## )
   if (texte.startsWith("## ")) {
     const titreSousSection = texte.replace("## ", "").trim();
@@ -83,7 +92,7 @@ function formaterTexte(texte) {
       .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
       .replace(/==([^=]+)==/g, '<span style="color: var(--couleur-or-fonce, #B8912F); font-weight: 600;">$1</span>')
       .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-    
+
     return `<ul class="article-list"><li>${contenuFormate}</li></ul>`;
   }
 
@@ -159,19 +168,48 @@ function erreurChargementHTML() {
   return `<p class="empty-msg">Impossible de charger les articles pour le moment. Vérifiez la configuration de votre base de données.</p>`;
 }
 
-/* ---------- Page d'accueil ---------- */
+/* ---------- Page d'accueil (aperçu minimal) ---------- */
 
 async function initAccueilFirebase() {
-  const grille = document.getElementById("articles-grid");
-  if (!grille) return;
+  const zoneRecents = document.getElementById("articles-recents");
+  if (!zoneRecents) return; // pas sur la page d'accueil
 
   const zoneFeatured = document.getElementById("featured-article");
   if (zoneFeatured && !zoneFeatured.children.length) {
     zoneFeatured.innerHTML = `<p class="empty-msg">Chargement…</p>`;
   }
-  if (!grille.children.length) {
-    grille.innerHTML = `<p class="empty-msg">Chargement des articles…</p>`;
+  zoneRecents.innerHTML = `<p class="empty-msg">Chargement des articles…</p>`;
+
+  let tous;
+  try {
+    tous = await chargerArticles();
+  } catch (err) {
+    console.error("Erreur Firestore (chargerArticles) :", err);
+    zoneRecents.innerHTML = erreurChargementHTML();
+    return;
   }
+
+  if (!tous.length) {
+    if (zoneFeatured) zoneFeatured.innerHTML = "";
+    zoneRecents.innerHTML = `<p class="empty-msg">Aucun article publié pour le moment.</p>`;
+    return;
+  }
+
+  const premier = tous.find(a => a.aLaUne === true) || tous[0];
+  const recents = tous.filter(a => a.id !== premier.id).slice(0, NB_RECENTS_ACCUEIL);
+
+  if (zoneFeatured) zoneFeatured.innerHTML = carteArticleHTML(premier, true);
+  zoneRecents.innerHTML = recents.map(a => carteArticleHTML(a)).join("")
+    || `<p class="empty-msg">Aucun autre article pour le moment.</p>`;
+}
+
+/* ---------- Page articles.html (liste complète) ---------- */
+
+async function initArticlesListePage() {
+  const grille = document.getElementById("articles-grid");
+  if (!grille) return; // pas sur la page articles.html
+
+  grille.innerHTML = `<p class="empty-msg">Chargement des articles…</p>`;
 
   let tous;
   try {
@@ -182,55 +220,54 @@ async function initAccueilFirebase() {
     return;
   }
 
-  if (!tous.length) {
-    grille.innerHTML = `<p class="empty-msg">Aucun article publié pour le moment.</p>`;
-    return;
+  const params = new URLSearchParams(window.location.search);
+  let catActuelle = params.get("cat") || "Tous";
+  let rechercheActuelle = "";
+  let nbAffiches = TAILLE_PAGE_ARTICLES;
+
+  function creerBoutonVoirPlus() {
+    let bouton = document.getElementById("btn-voir-plus-articles");
+    if (!bouton) {
+      bouton = document.createElement("button");
+      bouton.type = "button";
+      bouton.id = "btn-voir-plus-articles";
+      bouton.className = "btn btn-outline";
+      bouton.style.display = "block";
+      bouton.style.margin = "var(--e6) auto 0";
+      bouton.textContent = "Voir plus d'articles";
+      grille.insertAdjacentElement("afterend", bouton);
+      bouton.addEventListener("click", () => {
+        nbAffiches += TAILLE_PAGE_ARTICLES;
+        afficher();
+      });
+    }
+    return bouton;
   }
 
-  const premier = tous.find(a => a.aLaUne === true) || tous[0];
-  const reste = tous.filter(a => a.id !== premier.id);
-
-  if (zoneFeatured) zoneFeatured.innerHTML = carteArticleHTML(premier, true);
-
-  let catActuelle = "Tous";
-  let rechercheActuelle = "";
-
   function afficher() {
-    let filtres = catActuelle === "Tous" ? reste : reste.filter(a => a.categorie === catActuelle);
+    let filtres = catActuelle === "Tous" ? tous : tous.filter(a => a.categorie === catActuelle);
     if (rechercheActuelle) {
       const q = rechercheActuelle.toLowerCase();
       filtres = filtres.filter(a =>
         (a.titre || "").toLowerCase().includes(q) || (a.resume || "").toLowerCase().includes(q));
     }
-    grille.innerHTML = filtres.map(a => carteArticleHTML(a)).join("")
+
+    const visibles = filtres.slice(0, nbAffiches);
+    grille.innerHTML = visibles.map(a => carteArticleHTML(a)).join("")
       || `<p class="empty-msg">Aucun article ne correspond pour l'instant — essayez une autre recherche ou une autre rubrique.</p>`;
+
+    const bouton = creerBoutonVoirPlus();
+    bouton.style.display = nbAffiches < filtres.length ? "inline-block" : "none";
   }
 
-  const params = new URLSearchParams(window.location.search);
-  catActuelle = params.get("cat") || "Tous";
-
-  const btnPlusCats = document.getElementById("btn-plus-cats");
   const onglets = document.querySelectorAll(".filter-tab[data-cat]");
-
   onglets.forEach(onglet => {
-    const isSelected = onglet.dataset.cat === catActuelle;
-    onglet.classList.toggle("active", isSelected);
-
-    if (isSelected && btnPlusCats) {
-      const estDansDropdown = onglet.closest(".dropdown-menu") !== null;
-      btnPlusCats.classList.toggle("active", estDansDropdown);
-    }
-
+    onglet.classList.toggle("active", onglet.dataset.cat === catActuelle);
     onglet.addEventListener("click", () => {
       onglets.forEach(o => o.classList.remove("active"));
       onglet.classList.add("active");
       catActuelle = onglet.dataset.cat;
-
-      if (btnPlusCats) {
-        const estDansDropdown = onglet.closest(".dropdown-menu") !== null;
-        btnPlusCats.classList.toggle("active", estDansDropdown);
-      }
-
+      nbAffiches = TAILLE_PAGE_ARTICLES;
       afficher();
     });
   });
@@ -239,6 +276,7 @@ async function initAccueilFirebase() {
   if (champRecherche) {
     champRecherche.addEventListener("input", () => {
       rechercheActuelle = champRecherche.value.trim();
+      nbAffiches = TAILLE_PAGE_ARTICLES;
       afficher();
     });
   }
@@ -279,7 +317,7 @@ function injecterDonneesStructurees(article, titre, resume) {
   const script = document.createElement("script");
   script.type = "application/ld+json";
   script.id = "jsonld-article";
-  
+
   script.textContent = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "NewsArticle",
@@ -359,10 +397,10 @@ async function initArticlePageFirebase() {
 
   const tempsLecture = calculerTempsLecture(contenu);
 
-  const imageHero = article.image 
+  const imageHero = article.image
     ? `<figure class="article-hero">
         <img class="article-image" src="${article.image}" alt="${titre || ""}" fetchpriority="high">
-       </figure>` 
+       </figure>`
     : "";
 
   const dateObj = article.date && article.date.toDate ? article.date.toDate() : new Date(article.date);
@@ -374,8 +412,8 @@ async function initArticlePageFirebase() {
       <span class="tag tag-${slug}">${article.categorie || ""}</span>
       <h1 class="article-title">${titre || ""}</h1>
       <div class="article-meta">
-        Par <strong>${article.auteur || "Équipe Educa-Psy"}</strong> · 
-        <time datetime="${dateIso}">${formaterDateFirestore(article.date)}</time> · 
+        Par <strong>${article.auteur || "Équipe Educa-Psy"}</strong> ·
+        <time datetime="${dateIso}">${formaterDateFirestore(article.date)}</time> ·
         <span class="reading-time">${tempsLecture}</span>
       </div>
       ${imageHero}
@@ -431,8 +469,11 @@ async function initArticlePageFirebase() {
 /* ---------- Lancement ---------- */
 
 function rechargerContenu() {
-  if (document.getElementById("articles-grid")) {
+  if (document.getElementById("articles-recents")) {
     initAccueilFirebase();
+  }
+  if (document.getElementById("articles-grid")) {
+    initArticlesListePage();
   }
   if (document.getElementById("article-content")) {
     initArticlePageFirebase();
