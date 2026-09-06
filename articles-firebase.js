@@ -1,16 +1,18 @@
 /* ============================================================
    EDUCA-PSY — articles-firebase.js (Version finale : 5 thématiques, SEO, UX, Listes & YouTube)
+   Optimisée : pagination + requêtes ciblées (moins de données transférées)
    ============================================================ */
 
 import { db } from "./firebase-config.js";
 import {
-  collection, getDocs, doc, getDoc, query, orderBy
+  collection, getDocs, doc, getDoc, query, orderBy, limit, startAfter, where
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
 const MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet",
                   "août","septembre","octobre","novembre","décembre"];
 
-let cacheArticles = null;
+const TAILLE_PAGE = 9;              // nombre d'articles chargés par page sur l'accueil
+const TAILLE_RECHERCHE = 50;        // nombre max d'articles passés au crible d'une recherche
 
 function champLocale(article, champ, langue) {
   if (!langue || langue === "fr") return article[champ] || "";
@@ -106,25 +108,102 @@ function formaterTexte(texte) {
 
 /* ---------- Accès Firestore ---------- */
 
-async function chargerArticles() {
-  if (cacheArticles) return cacheArticles;
-  const q = query(collection(db, "articles"), orderBy("date", "desc"));
-  const snap = await getDocs(q);
-  cacheArticles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-  return cacheArticles;
-}
-
 async function chargerArticleParId(id) {
   const ref = doc(db, "articles", id);
   const snap = await getDoc(ref);
   return snap.exists() ? { id: snap.id, ...snap.data() } : null;
 }
 
+/* Charge l'article mis en avant : le plus récent marqué "aLaUne",
+   ou à défaut l'article le plus récent tout court.
+   NOTE : la première exécution de la requête aLaUne+date peut
+   demander à Firestore de créer un index composite — la console
+   affichera un lien direct pour le créer en un clic si besoin. */
+async function chargerArticleVedette() {
+  try {
+    const qVedette = query(
+      collection(db, "articles"),
+      where("aLaUne", "==", true),
+      orderBy("date", "desc"),
+      limit(1)
+    );
+    const snap = await getDocs(qVedette);
+    if (!snap.empty) {
+      const d = snap.docs[0];
+      return { id: d.id, ...d.data() };
+    }
+  } catch (err) {
+    console.error("Erreur Firestore (article vedette) :", err);
+  }
+  // Repli : l'article le plus récent, peu importe aLaUne
+  const qRecent = query(collection(db, "articles"), orderBy("date", "desc"), limit(1));
+  const snapRecent = await getDocs(qRecent);
+  if (snapRecent.empty) return null;
+  const d = snapRecent.docs[0];
+  return { id: d.id, ...d.data() };
+}
+
+/* Charge une page d'articles (9 par défaut), filtrée par catégorie
+   si besoin, à partir d'un curseur de pagination (startAfter).
+   NOTE : le filtrage par catégorie + tri par date peut lui aussi
+   demander la création d'un index composite (même remarque que ci-dessus). */
+async function chargerPageArticles({ categorie = "Tous", curseur = null } = {}) {
+  const contraintes = [];
+  if (categorie && categorie !== "Tous") {
+    contraintes.push(where("categorie", "==", categorie));
+  }
+  contraintes.push(orderBy("date", "desc"));
+  if (curseur) contraintes.push(startAfter(curseur));
+  contraintes.push(limit(TAILLE_PAGE));
+
+  const q = query(collection(db, "articles"), ...contraintes);
+  const snap = await getDocs(q);
+  const articles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  const nouveauCurseur = snap.docs.length ? snap.docs[snap.docs.length - 1] : null;
+  const fin = snap.docs.length < TAILLE_PAGE;
+  return { articles, curseur: nouveauCurseur, fin };
+}
+
+/* Recherche : charge un lot plus large (jusqu'à 50 articles, dans la
+   catégorie choisie le cas échéant) puis filtre côté client sur le
+   titre et le résumé. Une recherche plein texte plus poussée sur un
+   grand volume d'articles nécessiterait un service dédié (ex. Algolia). */
+async function rechercherArticles(termeRecherche, categorie) {
+  const contraintes = [];
+  if (categorie && categorie !== "Tous") {
+    contraintes.push(where("categorie", "==", categorie));
+  }
+  contraintes.push(orderBy("date", "desc"));
+  contraintes.push(limit(TAILLE_RECHERCHE));
+
+  const q = query(collection(db, "articles"), ...contraintes);
+  const snap = await getDocs(q);
+  const tous = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  const terme = termeRecherche.toLowerCase();
+  return tous.filter(a =>
+    (a.titre || "").toLowerCase().includes(terme) || (a.resume || "").toLowerCase().includes(terme));
+}
+
+/* Articles similaires : requête ciblée sur la catégorie plutôt que
+   de charger toute la collection pour filtrer ensuite en JS. */
 async function chargerArticlesSimilaires(categorie, idAExclure, max = 2) {
-  const tous = await chargerArticles();
-  return tous
-    .filter(a => a.categorie === categorie && a.id !== idAExclure)
-    .slice(0, max);
+  if (!categorie) return [];
+  try {
+    const q = query(
+      collection(db, "articles"),
+      where("categorie", "==", categorie),
+      orderBy("date", "desc"),
+      limit(max + 1)
+    );
+    const snap = await getDocs(q);
+    return snap.docs
+      .map(d => ({ id: d.id, ...d.data() }))
+      .filter(a => a.id !== idAExclure)
+      .slice(0, max);
+  } catch (err) {
+    console.error("Erreur Firestore (articles similaires) :", err);
+    return [];
+  }
 }
 
 /* ---------- Gabarits HTML ---------- */
@@ -169,45 +248,97 @@ async function initAccueilFirebase() {
   if (zoneFeatured && !zoneFeatured.children.length) {
     zoneFeatured.innerHTML = `<p class="empty-msg">Chargement…</p>`;
   }
-  if (!grille.children.length) {
-    grille.innerHTML = `<p class="empty-msg">Chargement des articles…</p>`;
-  }
+  grille.innerHTML = `<p class="empty-msg">Chargement des articles…</p>`;
 
-  let tous;
+  let vedette = null;
   try {
-    tous = await chargerArticles();
+    vedette = await chargerArticleVedette();
   } catch (err) {
-    console.error("Erreur Firestore (chargerArticles) :", err);
-    grille.innerHTML = erreurChargementHTML();
-    return;
+    console.error("Erreur Firestore (chargerArticleVedette) :", err);
   }
+  if (zoneFeatured) zoneFeatured.innerHTML = vedette ? carteArticleHTML(vedette, true) : "";
 
-  if (!tous.length) {
-    grille.innerHTML = `<p class="empty-msg">Aucun article publié pour le moment.</p>`;
-    return;
-  }
-
-  const premier = tous.find(a => a.aLaUne === true) || tous[0];
-  const reste = tous.filter(a => a.id !== premier.id);
-
-  if (zoneFeatured) zoneFeatured.innerHTML = carteArticleHTML(premier, true);
-
-  let catActuelle = "Tous";
-  let rechercheActuelle = "";
-
-  function afficher() {
-    let filtres = catActuelle === "Tous" ? reste : reste.filter(a => a.categorie === catActuelle);
-    if (rechercheActuelle) {
-      const q = rechercheActuelle.toLowerCase();
-      filtres = filtres.filter(a =>
-        (a.titre || "").toLowerCase().includes(q) || (a.resume || "").toLowerCase().includes(q));
-    }
-    grille.innerHTML = filtres.map(a => carteArticleHTML(a)).join("")
-      || `<p class="empty-msg">Aucun article ne correspond pour l'instant — essayez une autre recherche ou une autre rubrique.</p>`;
-  }
-
+  const idVedette = vedette ? vedette.id : null;
   const params = new URLSearchParams(window.location.search);
-  catActuelle = params.get("cat") || "Tous";
+  let catActuelle = params.get("cat") || "Tous";
+  let rechercheActuelle = "";
+  let curseur = null;
+  let fin = false;
+
+  function creerBoutonChargerPlus() {
+    let bouton = document.getElementById("btn-charger-plus");
+    if (!bouton) {
+      bouton = document.createElement("button");
+      bouton.type = "button";
+      bouton.id = "btn-charger-plus";
+      bouton.className = "btn btn-outline";
+      bouton.style.display = "block";
+      bouton.style.margin = "var(--e6) auto 0";
+      bouton.textContent = "Charger plus d'articles";
+      grille.insertAdjacentElement("afterend", bouton);
+      bouton.addEventListener("click", chargerEtAfficherSuite);
+    }
+    return bouton;
+  }
+
+  function mettreAJourBoutonChargerPlus() {
+    const bouton = document.getElementById("btn-charger-plus");
+    if (!bouton) return;
+    bouton.style.display = (fin || rechercheActuelle) ? "none" : "inline-block";
+  }
+
+  async function chargerEtAfficherPremierePage() {
+    curseur = null;
+    fin = false;
+    grille.innerHTML = `<p class="empty-msg">Chargement des articles…</p>`;
+    try {
+      const resultat = await chargerPageArticles({ categorie: catActuelle, curseur: null });
+      const articles = resultat.articles.filter(a => a.id !== idVedette);
+      curseur = resultat.curseur;
+      fin = resultat.fin;
+      grille.innerHTML = articles.length
+        ? articles.map(a => carteArticleHTML(a)).join("")
+        : `<p class="empty-msg">Aucun article ne correspond pour l'instant — essayez une autre rubrique.</p>`;
+      creerBoutonChargerPlus();
+      mettreAJourBoutonChargerPlus();
+    } catch (err) {
+      console.error("Erreur Firestore (chargerPageArticles) :", err);
+      grille.innerHTML = erreurChargementHTML();
+    }
+  }
+
+  async function chargerEtAfficherSuite() {
+    if (fin || !curseur) return;
+    const bouton = document.getElementById("btn-charger-plus");
+    if (bouton) { bouton.disabled = true; bouton.textContent = "Chargement…"; }
+    try {
+      const resultat = await chargerPageArticles({ categorie: catActuelle, curseur });
+      const articles = resultat.articles.filter(a => a.id !== idVedette);
+      curseur = resultat.curseur;
+      fin = resultat.fin;
+      grille.insertAdjacentHTML("beforeend", articles.map(a => carteArticleHTML(a)).join(""));
+    } catch (err) {
+      console.error("Erreur Firestore (page suivante) :", err);
+    } finally {
+      if (bouton) { bouton.disabled = false; bouton.textContent = "Charger plus d'articles"; }
+      mettreAJourBoutonChargerPlus();
+    }
+  }
+
+  async function lancerRecherche() {
+    grille.innerHTML = `<p class="empty-msg">Recherche…</p>`;
+    try {
+      const resultats = (await rechercherArticles(rechercheActuelle, catActuelle))
+        .filter(a => a.id !== idVedette);
+      grille.innerHTML = resultats.length
+        ? resultats.map(a => carteArticleHTML(a)).join("")
+        : `<p class="empty-msg">Aucun article ne correspond pour l'instant — essayez une autre recherche ou une autre rubrique.</p>`;
+      mettreAJourBoutonChargerPlus();
+    } catch (err) {
+      console.error("Erreur Firestore (recherche) :", err);
+      grille.innerHTML = erreurChargementHTML();
+    }
+  }
 
   const btnPlusCats = document.getElementById("btn-plus-cats");
   const onglets = document.querySelectorAll(".filter-tab[data-cat]");
@@ -231,19 +362,33 @@ async function initAccueilFirebase() {
         btnPlusCats.classList.toggle("active", estDansDropdown);
       }
 
-      afficher();
+      if (rechercheActuelle) {
+        lancerRecherche();
+      } else {
+        chargerEtAfficherPremierePage();
+      }
     });
   });
 
   const champRecherche = document.getElementById("recherche-articles");
   if (champRecherche) {
+    let delaiRecherche;
     champRecherche.addEventListener("input", () => {
+      clearTimeout(delaiRecherche);
       rechercheActuelle = champRecherche.value.trim();
-      afficher();
+      // Petit délai après la dernière frappe pour éviter une requête
+      // Firestore à chaque lettre tapée.
+      delaiRecherche = setTimeout(() => {
+        if (rechercheActuelle) {
+          lancerRecherche();
+        } else {
+          chargerEtAfficherPremierePage();
+        }
+      }, 300);
     });
   }
 
-  afficher();
+  await chargerEtAfficherPremierePage();
 }
 
 /* ---------- Optimisations SEO, Open Graph & Schema NewsArticle ---------- */
@@ -411,17 +556,13 @@ async function initArticlePageFirebase() {
 
   const zoneSimilaires = document.getElementById("articles-similaires");
   if (zoneSimilaires) {
-    try {
-      const similaires = await chargerArticlesSimilaires(article.categorie, article.id, 2);
-      if (similaires.length) {
-        zoneSimilaires.innerHTML = `
-          <h3>Articles similaires</h3>
-          <div class="articles-grid articles-grid--compact">
-            ${similaires.map(a => carteArticleHTML(a)).join("")}
-          </div>`;
-      }
-    } catch (err) {
-      console.error("Erreur Firestore (articles similaires) :", err);
+    const similaires = await chargerArticlesSimilaires(article.categorie, article.id, 2);
+    if (similaires.length) {
+      zoneSimilaires.innerHTML = `
+        <h3>Articles similaires</h3>
+        <div class="articles-grid articles-grid--compact">
+          ${similaires.map(a => carteArticleHTML(a)).join("")}
+        </div>`;
     }
   }
 
