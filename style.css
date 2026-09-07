@@ -250,6 +250,37 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .pagination-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
 /* ============================================================
+   ÉTATS DE CHARGEMENT (squelettes animés)
+   ============================================================ */
+@keyframes squelette-scintillement {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.squelette {
+  background: linear-gradient(90deg, var(--couleur-fond-alt) 25%, var(--couleur-ligne) 37%, var(--couleur-fond-alt) 63%);
+  background-size: 400% 100%;
+  animation: squelette-scintillement 1.4s ease-in-out infinite;
+  border-radius: var(--rayon);
+}
+.squelette-carte { padding: var(--e5) 0 var(--e6); border-top: 3px solid var(--couleur-ligne); border-bottom: 1px solid var(--couleur-ligne); margin-bottom: var(--e5); }
+.squelette-image { width: 100%; aspect-ratio: 16 / 9; margin-bottom: var(--e3); }
+.squelette-ligne { height: 14px; margin-bottom: var(--e2); }
+.squelette-ligne.titre { height: 22px; width: 85%; margin: var(--e2) 0 var(--e3); }
+.squelette-ligne.court { width: 35%; }
+.squelette-ligne.tag { height: 20px; width: 90px; border-radius: 999px; margin-bottom: var(--e3); }
+
+.squelette-article-page .squelette-ligne.tag { margin-bottom: var(--e3); }
+.squelette-article-page .squelette-titre-page { height: 2.4rem; width: 75%; margin-bottom: var(--e4); }
+.squelette-article-page .squelette-meta { height: 14px; width: 45%; margin-bottom: var(--e6); }
+.squelette-article-page .squelette-image-hero { width: 100%; aspect-ratio: 16 / 9; margin-bottom: var(--e6); }
+.squelette-article-page .squelette-paragraphe { height: 14px; width: 100%; margin-bottom: var(--e3); }
+.squelette-article-page .squelette-paragraphe.court { width: 70%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .squelette { animation: none; }
+}
+
+/* ============================================================
    BOUTON + CATÉGORIES SUPPLÉMENTAIRES
    ============================================================ */
 .filter-plus-wrap {
