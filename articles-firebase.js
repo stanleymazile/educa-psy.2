@@ -205,6 +205,17 @@ async function initAccueilFirebase() {
 
 /* ---------- Page articles.html (liste complète) ---------- */
 
+/* Génère les boutons de pagination numérotée (« ‹ 1 2 3 › »). */
+function genererPaginationHTML(pageActuelle, totalPages) {
+  if (totalPages <= 1) return "";
+  let boutons = `<button type="button" class="pagination-btn" data-page="prev" ${pageActuelle === 1 ? "disabled" : ""} aria-label="Page précédente">‹</button>`;
+  for (let i = 1; i <= totalPages; i++) {
+    boutons += `<button type="button" class="pagination-btn ${i === pageActuelle ? "active" : ""}" data-page="${i}">${i}</button>`;
+  }
+  boutons += `<button type="button" class="pagination-btn" data-page="next" ${pageActuelle === totalPages ? "disabled" : ""} aria-label="Page suivante">›</button>`;
+  return `<nav class="pagination" aria-label="Pagination des articles">${boutons}</nav>`;
+}
+
 async function initArticlesListePage() {
   const grille = document.getElementById("articles-grid");
   if (!grille) return; // pas sur la page articles.html
@@ -223,25 +234,16 @@ async function initArticlesListePage() {
   const params = new URLSearchParams(window.location.search);
   let catActuelle = params.get("cat") || "Tous";
   let rechercheActuelle = "";
-  let nbAffiches = TAILLE_PAGE_ARTICLES;
+  let pageActuelle = 1;
 
-  function creerBoutonVoirPlus() {
-    let bouton = document.getElementById("btn-voir-plus-articles");
-    if (!bouton) {
-      bouton = document.createElement("button");
-      bouton.type = "button";
-      bouton.id = "btn-voir-plus-articles";
-      bouton.className = "btn btn-outline";
-      bouton.style.display = "block";
-      bouton.style.margin = "var(--e6) auto 0";
-      bouton.textContent = "Voir plus d'articles";
-      grille.insertAdjacentElement("afterend", bouton);
-      bouton.addEventListener("click", () => {
-        nbAffiches += TAILLE_PAGE_ARTICLES;
-        afficher();
-      });
+  function zonePagination() {
+    let zone = document.getElementById("pagination-articles");
+    if (!zone) {
+      zone = document.createElement("div");
+      zone.id = "pagination-articles";
+      grille.insertAdjacentElement("afterend", zone);
     }
-    return bouton;
+    return zone;
   }
 
   function afficher() {
@@ -252,12 +254,27 @@ async function initArticlesListePage() {
         (a.titre || "").toLowerCase().includes(q) || (a.resume || "").toLowerCase().includes(q));
     }
 
-    const visibles = filtres.slice(0, nbAffiches);
+    const totalPages = Math.max(1, Math.ceil(filtres.length / TAILLE_PAGE_ARTICLES));
+    if (pageActuelle > totalPages) pageActuelle = totalPages;
+
+    const debut = (pageActuelle - 1) * TAILLE_PAGE_ARTICLES;
+    const visibles = filtres.slice(debut, debut + TAILLE_PAGE_ARTICLES);
+
     grille.innerHTML = visibles.map(a => carteArticleHTML(a)).join("")
       || `<p class="empty-msg">Aucun article ne correspond pour l'instant — essayez une autre recherche ou une autre rubrique.</p>`;
 
-    const bouton = creerBoutonVoirPlus();
-    bouton.style.display = nbAffiches < filtres.length ? "inline-block" : "none";
+    const zone = zonePagination();
+    zone.innerHTML = genererPaginationHTML(pageActuelle, totalPages);
+    zone.querySelectorAll(".pagination-btn").forEach(bouton => {
+      bouton.addEventListener("click", () => {
+        const val = bouton.dataset.page;
+        if (val === "prev") pageActuelle = Math.max(1, pageActuelle - 1);
+        else if (val === "next") pageActuelle = Math.min(totalPages, pageActuelle + 1);
+        else pageActuelle = parseInt(val, 10);
+        afficher();
+        grille.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
   }
 
   const onglets = document.querySelectorAll(".filter-tab[data-cat]");
@@ -267,7 +284,7 @@ async function initArticlesListePage() {
       onglets.forEach(o => o.classList.remove("active"));
       onglet.classList.add("active");
       catActuelle = onglet.dataset.cat;
-      nbAffiches = TAILLE_PAGE_ARTICLES;
+      pageActuelle = 1;
       afficher();
     });
   });
@@ -276,7 +293,7 @@ async function initArticlesListePage() {
   if (champRecherche) {
     champRecherche.addEventListener("input", () => {
       rechercheActuelle = champRecherche.value.trim();
-      nbAffiches = TAILLE_PAGE_ARTICLES;
+      pageActuelle = 1;
       afficher();
     });
   }
