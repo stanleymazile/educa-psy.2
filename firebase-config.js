@@ -3,8 +3,16 @@
    ============================================================ */
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-// ✅ Utiliser le SDK standard au lieu de firestore-lite
-import { getFirestore } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+// ✅ SDK standard + cache local persistant (IndexedDB) pour accélérer
+//    les visites répétées : les documents déjà lus sont servis
+//    depuis le cache local pendant que Firestore vérifie en
+//    arrière-plan s'il y a du nouveau, au lieu d'attendre
+//    systématiquement un aller-retour réseau complet.
+import {
+  initializeFirestore,
+  persistentLocalCache,
+  persistentMultipleTabManager
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 import { getStorage } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
 
@@ -18,7 +26,15 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+
+// persistentMultipleTabManager() permet à plusieurs onglets du même
+// navigateur de partager ce cache sans se bloquer mutuellement.
+export const db = initializeFirestore(app, {
+  localCache: persistentLocalCache({
+    tabManager: persistentMultipleTabManager()
+  })
+});
+
 export const auth = getAuth(app);
 export const storage = getStorage(app);
 
