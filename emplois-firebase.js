@@ -86,6 +86,36 @@ async function chargerEmploisSimilaires(type, idAExclure, max = 2) {
   return tous.filter(o => o.type === type && o.id !== idAExclure).slice(0, max);
 }
 
+/* Squelette d'une carte d'offre, affiché pendant le chargement
+   pour un rendu plus soigné qu'un simple texte "Chargement…". */
+function squeletteCarteEmploiHTML() {
+  return `
+    <div class="job-card squelette-carte" aria-hidden="true">
+      <div class="squelette squelette-ligne tag"></div>
+      <div class="squelette squelette-ligne titre"></div>
+      <div class="squelette squelette-ligne court"></div>
+      <div class="squelette squelette-ligne"></div>
+      <div class="squelette squelette-ligne court"></div>
+    </div>`;
+}
+
+function squelettesGrilleEmploisHTML(n = 6) {
+  return Array.from({ length: n }).map(squeletteCarteEmploiHTML).join("");
+}
+
+/* Squelette de la page détail d'une offre. */
+function squeletteEmploiPageHTML() {
+  return `
+    <div class="squelette-article-page" aria-hidden="true">
+      <div class="squelette squelette-ligne tag"></div>
+      <div class="squelette squelette-titre-page"></div>
+      <div class="squelette squelette-meta"></div>
+      <div class="squelette squelette-paragraphe"></div>
+      <div class="squelette squelette-paragraphe"></div>
+      <div class="squelette squelette-paragraphe court"></div>
+    </div>`;
+}
+
 /* ---------- Gabarits HTML ---------- */
 
 function carteEmploiHTML(offre, compact = false) {
@@ -124,6 +154,7 @@ function erreurHTML() {
 async function initApercuOpportunites() {
   const apercu = document.getElementById("opportunites-apercu");
   if (!apercu) return;
+  apercu.innerHTML = squelettesGrilleEmploisHTML(2);
   try {
     const tous = await chargerEmplois();
     apercu.innerHTML = tous.slice(0, 2).map(o => carteEmploiHTML(o, true)).join("")
@@ -140,7 +171,7 @@ async function initEmploisPage() {
   const grille = document.getElementById("emplois-grid");
   if (!grille) return;
 
-  grille.innerHTML = `<p class="empty-msg">Chargement des offres…</p>`;
+  grille.innerHTML = squelettesGrilleEmploisHTML(TAILLE_PAGE_EMPLOIS);
 
   let tous;
   try {
@@ -220,7 +251,7 @@ async function initEmploiPage() {
     return;
   }
 
-  zone.innerHTML = `<p class="empty-msg">Chargement…</p>`;
+  zone.innerHTML = squeletteEmploiPageHTML();
 
   let offre;
   try {
