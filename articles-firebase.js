@@ -1,11 +1,18 @@
 /* ============================================================
    EDUCA-PSY — articles-firebase.js
    ============================================================
-   Accueil (index.html) : à la une + quelques articles récents.
-   Page dédiée (articles.html) : liste complète, filtres,
-   recherche et bouton "Voir plus" — tout se fait ici côté
-   client sur la liste déjà chargée en mémoire (chargerArticles),
-   sans requête Firestore supplémentaire ni index composite.
+   Optimisé pour la VITESSE à l'échelle actuelle (~50 articles) :
+   un seul chargement Firestore (orderBy simple, sans filtre —
+   donc aucun index composite requis), mis en cache en mémoire.
+   Ensuite, filtrage par catégorie, recherche et pagination sont
+   100% instantanés côté client, sans aucun aller-retour réseau
+   supplémentaire.
+
+   Si le volume d'articles grossit significativement plus tard
+   (plusieurs centaines), cette approche « tout en mémoire »
+   redeviendra limitante — on pourra alors repasser à des requêtes
+   Firestore paginées ciblées (cette approche a déjà été codée
+   dans une version précédente et peut être réappliquée).
    ============================================================ */
 
 import { db } from "./firebase-config.js";
@@ -16,10 +23,11 @@ import {
 const MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet",
                   "août","septembre","octobre","novembre","décembre"];
 
-const NB_RECENTS_ACCUEIL = 3;   // nombre d'articles récents affichés sur l'accueil
-const TAILLE_PAGE_ARTICLES = 9; // nombre d'articles affichés par "page" sur articles.html
+const NB_RECENTS_ACCUEIL = 3;   // articles récents affichés sur l'accueil
+const TAILLE_PAGE_ARTICLES = 9; // articles par page sur articles.html
 
 let cacheArticles = null;
+let promesseChargement = null;
 
 function champLocale(article, champ, langue) {
   if (!langue || langue === "fr") return article[champ] || "";
@@ -62,9 +70,6 @@ function slugifyCategorie(categorie) {
   if (CATEGORIES_SLUGS_COURTS[cleNormalisee]) {
     return CATEGORIES_SLUGS_COURTS[cleNormalisee];
   }
-  // Repli générique pour toute catégorie non cartographiée
-  // (ex. "Santé mentale et soutien psychosocial") : elle recevra
-  // sa propre classe, sans couleur de thème dédiée pour l'instant.
   return slugify(categorie);
 }
 
@@ -79,13 +84,11 @@ function calculerTempsLecture(contenuArray) {
 function formaterTexte(texte) {
   if (!texte) return "";
 
-  // 1. Transformation des sous-titres (## )
   if (texte.startsWith("## ")) {
     const titreSousSection = texte.replace("## ", "").trim();
     return `<h2 class="article-subtitle">${titreSousSection}</h2>`;
   }
 
-  // 2. Transformation d'une ligne d'énumération / puce (* ou - )
   if (texte.startsWith("* ") || texte.startsWith("- ")) {
     const contenuPuce = texte.substring(2).trim();
     const contenuFormate = contenuPuce
@@ -96,7 +99,6 @@ function formaterTexte(texte) {
     return `<ul class="article-list"><li>${contenuFormate}</li></ul>`;
   }
 
-  // 3. Transformation d'une ligne vidéo YouTube : ![youtube](URL)
   if (texte.startsWith("![youtube](")) {
     const match = texte.match(/!\[youtube\]\((https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^\s)]+))\)/);
     if (match && match[1]) {
@@ -105,7 +107,6 @@ function formaterTexte(texte) {
     }
   }
 
-  // 4. Paragraphe classique avec formatages Markdown internes
   return texte
     .replace(/!\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<img src="$2" alt="$1" loading="lazy">')
     .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
@@ -113,14 +114,34 @@ function formaterTexte(texte) {
     .replace(/==([^=]+)==/g, '<span style="color: var(--couleur-or-fonce, #B8912F); font-weight: 600;">$1</span>');
 }
 
+/* Génère une pagination numérotée classique (saut direct possible
+   vers n'importe quelle page, puisque tout est déjà en mémoire). */
+function genererPaginationHTML(pageActuelle, totalPages) {
+  if (totalPages <= 1) return "";
+  let boutons = `<button type="button" class="pagination-btn" data-page="prev" ${pageActuelle === 1 ? "disabled" : ""} aria-label="Page précédente">‹</button>`;
+  for (let i = 1; i <= totalPages; i++) {
+    boutons += `<button type="button" class="pagination-btn ${i === pageActuelle ? "active" : ""}" data-page="${i}">${i}</button>`;
+  }
+  boutons += `<button type="button" class="pagination-btn" data-page="next" ${pageActuelle === totalPages ? "disabled" : ""} aria-label="Page suivante">›</button>`;
+  return `<nav class="pagination" aria-label="Pagination des articles">${boutons}</nav>`;
+}
+
 /* ---------- Accès Firestore ---------- */
 
+/* Un seul chargement, mis en cache pour le reste de la session.
+   Requête simple (orderBy uniquement, sans where) : aucun index
+   composite requis, la plus rapide et la plus fiable possible. */
 async function chargerArticles() {
   if (cacheArticles) return cacheArticles;
-  const q = query(collection(db, "articles"), orderBy("date", "desc"));
-  const snap = await getDocs(q);
-  cacheArticles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-  return cacheArticles;
+  if (!promesseChargement) {
+    promesseChargement = (async () => {
+      const q = query(collection(db, "articles"), orderBy("date", "desc"));
+      const snap = await getDocs(q);
+      cacheArticles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      return cacheArticles;
+    })();
+  }
+  return promesseChargement;
 }
 
 async function chargerArticleParId(id) {
@@ -203,18 +224,7 @@ async function initAccueilFirebase() {
     || `<p class="empty-msg">Aucun autre article pour le moment.</p>`;
 }
 
-/* ---------- Page articles.html (liste complète) ---------- */
-
-/* Génère les boutons de pagination numérotée (« ‹ 1 2 3 › »). */
-function genererPaginationHTML(pageActuelle, totalPages) {
-  if (totalPages <= 1) return "";
-  let boutons = `<button type="button" class="pagination-btn" data-page="prev" ${pageActuelle === 1 ? "disabled" : ""} aria-label="Page précédente">‹</button>`;
-  for (let i = 1; i <= totalPages; i++) {
-    boutons += `<button type="button" class="pagination-btn ${i === pageActuelle ? "active" : ""}" data-page="${i}">${i}</button>`;
-  }
-  boutons += `<button type="button" class="pagination-btn" data-page="next" ${pageActuelle === totalPages ? "disabled" : ""} aria-label="Page suivante">›</button>`;
-  return `<nav class="pagination" aria-label="Pagination des articles">${boutons}</nav>`;
-}
+/* ---------- Page articles.html (liste complète, pagination instantanée) ---------- */
 
 async function initArticlesListePage() {
   const grille = document.getElementById("articles-grid");
@@ -263,9 +273,8 @@ async function initArticlesListePage() {
     grille.innerHTML = visibles.map(a => carteArticleHTML(a)).join("")
       || `<p class="empty-msg">Aucun article ne correspond pour l'instant — essayez une autre recherche ou une autre rubrique.</p>`;
 
-    const zone = zonePagination();
-    zone.innerHTML = genererPaginationHTML(pageActuelle, totalPages);
-    zone.querySelectorAll(".pagination-btn").forEach(bouton => {
+    zonePagination().innerHTML = genererPaginationHTML(pageActuelle, totalPages);
+    zonePagination().querySelectorAll(".pagination-btn").forEach(bouton => {
       bouton.addEventListener("click", () => {
         const val = bouton.dataset.page;
         if (val === "prev") pageActuelle = Math.max(1, pageActuelle - 1);
