@@ -8,6 +8,10 @@
    Les cartes (accueil + liste) montrent un résumé et renvoient
    vers emploi.html?id=... pour le détail complet (description,
    lien, PDF) — même principe que les articles.
+
+   Version simple : une seule requête (orderBy uniquement, sans
+   filtre combiné) mise en cache, puis filtrage/pagination faits
+   côté client — aucun index Firestore composite nécessaire.
    ============================================================ */
 
 import { db } from "./firebase-config.js";
@@ -17,6 +21,10 @@ import {
 
 const MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet",
                   "août","septembre","octobre","novembre","décembre"];
+
+const TAILLE_PAGE_EMPLOIS = 9; // nombre d'offres affichées par page sur emplois.html
+
+let cacheEmplois = null;
 
 function formaterDateFirestore(valeur) {
   if (!valeur) return "";
@@ -46,12 +54,25 @@ function formaterTexte(texte) {
     .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
 }
 
+/* Génère les boutons de pagination numérotée (« ‹ 1 2 3 › »). */
+function genererPaginationHTML(pageActuelle, totalPages) {
+  if (totalPages <= 1) return "";
+  let boutons = `<button type="button" class="pagination-btn" data-page="prev" ${pageActuelle === 1 ? "disabled" : ""} aria-label="Page précédente">‹</button>`;
+  for (let i = 1; i <= totalPages; i++) {
+    boutons += `<button type="button" class="pagination-btn ${i === pageActuelle ? "active" : ""}" data-page="${i}">${i}</button>`;
+  }
+  boutons += `<button type="button" class="pagination-btn" data-page="next" ${pageActuelle === totalPages ? "disabled" : ""} aria-label="Page suivante">›</button>`;
+  return `<nav class="pagination" aria-label="Pagination des offres">${boutons}</nav>`;
+}
+
 /* ---------- Accès Firestore ---------- */
 
 async function chargerEmplois() {
+  if (cacheEmplois) return cacheEmplois;
   const q = query(collection(db, "emplois"), orderBy("datePublication", "desc"));
   const snap = await getDocs(q);
-  return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  cacheEmplois = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  return cacheEmplois;
 }
 
 async function chargerEmploiParId(id) {
@@ -113,7 +134,7 @@ async function initApercuOpportunites() {
   }
 }
 
-/* ---------- Page emplois.html (liste) ---------- */
+/* ---------- Page emplois.html (liste, pagination numérotée) ---------- */
 
 async function initEmploisPage() {
   const grille = document.getElementById("emplois-grid");
@@ -130,24 +151,58 @@ async function initEmploisPage() {
     return;
   }
 
-  function afficher(type) {
-    const filtres = type === "Tous" ? tous : tous.filter(o => o.type === type);
-    grille.innerHTML = filtres.map(o => carteEmploiHTML(o)).join("")
+  const params = new URLSearchParams(window.location.search);
+  let typeActuel = params.get("type") || "Tous";
+  let pageActuelle = 1;
+
+  function zonePagination() {
+    let zone = document.getElementById("pagination-emplois");
+    if (!zone) {
+      zone = document.createElement("div");
+      zone.id = "pagination-emplois";
+      grille.insertAdjacentElement("afterend", zone);
+    }
+    return zone;
+  }
+
+  function afficher() {
+    const filtres = typeActuel === "Tous" ? tous : tous.filter(o => o.type === typeActuel);
+    const totalPages = Math.max(1, Math.ceil(filtres.length / TAILLE_PAGE_EMPLOIS));
+    if (pageActuelle > totalPages) pageActuelle = totalPages;
+
+    const debut = (pageActuelle - 1) * TAILLE_PAGE_EMPLOIS;
+    const visibles = filtres.slice(debut, debut + TAILLE_PAGE_EMPLOIS);
+
+    grille.innerHTML = visibles.map(o => carteEmploiHTML(o)).join("")
       || `<p class="empty-msg">Aucune offre dans cette catégorie pour l'instant — consultez les autres catégories ou revenez bientôt.</p>`;
+
+    const zone = zonePagination();
+    zone.innerHTML = genererPaginationHTML(pageActuelle, totalPages);
+    zone.querySelectorAll(".pagination-btn").forEach(bouton => {
+      bouton.addEventListener("click", () => {
+        const val = bouton.dataset.page;
+        if (val === "prev") pageActuelle = Math.max(1, pageActuelle - 1);
+        else if (val === "next") pageActuelle = Math.min(totalPages, pageActuelle + 1);
+        else pageActuelle = parseInt(val, 10);
+        afficher();
+        grille.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
   }
 
   const onglets = document.querySelectorAll(".filter-tab[data-type]");
-  const params = new URLSearchParams(window.location.search);
-  const typeInitial = params.get("type") || "Tous";
   onglets.forEach(onglet => {
-    onglet.classList.toggle("active", onglet.dataset.type === typeInitial);
+    onglet.classList.toggle("active", onglet.dataset.type === typeActuel);
     onglet.addEventListener("click", () => {
       onglets.forEach(o => o.classList.remove("active"));
       onglet.classList.add("active");
-      afficher(onglet.dataset.type);
+      typeActuel = onglet.dataset.type;
+      pageActuelle = 1;
+      afficher();
     });
   });
-  afficher(typeInitial);
+
+  afficher();
 }
 
 /* ---------- Page emploi.html (détail) ---------- */
