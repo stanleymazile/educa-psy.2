@@ -221,6 +221,35 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .filter-tab.active { background: var(--couleur-texte); color: var(--couleur-fond); border-color: var(--couleur-texte); }
 
 /* ============================================================
+   PAGINATION NUMÉROTÉE (articles.html, emplois.html)
+   ============================================================ */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--e2);
+  margin: var(--e6) 0 var(--e5);
+  flex-wrap: wrap;
+}
+.pagination-btn {
+  font-family: var(--police-interface);
+  background: var(--couleur-fond-alt);
+  border: 1px solid var(--couleur-ligne);
+  color: var(--couleur-texte);
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.pagination-btn:hover:not(:disabled):not(.active) { border-color: var(--couleur-or); }
+.pagination-btn.active { background: var(--couleur-texte); color: var(--couleur-fond); border-color: var(--couleur-texte); cursor: default; }
+.pagination-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* ============================================================
    BOUTON + CATÉGORIES SUPPLÉMENTAIRES
    ============================================================ */
 .filter-plus-wrap {
