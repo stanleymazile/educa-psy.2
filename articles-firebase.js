@@ -157,6 +157,37 @@ async function chargerArticlesSimilaires(categorie, idAExclure, max = 2) {
     .slice(0, max);
 }
 
+/* Squelette d'une carte d'article, affiché pendant le chargement
+   pour un rendu plus soigné qu'un simple texte "Chargement…". */
+function squeletteCarteHTML() {
+  return `
+    <div class="article-card squelette-carte" aria-hidden="true">
+      <div class="squelette squelette-image"></div>
+      <div class="squelette squelette-ligne tag"></div>
+      <div class="squelette squelette-ligne titre"></div>
+      <div class="squelette squelette-ligne"></div>
+      <div class="squelette squelette-ligne court"></div>
+    </div>`;
+}
+
+function squelettesGrilleHTML(n = 6) {
+  return Array.from({ length: n }).map(squeletteCarteHTML).join("");
+}
+
+/* Squelette de la page d'un article (titre, méta, image, paragraphes). */
+function squeletteArticlePageHTML() {
+  return `
+    <div class="squelette-article-page" aria-hidden="true">
+      <div class="squelette squelette-ligne tag"></div>
+      <div class="squelette squelette-titre-page"></div>
+      <div class="squelette squelette-meta"></div>
+      <div class="squelette squelette-image-hero"></div>
+      <div class="squelette squelette-paragraphe"></div>
+      <div class="squelette squelette-paragraphe"></div>
+      <div class="squelette squelette-paragraphe court"></div>
+    </div>`;
+}
+
 /* ---------- Gabarits HTML ---------- */
 
 function carteArticleHTML(article, featured = false) {
@@ -197,9 +228,9 @@ async function initAccueilFirebase() {
 
   const zoneFeatured = document.getElementById("featured-article");
   if (zoneFeatured && !zoneFeatured.children.length) {
-    zoneFeatured.innerHTML = `<p class="empty-msg">Chargement…</p>`;
+    zoneFeatured.innerHTML = squeletteCarteHTML();
   }
-  zoneRecents.innerHTML = `<p class="empty-msg">Chargement des articles…</p>`;
+  zoneRecents.innerHTML = squelettesGrilleHTML(NB_RECENTS_ACCUEIL);
 
   let tous;
   try {
@@ -230,7 +261,7 @@ async function initArticlesListePage() {
   const grille = document.getElementById("articles-grid");
   if (!grille) return; // pas sur la page articles.html
 
-  grille.innerHTML = `<p class="empty-msg">Chargement des articles…</p>`;
+  grille.innerHTML = squelettesGrilleHTML(TAILLE_PAGE_ARTICLES);
 
   let tous;
   try {
@@ -391,7 +422,7 @@ async function initArticlePageFirebase() {
   }
 
   if (!zone.querySelector(".article-title")) {
-    zone.innerHTML = `<p class="empty-msg">Chargement de l'article…</p>`;
+    zone.innerHTML = squeletteArticlePageHTML();
   }
 
   let article;
