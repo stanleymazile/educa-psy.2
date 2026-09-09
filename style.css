@@ -868,6 +868,72 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 /* ============================================================
+   CAROUSEL D'IMAGES (dans le contenu d'article)
+   ============================================================ */
+.article-carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--rayon);
+  margin: var(--e5) 0 var(--e6);
+  background: var(--couleur-fond-alt);
+}
+.carousel-track {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+.carousel-slide {
+  min-width: 100%;
+  flex-shrink: 0;
+}
+.carousel-slide img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  margin: 0;
+  border-radius: 0;
+}
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(26, 26, 26, 0.55);
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.carousel-nav:hover { background: rgba(26, 26, 26, 0.8); }
+.carousel-nav.prev { left: var(--e3); }
+.carousel-nav.next { right: var(--e3); }
+.carousel-dots {
+  position: absolute;
+  bottom: var(--e3);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--e2);
+}
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+}
+.carousel-dot.active { background: var(--couleur-or); }
+
+/* ============================================================
    NEWSLETTER (pied de page)
    ============================================================ */
 .newsletter-widget { max-width: 360px; }
@@ -1188,6 +1254,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .lang-select { background: none; border: none; padding: 2px 4px; }
   .util-icon-btn { color: inherit; font-size: 1rem; line-height: 1; text-decoration: none; display: inline-flex; }
   .util-btn .label { display: none; }
+
+  .carousel-nav { width: 30px; height: 30px; font-size: 1rem; }
 }
 
 /* ============================================================
@@ -1198,6 +1266,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   * { transition: none !important; }
   .ticker-track { animation: none; padding-left: var(--e4); }
   .ticker-label::before { animation: none; }
+  .carousel-track { transition: none; }
 }
 
 /* ============================================================
