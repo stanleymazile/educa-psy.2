@@ -81,8 +81,80 @@ function calculerTempsLecture(contenuArray) {
   return `${minutes} min de lecture`;
 }
 
+/* ---------- Carousel d'images ---------- */
+
+let compteurCarousel = 0;
+
+function formaterCarousel(texte) {
+  const lignes = texte.split("\n").slice(1); // ignore la ligne "!carousel"
+  const images = [];
+  lignes.forEach(ligne => {
+    const m = ligne.trim().match(/^!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)$/);
+    if (m) images.push({ alt: m[1], url: m[2] });
+  });
+  if (!images.length) return "";
+
+  const id = `carousel-${compteurCarousel++}`;
+  const slides = images.map((img, i) =>
+    `<div class="carousel-slide ${i === 0 ? "active" : ""}">
+       <img src="${img.url}" alt="${img.alt}" loading="lazy">
+     </div>`).join("");
+  const dots = images.length > 1 ? images.map((_, i) =>
+    `<button type="button" class="carousel-dot ${i === 0 ? "active" : ""}"
+       data-index="${i}" aria-label="Image ${i + 1}"></button>`).join("") : "";
+  const navs = images.length > 1 ? `
+      <button type="button" class="carousel-nav prev" aria-label="Image précédente">‹</button>
+      <button type="button" class="carousel-nav next" aria-label="Image suivante">›</button>` : "";
+
+  return `
+    <div class="article-carousel" id="${id}" data-index="0" data-total="${images.length}">
+      <div class="carousel-track">${slides}</div>${navs}
+      <div class="carousel-dots">${dots}</div>
+    </div>`;
+}
+
+function initCarousels(racine) {
+  const conteneur = racine || document;
+  conteneur.querySelectorAll(".article-carousel").forEach(carousel => {
+    if (carousel.dataset.init) return;
+    carousel.dataset.init = "1";
+
+    const total = parseInt(carousel.dataset.total, 10);
+    const track = carousel.querySelector(".carousel-track");
+    const dots = carousel.querySelectorAll(".carousel-dot");
+    const btnPrev = carousel.querySelector(".carousel-nav.prev");
+    const btnNext = carousel.querySelector(".carousel-nav.next");
+
+    function afficherSlide(index) {
+      carousel.dataset.index = index;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle("active", i === index));
+    }
+
+    if (btnPrev) {
+      btnPrev.addEventListener("click", () => {
+        const i = (parseInt(carousel.dataset.index, 10) - 1 + total) % total;
+        afficherSlide(i);
+      });
+    }
+    if (btnNext) {
+      btnNext.addEventListener("click", () => {
+        const i = (parseInt(carousel.dataset.index, 10) + 1) % total;
+        afficherSlide(i);
+      });
+    }
+    dots.forEach(dot => {
+      dot.addEventListener("click", () => afficherSlide(parseInt(dot.dataset.index, 10)));
+    });
+  });
+}
+
 function formaterTexte(texte) {
   if (!texte) return "";
+
+  if (texte.startsWith("!carousel")) {
+    return formaterCarousel(texte);
+  }
 
   if (texte.startsWith("## ")) {
     const titreSousSection = texte.replace("## ", "").trim();
@@ -485,6 +557,8 @@ async function initArticlePageFirebase() {
       </div>
       <button type="button" class="share-btn" id="btn-partager">↗ Partager</button>
     </article>`;
+
+  initCarousels(zone);
 
   const btnPartager = document.getElementById("btn-partager");
   if (btnPartager) {
