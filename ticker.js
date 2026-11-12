@@ -5,20 +5,19 @@
    les pages. Lit les 6 articles les plus récents dans Firestore.
    ============================================================ */
 
-import { db } from "./firebase-config.js";
-import { collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+import { chargerArticles } from "./articles-firebase.js";
 
 async function initTicker() {
   const zone = document.getElementById("ticker-track");
   if (!zone) return;
 
   try {
-    const q = query(collection(db, "articles"), orderBy("date", "desc"), limit(6));
-    const snap = await getDocs(q);
-    const articles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const tous = await chargerArticles();
+    const articles = (tous || []).slice(0, 6);
 
     if (!articles.length) {
-      zone.parentElement.parentElement.style.display = "none"; // masque le bandeau si vide
+      const bandeau = document.getElementById("ticker-bar");
+      if (bandeau) bandeau.style.display = "none";
       return;
     }
 
@@ -29,7 +28,7 @@ async function initTicker() {
   } catch (err) {
     console.error("Erreur Firestore (ticker) :", err);
     const bandeau = document.getElementById("ticker-bar");
-    if (bandeau) bandeau.style.display = "none"; // échec silencieux : le site reste utilisable
+    if (bandeau) bandeau.style.display = "none";
   }
 }
 

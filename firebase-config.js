@@ -11,10 +11,16 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/fireba
 import {
   initializeFirestore,
   persistentLocalCache,
-  persistentMultipleTabManager
+  persistentMultipleTabManager,
+  setLogLevel
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 import { getStorage } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
+
+// Réduit la verbosité des logs internes de transport du SDK en cas de micro-coupure réseau
+try {
+  setLogLevel("silent");
+} catch (_) {}
 
 const firebaseConfig = {
   apiKey: "AIzaSyDn_IdagjN1w2cf4DkPmlfaEpMFfv5dRW4",
@@ -25,14 +31,18 @@ const firebaseConfig = {
   appId: "1:128787624540:web:84b2bb3d23d7f718bfac99"
 };
 
+export const FIREBASE_PROJECT_ID = firebaseConfig.projectId;
+
 const app = initializeApp(firebaseConfig);
 
 // persistentMultipleTabManager() permet à plusieurs onglets du même
 // navigateur de partager ce cache sans se bloquer mutuellement.
+// experimentalAutoDetectLongPolling bascule automatiquement si les flux WebChannel sont bloqués.
 export const db = initializeFirestore(app, {
   localCache: persistentLocalCache({
     tabManager: persistentMultipleTabManager()
-  })
+  }),
+  experimentalAutoDetectLongPolling: true
 });
 
 export const auth = getAuth(app);

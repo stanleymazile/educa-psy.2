@@ -65,20 +65,136 @@ function genererPaginationHTML(pageActuelle, totalPages) {
   return `<nav class="pagination" aria-label="Pagination des offres">${boutons}</nav>`;
 }
 
-/* ---------- Accès Firestore ---------- */
+/* ---------- Accès Firestore (Hybride SDK + Secours REST) ---------- */
+
+function parserDocumentFirestoreRest(doc) {
+  if (!doc) return null;
+  const id = doc.name ? doc.name.split("/").pop() : "";
+  const data = { id };
+  if (doc.fields) {
+    for (const [cle, val] of Object.entries(doc.fields)) {
+      if (val.stringValue !== undefined) data[cle] = val.stringValue;
+      else if (val.booleanValue !== undefined) data[cle] = val.booleanValue;
+      else if (val.integerValue !== undefined) data[cle] = parseInt(val.integerValue, 10);
+      else if (val.doubleValue !== undefined) data[cle] = parseFloat(val.doubleValue);
+      else if (val.timestampValue !== undefined) data[cle] = val.timestampValue;
+      else if (val.arrayValue !== undefined) {
+        data[cle] = (val.arrayValue.values || []).map(v => v.stringValue ?? v.integerValue ?? v);
+      } else if (val.nullValue !== undefined) {
+        data[cle] = null;
+      } else {
+        data[cle] = val;
+      }
+    }
+  }
+  return data;
+}
+
+async function chargerEmploisViaRest() {
+  try {
+    const res = await fetch("https://firestore.googleapis.com/v1/projects/educa-psy/databases/(default)/documents/emplois");
+    if (!res.ok) return null;
+    const json = await res.json();
+    if (!json.documents || !Array.isArray(json.documents)) return [];
+    const liste = json.documents.map(parserDocumentFirestoreRest).filter(Boolean);
+    liste.sort((a, b) => {
+      const da = new Date(a.datePublication || 0).getTime();
+      const db = new Date(b.datePublication || 0).getTime();
+      return db - da;
+    });
+    return liste;
+  } catch (e) {
+    return null;
+  }
+}
+
+async function chargerEmploiParIdViaRest(id) {
+  try {
+    const res = await fetch(`https://firestore.googleapis.com/v1/projects/educa-psy/databases/(default)/documents/emplois/${encodeURIComponent(id)}`);
+    if (!res.ok) return null;
+    const json = await res.json();
+    return parserDocumentFirestoreRest(json);
+  } catch (e) {
+    return null;
+  }
+}
 
 async function chargerEmplois() {
-  if (cacheEmplois) return cacheEmplois;
-  const q = query(collection(db, "emplois"), orderBy("datePublication", "desc"));
-  const snap = await getDocs(q);
-  cacheEmplois = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-  return cacheEmplois;
+  if (cacheEmplois && cacheEmplois.length > 0) return cacheEmplois;
+  const promesseRest = chargerEmploisViaRest();
+  const promesseSdk = (async () => {
+    try {
+      const q = query(collection(db, "emplois"), orderBy("datePublication", "desc"));
+      const snap = await Promise.race([
+        getDocs(q),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout SDK")), 1000))
+      ]);
+      return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    } catch (_) {
+      return null;
+    }
+  })();
+
+  try {
+    const premier = await Promise.race([
+      promesseRest.then(r => (r && r.length > 0 ? r : Promise.reject())),
+      promesseSdk.then(r => (r && r.length > 0 ? r : Promise.reject()))
+    ]);
+    if (premier && premier.length > 0) {
+      cacheEmplois = premier;
+      promesseSdk.then(docs => {
+        if (docs && docs.length > 0) cacheEmplois = docs;
+      }).catch(() => {});
+      return cacheEmplois;
+    }
+  } catch (_) {}
+
+  const secours = await promesseRest;
+  if (secours && secours.length > 0) {
+    cacheEmplois = secours;
+    return cacheEmplois;
+  }
+
+  try {
+    const q = query(collection(db, "emplois"), orderBy("datePublication", "desc"));
+    const snap = await getDocs(q);
+    cacheEmplois = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    return cacheEmplois;
+  } catch (err) {
+    throw err;
+  }
 }
 
 async function chargerEmploiParId(id) {
-  const ref = doc(db, "emplois", id);
-  const snap = await getDoc(ref);
-  return snap.exists() ? { id: snap.id, ...snap.data() } : null;
+  if (cacheEmplois) {
+    const trouve = cacheEmplois.find(o => o.id === id);
+    if (trouve) return trouve;
+  }
+  try {
+    const promesseRest = chargerEmploiParIdViaRest(id);
+    const promesseSdk = (async () => {
+      try {
+        const ref = doc(db, "emplois", id);
+        const snap = await Promise.race([
+          getDoc(ref),
+          new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout SDK")), 1000))
+        ]);
+        if (snap.exists()) return { id: snap.id, ...snap.data() };
+      } catch (_) {}
+      return null;
+    })();
+
+    const trouve = await Promise.race([
+      promesseRest.then(r => (r ? r : Promise.reject())),
+      promesseSdk.then(r => (r ? r : Promise.reject()))
+    ]).catch(() => null);
+
+    if (trouve) return trouve;
+    const secours = await promesseRest;
+    if (secours) return secours;
+  } catch (err) {}
+
+  return await chargerEmploiParIdViaRest(id);
 }
 
 async function chargerEmploisSimilaires(type, idAExclure, max = 2) {
@@ -238,6 +354,60 @@ async function initEmploisPage() {
 
 /* ---------- Page emploi.html (détail) ---------- */
 
+function genererFilArianeEmploiHTML(offre) {
+  const labelAccueil = window.EducaPsyI18n ? window.EducaPsyI18n.texte("nav_accueil") : "Accueil";
+  const labelOpportunites = window.EducaPsyI18n ? window.EducaPsyI18n.texte("nav_opportunites") : "Opportunités";
+  const labelFilAriane = window.EducaPsyI18n ? window.EducaPsyI18n.texte("breadcrumb_label") : "Fil d'Ariane";
+  const chevronSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+  const siteUrl = "https://educa-psy.web.app";
+  const urlActuelle = typeof window !== "undefined" ? window.location.href : `${siteUrl}/emploi.html?id=${offre.id}`;
+
+  let position = 1;
+  let itemsHtml = `
+    <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a class="breadcrumb-link" href="index.html" itemprop="item">
+        <span itemprop="name" data-i18n="nav_accueil">${labelAccueil}</span>
+      </a>
+      <meta itemprop="position" content="${position++}">
+    </li>
+    <li class="breadcrumb-separator" aria-hidden="true">${chevronSvg}</li>
+    <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a class="breadcrumb-link" href="emplois.html" itemprop="item">
+        <span itemprop="name" data-i18n="nav_opportunites">${labelOpportunites}</span>
+      </a>
+      <meta itemprop="position" content="${position++}">
+    </li>`;
+
+  if (offre.type) {
+    itemsHtml += `
+    <li class="breadcrumb-separator" aria-hidden="true">${chevronSvg}</li>
+    <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a class="breadcrumb-link" href="emplois.html?type=${encodeURIComponent(offre.type)}" itemprop="item">
+        <span itemprop="name">${offre.type}</span>
+      </a>
+      <meta itemprop="position" content="${position++}">
+    </li>`;
+  }
+
+  const titreEchappeAttr = (offre.titre || "").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const titreEchappeContenu = (offre.titre || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+  itemsHtml += `
+    <li class="breadcrumb-separator" aria-hidden="true">${chevronSvg}</li>
+    <li class="breadcrumb-item current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+      <span class="breadcrumb-current" itemprop="name" title="${titreEchappeAttr}">${titreEchappeContenu}</span>
+      <link itemprop="item" href="${urlActuelle}">
+      <meta itemprop="position" content="${position}">
+    </li>`;
+
+  return `
+    <nav class="breadcrumb-nav" aria-label="${labelFilAriane}">
+      <ol class="breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">
+        ${itemsHtml}
+      </ol>
+    </nav>`;
+}
+
 async function initEmploiPage() {
   const zone = document.getElementById("emploi-content");
   if (!zone) return;
@@ -269,6 +439,18 @@ async function initEmploiPage() {
   }
 
   document.title = `${offre.titre} — Educa-Psy`;
+  const urlOffre = `https://educa-psy.web.app/emploi.html?id=${encodeURIComponent(id)}`;
+  const resumeOffre = (offre.resume || offre.description || "").slice(0, 160).replace(/\s+/g, " ").trim();
+  document.querySelector('meta[name="description"]')?.setAttribute('content', resumeOffre);
+  document.querySelector('meta[property="og:title"]')?.setAttribute('content', `${offre.titre} — Educa-Psy`);
+  document.querySelector('meta[property="og:description"]')?.setAttribute('content', resumeOffre);
+  document.querySelector('meta[property="og:url"]')?.setAttribute('content', urlOffre);
+  document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', `${offre.titre} — Educa-Psy`);
+  let canonicalLink = document.querySelector('link[rel="canonical"]');
+  if (canonicalLink) {
+    canonicalLink.setAttribute('href', urlOffre);
+  }
+
   const slug = slugify(offre.type || "");
   const lieuTxt = offre.lieu ? ` · ${offre.lieu}` : "";
   const dateTxt = offre.dateLimite ? `Date limite : ${formaterDateFirestore(offre.dateLimite)}` : "";
@@ -278,8 +460,10 @@ async function initEmploiPage() {
   if (offre.lien) boutons.push(`<a class="btn btn-primary" href="${offre.lien}" target="_blank" rel="noopener">Postuler / En savoir plus →</a>`);
   if (offre.pdfUrl) boutons.push(`<a class="btn btn-outline" href="${offre.pdfUrl}" target="_blank" rel="noopener">📄 ${offre.pdfNom || "Voir le PDF"}</a>`);
 
+  const filArianeHtml = genererFilArianeEmploiHTML(offre);
+
   zone.innerHTML = `
-    <a class="back-link" href="emplois.html">← Retour aux emplois &amp; collaborations</a>
+    ${filArianeHtml}
     <span class="tag tag-${slug}">${offre.type || ""}</span>
     <h1 class="article-title">${offre.titre || ""}</h1>
     <div class="article-meta">${offre.organisation || ""}${lieuTxt}${dateTxt ? " · " + dateTxt : ""}</div>
@@ -287,19 +471,49 @@ async function initEmploiPage() {
     ${boutons.length ? `<div class="emploi-actions">${boutons.join("")}</div>` : ""}
     <button type="button" class="share-btn" id="btn-partager-emploi">↗ Partager</button>`;
 
+  async function copierDansPressePapier(texte) {
+    try {
+      if (typeof window !== "undefined" && window.focus) {
+        window.focus();
+      }
+    } catch (_) {}
+
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+      try {
+        await navigator.clipboard.writeText(texte);
+        return true;
+      } catch (_) {}
+    }
+
+    try {
+      const zone = document.createElement("textarea");
+      zone.value = texte;
+      zone.setAttribute("readonly", "");
+      zone.style.position = "fixed";
+      zone.style.left = "-9999px";
+      zone.style.top = "0";
+      zone.style.opacity = "0";
+      document.body.appendChild(zone);
+      zone.focus();
+      zone.select();
+      const succes = document.execCommand("copy");
+      document.body.removeChild(zone);
+      if (succes) return true;
+    } catch (_) {}
+
+    return false;
+  }
+
   const btnPartager = document.getElementById("btn-partager-emploi");
   if (btnPartager) {
     btnPartager.addEventListener("click", async () => {
       const data = { title: offre.titre || "Educa-Psy", text: offre.resume || "", url: window.location.href };
       if (navigator.share) {
-        try { await navigator.share(data); } catch (err) { /* annulé par l'utilisateur */ }
-      } else {
-        try {
-          await navigator.clipboard.writeText(window.location.href);
-          btnPartager.textContent = "✓ Lien copié";
-          setTimeout(() => { btnPartager.textContent = "↗ Partager"; }, 2000);
-        } catch (err) { console.error(err); }
+        try { await navigator.share(data); return; } catch (_) {}
       }
+      const succes = await copierDansPressePapier(window.location.href);
+      btnPartager.textContent = succes ? "✓ Lien copié" : "Lien prêt";
+      setTimeout(() => { btnPartager.textContent = "↗ Partager"; }, 2000);
     });
   }
 
@@ -325,19 +539,57 @@ function injecterDonneesStructureesEmploi(offre) {
   if (ancien) ancien.remove();
   const d = offre.datePublication && offre.datePublication.toDate ? offre.datePublication.toDate() : null;
   const dLimite = offre.dateLimite && offre.dateLimite.toDate ? offre.dateLimite.toDate() : null;
+  const siteUrl = "https://educa-psy.web.app";
+  const urlOffre = window.location.href;
+
+  const breadcrumbElements = [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": `${siteUrl}/` },
+    { "@type": "ListItem", "position": 2, "name": "Opportunités", "item": `${siteUrl}/emplois.html` }
+  ];
+
+  if (offre.type) {
+    breadcrumbElements.push({
+      "@type": "ListItem",
+      "position": 3,
+      "name": offre.type,
+      "item": `${siteUrl}/emplois.html?type=${encodeURIComponent(offre.type)}`
+    });
+    breadcrumbElements.push({
+      "@type": "ListItem",
+      "position": 4,
+      "name": offre.titre || "",
+      "item": urlOffre
+    });
+  } else {
+    breadcrumbElements.push({
+      "@type": "ListItem",
+      "position": 3,
+      "name": offre.titre || "",
+      "item": urlOffre
+    });
+  }
+
   const script = document.createElement("script");
   script.type = "application/ld+json";
   script.id = "jsonld-emploi";
   script.textContent = JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "JobPosting",
-    "title": offre.titre || "",
-    "description": offre.description || offre.resume || "",
-    "datePosted": d ? d.toISOString().slice(0, 10) : undefined,
-    "validThrough": dLimite ? dLimite.toISOString().slice(0, 10) : undefined,
-    "employmentType": offre.type === "Emploi" ? "FULL_TIME" : offre.type === "Stage / Formation" ? "INTERN" : "OTHER",
-    "hiringOrganization": { "@type": "Organization", "name": offre.organisation || "Educa-Psy" },
-    "jobLocation": offre.lieu ? { "@type": "Place", "address": offre.lieu } : undefined
+    "@graph": [
+      {
+        "@type": "JobPosting",
+        "title": offre.titre || "",
+        "description": offre.description || offre.resume || "",
+        "datePosted": d ? d.toISOString().slice(0, 10) : undefined,
+        "validThrough": dLimite ? dLimite.toISOString().slice(0, 10) : undefined,
+        "employmentType": offre.type === "Emploi" ? "FULL_TIME" : offre.type === "Stage / Formation" ? "INTERN" : "OTHER",
+        "hiringOrganization": { "@type": "Organization", "name": offre.organisation || "Educa-Psy" },
+        "jobLocation": offre.lieu ? { "@type": "Place", "address": offre.lieu } : undefined
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": breadcrumbElements
+      }
+    ]
   });
   document.head.appendChild(script);
 }

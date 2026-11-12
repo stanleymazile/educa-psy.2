@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Educa-Psy — Éducation, psychologie, bien-être et santé mentale</title>
+    <link>https://educa-psy.web.app/</link>
+    <description>Actualités et ressources en éducation, psychologie, bien-être et santé mentale, émotions, et santé mentale et soutien psychosocial.</description>
+    <language>fr</language>
+    <atom:link href="https://educa-psy.web.app/rss.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Oct 2026 19:00:00 GMT</lastBuildDate>
+    <image>
+      <url>https://educa-psy.web.app/og-image.png</url>
+      <title>Educa-Psy</title>
+      <link>https://educa-psy.web.app/</link>
+    </image>
+
+    <item>
+      <title>Reconnaître les signes de détresse psychologique chez un proche</title>
+      <link>https://educa-psy.web.app/article.html?id=12</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=12</guid>
+      <pubDate>Mon, 10 Aug 2026 09:00:00 GMT</pubDate>
+      <dc:creator>Équipe Educa-Psy</dc:creator>
+      <category>Psychologie</category>
+      <description><![CDATA[Repli sur soi, changements d'humeur, perte d'intérêt : certains signes peuvent alerter sur une détresse psychologique chez une personne de notre entourage.]]></description>
+    </item>
+
+    <item>
+      <title>Ce que les neurosciences nous apprennent sur le stress</title>
+      <link>https://educa-psy.web.app/article.html?id=11</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=11</guid>
+      <pubDate>Sun, 09 Aug 2026 09:00:00 GMT</pubDate>
+      <dc:creator>Équipe Educa-Psy</dc:creator>
+      <category>Science</category>
+      <description><![CDATA[Le stress n'est pas seulement « dans la tête » : il déclenche des réactions physiologiques précises, que la recherche en neurosciences permet aujourd'hui de mieux comprendre.]]></description>
+    </item>
+
+    <item>
+      <title>Le soutien psychosocial à l'école : un pilier trop souvent oublié</title>
+      <link>https://educa-psy.web.app/article.html?id=10</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=10</guid>
+      <pubDate>Sat, 08 Aug 2026 09:00:00 GMT</pubDate>
+      <dc:creator>Équipe Educa-Psy</dc:creator>
+      <category>Éducation</category>
+      <description><![CDATA[Au-delà des apprentissages académiques, le bien-être émotionnel des élèves conditionne leur réussite scolaire. Comment les établissements peuvent-ils mieux intégrer le soutien psychosocial ?]]></description>
+    </item>
+
+    <item>
+      <title>L'intelligence artificielle peut-elle vraiment aider le secteur humanitaire ?</title>
+      <link>https://educa-psy.web.app/article.html?id=9</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=9</guid>
+      <pubDate>Wed, 05 Aug 2026 09:00:00 GMT</pubDate>
+      <dc:creator>Équipe Educa-Psy</dc:creator>
+      <category>Technologie</category>
+      <description><![CDATA[Traduction automatique, analyse de données, optimisation logistique : l'intelligence artificielle ouvre de nouvelles possibilités pour les organisations humanitaires — avec ses limites.]]></description>
+    </item>
+
+    <item>
+      <title>La résilience communautaire : se relever ensemble face à l'adversité</title>
+      <link>https://educa-psy.web.app/article.html?id=8</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=8</guid>
+      <pubDate>Sat, 25 Jul 2026 09:00:00 GMT</pubDate>
+      <dc:creator>Équipe Educa-Psy</dc:creator>
+      <category>Psychologie</category>
+      <description><![CDATA[Face aux crises, ce sont souvent les liens communautaires qui permettent aux individus de tenir et de se reconstruire. Un regard sur la résilience collective.]]></description>
+    </item>
+
+    <item>
+      <title>Apprendre par l'art : ce que la créativité change dans l'éducation</title>
+      <link>https://educa-psy.web.app/article.html?id=7</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=7</guid>
+      <pubDate>Wed, 22 Jul 2026 09:00:00 GMT</pubDate>
+      <dc:creator>Équipe Educa-Psy</dc:creator>
+      <category>Éducation</category>
+      <description><![CDATA[Dessiner, jouer, raconter des histoires : les approches créatives ouvrent des chemins d'apprentissage différents, en particulier pour les enfants en difficulté.]]></description>
+    </item>
+
+    <item>
+      <title>L'art-thérapie expliquée : quand créer devient soigner</title>
+      <link>https://educa-psy.web.app/article.html?id=6</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=6</guid>
+      <pubDate>Wed, 08 Jul 2026 09:00:00 GMT</pubDate>
+      <dc:creator>Équipe Educa-Psy</dc:creator>
+      <category>Psychologie</category>
+      <description><![CDATA[Peinture, théâtre, musique, écriture : l'art-thérapie utilise la création comme outil d'expression et de reconstruction psychologique.]]></description>
+    </item>
+
+    <item>
+      <title>Enseigner à distance : quels outils numériques choisir ?</title>
+      <link>https://educa-psy.web.app/article.html?id=5</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=5</guid>
+      <pubDate>Wed, 15 Jul 2026 09:00:00 GMT</pubDate>
+      <dc:creator>Équipe Educa-Psy</dc:creator>
+      <category>Technologie</category>
+      <description><![CDATA[Plateformes de visioconférence, contenus hors ligne, messageries simples : bien choisir ses outils numériques fait souvent la différence en enseignement à distance.]]></description>
+    </item>
+
+    <item>
+      <title>Santé mentale et changement climatique : un lien scientifique de plus en plus documenté</title>
+      <link>https://educa-psy.web.app/article.html?id=4</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=4</guid>
+      <pubDate>Sat, 18 Jul 2026 09:00:00 GMT</pubDate>
+      <dc:creator>Équipe Educa-Psy</dc:creator>
+      <category>Science</category>
+      <description><![CDATA[Éco-anxiété, stress post-catastrophe, incertitude face à l'avenir : la recherche s'intéresse de plus en plus aux effets psychologiques du changement climatique.]]></description>
+    </item>
+
+    <item>
+      <title>Réduire la fracture numérique : l'éducation face au défi du tout-numérique</title>
+      <link>https://educa-psy.web.app/article.html?id=3</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=3</guid>
+      <pubDate>Thu, 02 Jul 2026 09:00:00 GMT</pubDate>
+      <dc:creator>Équipe Educa-Psy</dc:creator>
+      <category>Éducation</category>
+      <description><![CDATA[Accès inégal à internet, au matériel informatique, aux compétences numériques : la fracture numérique continue de creuser les inégalités éducatives.]]></description>
+    </item>
+
+    <item>
+      <title>La science citoyenne : et si la recherche s'ouvrait à tous ?</title>
+      <link>https://educa-psy.web.app/article.html?id=2</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=2</guid>
+      <pubDate>Tue, 30 Jun 2026 09:00:00 GMT</pubDate>
+      <dc:creator>Équipe Educa-Psy</dc:creator>
+      <category>Science</category>
+      <description><![CDATA[Observer des oiseaux, cartographier une région, contribuer à des bases de données scientifiques : la science citoyenne permet à chacun de participer à la recherche.]]></description>
+    </item>
+
+    <item>
+      <title>Vie privée en ligne : les réflexes essentiels à adopter</title>
+      <link>https://educa-psy.web.app/article.html?id=1</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=1</guid>
+      <pubDate>Sun, 28 Jun 2026 09:00:00 GMT</pubDate>
+      <dc:creator>Équipe Educa-Psy</dc:creator>
+      <category>Technologie</category>
+      <description><![CDATA[Mots de passe, réseaux sociaux, partage d'informations personnelles : quelques bons réflexes suffisent à mieux protéger sa vie privée en ligne.]]></description>
+    </item>
+  </channel>
+</rss>

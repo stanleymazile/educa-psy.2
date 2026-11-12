@@ -196,8 +196,14 @@ const TRADUCTIONS = {
     desabo_texte: "Indiquez l'adresse e-mail à retirer de notre liste de diffusion.",
     desabo_bouton: "Se désabonner",
     desabo_succes: "Vous avez été désabonné(e) avec succès.",
-    desabo_erreur: "Cette adresse n'a pas été trouvée dans nos abonnés.",
-    lien_desabonnement: "Se désabonner de la newsletter"
+    lien_desabonnement: "Se désabonner de la newsletter",
+    breadcrumb_label: "Fil d'Ariane",
+    page_404_titre: "404 — Page introuvable",
+    page_404_desc: "La page ou la ressource que vous recherchez n'existe pas, a été renommée ou est temporairement inaccessible.",
+    page_404_recherche_placeholder: "Rechercher un article, un thème...",
+    page_404_retour_accueil: "← Retour à l'accueil",
+    page_404_explorer_articles: "Explorer les articles",
+    page_404_rubriques: "Rubriques recommandées :"
   },
   en: {
     tagline: "Education · Psychology",
@@ -257,7 +263,14 @@ const TRADUCTIONS = {
     desabo_bouton: "Unsubscribe",
     desabo_succes: "You have been successfully unsubscribed.",
     desabo_erreur: "This address was not found in our subscribers.",
-    lien_desabonnement: "Unsubscribe from the newsletter"
+    lien_desabonnement: "Unsubscribe from the newsletter",
+    breadcrumb_label: "Breadcrumbs",
+    page_404_titre: "404 — Page Not Found",
+    page_404_desc: "The page or resource you are looking for does not exist, has been moved, or is temporarily unavailable.",
+    page_404_recherche_placeholder: "Search for an article, a topic...",
+    page_404_retour_accueil: "← Back to Home",
+    page_404_explorer_articles: "Browse Articles",
+    page_404_rubriques: "Recommended Sections:"
   },
   ht: {
     tagline: "Edikasyon · Sikoloji",
@@ -317,7 +330,14 @@ const TRADUCTIONS = {
     desabo_bouton: "Dezabòne",
     desabo_succes: "Ou dezabòne avèk siksè.",
     desabo_erreur: "Nou pa jwenn imèl sa a nan abòne nou yo.",
-    lien_desabonnement: "Dezabòne nan bilten an"
+    lien_desabonnement: "Dezabòne nan bilten an",
+    breadcrumb_label: "Fil Ariàn",
+    page_404_titre: "404 — Paj la pa jwenn",
+    page_404_desc: "Paj oswa resous w ap chèche a pa egziste, yo chanje non l oswa li pa disponib pou kounye a.",
+    page_404_recherche_placeholder: "Chèche yon atik, yon sijè...",
+    page_404_retour_accueil: "← Retounen nan Akèy",
+    page_404_explorer_articles: "Eksplore Atik yo",
+    page_404_rubriques: "Seksyon Rekòmande yo:"
   },
   es: {
     tagline: "Educación · Psicología",
@@ -377,7 +397,14 @@ const TRADUCTIONS = {
     desabo_bouton: "Cancelar suscripción",
     desabo_succes: "Se ha cancelado su suscripción con éxito.",
     desabo_erreur: "No encontramos este correo en nuestros suscriptores.",
-    lien_desabonnement: "Cancelar suscripción al boletín"
+    lien_desabonnement: "Cancelar suscripción al boletín",
+    breadcrumb_label: "Miga de pan",
+    page_404_titre: "404 — Página no encontrada",
+    page_404_desc: "La página o recurso que busca no existe, ha sido movido o no está disponible temporalmente.",
+    page_404_recherche_placeholder: "Buscar un artículo, un tema...",
+    page_404_retour_accueil: "← Volver al Inicio",
+    page_404_explorer_articles: "Explorar Artículos",
+    page_404_rubriques: "Secciones Recomendadas:"
   }
 };
 
@@ -419,6 +446,8 @@ function initLangue() {
       const url = new URL(window.location.href);
       url.searchParams.set("lang", nouvelleLangue);
       window.history.replaceState({}, "", url);
+
+      window.dispatchEvent(new CustomEvent("educapsy-langue-changee", { detail: nouvelleLangue }));
     });
   }
 }
