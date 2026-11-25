@@ -2,18 +2,25 @@
    EDUCA-PSY — sw.js (Service Worker PWA)
    ============================================================ */
 
-const CACHE_NAME = 'educapsy-v1';
+const CACHE_NAME = 'educapsy-v11';
 const ASSETS_A_METTRE_EN_CACHE = [
   '/',
   '/index.html',
+  '/article.html',
   '/articles.html',
   '/emplois.html',
+  '/dissonance-cognitive.html',
   '/a-propos.html',
   '/contact.html',
   '/connexion.html',
   '/style.css',
   '/interface.js',
   '/logo.svg',
+  '/logo.png',
+  '/favicon.ico',
+  '/favicon-48.png',
+  '/icon-192.png',
+  '/images/education-province.svg',
   '/manifest.json'
 ];
 

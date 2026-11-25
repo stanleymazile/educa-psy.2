@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <title>Educa-Psy — Éducation, psychologie, bien-être et santé mentale</title>
+    <title>Educa-Psy — Éducation et Psychologie</title>
     <link>https://educa-psy.web.app/</link>
-    <description>Actualités et ressources en éducation, psychologie, bien-être et santé mentale, émotions, et santé mentale et soutien psychosocial.</description>
+    <description>Actualités et ressources en éducation et psychologie.</description>
     <language>fr</language>
     <atom:link href="https://educa-psy.web.app/rss.xml" rel="self" type="application/rss+xml" />
     <lastBuildDate>Sun, 18 Oct 2026 19:00:00 GMT</lastBuildDate>
     <image>
-      <url>https://educa-psy.web.app/og-image.png</url>
+      <url>https://educa-psy.web.app/logo.png</url>
       <title>Educa-Psy</title>
       <link>https://educa-psy.web.app/</link>
     </image>

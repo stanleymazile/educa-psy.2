@@ -16,7 +16,7 @@
   </url>
   <url>
     <loc>https://educa-psy.web.app/emplois.html</loc>
-    <lastmod>2026-11-12</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -54,24 +54,6 @@
   </url>
   <url>
     <loc>https://educa-psy.web.app/articles.html?cat=Psychologie</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://educa-psy.web.app/articles.html?cat=Bien-%C3%AAtre%20et%20Sant%C3%A9%20Mentale</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://educa-psy.web.app/articles.html?cat=%C3%89motions</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://educa-psy.web.app/articles.html?cat=Sant%C3%A9%20Mentale%20et%20Soutien%20Psychosociale</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -121,29 +103,23 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Offres d'emploi et opportunités individuelles -->
+  <!-- Rubriques (Insolite / Savoir) -->
   <url>
-    <loc>https://educa-psy.web.app/emploi.html?id=GXsDn05Bvrtl3EhtmUfF</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://educa-psy.web.app/emplois.html?type=Insolite</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://educa-psy.web.app/emploi.html?id=MmmJA6S99vlvaC3kRMcS</loc>
-    <lastmod>2026-08-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://educa-psy.web.app/emplois.html?type=Savoir</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://educa-psy.web.app/emploi.html?id=eB4TlohRCQPvwLBn8iNC</loc>
-    <lastmod>2026-08-13</lastmod>
+    <loc>https://educa-psy.web.app/dissonance-cognitive.html</loc>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://educa-psy.web.app/emploi.html?id=q7TPmI4Yi8Fv5nFXOdaT</loc>
-    <lastmod>2026-08-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
 </urlset>

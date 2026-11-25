@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Educa-Psy — Éducation, psychologie, bien-être et santé mentale</title>
-<meta name="description" content="Educa-Psy publie des actualités et ressources en éducation, psychologie, bien-être et santé mentale, émotions, et santé mentale et soutien psychosocial, ainsi que des opportunités d'emploi et de collaboration.">
+<meta name="description" content="Educa-Psy publie des actualités, ressources et rubriques en éducation, psychologie, bien-être et santé mentale, émotions, et santé mentale et soutien psychosocial.">
   
   <!-- SEO & Google Discover -->
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Educa-Psy">
 <meta property="og:title" content="Educa-Psy — Éducation, psychologie, bien-être et santé mentale">
-<meta property="og:description" content="Actualités et ressources en éducation, psychologie, bien-être et santé mentale, émotions, et santé mentale et soutien psychosocial, ainsi que des opportunités d'emploi et de collaboration.">
+<meta property="og:description" content="Actualités, ressources et rubriques en éducation, psychologie, bien-être et santé mentale, émotions, et santé mentale et soutien psychosocial.">
 <meta property="og:image" content="https://educa-psy.web.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -24,13 +24,17 @@
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Educa-Psy — Éducation, psychologie, bien-être et santé mentale">
-<meta name="twitter:description" content="Actualités et ressources en éducation, psychologie, bien-être et santé mentale, émotions, et santé mentale et soutien psychosocial, ainsi que des opportunités d'emploi et de collaboration.">
+<meta name="twitter:description" content="Actualités, ressources et rubriques en éducation, psychologie, bien-être et santé mentale, émotions, et santé mentale et soutien psychosocial.">
 <meta name="twitter:image" content="https://educa-psy.web.app/og-image.png">
 
 <!-- Favicons & Manifest -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Ccircle%20cx='20'%20cy='20'%20r='18.5'%20fill='%23FAF6ED'%20stroke='%23B8912F'%20stroke-width='2'/%3E%3Ctext%20x='20'%20y='27'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='17'%20font-weight='700'%20fill='%23B8912F'%3EEP%3C/text%3E%3C/svg%3E">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
+<link rel="icon" type="image/png" sizes="144x144" href="/favicon-144.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
 
 <!-- Fonts & Styles -->
@@ -53,8 +57,11 @@
     "url": "https://educa-psy.web.app/",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://educa-psy.web.app/logo.svg"
+      "url": "https://educa-psy.web.app/logo.png",
+      "width": 640,
+      "height": 640
     },
+    "image": "https://educa-psy.web.app/logo.png",
     "description": "Organisation média dédiée à l'actualité en éducation, psychologie, bien-être et santé mentale, émotions, et soutien psychosocial.",
     "sameAs": [
       "https://educa-psy-haiti.web.app",
@@ -139,8 +146,7 @@
   <nav class="site-nav">
     <div class="container">
       <div class="mobile-quicknav">
-        <a href="articles.html" data-i18n="nav_actualites">Actualités</a>
-        <a href="emplois.html" data-i18n="nav_opportunites">Opportunités</a>
+        <span class="mobile-site-label" data-i18n="site_information">Site d'information</span>
         <a href="abonnement.html" class="newsletter-mini-btn" data-i18n="nav_newsletter">Newsletter</a>
       </div>
       <ul class="nav-links" id="nav-links">
@@ -149,21 +155,16 @@
           <a href="articles.html" data-i18n="nav_articles">Articles</a>
           <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Articles">▾</button>
           <ul class="nav-submenu">
-            <li><a href="articles.html?cat=%C3%89ducation">Éducation</a></li>
-            <li><a href="articles.html?cat=Psychologie">Psychologie</a></li>
-            <li><a href="articles.html?cat=Bien-%C3%AAtre%20et%20Sant%C3%A9%20Mentale">Bien-être et santé mentale</a></li>
-            <li><a href="articles.html?cat=%C3%89motions">Émotions</a></li>
-            <li><a href="articles.html?cat=Sant%C3%A9%20Mentale%20et%20Soutien%20Psychosociale">Santé mentale et soutien psychosocial</a></li>
+            <li><a href="articles.html?cat=%C3%89ducation" data-i18n="nav_education">Éducation</a></li>
+            <li><a href="articles.html?cat=Psychologie" data-i18n="nav_psychologie">Psychologie</a></li>
           </ul>
         </li>
         <li class="nav-dropdown">
-          <a href="emplois.html" class="nav-highlight" data-i18n="nav_opportunites">Opportunités</a>
-          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Opportunités">▾</button>
+          <a href="emplois.html" data-i18n="nav_bon_a_savoir">Rubriques</a>
+          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Rubriques">▾</button>
           <ul class="nav-submenu">
-            <li><a href="emplois.html?type=Emploi" data-i18n="type_emploi">Emploi</a></li>
-            <li><a href="emplois.html?type=Collaboration" data-i18n="type_collaboration">Collaboration</a></li>
-            <li><a href="emplois.html?type=B%C3%A9n%C3%A9volat" data-i18n="type_benevolat">Bénévolat</a></li>
-            <li><a href="emplois.html?type=Stage%20%2F%20Formation" data-i18n="type_stage">Stage</a></li>
+            <li><a href="emplois.html?type=Insolite" data-i18n="type_insolite">Insolite</a></li>
+            <li><a href="emplois.html?type=Savoir" data-i18n="type_savoir">Savoir</a></li>
           </ul>
         </li>
         <li><a href="a-propos.html" data-i18n="nav_apropos">À propos</a></li>
@@ -210,11 +211,11 @@
   <section class="opportunites-section">
     <div class="container">
       <div class="opportunites-header">
-        <h2 data-i18n="opportunites_titre">Opportunités du moment</h2>
-        <a href="emplois.html" class="see-all" data-i18n="voir_opportunites">Voir toutes les opportunités →</a>
+        <h2 data-i18n="bon_a_savoir_titre">Rubriques</h2>
+        <a href="emplois.html" class="see-all" data-i18n="voir_bon_a_savoir">Voir tout →</a>
       </div>
       <div id="opportunites-apercu" class="opportunites-apercu"></div>
-      <p style="text-align:center; margin-top: var(--e4);"><a href="emplois.html" class="see-all">Voir plus →</a></p>
+      <p style="text-align:center; margin-top: var(--e4);"><a href="emplois.html" class="see-all" data-i18n="voir_plus">Voir plus →</a></p>
     </div>
   </section>
 
@@ -252,7 +253,7 @@
       </div>
       <div class="newsletter-widget">
         <h3 data-i18n="newsletter_titre">Abonnez-vous à notre newsletter</h3>
-        <p data-i18n="newsletter_texte">Recevez nos derniers articles et opportunités par e-mail.</p>
+        <p data-i18n="newsletter_texte">Recevez nos derniers articles et ressources par e-mail.</p>
         <form id="newsletter-form" class="newsletter-form" novalidate>
           <input type="email" id="newsletter-email" data-i18n-placeholder="newsletter_placeholder" placeholder="Votre adresse e-mail" required>
           <button type="submit" id="newsletter-submit" data-i18n="newsletter_bouton">S'abonner</button>
@@ -263,11 +264,11 @@
       <div class="footer-links">
         <a href="index.html" data-i18n="nav_accueil">Accueil</a>
         <a href="articles.html" data-i18n="nav_articles">Articles</a>
-        <a href="emplois.html" data-i18n="nav_emplois">Emplois &amp; Collaborations</a>
+        <a href="emplois.html" data-i18n="nav_bon_a_savoir">Rubriques</a>
         <a href="contact.html" data-i18n="nav_contact">Contact</a>
         <a href="a-propos.html" data-i18n="nav_apropos">À propos</a>
         <a href="politique-de-confidentialite.html">Politique de confidentialité</a>
-        <a href="https://educa-psy-haiti.web.app" target="_blank" rel="noopener" data-i18n="footer_site_officiel">Site officiel d'Educa-Psy ↗</a>
+        <a href="https://educa-psy-haiti.web.app" target="_blank" rel="noopener" data-i18n="footer_site_officiel">Entreprise Educa-Psy ↗</a>
       </div>
     </div>
     <div class="footer-bottom">

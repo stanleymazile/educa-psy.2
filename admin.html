@@ -6,9 +6,13 @@
 <title>Administration — Educa-Psy</title>
 <meta name="robots" content="noindex, nofollow">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Ccircle%20cx='20'%20cy='20'%20r='18.5'%20fill='%23FAF6ED'%20stroke='%23B8912F'%20stroke-width='2'/%3E%3Ctext%20x='20'%20y='27'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='17'%20font-weight='700'%20fill='%23B8912F'%3EEP%3C/text%3E%3C/svg%3E">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
+<link rel="icon" type="image/png" sizes="144x144" href="/favicon-144.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +27,7 @@
     <div class="container">
       <div class="masthead-top-inner">
         <span id="today-date" class="masthead-date"></span>
-        <span class="masthead-tagline" data-i18n="tagline">Éducation · Psychologie · Bien-être et santé mentale · Émotions · Santé mentale et soutien psychosocial</span>
+        <span class="masthead-tagline" data-i18n="tagline">Éducation · Psychologie</span>
         <div class="masthead-utils">
           <div class="lang-wrapper">
             <svg class="lang-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
@@ -59,8 +63,7 @@
     <nav class="site-nav">
     <div class="container">
       <div class="mobile-quicknav">
-        <a href="articles.html" data-i18n="nav_actualites">Actualités</a>
-        <a href="emplois.html" data-i18n="nav_opportunites">Opportunités</a>
+        <span class="mobile-site-label" data-i18n="site_information">Site d'information</span>
         <a href="abonnement.html" class="newsletter-mini-btn" data-i18n="nav_newsletter">Newsletter</a>
       </div>
       <ul class="nav-links" id="nav-links">
@@ -69,21 +72,16 @@
           <a href="articles.html" data-i18n="nav_articles">Articles</a>
           <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Articles">▾</button>
           <ul class="nav-submenu">
-            <li><a href="articles.html?cat=%C3%89ducation">Éducation</a></li>
-            <li><a href="articles.html?cat=Psychologie">Psychologie</a></li>
-            <li><a href="articles.html?cat=Bien-%C3%AAtre%20et%20Sant%C3%A9%20Mentale">Bien-être et santé mentale</a></li>
-            <li><a href="articles.html?cat=%C3%89motions">Émotions</a></li>
-            <li><a href="articles.html?cat=Sant%C3%A9%20Mentale%20et%20Soutien%20Psychosociale">Santé mentale et soutien psychosocial</a></li>
+            <li><a href="articles.html?cat=%C3%89ducation" data-i18n="nav_education">Éducation</a></li>
+            <li><a href="articles.html?cat=Psychologie" data-i18n="nav_psychologie">Psychologie</a></li>
           </ul>
         </li>
         <li class="nav-dropdown">
-          <a href="emplois.html" class="nav-highlight" data-i18n="nav_opportunites">Opportunités</a>
-          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Opportunités">▾</button>
+          <a href="emplois.html" data-i18n="nav_bon_a_savoir">Rubriques</a>
+          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Rubriques">▾</button>
           <ul class="nav-submenu">
-            <li><a href="emplois.html?type=Emploi" data-i18n="type_emploi">Emploi</a></li>
-            <li><a href="emplois.html?type=Collaboration" data-i18n="type_collaboration">Collaboration</a></li>
-            <li><a href="emplois.html?type=B%C3%A9n%C3%A9volat" data-i18n="type_benevolat">Bénévolat</a></li>
-            <li><a href="emplois.html?type=Stage%20%2F%20Formation" data-i18n="type_stage">Stage</a></li>
+            <li><a href="emplois.html?type=Insolite" data-i18n="type_insolite">Insolite</a></li>
+            <li><a href="emplois.html?type=Savoir" data-i18n="type_savoir">Savoir</a></li>
           </ul>
         </li>
         <li><a href="a-propos.html" data-i18n="nav_apropos">À propos</a></li>
@@ -119,7 +117,7 @@
 
         <div class="admin-tabs">
           <button type="button" class="admin-tab active" data-panneau="articles">Articles</button>
-          <button type="button" class="admin-tab" data-panneau="emplois">Emplois &amp; Collaborations</button>
+          <button type="button" class="admin-tab" data-panneau="emplois">Rubriques</button>
           <button type="button" class="admin-tab" data-panneau="messages">Messages</button>
           <button type="button" class="admin-tab" data-panneau="newsletter">Newsletter</button>
         </div>
@@ -137,27 +135,8 @@
               <div>
                 <label for="article-categorie">Catégorie</label>
                 <select id="article-categorie">
-                  <optgroup label="Catégories principales">
-                    <option>Éducation</option>
-                    <option>Psychologie</option>
-                    <option>Bien-être et santé mentale</option>
-                    <option>Émotions</option>
-                    <option>Santé mentale et soutien psychosocial</option>
-                  </optgroup>
-                  <optgroup label="Catégories supplémentaires">
-                    <option>Culture</option>
-                    <option>IA</option>
-                    <option>Société</option>
-                    <option>Humanitaire</option>
-                    <option>Politique</option>
-                    <option>Histoire</option>
-                    <option>Environnement</option>
-                    <option>Climat</option>
-                    <option>Jeunesse</option>
-                    <option>Réseaux sociaux</option>
-                    <option>Sexualité</option>
-                    <option>Autre</option>
-                  </optgroup>
+                  <option value="Éducation">Éducation</option>
+                  <option value="Psychologie">Psychologie</option>
                 </select>
               </div>
               <div>
@@ -224,9 +203,9 @@
           <div id="liste-articles"></div>
         </div>
 
-        <!-- EMPLOIS -->
+        <!-- RUBRIQUES -->
         <div id="panneau-emplois" class="admin-panneau" style="display:none;">
-          <h2 id="titre-form-emploi">Ajouter une offre</h2>
+          <h2 id="titre-form-emploi">Ajouter une fiche Rubriques</h2>
           <div id="emploi-form-message"></div>
           <form id="form-emploi" class="admin-form" novalidate>
             <div class="champ">
@@ -235,45 +214,43 @@
             </div>
             <div class="champ champ-ligne">
               <div>
-                <label for="emploi-type">Type</label>
+                <label for="emploi-type">Catégorie</label>
                 <select id="emploi-type">
-                  <option>Emploi</option>
-                  <option>Collaboration</option>
-                  <option>Bénévolat</option>
-                  <option>Stage / Formation</option>
+                  <option value="Insolite">Insolite</option>
+                  <option value="Savoir">Savoir</option>
                 </select>
               </div>
               <div>
-                <label for="emploi-organisation">Organisation</label>
-                <input type="text" id="emploi-organisation">
+                <label for="emploi-organisation">Source / Référence</label>
+                <input type="text" id="emploi-organisation" placeholder="Ex. : Équipe Educa-Psy, étude…">
               </div>
             </div>
             <div class="champ champ-ligne">
               <div>
-                <label for="emploi-lieu">Lieu</label>
-                <input type="text" id="emploi-lieu">
+                <label for="emploi-lieu">Thème / Domaine</label>
+                <input type="text" id="emploi-lieu" placeholder="Ex. : Psychologie, Éducation">
               </div>
               <div>
-                <label for="emploi-datelimite">Date limite (optionnel)</label>
+                <label for="emploi-datelimite">Date repère (optionnel)</label>
                 <input type="date" id="emploi-datelimite">
               </div>
             </div>
             <div class="champ">
-              <label for="emploi-resume">Résumé (affiché sur les cartes — 1-2 phrases)</label>
+              <label for="emploi-resume">Résumé court (1-2 phrases)</label>
               <textarea id="emploi-resume" rows="2"></textarea>
             </div>
             <div class="champ">
-              <label for="emploi-description">Description complète (affichée sur la page de l'offre)</label>
-              <textarea id="emploi-description" rows="6"></textarea>
+              <label for="emploi-description">Contenu détaillé — paragraphes séparés par une ligne vide</label>
+              <textarea id="emploi-description" rows="6" required></textarea>
             </div>
             <div class="champ">
-              <label for="emploi-lien">Lien — postuler / en savoir plus (optionnel)</label>
-              <input type="url" id="emploi-lien" placeholder="https://... ou mailto:...">
+              <label for="emploi-lien">Lien externe / Source (optionnel)</label>
+              <input type="url" id="emploi-lien" placeholder="https://...">
             </div>
             <div class="champ">
-              <label for="emploi-pdf-fichier">Document PDF joint (optionnel, 10 Mo max)</label>
+              <label for="emploi-pdf-fichier">Document PDF joint (optionnel)</label>
               <div id="emploi-pdf-actuel"></div>
-              <input type="file" id="emploi-pdf-fichier" accept="application/pdf">
+              <input type="file" id="emploi-pdf-fichier" accept="application/pdf,.pdf">
             </div>
             <div class="admin-form-actions">
               <button type="submit" id="emploi-submit" class="btn btn-primary">Enregistrer</button>
@@ -281,7 +258,7 @@
             </div>
           </form>
 
-          <h2>Offres existantes</h2>
+          <h2>Fiches Rubriques existantes</h2>
           <div id="liste-emplois"></div>
         </div>
 

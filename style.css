@@ -145,7 +145,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .spectrum-seg.s-psychologie { background: var(--couleur-psychologie-texte); }
 
 /* ============================================================
-   ÉTIQUETTES (tags) DE RUBRIQUE / TYPE D'OFFRE
+   ÉTIQUETTES (tags) DE RUBRIQUE / INSOLITE & SAVOIR
    ============================================================ */
 .tag {
   display: inline-block;
@@ -159,14 +159,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   margin-bottom: var(--e3);
 }
 .tag-education { background: var(--couleur-education-fond); color: var(--couleur-education-texte); }
-.tag-bien-etre { background: var(--couleur-bien-etre-fond); color: var(--couleur-bien-etre-texte); }
-.tag-emotions { background: var(--couleur-emotions-fond); color: var(--couleur-emotions-texte); }
 .tag-psychologie { background: var(--couleur-psychologie-fond); color: var(--couleur-psychologie-texte); }
-.tag-emploi { background: var(--couleur-emploi-fond); color: var(--couleur-or-fonce); }
-.tag-collaboration { background: var(--couleur-education-fond); color: var(--couleur-education-texte); }
-.tag-benevolat { background: var(--couleur-psychologie-fond); color: var(--couleur-psychologie-texte); }
-.tag-stage-formation { background: var(--couleur-bien-etre-fond); color: var(--couleur-bien-etre-texte); }
-.tag-sante-mentale { background: var(--couleur-bien-etre-fond); color: var(--couleur-bien-etre-texte); }
+.tag-savoir { background: var(--couleur-emploi-fond); color: var(--couleur-or-fonce); }
+.tag-insolite { background: var(--couleur-emotions-fond); color: var(--couleur-emotions-texte); }
 
 /* ============================================================
    FILTRES (pastilles cliquables avec défilement horizontal)
@@ -393,10 +388,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   height: 100%;
 }
 .article-card.cat-education { border-top-color: var(--couleur-education-texte); }
-.article-card.cat-bien-etre { border-top-color: var(--couleur-bien-etre-texte); }
-.article-card.cat-emotions { border-top-color: var(--couleur-emotions-texte); }
 .article-card.cat-psychologie { border-top-color: var(--couleur-psychologie-texte); }
-.article-card.cat-sante-mentale { border-top-color: var(--couleur-bien-etre-texte); }
 
 .article-card-media {
   display: block;
@@ -451,7 +443,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .article-card--featured .article-card-resume { font-size: 1.08rem; }
 
 /* ============================================================
-   OPPORTUNITÉS (aperçu accueil + page emplois)
+   RUBRIQUES (aperçu accueil + page emplois.html)
    ============================================================ */
 .opportunites-section { background: var(--couleur-fond-alt); padding: var(--e7) 0; margin-top: var(--e7); }
 .opportunites-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: var(--e2); margin-bottom: var(--e5); }
@@ -474,10 +466,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   flex-direction: column;
 }
 .job-card--compact { background: var(--couleur-fond); }
-.job-card.type-emploi { border-top-color: var(--couleur-or-fonce); }
-.job-card.type-collaboration { border-top-color: var(--couleur-education-texte); }
-.job-card.type-benevolat { border-top-color: var(--couleur-psychologie-texte); }
-.job-card.type-stage-formation { border-top-color: var(--couleur-bien-etre-texte); }
+.job-card.type-savoir { border-top-color: var(--couleur-or-fonce); }
+.job-card.type-insolite { border-top-color: var(--couleur-emotions-texte); }
 
 .job-card-title { font-size: 1.25rem; margin: var(--e2) 0 var(--e2); }
 .job-card-title a { color: var(--couleur-texte); text-decoration: none; }
@@ -730,9 +720,22 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .article-meta-info {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
   color: var(--couleur-texte-attenue);
   font-size: 0.85rem;
+}
+
+.meta-category-badge {
+  margin-bottom: 0;
+  text-decoration: none;
+  font-size: 0.72rem;
+  padding: 3px 9px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.meta-category-badge:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
 }
 
 .article-date, .article-readtime {
@@ -889,11 +892,27 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   margin: 0 auto;
 }
 
+.article-svg-figure {
+  background: var(--couleur-fond-alt);
+  border: 1px solid var(--couleur-ligne);
+  border-radius: 10px;
+  padding: var(--e3);
+}
+
+.article-svg-figure .article-inline-svg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  display: block;
+  border-radius: 6px;
+  box-shadow: var(--ombre-douce);
+}
+
 .article-inline-caption {
   font-family: var(--police-interface);
   font-size: 0.85rem;
   color: var(--couleur-texte-attenue);
-  margin-top: 8px;
+  margin-top: 10px;
   font-style: italic;
 }
 
@@ -1022,6 +1041,27 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .article-not-found { text-align: center; padding: var(--e8) 0; }
 .article-not-found p { font-family: var(--police-lecture); margin: var(--e3) 0 var(--e5); }
 .emploi-actions { display: flex; gap: var(--e3); flex-wrap: wrap; margin: var(--e5) 0; }
+.savoir-schema-figure {
+  margin: var(--e6) auto;
+  max-width: 540px;
+  background: #FFFFFF;
+  border: 1px solid var(--couleur-ligne);
+  border-radius: var(--rayon);
+  padding: var(--e4);
+  box-shadow: var(--ombre-douce);
+}
+.savoir-schema-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.savoir-schema-caption {
+  font-family: var(--police-interface);
+  font-size: 0.82rem;
+  color: #5F5E5A;
+  text-align: center;
+  margin-top: var(--e3);
+}
 
 .similaires-section { margin-top: var(--e8); padding-top: var(--e6); border-top: 1px solid var(--couleur-ligne); }
 .similaires-section h3 {
@@ -1179,6 +1219,44 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .share-action-btn.share-copy:hover {
   border-color: var(--couleur-or);
   color: var(--couleur-or-fonce);
+}
+
+.article-cta-box {
+  margin-top: var(--e6);
+  margin-bottom: 0;
+  padding: var(--e6) var(--e5);
+  border: 1px solid var(--couleur-ligne);
+  border-top: 3px solid var(--couleur-or);
+}
+.cta-services-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--e2);
+  margin: 0 auto var(--e5);
+  list-style: none;
+  padding: 0;
+}
+.cta-service-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--rayon);
+  border: 1px solid rgba(214, 170, 59, 0.45);
+  background: rgba(214, 170, 59, 0.14);
+  color: var(--couleur-fond);
+  font-family: var(--police-interface);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.cta-service-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--couleur-or);
+  flex-shrink: 0;
 }
 
 /* ============================================================
@@ -1765,7 +1843,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .social-badge:hover { background: var(--couleur-or); color: var(--couleur-bouton-texte); }
 
 /* ============================================================
-   SOUS-MENUS DE NAVIGATION (Articles, Opportunités)
+   SOUS-MENUS DE NAVIGATION (Articles, Rubriques)
    ============================================================ */
 .nav-dropdown { position: relative; display: flex; align-items: center; gap: 2px; }
 .nav-dropdown-toggle {
@@ -1855,10 +1933,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .mobile-quicknav {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--e3);
+    justify-content: center;
+    gap: 12px;
     padding: var(--e3) 0;
     font-family: var(--police-interface);
+  }
+  .mobile-site-label {
+    color: var(--couleur-texte-attenue);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
   }
   .mobile-quicknav a { text-decoration: none; color: var(--couleur-texte); font-weight: 600; font-size: 0.85rem; }
   .mobile-quicknav a:hover { color: var(--couleur-or-fonce); }
@@ -1946,10 +2030,37 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 [data-theme="sombre"] .masthead-top,
 [data-theme="sombre"] .ticker-bar { background: #12100C; }
-[data-theme="sombre"] .site-footer,
-[data-theme="sombre"] .cta-box { background: #15130E; }
+[data-theme="sombre"] .site-footer {
+  background: var(--couleur-fond-alt);
+  color: var(--couleur-texte);
+}
+[data-theme="sombre"] .cta-box {
+  background: var(--couleur-fond-alt);
+  color: var(--couleur-texte);
+  border: 1px solid var(--couleur-ligne);
+}
+[data-theme="sombre"] .cta-box h2,
+[data-theme="sombre"] .cta-box p { color: var(--couleur-texte); }
+[data-theme="sombre"] .article-cta-box { border-top: 3px solid var(--couleur-or); }
+[data-theme="sombre"] .cta-service-item {
+  background: rgba(214, 170, 59, 0.14);
+  border-color: rgba(214, 170, 59, 0.4);
+  color: var(--couleur-texte);
+}
+[data-theme="sombre"] .share-action-btn.share-x:hover {
+  background: var(--couleur-texte);
+  color: var(--couleur-fond);
+  border-color: var(--couleur-texte);
+}
 [data-theme="sombre"] .ticker-bar::after { background: linear-gradient(to right, transparent, #12100C); }
 [data-theme="sombre"] .article-highlight { background-color: rgba(214, 170, 59, 0.28); color: #FFFFFF; }
 [data-theme="sombre"] .article-body a { color: var(--couleur-or); }
 [data-theme="sombre"] .article-author-badge .author-avatar { background: var(--couleur-fond-alt); color: var(--couleur-or); }
+[data-theme="sombre"] .article-svg-figure {
+  background: var(--couleur-fond-alt);
+  border-color: var(--couleur-ligne);
+}
+[data-theme="sombre"] .article-svg-figure .article-inline-svg {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+}
 

@@ -55,12 +55,63 @@ function slugify(texte) {
    utilisé pour les classes CSS de couleur (tag-*, cat-*). */
 const CATEGORIES_SLUGS_COURTS = {
   "education": "education",
-  "psychologie": "psychologie",
-  "bien-etre et sante mentale": "bien-etre",
-  "emotions": "emotions",
-  "sante mentale et soutien psychosocial": "sante-mentale",
-  "sante mentale et soutien psychosociale": "sante-mentale"
+  "psychologie": "psychologie"
 };
+
+function normaliserCategorieArticle(categorie) {
+  const norm = retirerAccents((categorie || "").toLowerCase()).trim();
+  if (norm === "education") return "Éducation";
+  return "Psychologie";
+}
+
+const IMAGE_EDUCATION_PROVINCE_SVG = "images/education-province.svg";
+const ALT_EDUCATION_PROVINCE_FR = "Illustration de l'accès à l'éducation de qualité dans nos villes de province : élèves, salle de classe et livres ouverts";
+
+function estUrlImgbb(url) {
+  return typeof url === "string" && /https?:\/\/(?:i\.)?(?:ibb\.co|imgbb\.com)\//i.test(url);
+}
+
+function remplacerUrlImgbb(url, article) {
+  if (!estUrlImgbb(url)) return url;
+  if (/odd/i.test(url)) return IMAGE_EDUCATION_PROVINCE_SVG;
+  if (/education4/i.test(url)) return "images/education4.png";
+  const slug = slugifyCategorie((article && article.categorie) || "");
+  return slug === "education" ? IMAGE_EDUCATION_PROVINCE_SVG : "images/image2.webp";
+}
+
+function nettoyerImgbbDansTexte(texte, article) {
+  if (typeof texte !== "string") return texte;
+  return texte
+    .replace(/!\[([^\]]*)\]\((https?:\/\/(?:i\.)?(?:ibb\.co|imgbb\.com)\/[^\s)]+)\)/gi, (_, altBrut, urlBrut) => {
+      const altPropre = (altBrut || "").trim();
+      const estArticleProvince = /province/i.test((article && article.titre) || "") || /odd/i.test(urlBrut);
+      const altFinal = (estArticleProvince && (!altPropre || /^éducation de qualité$/i.test(altPropre)))
+        ? ALT_EDUCATION_PROVINCE_FR
+        : (altPropre || ALT_EDUCATION_PROVINCE_FR);
+      return `![${altFinal}](${remplacerUrlImgbb(urlBrut, article)})`;
+    })
+    .replace(/https?:\/\/(?:i\.)?(?:ibb\.co|imgbb\.com)\/[^\s)"']+/gi, (urlBrut) => remplacerUrlImgbb(urlBrut, article));
+}
+
+function normaliserArticle(article) {
+  if (!article) return article;
+  const articleNorm = {
+    ...article,
+    categorie: normaliserCategorieArticle(article.categorie)
+  };
+  if (typeof articleNorm.image === "string" && estUrlImgbb(articleNorm.image)) {
+    articleNorm.image = remplacerUrlImgbb(articleNorm.image, articleNorm);
+  }
+  for (const champContenu of ["contenu", "contenu_en", "contenu_ht", "contenu_es"]) {
+    const val = articleNorm[champContenu];
+    if (Array.isArray(val)) {
+      articleNorm[champContenu] = val.map(bloc => nettoyerImgbbDansTexte(bloc, articleNorm));
+    } else if (typeof val === "string") {
+      articleNorm[champContenu] = nettoyerImgbbDansTexte(val, articleNorm);
+    }
+  }
+  return articleNorm;
+}
 
 function slugifyCategorie(categorie) {
   if (!categorie) return "";
@@ -73,11 +124,7 @@ function slugifyCategorie(categorie) {
 
 function normaliserCategorie(cat) {
   if (!cat) return "";
-  let norm = retirerAccents(cat.toLowerCase().trim());
-  if (norm.endsWith("soutien psychosociale")) {
-    norm = norm.slice(0, -1);
-  }
-  return norm;
+  return retirerAccents(cat.toLowerCase()).trim();
 }
 
 function correspondCategorie(catArticle, catFiltre) {
@@ -106,18 +153,28 @@ function obtenirImageArticle(article) {
   // Fallback par catégorie
   const slug = slugifyCategorie((article && article.categorie) || "");
   if (slug === "education") return "images/Ecole.webp";
-  if (slug === "psychologie" || slug === "bien-etre" || slug === "sante-mentale") return "images/image2.webp";
-  if (slug === "emotions") return "images/Genre1.webp";
+  if (slug === "psychologie") return "images/image2.webp";
 
   return "images/logo.webp";
 }
 
 function calculerTempsLecture(contenuArray) {
-  if (!contenuArray || !contenuArray.length) return "1 min de lecture";
-  const texteTotal = contenuArray.join(" ");
-  const mots = texteTotal.trim().split(/\s+/).length;
+  const suffixe = (typeof window !== "undefined" && window.EducaPsyI18n)
+    ? window.EducaPsyI18n.texte("temps_lecture_suffixe")
+    : "min de lecture";
+  if (!contenuArray || !contenuArray.length) return `1 ${suffixe}`;
+  const texteNettoye = contenuArray
+    .filter(bloc => typeof bloc === "string")
+    .map(bloc => bloc
+      .replace(/!\[[^\]]*\]\([^)]+\)/g, " ")
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+      .replace(/<[^>]+>/g, " "))
+    .join(" ")
+    .trim();
+  if (!texteNettoye) return `1 ${suffixe}`;
+  const mots = texteNettoye.split(/\s+/).filter(Boolean).length;
   const minutes = Math.max(1, Math.ceil(mots / 200));
-  return `${minutes} min de lecture`;
+  return `${minutes} ${suffixe}`;
 }
 
 /* ---------- Carousel d'images ---------- */
@@ -127,7 +184,7 @@ let compteurCarousel = 0;
 function formaterCarousel(texte) {
   if (!texte) return "";
   const images = [];
-  const regex = /!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)/g;
+  const regex = /!\[([^\]]*)\]\(((?:https?:\/\/|images\/|\.?\/)[^\s)]+)\)/g;
   let m;
   while ((m = regex.exec(texte)) !== null) {
     images.push({ alt: m[1] || "", url: m[2] });
@@ -252,7 +309,12 @@ function parserSources(texte) {
 function formaterEnrichissementsEnLigne(texte) {
   if (!texte) return "";
   return texte
-    .replace(/!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)/g, '<figure class="article-inline-figure"><img src="$2" alt="$1" loading="lazy" class="article-inline-image" onerror="this.onerror=null;this.src=\'images/logo.webp\'"><figcaption class="article-inline-caption">$1</figcaption></figure>')
+    .replace(/!\[([^\]]*)\]\(((?:https?:\/\/|images\/|\.?\/)[^\s)]+)\)/g, (_, alt, url) => {
+      const estSvg = /\.svg(?:[?#].*)?$/i.test(url);
+      const figCls = estSvg ? "article-inline-figure article-svg-figure" : "article-inline-figure";
+      const imgCls = estSvg ? "article-inline-image article-inline-svg" : "article-inline-image";
+      return `<figure class="${figCls}"><img src="${url}" alt="${alt}" loading="lazy" class="${imgCls}" onerror="this.onerror=null;this.src='images/logo.webp'"><figcaption class="article-inline-caption">${alt}</figcaption></figure>`;
+    })
     .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" class="article-link">$1 <span class="ext-icon" aria-hidden="true">↗</span></a>')
     .replace(/\*\*\s*([^*]+?)\s*\*\*/g, '<strong>$1</strong>')
     .replace(/==([^=]+)==/g, '<mark class="article-highlight">$1</mark>');
@@ -306,12 +368,15 @@ function rendreContenuArticle(contenu) {
     }
 
     // 3. Image figure autonome
-    const imageSeuleMatch = t.match(/^!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)$/);
+    const imageSeuleMatch = t.match(/^!\[([^\]]*)\]\(((?:https?:\/\/|images\/|\.?\/)[^\s)]+)\)$/);
     if (imageSeuleMatch) {
       viderListe();
       const alt = imageSeuleMatch[1] || "";
       const url = imageSeuleMatch[2];
-      blocs.push(`<figure class="article-inline-figure"><img src="${url}" alt="${alt}" loading="lazy" class="article-inline-image" onerror="this.onerror=null;this.src='images/logo.webp'">${alt ? `<figcaption class="article-inline-caption">${alt}</figcaption>` : ""}</figure>`);
+      const estSvg = /\.svg(?:[?#].*)?$/i.test(url);
+      const figCls = estSvg ? "article-inline-figure article-svg-figure" : "article-inline-figure";
+      const imgCls = estSvg ? "article-inline-image article-inline-svg" : "article-inline-image";
+      blocs.push(`<figure class="${figCls}"><img src="${url}" alt="${alt}" loading="lazy" class="${imgCls}" onerror="this.onerror=null;this.src='images/logo.webp'">${alt ? `<figcaption class="article-inline-caption">${alt}</figcaption>` : ""}</figure>`);
       continue;
     }
 
@@ -400,7 +465,7 @@ function parserDocumentFirestoreRest(doc) {
       }
     }
   }
-  return data;
+  return normaliserArticle(data);
 }
 
 async function chargerArticlesViaRest() {
@@ -448,7 +513,7 @@ export async function chargerArticles() {
             getDocs(q),
             new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout SDK")), 1000))
           ]);
-          return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+          return snap.docs.map(d => normaliserArticle({ id: d.id, ...d.data() }));
         } catch (_) {
           return null;
         }
@@ -480,7 +545,7 @@ export async function chargerArticles() {
       try {
         const q = query(collection(db, "articles"), orderBy("date", "desc"));
         const snap = await getDocs(q);
-        cacheArticles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        cacheArticles = snap.docs.map(d => normaliserArticle({ id: d.id, ...d.data() }));
         return cacheArticles;
       } catch (err) {
         promesseChargement = null;
@@ -509,7 +574,7 @@ export async function chargerArticleParId(id) {
           getDoc(ref),
           new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout SDK")), 1000))
         ]);
-        if (snap.exists()) return { id: snap.id, ...snap.data() };
+        if (snap.exists()) return normaliserArticle({ id: snap.id, ...snap.data() });
       } catch (_) {}
       return null;
     })();
@@ -794,7 +859,10 @@ async function initArticlesListePage() {
   }
 
   const params = new URLSearchParams(window.location.search);
-  let catActuelle = params.get("cat") || "Tous";
+  const catBrut = params.get("cat");
+  let catActuelle = !catBrut || retirerAccents(catBrut.toLowerCase()).trim() === "tous"
+    ? "Tous"
+    : normaliserCategorieArticle(catBrut);
   let rechercheActuelle = "";
   let pageActuelle = 1;
 
@@ -889,7 +957,10 @@ function mettreAJourMetaTags(article, titre, resume) {
   const urlArticle = id
     ? `https://educa-psy.web.app/article.html?id=${encodeURIComponent(id)}`
     : `https://educa-psy.web.app/article.html`;
-  const imageArticle = article.image || "https://educa-psy.web.app/og-image.png";
+  const siteUrl = "https://educa-psy.web.app";
+  const imageArticle = article.image
+    ? (/^https?:\/\//i.test(article.image) ? article.image : `${siteUrl}/${article.image.replace(/^\.?\//, "")}`)
+    : `${siteUrl}/og-image.png`;
 
   document.querySelector('meta[name="description"]')?.setAttribute('content', resume);
 
@@ -970,7 +1041,9 @@ function injecterDonneesStructurees(article, titre, resume) {
         },
         "headline": titre || article.titre || "",
         "description": resume || article.resume || "",
-        "image": article.image ? [article.image] : [`${siteUrl}/og-image.png`],
+        "image": article.image
+          ? [/^https?:\/\//i.test(article.image) ? article.image : `${siteUrl}/${article.image.replace(/^\.?\//, "")}`]
+          : [`${siteUrl}/og-image.png`],
         "datePublished": dateIso,
         "dateModified": article.dateModif ? new Date(article.dateModif).toISOString() : dateIso,
         "author": [{
@@ -984,7 +1057,9 @@ function injecterDonneesStructurees(article, titre, resume) {
           "url": `${siteUrl}/`,
           "logo": {
             "@type": "ImageObject",
-            "url": `${siteUrl}/logo.svg`
+            "url": `${siteUrl}/logo.png`,
+            "width": 640,
+            "height": 640
           }
         }
       },
@@ -1065,9 +1140,14 @@ async function initArticlePageFirebase() {
   const urlEncodee = encodeURIComponent(urlPage);
   const texteEncode = encodeURIComponent(`${titreShare} — Educa-Psy`);
 
+  const t = (cle, defaut) => (window.EducaPsyI18n ? window.EducaPsyI18n.texte(cle) : defaut);
+  const catLibelle = slug === "education"
+    ? t("nav_education", "Éducation")
+    : (slug === "psychologie" ? t("nav_psychologie", "Psychologie") : (article.categorie || "Psychologie"));
+
   const shareSectionHtml = `
     <div class="article-share-section">
-      <span class="share-label">Partager cet article :</span>
+      <span class="share-label">${t("partager_article", "Partager cet article :")}</span>
       <div class="share-buttons-group">
         <a class="share-action-btn share-whatsapp" href="https://api.whatsapp.com/send?text=${texteEncode}%20${urlEncodee}" target="_blank" rel="noopener" aria-label="Partager sur WhatsApp">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
@@ -1085,12 +1165,25 @@ async function initArticlePageFirebase() {
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           LinkedIn
         </a>
-        <button type="button" class="share-action-btn share-copy" id="btn-partager" aria-label="Copier le lien">
+        <button type="button" class="share-action-btn share-copy" id="btn-partager" aria-label="${t("copier_lien", "Copier le lien")}">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          <span id="label-copier">Copier</span>
+          <span id="label-copier">${t("copier_lien", "Copier le lien")}</span>
         </button>
       </div>
     </div>`;
+
+  const contactHref = langue && langue !== "fr" ? `contact.html?lang=${encodeURIComponent(langue)}` : "contact.html";
+  const ctaSectionHtml = `
+    <aside class="cta-box article-cta-box" aria-labelledby="article-cta-titre">
+      <h2 id="article-cta-titre">${t("cta_titre", "Besoin d'accompagnement ?")}</h2>
+      <p>${t("cta_description", "Educa-Psy vous accompagne avec des services spécialisés adaptés à vos besoins :")}</p>
+      <ul class="cta-services-list">
+        <li class="cta-service-item"><span class="cta-service-dot" aria-hidden="true"></span>${t("cta_service_psychologie", "Psychologie")}</li>
+        <li class="cta-service-item"><span class="cta-service-dot" aria-hidden="true"></span>${t("cta_service_education", "Éducation")}</li>
+        <li class="cta-service-item"><span class="cta-service-dot" aria-hidden="true"></span>${t("cta_service_accompagnement", "Accompagnement")}</li>
+      </ul>
+      <a class="btn btn-primary" href="${contactHref}">${t("cta_bouton_contact", "Contacter Educa-Psy →")}</a>
+    </aside>`;
 
   const nomAuteur = article.auteur || "Équipe Educa-Psy";
   const initialesAuteur = nomAuteur
@@ -1130,6 +1223,8 @@ async function initArticlePageFirebase() {
             </div>
           </div>
           <div class="article-meta-info">
+            <a href="articles.html?cat=${encodeURIComponent(article.categorie || '')}" class="tag tag-${slug} meta-category-badge">${catLibelle}</a>
+            <span class="meta-separator" aria-hidden="true">·</span>
             <span class="article-date">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
               <time datetime="${dateIso}">${formaterDateFirestore(article.date)}</time>
@@ -1150,6 +1245,7 @@ async function initArticlePageFirebase() {
       </div>
 
       ${shareSectionHtml}
+      ${ctaSectionHtml}
     </article>`;
 
   initCarousels(zone);
@@ -1207,17 +1303,10 @@ async function initArticlePageFirebase() {
   const labelCopier = document.getElementById("label-copier");
   if (btnPartager) {
     btnPartager.addEventListener("click", async () => {
-      const data = { title: titreShare, text: resume || "", url: window.location.href };
-      if (navigator.share) {
-        try {
-          await navigator.share(data);
-          return;
-        } catch (_) { /* fallback vers copie */ }
-      }
       const copieReussie = await copierDansPressePapier(window.location.href);
       if (labelCopier) {
-        labelCopier.textContent = copieReussie ? "✓ Copié !" : "Lien prêt";
-        setTimeout(() => { if (labelCopier) labelCopier.textContent = "Copier"; }, 2200);
+        labelCopier.textContent = copieReussie ? t("lien_copie", "✓ Copié !") : t("lien_pret", "Lien prêt");
+        setTimeout(() => { if (labelCopier) labelCopier.textContent = t("copier_lien", "Copier le lien"); }, 2200);
       }
     });
   }
@@ -1228,7 +1317,7 @@ async function initArticlePageFirebase() {
       const similaires = await chargerArticlesSimilaires(article.categorie, article.id, 2);
       if (similaires.length) {
         zoneSimilaires.innerHTML = `
-          <h3>Articles similaires</h3>
+          <h3>${t("articles_similaires", "Articles similaires")}</h3>
           <div class="articles-grid articles-grid--compact">
             ${similaires.map(a => carteArticleHTML(a)).join("")}
           </div>`;

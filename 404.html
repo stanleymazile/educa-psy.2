@@ -5,9 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Page introuvable — Educa-Psy</title>
 <meta name="robots" content="noindex, follow">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Ccircle%20cx='20'%20cy='20'%20r='18.5'%20fill='%23FAF6ED'%20stroke='%23B8912F'%20stroke-width='2'/%3E%3Ctext%20x='20'%20y='27'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='17'%20font-weight='700'%20fill='%23B8912F'%3EEP%3C/text%3E%3C/svg%3E">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
+<link rel="icon" type="image/png" sizes="144x144" href="/favicon-144.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +26,7 @@
     <div class="container">
       <div class="masthead-top-inner">
         <span id="today-date" class="masthead-date"></span>
-        <span class="masthead-tagline" data-i18n="tagline">Éducation · Psychologie · Bien-être et santé mentale · Émotions · Santé mentale et soutien psychosocial</span>
+        <span class="masthead-tagline" data-i18n="tagline">Éducation · Psychologie</span>
         <div class="masthead-utils">
           <div class="lang-wrapper">
             <svg class="lang-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
@@ -57,8 +61,7 @@
   <nav class="site-nav">
     <div class="container">
       <div class="mobile-quicknav">
-        <a href="articles.html" data-i18n="nav_actualites">Actualités</a>
-        <a href="emplois.html" data-i18n="nav_opportunites">Opportunités</a>
+        <span class="mobile-site-label" data-i18n="site_information">Site d'information</span>
         <a href="abonnement.html" class="newsletter-mini-btn" data-i18n="nav_newsletter">Newsletter</a>
       </div>
       <ul class="nav-links" id="nav-links">
@@ -67,21 +70,16 @@
           <a href="articles.html" data-i18n="nav_articles">Articles</a>
           <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Articles">▾</button>
           <ul class="nav-submenu">
-            <li><a href="articles.html?cat=%C3%89ducation">Éducation</a></li>
-            <li><a href="articles.html?cat=Psychologie">Psychologie</a></li>
-            <li><a href="articles.html?cat=Bien-%C3%AAtre%20et%20Sant%C3%A9%20Mentale">Bien-être et santé mentale</a></li>
-            <li><a href="articles.html?cat=%C3%89motions">Émotions</a></li>
-            <li><a href="articles.html?cat=Sant%C3%A9%20Mentale%20et%20Soutien%20Psychosociale">Santé mentale et soutien psychosocial</a></li>
+            <li><a href="articles.html?cat=%C3%89ducation" data-i18n="nav_education">Éducation</a></li>
+            <li><a href="articles.html?cat=Psychologie" data-i18n="nav_psychologie">Psychologie</a></li>
           </ul>
         </li>
         <li class="nav-dropdown">
-          <a href="emplois.html" class="nav-highlight" data-i18n="nav_opportunites">Opportunités</a>
-          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Opportunités">▾</button>
+          <a href="emplois.html" data-i18n="nav_bon_a_savoir">Rubriques</a>
+          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-label="Sous-menu Rubriques">▾</button>
           <ul class="nav-submenu">
-            <li><a href="emplois.html?type=Emploi" data-i18n="type_emploi">Emploi</a></li>
-            <li><a href="emplois.html?type=Collaboration" data-i18n="type_collaboration">Collaboration</a></li>
-            <li><a href="emplois.html?type=B%C3%A9n%C3%A9volat" data-i18n="type_benevolat">Bénévolat</a></li>
-            <li><a href="emplois.html?type=Stage%20%2F%20Formation" data-i18n="type_stage">Stage</a></li>
+            <li><a href="emplois.html?type=Insolite" data-i18n="type_insolite">Insolite</a></li>
+            <li><a href="emplois.html?type=Savoir" data-i18n="type_savoir">Savoir</a></li>
           </ul>
         </li>
         <li><a href="a-propos.html" data-i18n="nav_apropos">À propos</a></li>
@@ -134,10 +132,7 @@
         <div style="display: flex; gap: var(--e2); justify-content: center; flex-wrap: wrap;">
           <a class="tag tag-education" href="articles.html?cat=%C3%89ducation" data-i18n="nav_education">Éducation</a>
           <a class="tag tag-psychologie" href="articles.html?cat=Psychologie" data-i18n="nav_psychologie">Psychologie</a>
-          <a class="tag tag-bien-etre" href="articles.html?cat=Bien-%C3%AAtre%20et%20Sant%C3%A9%20Mentale" data-i18n="nav_bien_etre">Bien-être et santé mentale</a>
-          <a class="tag tag-emotions" href="articles.html?cat=%C3%89motions" data-i18n="nav_emotions">Émotions</a>
-          <a class="tag" style="background: var(--couleur-fond-alt); color: var(--couleur-texte);" href="articles.html?cat=Sant%C3%A9%20Mentale%20et%20Soutien%20Psychosociale" data-i18n="nav_soutien_psychosocial">Santé mentale et soutien psychosocial</a>
-          <a class="tag tag-emploi" style="background: var(--couleur-fond-alt); color: var(--couleur-or-fonce); border: 1px solid var(--couleur-or);" href="emplois.html" data-i18n="nav_opportunites">Opportunités</a>
+          <a class="tag" style="background: var(--couleur-fond-alt); color: var(--couleur-or-fonce); border: 1px solid var(--couleur-or);" href="emplois.html" data-i18n="nav_bon_a_savoir">Rubriques</a>
         </div>
       </div>
     </section>
@@ -177,11 +172,11 @@
       <div class="footer-links">
         <a href="index.html" data-i18n="nav_accueil">Accueil</a>
         <a href="articles.html" data-i18n="nav_articles">Articles</a>
-        <a href="emplois.html" data-i18n="nav_emplois">Emplois &amp; Collaborations</a>
+        <a href="emplois.html" data-i18n="nav_bon_a_savoir">Rubriques</a>
         <a href="contact.html" data-i18n="nav_contact">Contact</a>
         <a href="a-propos.html" data-i18n="nav_apropos">À propos</a>
         <a href="politique-de-confidentialite.html">Politique de confidentialité</a>
-        <a href="https://educa-psy-haiti.web.app" target="_blank" rel="noopener" data-i18n="footer_site_officiel">Site officiel d'Educa-Psy ↗</a>
+        <a href="https://educa-psy-haiti.web.app" target="_blank" rel="noopener" data-i18n="footer_site_officiel">Entreprise Educa-Psy ↗</a>
       </div>
     </div>
     <div class="footer-bottom">

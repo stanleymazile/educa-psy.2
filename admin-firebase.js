@@ -18,6 +18,12 @@ function dateVersInput(valeur) {
   return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}-${String(d.getUTCDate()).padStart(2, "0")}`;
 }
 
+function normaliserCategorieArticle(categorie) {
+  const norm = (categorie || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+  if (norm === "education") return "Éducation";
+  return "Psychologie";
+}
+
 function inputVersTimestamp(valeur) {
   if (!valeur) return null;
   return Timestamp.fromDate(new Date(valeur + "T00:00:00Z"));
@@ -157,7 +163,7 @@ function remplirFormArticle(a) {
   const elALaUne = document.getElementById("article-alaune");
 
   if (elTitre) elTitre.value = a.titre || "";
-  if (elCat) elCat.value = a.categorie || "Éducation";
+  if (elCat) elCat.value = normaliserCategorieArticle(a.categorie);
   if (elAuteur) elAuteur.value = a.auteur || "Équipe Educa-Psy";
   if (elDate) elDate.value = dateVersInput(a.date);
   if (elResume) elResume.value = a.resume || "";
@@ -201,7 +207,7 @@ async function rafraichirListeArticles() {
       <div class="admin-liste-item">
         <div>
           <div class="admin-liste-item-titre">${echapperHTML(a.titre) || "(sans titre)"}</div>
-          <div class="admin-liste-item-meta">${echapperHTML(a.categorie) || ""} · ${formaterDateAffichage(a.date)}${a.aLaUne ? " · À la une" : ""}${LANGUES.filter(lg => a[`titre_${lg}`]).map(lg => ` · ${lg.toUpperCase()}✓`).join("")}</div>
+          <div class="admin-liste-item-meta">${echapperHTML(normaliserCategorieArticle(a.categorie))} · ${formaterDateAffichage(a.date)}${a.aLaUne ? " · À la une" : ""}${LANGUES.filter(lg => a[`titre_${lg}`]).map(lg => ` · ${lg.toUpperCase()}✓`).join("")}</div>
         </div>
         <div class="admin-liste-actions">
           <button type="button" data-id="${a.id}" class="btn-modif-art">Modifier</button>
@@ -263,7 +269,7 @@ async function enregistrerArticle(e) {
 
     const donnees = {
       titre,
-      categorie: elCat ? elCat.value : "Éducation",
+      categorie: normaliserCategorieArticle(elCat ? elCat.value : "Éducation"),
       auteur: elAuteur && elAuteur.value.trim() ? elAuteur.value.trim() : "Équipe Educa-Psy",
       date: elDate ? inputVersTimestamp(elDate.value) || Timestamp.now() : Timestamp.now(),
       resume: elResume ? elResume.value.trim() : "",
@@ -305,7 +311,7 @@ async function enregistrerArticle(e) {
 }
 
 /* ============================================================
-   EMPLOIS & COLLABORATIONS
+   RUBRIQUES (Collection Firestore "emplois" : Insolite / Savoir)
    ============================================================ */
 
 let cacheEmplois = [];
@@ -317,7 +323,7 @@ function reinitialiserFormEmploi() {
   if (form) form.reset();
 
   const elTitreForm = document.getElementById("titre-form-emploi");
-  if (elTitreForm) elTitreForm.textContent = "Ajouter une offre";
+  if (elTitreForm) elTitreForm.textContent = "Ajouter une fiche Rubriques";
 
   const elPdfActuel = document.getElementById("emploi-pdf-actuel");
   if (elPdfActuel) elPdfActuel.innerHTML = "";
@@ -330,29 +336,39 @@ function remplirFormEmploi(o) {
   const elType = document.getElementById("emploi-type");
   const elOrg = document.getElementById("emploi-organisation");
   const elLieu = document.getElementById("emploi-lieu");
-  const elDate = document.getElementById("emploi-datelimite");
-  const elDesc = document.getElementById("emploi-description");
+  const elDateLimite = document.getElementById("emploi-datelimite");
   const elResume = document.getElementById("emploi-resume");
+  const elDesc = document.getElementById("emploi-description");
   const elLien = document.getElementById("emploi-lien");
 
   if (elTitre) elTitre.value = o.titre || "";
-  if (elType) elType.value = o.type || "Emploi";
+  if (elType) {
+    const typeVal = o.type || "Insolite";
+    const existeOption = Array.from(elType.options).some(opt => opt.value === typeVal);
+    if (!existeOption && typeVal) {
+      const opt = document.createElement("option");
+      opt.value = typeVal;
+      opt.textContent = typeVal;
+      elType.appendChild(opt);
+    }
+    elType.value = typeVal;
+  }
   if (elOrg) elOrg.value = o.organisation || "";
   if (elLieu) elLieu.value = o.lieu || "";
-  if (elDate) elDate.value = dateVersInput(o.dateLimite);
-  if (elDesc) elDesc.value = o.description || "";
+  if (elDateLimite) elDateLimite.value = dateVersInput(o.dateLimite);
   if (elResume) elResume.value = o.resume || "";
+  if (elDesc) elDesc.value = Array.isArray(o.description) ? o.description.join("\n\n") : (o.description || "");
   if (elLien) elLien.value = o.lien || "";
+
+  const elTitreForm = document.getElementById("titre-form-emploi");
+  if (elTitreForm) elTitreForm.textContent = "Modifier la fiche Rubriques";
 
   const elPdfActuel = document.getElementById("emploi-pdf-actuel");
   if (elPdfActuel) {
     elPdfActuel.innerHTML = o.pdfUrl
-      ? `<div class="admin-apercu-actuel">📄 <a href="${o.pdfUrl}" target="_blank" rel="noopener">${o.pdfNom || "PDF actuel"}</a><span>— un nouvel envoi le remplacera</span></div>`
+      ? `<div class="admin-apercu-actuel"><a href="${echapperHTML(o.pdfUrl)}" target="_blank" rel="noopener">📄 ${echapperHTML(o.pdfNom || "Document PDF actuel")}</a> — un nouvel envoi le remplacera</div>`
       : "";
   }
-
-  const elTitreForm = document.getElementById("titre-form-emploi");
-  if (elTitreForm) elTitreForm.textContent = "Modifier l'offre";
 
   const form = document.getElementById("form-emploi");
   if (form) form.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -370,26 +386,26 @@ async function rafraichirListeEmplois() {
       <div class="admin-liste-item">
         <div>
           <div class="admin-liste-item-titre">${echapperHTML(o.titre) || "(sans titre)"}</div>
-          <div class="admin-liste-item-meta">${echapperHTML(o.type) || ""} · ${echapperHTML(o.organisation) || ""}${o.pdfUrl ? " · 📄 PDF joint" : ""}</div>
+          <div class="admin-liste-item-meta">${echapperHTML(o.type || "Savoir")}${o.organisation ? " · " + echapperHTML(o.organisation) : ""}${o.lieu ? " · " + echapperHTML(o.lieu) : ""} · ${formaterDateAffichage(o.datePublication)}</div>
         </div>
         <div class="admin-liste-actions">
           <button type="button" data-id="${o.id}" class="btn-modif-emp">Modifier</button>
           <button type="button" data-id="${o.id}" class="supprimer btn-suppr-emp">Supprimer</button>
         </div>
-      </div>`).join("") || `<p class="empty-msg">Aucune offre pour le moment.</p>`;
+      </div>`).join("") || `<p class="empty-msg">Aucune fiche Rubriques pour le moment.</p>`;
 
     zone.querySelectorAll(".btn-modif-emp").forEach(b =>
       b.addEventListener("click", () => remplirFormEmploi(cacheEmplois.find(o => o.id === b.dataset.id))));
     zone.querySelectorAll(".btn-suppr-emp").forEach(b =>
       b.addEventListener("click", () => supprimerEmploi(b.dataset.id)));
   } catch (err) {
-    console.error("Erreur chargement emplois :", err);
+    console.error("Erreur chargement Rubriques :", err);
     zone.innerHTML = `<p class="empty-msg">Erreur de chargement : ${err.message}</p>`;
   }
 }
 
 async function supprimerEmploi(id) {
-  if (!confirm("Supprimer définitivement cette offre ?")) return;
+  if (!confirm("Supprimer définitivement cette fiche Rubriques ?")) return;
   await deleteDoc(doc(db, "emplois", id));
   if (emploiEnEdition === id) reinitialiserFormEmploi();
   await rafraichirListeEmplois();
@@ -404,43 +420,40 @@ async function enregistrerEmploi(e) {
 
   try {
     const elTitre = document.getElementById("emploi-titre");
-    const titre = elTitre ? elTitre.value.trim() : "";
-    if (!titre) throw new Error("Le titre est obligatoire.");
-
-    let pdfUrl = null, pdfNom = null;
-    const elFichier = document.getElementById("emploi-pdf-fichier");
-    const fichier = elFichier ? elFichier.files[0] : null;
-
-    if (fichier) {
-      if (fichier.type !== "application/pdf") throw new Error("Le fichier joint doit être un PDF.");
-      pdfUrl = await televerserFichier(fichier, "emplois");
-      pdfNom = fichier.name;
-    } else if (emploiEnEdition) {
-      const empExistant = cacheEmplois.find(o => o.id === emploiEnEdition);
-      if (empExistant && empExistant.pdfUrl) {
-        pdfUrl = empExistant.pdfUrl;
-        pdfNom = empExistant.pdfNom || "PDF actuel";
-      }
-    }
-
     const elType = document.getElementById("emploi-type");
     const elOrg = document.getElementById("emploi-organisation");
     const elLieu = document.getElementById("emploi-lieu");
-    const elDate = document.getElementById("emploi-datelimite");
-    const elDesc = document.getElementById("emploi-description");
+    const elDateLimite = document.getElementById("emploi-datelimite");
     const elResume = document.getElementById("emploi-resume");
+    const elDesc = document.getElementById("emploi-description");
     const elLien = document.getElementById("emploi-lien");
+    const elPdf = document.getElementById("emploi-pdf-fichier");
+
+    const titre = elTitre ? elTitre.value.trim() : "";
+    const description = elDesc ? elDesc.value.trim() : "";
+
+    if (!titre || !description) throw new Error("Le titre et le contenu détaillé sont obligatoires.");
+
+    const existant = emploiEnEdition ? cacheEmplois.find(o => o.id === emploiEnEdition) : null;
+    let pdfUrl = existant?.pdfUrl || "";
+    let pdfNom = existant?.pdfNom || "";
+
+    if (elPdf && elPdf.files[0]) {
+      const fichier = elPdf.files[0];
+      pdfUrl = await televerserFichier(fichier, "emplois");
+      pdfNom = fichier.name;
+    }
 
     const donnees = {
       titre,
-      type: elType ? elType.value : "Emploi",
+      type: elType ? elType.value : "Insolite",
       organisation: elOrg ? elOrg.value.trim() : "",
       lieu: elLieu ? elLieu.value.trim() : "",
-      dateLimite: elDate ? inputVersTimestamp(elDate.value) : null,
-      description: elDesc ? elDesc.value.trim() : "",
+      dateLimite: elDateLimite && elDateLimite.value ? inputVersTimestamp(elDateLimite.value) : null,
       resume: elResume ? elResume.value.trim() : "",
-      lien: elLien ? elLien.value.trim() || null : null,
-      datePublication: Timestamp.now()
+      description,
+      lien: elLien ? elLien.value.trim() : "",
+      datePublication: existant?.datePublication || Timestamp.now()
     };
 
     if (pdfUrl) {
@@ -449,17 +462,16 @@ async function enregistrerEmploi(e) {
     }
 
     if (emploiEnEdition) {
-      delete donnees.datePublication;
       await setDoc(doc(db, "emplois", emploiEnEdition), donnees, { merge: true });
     } else {
       await addDoc(collection(db, "emplois"), donnees);
     }
 
-    if (messageZone) messageZone.innerHTML = `<div class="formulaire-message succes">Offre enregistrée avec succès.</div>`;
+    if (messageZone) messageZone.innerHTML = `<div class="formulaire-message succes">Fiche Rubriques enregistrée avec succès.</div>`;
     reinitialiserFormEmploi();
     await rafraichirListeEmplois();
   } catch (err) {
-    console.error("Erreur enregistrement emploi :", err);
+    console.error("Erreur enregistrement Rubriques :", err);
     if (messageZone) messageZone.innerHTML = `<div class="formulaire-message erreur">Erreur : ${err.message}</div>`;
   } finally {
     if (bouton) bouton.disabled = false;
