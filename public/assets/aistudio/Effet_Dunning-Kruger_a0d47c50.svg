@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <!-- Courbe confiance / connaissance -->
+  <path d="M60 380 C150 370 190 300 225 165 C245 90 275 78 300 110 C340 160 360 300 430 322 C520 350 600 210 740 105" fill="none" stroke="#2E3192" stroke-width="9" stroke-linecap="round"/>
+  <path d="M60 380 C150 370 190 300 225 165 C245 90 275 78 300 110 C340 160 360 300 430 322 C520 350 600 210 740 105 L740 420 L60 420 Z" fill="#2E3192" opacity="0.08"/>
+  <!-- Personnage fier sur le premier sommet -->
+  <line x1="243" y1="128" x2="243" y2="66" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round"/>
+  <path d="M243 66 L292 78 L243 92 Z" fill="#B8912F"/>
+  <circle cx="228" cy="98" r="13" fill="#1A1A1A"/>
+  <path d="M228 111 L228 140 M228 120 L206 132 M228 120 L252 108 M228 140 L214 162 M228 140 L244 160" stroke="#1A1A1A" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <!-- Point bas : le doute -->
+  <circle cx="430" cy="322" r="10" fill="#7A3B4A"/>
+  <!-- Montée de l'expérience -->
+  <circle cx="560" cy="272" r="7" fill="#2F5D50"/>
+  <circle cx="650" cy="178" r="7" fill="#2F5D50"/>
+  <circle cx="740" cy="105" r="10" fill="#2F5D50"/>
+  <!-- Axes discrets -->
+  <line x1="60" y1="420" x2="760" y2="420" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+  <line x1="60" y1="420" x2="60" y2="40" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+</svg>

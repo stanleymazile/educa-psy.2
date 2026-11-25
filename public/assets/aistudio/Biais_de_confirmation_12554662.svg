@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <!-- Personnage -->
+  <circle cx="235" cy="185" r="78" fill="#2E3192"/>
+  <path d="M120 450 C120 350 175 315 235 315 C295 315 350 350 350 450 Z" fill="#2E3192"/>
+  <circle cx="262" cy="172" r="10" fill="#FFFFFF"/>
+  <!-- Bulle de pensée -->
+  <circle cx="392" cy="262" r="10" fill="#FFFFFF"/>
+  <circle cx="420" cy="238" r="14" fill="#FFFFFF"/>
+  <rect x="430" y="90" width="310" height="190" rx="34" fill="#FFFFFF" stroke="#2E3192" stroke-width="5"/>
+  <!-- Trois coches bien visibles -->
+  <circle cx="500" cy="150" r="30" fill="#2F5D50"/>
+  <path d="M485 150 L496 161 L516 139" stroke="#FFFFFF" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="585" cy="150" r="30" fill="#2E3192"/>
+  <path d="M570 150 L581 161 L601 139" stroke="#FFFFFF" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="670" cy="150" r="30" fill="#2F5D50"/>
+  <path d="M655 150 L666 161 L686 139" stroke="#FFFFFF" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Deux croix presque invisibles -->
+  <g stroke="#C9CDD6" stroke-width="6" stroke-linecap="round">
+    <path d="M528 205 L548 225 M548 205 L528 225"/>
+    <path d="M618 205 L638 225 M638 205 L618 225"/>
+  </g>
+  <circle cx="545" cy="215" r="24" fill="none" stroke="#E3E6EF" stroke-width="4"/>
+  <circle cx="635" cy="215" r="24" fill="none" stroke="#E3E6EF" stroke-width="4"/>
+</svg>

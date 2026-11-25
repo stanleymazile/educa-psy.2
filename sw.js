@@ -2,12 +2,14 @@
    EDUCA-PSY — sw.js (Service Worker PWA)
    ============================================================ */
 
-const CACHE_NAME = 'educapsy-v11';
+const CACHE_NAME = 'educapsy-v16';
 const ASSETS_A_METTRE_EN_CACHE = [
   '/',
   '/index.html',
   '/article.html',
   '/articles.html',
+  '/gta-6-psychologie.html',
+  '/biais-psychologiques.html',
   '/emplois.html',
   '/dissonance-cognitive.html',
   '/a-propos.html',
@@ -20,7 +22,15 @@ const ASSETS_A_METTRE_EN_CACHE = [
   '/favicon.ico',
   '/favicon-48.png',
   '/icon-192.png',
-  '/images/education-province.svg',
+  '/images/gta6-lancement.webp',
+  '/images/gta6-vice-city-miami.webp',
+  '/images/gta6-manette-ps5.webp',
+  '/images/biais-psychologiques-couverture.webp',
+  '/images/stanley-mazile.webp',
+  '/assets/aistudio/Biais_de_confirmation_12554662.svg',
+  '/assets/aistudio/Biais_de_disponibilit__1e793a81.svg',
+  '/assets/aistudio/Biais_de_n_gativit__2031562b.svg',
+  '/assets/aistudio/Effet_Dunning-Kruger_a0d47c50.svg',
   '/manifest.json'
 ];
 

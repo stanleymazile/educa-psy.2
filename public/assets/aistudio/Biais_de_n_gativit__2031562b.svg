@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <!-- Balance penchée côté négatif -->
+  <g transform="rotate(11 400 130)">
+    <rect x="180" y="118" width="440" height="15" rx="7" fill="#2C4A63"/>
+    <!-- Fils plateau gauche -->
+    <line x1="215" y1="130" x2="165" y2="215" stroke="#2C4A63" stroke-width="6"/>
+    <line x1="215" y1="130" x2="265" y2="215" stroke="#2C4A63" stroke-width="6"/>
+    <path d="M150 215 L280 215 L262 252 L168 252 Z" fill="#B8912F"/>
+    <!-- Fils plateau droit -->
+    <line x1="585" y1="130" x2="535" y2="215" stroke="#2C4A63" stroke-width="6"/>
+    <line x1="585" y1="130" x2="635" y2="215" stroke="#2C4A63" stroke-width="6"/>
+    <path d="M520 215 L650 215 L632 252 L538 252 Z" fill="#7A3B4A"/>
+  </g>
+  <!-- Cœurs légers à gauche (nombreux mais légers) -->
+  <g fill="#B8912F">
+    <path d="M196 176 C186 158 158 166 158 186 C158 202 178 212 196 226 C214 212 234 202 234 186 C234 166 206 158 196 176 Z"/>
+  </g>
+  <g fill="#2F5D50">
+    <path d="M238 190 C231 176 210 182 210 197 C210 209 224 217 238 228 C252 217 266 209 266 197 C266 182 245 176 238 190 Z"/>
+  </g>
+  <!-- Un seul poids lourd à droite -->
+  <circle cx="585" cy="196" r="34" fill="#3A3F4A"/>
+  <path d="M562 172 C562 148 608 148 608 172" fill="none" stroke="#3A3F4A" stroke-width="11"/>
+  <path d="M568 196 L578 206 L600 184" stroke="#FFFFFF" stroke-width="0" fill="none"/>
+  <path d="M570 188 L600 218 M600 188 L570 218" stroke="#FDF6E3" stroke-width="8" stroke-linecap="round"/>
+  <!-- Pilier et base -->
+  <path d="M400 128 L436 330 L364 330 Z" fill="#2C4A63"/>
+  <circle cx="400" cy="128" r="13" fill="#B8912F"/>
+  <rect x="300" y="330" width="200" height="18" rx="9" fill="#2C4A63"/>
+  <line x1="120" y1="392" x2="680" y2="392" stroke="#2C4A63" stroke-width="5" stroke-linecap="round" opacity="0.3"/>
+</svg>

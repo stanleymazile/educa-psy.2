@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /connexion.html
+Disallow: /admin.html
+Disallow: /desabonnement.html
+Disallow: /404.html
+
+Sitemap: https://educa-psy.web.app/sitemap.xml
+Sitemap: https://educa-psy.web.app/news-sitemap.xml

@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" role="img" aria-labelledby="biais-intro-title biais-intro-desc">
+  <title id="biais-intro-title">Pourquoi votre cerveau vous trompe : 5 biais psychologiques</title>
+  <desc id="biais-intro-desc">Illustration éditoriale montrant un profil humain dont la pensée emprunte des raccourcis invisibles symbolisés par cinq repères de biais cognitifs, face à une loupe d'esprit critique qui rétablit un choix lucide.</desc>
+
+  <!-- Fond transparent : aucune boîte ni arrière-plan -->
+  <!-- Ligne d'horizon discrète -->
+  <line x1="60" y1="398" x2="740" y2="398" stroke="#2E3192" stroke-width="3" stroke-linecap="round" opacity="0.22"/>
+
+  <!-- Silhouette de profil / tête pensante (à gauche) -->
+  <path d="M98 450 L108 352 C108 320 124 304 148 296 L154 274 C122 252 106 216 112 172 C118 112 168 74 226 76 C284 78 324 120 326 174 L344 206 C348 214 342 222 332 224 L322 226 L320 250 C318 266 306 276 286 278 L272 278 L276 318 C298 328 318 352 322 398 L326 450 Z" fill="#2E3192"/>
+
+  <!-- Réseau mental / cerveau stylisé à l'intérieur -->
+  <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M174 176 C168 144 194 120 226 122 C258 124 278 148 274 176 C272 198 254 214 226 216 C198 218 178 202 174 176 Z" fill="#FFFFFF" fill-opacity="0.14" stroke-width="3.5"/>
+    <line x1="194" y1="166" x2="226" y2="146" stroke-width="3" opacity="0.85"/>
+    <line x1="226" y1="146" x2="254" y2="170" stroke-width="3" opacity="0.85"/>
+    <line x1="194" y1="166" x2="218" y2="192" stroke-width="3" opacity="0.85"/>
+    <line x1="218" y1="192" x2="254" y2="170" stroke-width="3" opacity="0.85"/>
+    <line x1="226" y1="146" x2="218" y2="192" stroke-width="2.5" opacity="0.55"/>
+  </g>
+  <circle cx="194" cy="166" r="6" fill="#B8912F"/>
+  <circle cx="226" cy="146" r="6" fill="#FFFFFF"/>
+  <circle cx="254" cy="170" r="6" fill="#FFFFFF"/>
+  <circle cx="218" cy="192" r="6" fill="#2F5D50"/>
+
+  <!-- Trajectoire 1 : Le raccourci mental (biais cognitif) qui dévie le jugement -->
+  <path d="M332 172 C398 118 456 96 520 128 C550 144 568 140 584 128" fill="none" stroke="#7A3B4A" stroke-width="6" stroke-dasharray="14 10" stroke-linecap="round"/>
+  <path d="M570 118 L592 124 L578 144" fill="none" stroke="#7A3B4A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Carte supérieure : illusion / raccourci trompeur -->
+  <g transform="translate(598, 72)">
+    <rect x="0" y="0" width="144" height="114" rx="20" fill="#FFFFFF" stroke="#7A3B4A" stroke-width="4.5"/>
+    <!-- Prisme / barres décalées symbolisant une perception faussée -->
+    <rect x="24" y="26" width="96" height="12" rx="6" fill="#7A3B4A" opacity="0.22" transform="rotate(-4 72 32)"/>
+    <rect x="24" y="50" width="72" height="12" rx="6" fill="#B8912F" opacity="0.5" transform="rotate(5 60 56)"/>
+    <circle cx="108" cy="82" r="16" fill="#7A3B4A"/>
+    <path d="M101 75 L115 89 M115 75 L101 89" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+    <rect x="24" y="76" width="54" height="11" rx="5.5" fill="#9AA0AE" opacity="0.55"/>
+  </g>
+
+  <!-- Trajectoire 2 : Le recul / esprit critique (chemin lucide en bas) -->
+  <path d="M336 236 C410 264 468 292 586 292" fill="none" stroke="#2F5D50" stroke-width="6" stroke-linecap="round"/>
+  <path d="M572 278 L592 292 L572 306" fill="none" stroke="#2F5D50" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Carte inférieure : jugement vérifié et équilibré -->
+  <g transform="translate(598, 236)">
+    <rect x="0" y="0" width="144" height="114" rx="20" fill="#FFFFFF" stroke="#2F5D50" stroke-width="4.5"/>
+    <rect x="24" y="28" width="96" height="11" rx="5.5" fill="#2E3192" opacity="0.22"/>
+    <rect x="24" y="50" width="96" height="11" rx="5.5" fill="#2E3192" opacity="0.22"/>
+    <rect x="24" y="76" width="56" height="11" rx="5.5" fill="#2F5D50" opacity="0.35"/>
+    <circle cx="108" cy="80" r="17" fill="#2F5D50"/>
+    <path d="M99 80 L105 86 L118 73" fill="none" stroke="#FFFFFF" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Loupe d'esprit critique au croisement central -->
+  <g transform="translate(454, 212)">
+    <circle cx="0" cy="0" r="38" fill="#FFFFFF" stroke="#2E3192" stroke-width="5"/>
+    <circle cx="0" cy="0" r="24" fill="#EEF1FA"/>
+    <path d="M-10 1 L-3 8 L12 -7" fill="none" stroke="#2F5D50" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="27" y1="27" x2="54" y2="54" stroke="#2E3192" stroke-width="9" stroke-linecap="round"/>
+    <line x1="34" y1="34" x2="52" y2="52" stroke="#B8912F" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- 5 repères numérotés représentant les 5 biais psychologiques -->
+  <g stroke="#2E3192" stroke-width="2" stroke-dasharray="4 5" opacity="0.4">
+    <line x1="286" y1="108" x2="352" y2="54"/>
+    <line x1="316" y1="138" x2="416" y2="60"/>
+    <line x1="330" y1="172" x2="480" y2="74"/>
+    <line x1="312" y1="256" x2="374" y2="342"/>
+    <line x1="286" y1="296" x2="446" y2="362"/>
+  </g>
+
+  <!-- Badge 1 : Confirmation -->
+  <g transform="translate(352, 54)">
+    <circle cx="0" cy="0" r="18" fill="#2E3192" stroke="#FFFFFF" stroke-width="3"/>
+    <text x="0" y="6" text-anchor="middle" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">1</text>
+  </g>
+
+  <!-- Badge 2 : Ancrage -->
+  <g transform="translate(416, 60)">
+    <circle cx="0" cy="0" r="18" fill="#B8912F" stroke="#FFFFFF" stroke-width="3"/>
+    <text x="0" y="6" text-anchor="middle" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">2</text>
+  </g>
+
+  <!-- Badge 3 : Disponibilité -->
+  <g transform="translate(480, 74)">
+    <circle cx="0" cy="0" r="18" fill="#2C4A63" stroke="#FFFFFF" stroke-width="3"/>
+    <text x="0" y="6" text-anchor="middle" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">3</text>
+  </g>
+
+  <!-- Badge 4 : Négativité -->
+  <g transform="translate(374, 342)">
+    <circle cx="0" cy="0" r="18" fill="#7A3B4A" stroke="#FFFFFF" stroke-width="3"/>
+    <text x="0" y="6" text-anchor="middle" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">4</text>
+  </g>
+
+  <!-- Badge 5 : Dunning-Kruger -->
+  <g transform="translate(446, 362)">
+    <circle cx="0" cy="0" r="18" fill="#2F5D50" stroke="#FFFFFF" stroke-width="3"/>
+    <text x="0" y="6" text-anchor="middle" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">5</text>
+  </g>
+</svg>

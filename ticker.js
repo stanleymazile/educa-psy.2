@@ -23,7 +23,7 @@ async function initTicker() {
 
     // Dupliqué une fois pour un défilement continu sans "trou".
     // Le séparateur (point doré) est ajouté en CSS après chaque lien.
-    const liens = articles.map(a => `<a href="article.html?id=${a.id}">${a.titre || ""}</a>`);
+    const liens = articles.map(a => `<a href="${a.urlStatique || `article.html?id=${a.id}`}">${a.titre || ""}</a>`);
     zone.innerHTML = [...liens, ...liens].join("");
   } catch (err) {
     console.error("Erreur Firestore (ticker) :", err);

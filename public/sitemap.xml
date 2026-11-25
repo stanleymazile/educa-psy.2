@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Pages Principales -->
+  <url>
+    <loc>https://educa-psy.web.app/</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/articles.html</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/emplois.html</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/a-propos.html</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/contact.html</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/abonnement.html</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/politique-de-confidentialite.html</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Catégories Thématiques d'Articles -->
+  <url>
+    <loc>https://educa-psy.web.app/articles.html?cat=%C3%89ducation</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/articles.html?cat=Psychologie</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Articles Éditoriaux Statiques (Optimisés Google Search & Google Actualités) -->
+  <url>
+    <loc>https://educa-psy.web.app/gta-6-psychologie.html</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/gta6-lancement.webp</image:loc>
+      <image:title>GTA 6 : pourquoi le monde entier a attendu 13 ans — et ce que la psychologie nous dit de cette fièvre</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/gta6-vice-city-miami.webp</image:loc>
+      <image:title>Ocean Drive la nuit à Miami Beach</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/gta6-manette-ps5.webp</image:loc>
+      <image:title>Manette PlayStation 5 DualSense</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/biais-psychologiques.html</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/biais-psychologiques-couverture.webp</image:loc>
+      <image:title>Pourquoi votre cerveau vous trompe : 5 biais psychologiques</image:title>
+    </image:image>
+  </url>
+
+  <!-- Articles Individuels (Firestore) -->
+  <url>
+    <loc>https://educa-psy.web.app/article.html?id=154FNePdwLYBkVisiAHC</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/article.html?id=QEs26nevr56n4DcEqDLU</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/article.html?id=cyu8VawYtQoQv9TG1CTZ</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/article.html?id=rjPnqv3hl8FPCvoytPp1</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/article.html?id=yfiwSpHNVTyrUKguSHkn</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Rubriques (Insolite / Savoir) -->
+  <url>
+    <loc>https://educa-psy.web.app/emplois.html?type=Insolite</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/emplois.html?type=Savoir</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/dissonance-cognitive.html</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

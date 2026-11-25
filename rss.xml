@@ -6,12 +6,34 @@
     <description>Actualités et ressources en éducation et psychologie.</description>
     <language>fr</language>
     <atom:link href="https://educa-psy.web.app/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sun, 18 Oct 2026 19:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 12:00:00 GMT</lastBuildDate>
     <image>
       <url>https://educa-psy.web.app/logo.png</url>
       <title>Educa-Psy</title>
       <link>https://educa-psy.web.app/</link>
     </image>
+
+    <item>
+      <title>GTA 6 : pourquoi le monde entier a attendu 13 ans — et ce que la psychologie nous dit de cette fièvre</title>
+      <link>https://educa-psy.web.app/gta-6-psychologie.html</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/gta-6-psychologie.html</guid>
+      <pubDate>Tue, 24 Nov 2026 12:00:00 GMT</pubDate>
+      <dc:creator>Stanley Mazile</dc:creator>
+      <category>Psychologie</category>
+      <enclosure url="https://educa-psy.web.app/images/gta6-lancement.webp" length="195098" type="image/webp" />
+      <description><![CDATA[Le 19 novembre 2026, des millions de joueurs ont enfin mis la main sur Grand Theft Auto VI, treize ans après l'épisode précédent. Files d'attente à minuit, congés posés au travail, record de ventes dès le premier jour : un jeu vidéo peut-il vraiment rendre les gens « fous » ? La psychologie a des réponses — plus nuancées, et plus intéressantes, que les polémiques.]]></description>
+    </item>
+
+    <item>
+      <title>Pourquoi votre cerveau vous trompe : 5 biais psychologiques qui guident vos choix sans que vous le sachiez</title>
+      <link>https://educa-psy.web.app/biais-psychologiques.html</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/biais-psychologiques.html</guid>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Stanley Mazile</dc:creator>
+      <category>Psychologie</category>
+      <enclosure url="https://educa-psy.web.app/images/biais-psychologiques-couverture.webp" length="52762" type="image/webp" />
+      <description><![CDATA[Nous pensons décider en toute logique. La psychologie montre pourtant que notre cerveau prend des raccourcis — et que ces raccourcis faussent nos jugements, nos relations et nos décisions, chaque jour, sans que nous nous en rendions compte.]]></description>
+    </item>
 
     <item>
       <title>Reconnaître les signes de détresse psychologique chez un proche</title>
@@ -29,7 +51,7 @@
       <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=11</guid>
       <pubDate>Sun, 09 Aug 2026 09:00:00 GMT</pubDate>
       <dc:creator>Équipe Educa-Psy</dc:creator>
-      <category>Science</category>
+      <category>Psychologie</category>
       <description><![CDATA[Le stress n'est pas seulement « dans la tête » : il déclenche des réactions physiologiques précises, que la recherche en neurosciences permet aujourd'hui de mieux comprendre.]]></description>
     </item>
 
@@ -41,16 +63,6 @@
       <dc:creator>Équipe Educa-Psy</dc:creator>
       <category>Éducation</category>
       <description><![CDATA[Au-delà des apprentissages académiques, le bien-être émotionnel des élèves conditionne leur réussite scolaire. Comment les établissements peuvent-ils mieux intégrer le soutien psychosocial ?]]></description>
-    </item>
-
-    <item>
-      <title>L'intelligence artificielle peut-elle vraiment aider le secteur humanitaire ?</title>
-      <link>https://educa-psy.web.app/article.html?id=9</link>
-      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=9</guid>
-      <pubDate>Wed, 05 Aug 2026 09:00:00 GMT</pubDate>
-      <dc:creator>Équipe Educa-Psy</dc:creator>
-      <category>Technologie</category>
-      <description><![CDATA[Traduction automatique, analyse de données, optimisation logistique : l'intelligence artificielle ouvre de nouvelles possibilités pour les organisations humanitaires — avec ses limites.]]></description>
     </item>
 
     <item>
@@ -84,26 +96,6 @@
     </item>
 
     <item>
-      <title>Enseigner à distance : quels outils numériques choisir ?</title>
-      <link>https://educa-psy.web.app/article.html?id=5</link>
-      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=5</guid>
-      <pubDate>Wed, 15 Jul 2026 09:00:00 GMT</pubDate>
-      <dc:creator>Équipe Educa-Psy</dc:creator>
-      <category>Technologie</category>
-      <description><![CDATA[Plateformes de visioconférence, contenus hors ligne, messageries simples : bien choisir ses outils numériques fait souvent la différence en enseignement à distance.]]></description>
-    </item>
-
-    <item>
-      <title>Santé mentale et changement climatique : un lien scientifique de plus en plus documenté</title>
-      <link>https://educa-psy.web.app/article.html?id=4</link>
-      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=4</guid>
-      <pubDate>Sat, 18 Jul 2026 09:00:00 GMT</pubDate>
-      <dc:creator>Équipe Educa-Psy</dc:creator>
-      <category>Science</category>
-      <description><![CDATA[Éco-anxiété, stress post-catastrophe, incertitude face à l'avenir : la recherche s'intéresse de plus en plus aux effets psychologiques du changement climatique.]]></description>
-    </item>
-
-    <item>
       <title>Réduire la fracture numérique : l'éducation face au défi du tout-numérique</title>
       <link>https://educa-psy.web.app/article.html?id=3</link>
       <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=3</guid>
@@ -111,26 +103,6 @@
       <dc:creator>Équipe Educa-Psy</dc:creator>
       <category>Éducation</category>
       <description><![CDATA[Accès inégal à internet, au matériel informatique, aux compétences numériques : la fracture numérique continue de creuser les inégalités éducatives.]]></description>
-    </item>
-
-    <item>
-      <title>La science citoyenne : et si la recherche s'ouvrait à tous ?</title>
-      <link>https://educa-psy.web.app/article.html?id=2</link>
-      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=2</guid>
-      <pubDate>Tue, 30 Jun 2026 09:00:00 GMT</pubDate>
-      <dc:creator>Équipe Educa-Psy</dc:creator>
-      <category>Science</category>
-      <description><![CDATA[Observer des oiseaux, cartographier une région, contribuer à des bases de données scientifiques : la science citoyenne permet à chacun de participer à la recherche.]]></description>
-    </item>
-
-    <item>
-      <title>Vie privée en ligne : les réflexes essentiels à adopter</title>
-      <link>https://educa-psy.web.app/article.html?id=1</link>
-      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=1</guid>
-      <pubDate>Sun, 28 Jun 2026 09:00:00 GMT</pubDate>
-      <dc:creator>Équipe Educa-Psy</dc:creator>
-      <category>Technologie</category>
-      <description><![CDATA[Mots de passe, réseaux sociaux, partage d'informations personnelles : quelques bons réflexes suffisent à mieux protéger sa vie privée en ligne.]]></description>
     </item>
   </channel>
 </rss>

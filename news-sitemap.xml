@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://educa-psy.web.app/gta-6-psychologie.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Educa-Psy</news:name>
+        <news:language>fr</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-24T12:00:00Z</news:publication_date>
+      <news:title>GTA 6 : pourquoi le monde entier a attendu 13 ans — et ce que la psychologie nous dit de cette fièvre</news:title>
+      <news:keywords>GTA 6, Grand Theft Auto VI, psychologie, jeu vidéo, dopamine, flow, trouble du jeu vidéo OMS</news:keywords>
+    </news:news>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/gta6-lancement.webp</image:loc>
+      <image:title>Lancement mondial de Grand Theft Auto VI le 19 novembre 2026</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/gta6-vice-city-miami.webp</image:loc>
+      <image:title>Ocean Drive la nuit à Miami Beach, inspiration de Vice City</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/gta6-manette-ps5.webp</image:loc>
+      <image:title>Manette PlayStation 5 DualSense</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/biais-psychologiques.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Educa-Psy</news:name>
+        <news:language>fr</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-24T00:00:00Z</news:publication_date>
+      <news:title>Pourquoi votre cerveau vous trompe : 5 biais psychologiques qui guident vos choix sans que vous le sachiez</news:title>
+      <news:keywords>biais cognitifs, biais psychologiques, biais de confirmation, effet d'ancrage, Dunning-Kruger, psychologie</news:keywords>
+    </news:news>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/biais-psychologiques-couverture.webp</image:loc>
+      <image:title>Pions d'échecs en noir et blanc illustrant les biais psychologiques et nos choix</image:title>
+    </image:image>
+  </url>
+</urlset>
