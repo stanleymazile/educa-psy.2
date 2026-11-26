@@ -17,12 +17,152 @@ const TAILLE_PAGE_EMPLOIS = 9;
 
 const FICHES_SAVOIR_INTEGREES = [
   {
+    id: "ia-voix-depression",
+    titre: "Une IA peut détecter la dépression dans ta voix",
+    titre_en: "An AI Can Detect Depression in Your Voice",
+    titre_ht: "Yon IA kapab detekte depresyon nan vwa ou",
+    titre_es: "Una IA puede detectar la depresión en tu voz",
+    type: "Savoir",
+    organisation: "Stanley Mazile",
+    lieu: "Psychologie & IA",
+    lieu_en: "Psychology & AI",
+    lieu_ht: "Sikoloji ak IA",
+    lieu_es: "Psicología e IA",
+    resume: "Ta voix trahit ton état mental. Des algorithmes analysent rythme, pauses et tonalité pour repérer des signes de dépression et d'anxiété.",
+    resume_en: "Your voice reflects your mental state. Machine-learning algorithms analyze rhythm, pauses, and tone to spot early signs of depression and anxiety.",
+    resume_ht: "Vwa ou revele eta mantal ou. Algoritm yo analize ritm, poz ak ton pou detekte siy depresyon ak enkyetid byen bonè.",
+    resume_es: "Tu voz revela tu estado mental. Algoritmos de aprendizaje automático analizan ritmo, pausas y tono para detectar depresión y ansiedad.",
+    description: "Ta voix trahit ton état mental. Des algorithmes d'apprentissage automatique analysent des micro-variations — rythme, pauses, tonalité — invisibles à l'oreille humaine.",
+    image: "/images/ia-voix-depression.webp",
+    svgMini: `<svg class="job-card-svg-mini" viewBox="0 0 28 28" aria-hidden="true" fill="currentColor"><rect class="svg-wave-bar" x="3" y="9" width="3.5" height="10" rx="1.75" style="animation-delay:0s"/><rect class="svg-wave-bar" x="9" y="5" width="3.5" height="18" rx="1.75" style="animation-delay:0.18s"/><rect class="svg-wave-bar" x="15" y="7" width="3.5" height="14" rx="1.75" style="animation-delay:0.36s"/><rect class="svg-wave-bar" x="21" y="10" width="3.5" height="8" rx="1.75" style="animation-delay:0.54s"/></svg>`,
+    url: "ia-voix-depression.html",
+    datePublication: new Date("2026-11-25T17:00:00Z")
+  },
+  {
+    id: "parole-par-la-pensee",
+    titre: "Un homme paralysé « parle » par la pensée, avec 97 % de précision",
+    titre_en: "A Paralyzed Man Speaks Through Thought With 97% Accuracy",
+    titre_ht: "Yon nonm paralize « pale » ak panse li, avèk 97 % presizyon",
+    titre_es: "Un hombre paralizado «habla» con el pensamiento, con un 97 % de precisión",
+    type: "Insolite",
+    organisation: "Stanley Mazile",
+    lieu: "Neurosciences",
+    lieu_en: "Neuroscience",
+    lieu_ht: "Newosyans",
+    lieu_es: "Neurociencia",
+    resume: "Atteint de la maladie de Charcot, Casey Harrell retrouve la parole grâce à des électrodes cérébrales qui décodent ses phrases avec environ 97 % de précision.",
+    resume_en: "Living with ALS, Casey Harrell speaks again through brain implants that decode intended words into aloud speech with roughly 97% accuracy.",
+    resume_ht: "Ak maladi Charcot a, Casey Harrell reprann lapawòl gras a elektwòd nan sèvo ki tradui panse li an fraz a 97 % presizyon.",
+    resume_es: "Con ELA, Casey Harrell vuelve a comunicarse gracias a electrodos cerebrales que descifran sus frases con alrededor de un 97 % de precisión.",
+    description: "Casey Harrell, atteint de la maladie de Charcot, ne pouvait plus parler. Des électrodes implantées dans son cerveau transforment ses signaux en phrases avec 97 % de précision.",
+    image: "/images/parole-pensee-bci.webp",
+    svgMini: `<svg class="job-card-svg-mini" viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle class="svg-pulse-node" cx="9" cy="14" r="4" fill="currentColor" fill-opacity="0.2"/><path d="M13 14h6"/><circle cx="22" cy="14" r="2.5" fill="currentColor"/></svg>`,
+    url: "parole-par-la-pensee.html",
+    datePublication: new Date("2026-11-25T15:30:00Z")
+  },
+  {
+    id: "tuteur-ia-harvard",
+    titre: "Un tuteur IA a fait mieux qu'un cours en classe",
+    titre_en: "An AI Tutor Outperformed a Classroom Lecture",
+    titre_ht: "Yon titè IA fè pi byen pase yon kou nan sal klas",
+    titre_es: "Un tutor de IA superó a una clase presencial",
+    type: "Savoir",
+    organisation: "Stanley Mazile",
+    lieu: "Éducation & IA",
+    lieu_en: "Education & AI",
+    lieu_ht: "Edikasyon ak IA",
+    lieu_es: "Educación e IA",
+    resume: "À Harvard, des étudiants guidés question par question par un tuteur IA ont appris plus du double qu'en cours classique actif, en moins de temps.",
+    resume_en: "At Harvard, physics students guided question by question by an AI tutor learned more than twice as much in less time than in an active class.",
+    resume_ht: "Nan Harvard, etidyan ki te aprann ak yon titè IA ki poze kesyon etap pa etap te aprann plis pase de fwa plis nan mwens tan.",
+    resume_es: "En Harvard, estudiantes guiados pregunta a pregunta por un tutor de IA aprendieron más del doble en menos tiempo que en clase.",
+    description: "À Harvard, des étudiants en physique ont appris plus du double avec un tuteur IA socratique qu'en cours classique actif.",
+    image: "/images/tuteur-ia-harvard.webp",
+    svgMini: `<svg class="job-card-svg-mini" viewBox="0 0 28 28" aria-hidden="true" fill="currentColor"><rect x="4" y="15" width="7" height="9" rx="1.5" opacity="0.45"/><rect class="svg-bar-focus" x="15" y="5" width="8" height="19" rx="1.5"/></svg>`,
+    url: "tuteur-ia-harvard.html",
+    datePublication: new Date("2026-11-25T14:00:00Z")
+  },
+  {
+    id: "cerveau-lavage-sommeil",
+    titre: "Pendant que tu dors, ton cerveau se « lave »",
+    titre_en: "While You Sleep, Your Brain Washes Itself",
+    titre_ht: "Pandan w ap dòmi, sèvo ou « lave » tèt li",
+    titre_es: "Mientras duermes, tu cerebro se «lava»",
+    type: "Insolite",
+    organisation: "Stanley Mazile",
+    lieu: "Sommeil & Cerveau",
+    lieu_en: "Sleep & Brain",
+    lieu_ht: "Dòmi ak Sèvo",
+    lieu_es: "Sueño y Cerebro",
+    resume: "Pendant le sommeil profond, des vagues de noradrénaline pompent toutes les 50 secondes le liquide qui évacue les déchets du cerveau — un cycle perturbé par certains somnifères.",
+    resume_en: "During deep sleep, noradrenaline waves pulse brain vessels every ~50 seconds to flush out metabolic waste—a cycle disrupted by sleeping pills like zolpidem.",
+    resume_ht: "Pandan dòmi pwofon, vag noradrenalin ponpe likid ki netwaye dechè nan sèvo a chak 50 segonn — yon ritm kèk grenn dòmi kapab deranje.",
+    resume_es: "Durante el sueño profundo, ondas de noradrenalina bombean líquido cada ~50 segundos para limpiar residuos cerebrales, un ciclo alterado por ciertos somníferos.",
+    description: "Pendant le sommeil profond, des vagues de noradrénaline font contracter les vaisseaux toutes les 50 secondes pour évacuer les déchets cérébraux.",
+    image: "/images/cerveau-lavage-sommeil.webp",
+    svgMini: `<svg class="job-card-svg-mini" viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle class="svg-vessel-pulse" cx="14" cy="14" r="9" stroke-opacity="0.45"/><circle class="svg-pulse-node" cx="14" cy="14" r="4.5" fill="currentColor" fill-opacity="0.25"/></svg>`,
+    url: "cerveau-lavage-sommeil.html",
+    datePublication: new Date("2026-11-25T12:30:00Z")
+  },
+  {
+    id: "rejoyn-application-depression",
+    titre: "La première application sur ordonnance contre la dépression",
+    titre_en: "The First Prescription App for Depression",
+    titre_ht: "Premye aplikasyon sou preskripsyon kont depresyon",
+    titre_es: "La primera aplicación con receta médica contra la depresión",
+    type: "Savoir",
+    organisation: "Stanley Mazile",
+    lieu: "Santé mentale numérique",
+    lieu_en: "Digital Mental Health",
+    lieu_ht: "Sante mantal dijital",
+    lieu_es: "Salud mental digital",
+    resume: "Autorisée par la FDA, Rejoyn se prescrit comme un médicament en complément d'un antidépresseur grâce à de courts exercices cognitifs et émotionnels.",
+    resume_en: "Authorized by the FDA, Rejoyn is prescribed alongside antidepressants to train emotional and cognitive brain circuits through brief guided exercises.",
+    resume_ht: "Otorize pa FDA, Rejoyn preskri tankou yon medikaman ak egzèsis kognitif ak emosyonèl kout pou ranfòse sikui sèvo a.",
+    resume_es: "Autorizada por la FDA, Rejoyn se receta como complemento de antidepresivos mediante breves ejercicios cognitivos y emocionales.",
+    description: "Rejoyn, autorisée par la FDA en mars 2024, est la première application thérapeutique prescrite en complément d'un antidépresseur.",
+    image: "/images/rejoyn-therapie-numerique.webp",
+    svgMini: `<svg class="job-card-svg-mini" viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="3" width="14" height="22" rx="3"/><circle class="svg-pulse-node" cx="14" cy="13" r="3" fill="currentColor" fill-opacity="0.3"/></svg>`,
+    url: "rejoyn-application-depression.html",
+    datePublication: new Date("2026-11-25T11:00:00Z")
+  },
+  {
+    id: "baillement-contagieux",
+    titre: "Pourquoi bâillons-nous quand les autres bâillent ?",
+    titre_en: "Why Do We Yawn When Others Yawn?",
+    titre_ht: "Poukisa nou baye lè lòt moun ap baye ?",
+    titre_es: "¿Por qué bostezamos cuando otros bostezan?",
+    type: "Insolite",
+    organisation: "Stanley Mazile",
+    lieu: "Psychologie",
+    lieu_en: "Psychology",
+    lieu_ht: "Sikoloji",
+    lieu_es: "Psicología",
+    resume: "Il suffit parfois de voir un inconnu bâiller — ou simplement de lire ces quelques lignes — pour sentir sa propre mâchoire s'ouvrir. Ce réflexe banal cache un fascinant mécanisme social.",
+    resume_en: "Seeing someone yawn—or just reading about it—can trigger an immediate yawn. Behind this ordinary reflex lies an intriguing social brain mechanism.",
+    resume_ht: "Pafwa li sifi pou wè yon moun baye — oswa li yon fraz sou sa — pou machwè nou louvri tou. Dèyè reflèks sa a gen yon mekanis sosyal kaptivan.",
+    resume_es: "A veces basta con ver bostezar a alguien —o leer estas líneas— para sentir el impulso de bostezar. Detrás de este reflejo se esconde un mecanismo social fascinante.",
+    description: "Il suffit parfois de voir un inconnu bâiller — ou simplement de lire ces quelques lignes — pour sentir sa propre mâchoire s'ouvrir. Ce réflexe banal cache un fascinant mécanisme social.",
+    image: "/images/baillement-contagieux.webp",
+    url: "baillement-contagieux.html",
+    datePublication: new Date("2026-11-25T08:00:00Z")
+  },
+  {
     id: "dissonance-cognitive",
     titre: "La dissonance cognitive",
+    titre_en: "Cognitive Dissonance",
+    titre_ht: "Disonans kognitif",
+    titre_es: "La disonancia cognitiva",
     type: "Savoir",
     organisation: "Équipe Educa-Psy",
     lieu: "Psychologie",
+    lieu_en: "Psychology",
+    lieu_ht: "Sikoloji",
+    lieu_es: "Psicología",
     resume: "La dissonance cognitive est le malaise que nous ressentons quand nos pensées, nos valeurs ou nos actes se contredisent. Comprendre le phénomène décrit par Leon Festinger et mieux le gérer.",
+    resume_en: "Cognitive dissonance is the mental discomfort felt when thoughts, values, and actions clash. Understand Leon Festinger's concept and how to navigate it.",
+    resume_ht: "Disonans kognitif se malèz nou santi lè panse, valè ak aksyon nou kontredi youn lòt. Konprann fenomèn Leon Festinger te dekri a.",
+    resume_es: "La disonancia cognitiva es el malestar que sentimos cuando nuestros pensamientos, valores o actos se contradicen.",
     description: "La dissonance cognitive est le malaise que nous ressentons quand nos pensées, nos valeurs ou nos actes se contredisent.",
     url: "dissonance-cognitive.html",
     datePublication: new Date("2026-11-14T09:00:00Z")
@@ -36,6 +176,17 @@ function echapperHTML(texte) {
   const div = document.createElement("div");
   div.textContent = texte == null ? "" : String(texte);
   return div.innerHTML;
+}
+
+function champLocal(o, champ) {
+  let langue = "fr";
+  try {
+    langue = localStorage.getItem("educapsy-langue") || document.documentElement.lang || "fr";
+  } catch (_) {
+    langue = document.documentElement.lang || "fr";
+  }
+  if (!langue || langue === "fr") return o[champ] || "";
+  return o[`${champ}_${langue}`] || o[champ] || "";
 }
 
 function retirerAccents(texte) {
@@ -140,15 +291,26 @@ function carteEmploiHTML(o, compact = false) {
   const slug = slugifyType(o.type);
   const badge = libelleType(o.type);
   const url = o.url || `emploi.html?id=${encodeURIComponent(o.id)}`;
+  const titre = champLocal(o, "titre") || "(sans titre)";
+  const lieu = champLocal(o, "lieu");
   const datePub = formaterDateFirestore(o.datePublication);
-  const metaParts = [o.organisation, o.lieu, datePub].filter(Boolean).map(echapperHTML);
-  const texteResume = o.resume || (o.description ? String(o.description).slice(0, 160) + (String(o.description).length > 160 ? "…" : "") : "");
+  const metaParts = [o.organisation, lieu, datePub].filter(Boolean).map(echapperHTML);
+  const resumeLocal = champLocal(o, "resume");
+  const descLocal = champLocal(o, "description");
+  const texteResume = resumeLocal || (descLocal ? String(descLocal).slice(0, 160) + (String(descLocal).length > 160 ? "…" : "") : "");
   const lireSuite = window.EducaPsyI18n ? window.EducaPsyI18n.texte("lire_la_suite") : "Lire la suite →";
+  const mediaHtml = o.image
+    ? `<a href="${url}" class="job-card-media" tabindex="-1" aria-hidden="true"><img class="job-card-image" src="${echapperHTML(o.image)}" alt="${echapperHTML(titre)}" loading="lazy" width="1280" height="714" referrerpolicy="no-referrer" decoding="async"></a>`
+    : "";
 
   return `
     <article class="job-card ${compact ? "job-card--compact " : ""}type-${slug}">
-      <span class="tag tag-${slug}">${echapperHTML(badge)}</span>
-      <h3 class="job-card-title"><a href="${url}">${echapperHTML(o.titre) || "(sans titre)"}</a></h3>
+      ${mediaHtml}
+      <div class="job-card-top">
+        <span class="tag tag-${slug}">${echapperHTML(badge)}</span>
+        ${o.svgMini || ""}
+      </div>
+      <h3 class="job-card-title"><a href="${url}">${echapperHTML(titre)}</a></h3>
       ${metaParts.length ? `<div class="job-card-meta">${metaParts.join(" · ")}</div>` : ""}
       ${texteResume ? `<p class="job-card-desc">${echapperHTML(texteResume)}</p>` : ""}
       <div class="job-card-footer">
@@ -399,8 +561,18 @@ async function initEmploiDetailPage() {
     return;
   }
 
-  if (id === "dissonance-cognitive") {
-    window.location.replace("dissonance-cognitive.html");
+  const redirectionsStatiques = {
+    "ia-voix-depression": "ia-voix-depression.html",
+    "parole-par-la-pensee": "parole-par-la-pensee.html",
+    "tuteur-ia-harvard": "tuteur-ia-harvard.html",
+    "cerveau-lavage-sommeil": "cerveau-lavage-sommeil.html",
+    "rejoyn-application-depression": "rejoyn-application-depression.html",
+    "dissonance-cognitive": "dissonance-cognitive.html",
+    "baillement-contagieux": "baillement-contagieux.html"
+  };
+
+  if (redirectionsStatiques[id]) {
+    window.location.replace(redirectionsStatiques[id]);
     return;
   }
 
@@ -484,6 +656,8 @@ async function initEmploiDetailPage() {
         </div>
       </header>
 
+      ${item.image ? `<figure class="article-hero"><img class="article-image" src="${echapperHTML(item.image)}" alt="${echapperHTML(item.titre || "")}" width="1280" height="714" referrerpolicy="no-referrer" decoding="async"></figure>` : ""}
+
       <div class="article-body">
         ${item.description ? rendreContenu(item.description) : (item.resume ? `<p>${echapperHTML(item.resume)}</p>` : "")}
       </div>
@@ -557,7 +731,11 @@ async function initSimilairesPageStatique() {
   if (!zoneSimilaires || document.getElementById("emploi-content")) return;
   try {
     const tous = await chargerEmplois();
-    const similaires = tous.filter(o => o.id !== "dissonance-cognitive").slice(0, 2);
+    const pageActuelle = (window.location.pathname.split("/").pop() || "").toLowerCase();
+    const similaires = tous.filter(o => {
+      const cible = (o.url || "").toLowerCase();
+      return !pageActuelle || cible !== pageActuelle;
+    }).slice(0, 2);
     if (similaires.length) {
       zoneSimilaires.innerHTML = `
         <h3>À découvrir aussi dans Rubriques</h3>

@@ -66,7 +66,12 @@ function normaliserCategorieArticle(categorie) {
 
 const ARTICLES_REMPLACES_IDS = new Set([
   "prSpdLauQLcV0dTtbkZg", // Ancien article du 30 août remplacé par l'article sur les biais psychologiques
-  "7tN49aVMYojupjgakbFx"  // Ancien article du 1er septembre (Google AI Studio) remplacé par l'article Psychologie sur GTA 6
+  "7tN49aVMYojupjgakbFx", // Ancien article du 1er septembre (Google AI Studio) remplacé par l'article Psychologie sur GTA 6
+  "154FNePdwLYBkVisiAHC", // Ancien article archivé
+  "rjPnqv3hl8FPCvoytPp1", // Ancien article archivé
+  "yfiwSpHNVTyrUKguSHkn", // Ancien article archivé
+  "cyu8VawYtQoQv9TG1CTZ", // Ancien article archivé
+  "QEs26nevr56n4DcEqDLU"  // Ancien article archivé
 ]);
 
 function urlArticleCanonique(article) {
@@ -97,7 +102,7 @@ function avatarAuteurHTML(nomAuteur) {
 
 function miniatureAuteurCarteHTML(nomAuteur) {
   if (!estAuteurStanley(nomAuteur)) return "";
-  return `<img class="article-card-author-thumb" src="${PHOTO_AUTEUR_STANLEY}" alt="Stanley Mazile" width="22" height="22" loading="lazy">`;
+  return `<img class="article-card-author-thumb" src="${PHOTO_AUTEUR_STANLEY}" alt="Stanley Mazile" width="22" height="22" loading="lazy" decoding="async">`;
 }
 
 const ARTICLES_PUBLIES_LOCAUX = [
@@ -309,6 +314,285 @@ const ARTICLES_PUBLIES_LOCAUX = [
       "## Conocer tus sesgos no los elimina, pero lo cambia todo",
       "No se « apaga » un sesgo cognitivo como una luz: son el precio de un cerebro rápido. Conocerlos permite frenar a tiempo y hacer una pregunta más antes de juzgar o decidir. El primer paso del pensamiento crítico es cuestionarse un poco a uno mismo.",
       "**Sources :**\n[1] Tversky, A. & Kahneman, D. (1974). « Judgment under Uncertainty: Heuristics and Biases », *Science*, 185(4157), p. 1124-1131.\n[2] Kahneman, D. (2011). *Pensar rápido, pensar despacio*, Debate.\n[3] Nickerson, R. S. (1998). « Confirmation Bias: A Ubiquitous Phenomenon in Many Guises », *Review of General Psychology*, 2(2), p. 175-220.\n[4] Baumeister, R. F., Bratslavsky, E., Finkenauer, C. & Vohs, K. D. (2001). « Bad Is Stronger Than Good », *Review of General Psychology*, 5(4), p. 323-370.\n[5] Kruger, J. & Dunning, D. (1999). « Unskilled and Unaware of It », *Journal of Personality and Social Psychology*, 77(6), p. 1121-1134."
+    ]
+  },
+  {
+    id: "pourquoi-difficile-changer-habitude",
+    urlStatique: "changer-une-habitude.html",
+    categorie: "Psychologie",
+    aLaUne: false,
+    auteur: "Stanley Mazile",
+    date: "2026-11-25T16:00:00Z",
+    dateModif: "2026-11-25T16:00:00Z",
+    image: "/images/changer-habitude.webp",
+    imageWidth: 1280,
+    imageHeight: 853,
+    imageAlt: "Tasse de café, carnet de suivi quotidien et stylo sur un bureau en bois (CC0 / Thought Catalog)",
+    articlesSimilairesIds: ["dormir-pour-apprendre-sommeil-memoire", "biais-psychologiques-cerveau"],
+    motsCles: "habitudes, psychologie comportementale, changer une habitude, automatisme, cerveau, motivation, méthode, Educa-Psy",
+    titre: "Pourquoi il est si difficile de changer une habitude",
+    resume: "On sait ce qu'il faudrait faire. On ne le fait pas. Ce n'est pas un manque de volonté : c'est le fonctionnement normal du cerveau.",
+    contenu: [
+      "Une habitude est un raccourci. Quand un comportement se répète dans le même contexte — le café du matin, le téléphone avant de dormir —, le cerveau l'automatise pour économiser son énergie. Au bout d'un certain temps, ce n'est plus une décision : c'est le contexte qui déclenche le geste, sans passer par la réflexion.",
+      "## Pourquoi la volonté seule s'épuise",
+      "C'est pourquoi la volonté seule échoue si souvent. Elle demande un effort constant, alors que l'habitude, elle, ne demande rien. Les recherches en psychologie montrent qu'un comportement devient automatique en moyenne après plusieurs semaines de répétition régulière — entre 18 et 254 jours selon les études et la complexité du geste. La fourchette est large, mais le principe est stable : c'est la répétition, pas l'intensité, qui crée l'automatisme.",
+      "## Trois leviers qui fonctionnent mieux que la motivation",
+      "Trois leviers fonctionnent mieux que la motivation. D'abord, **changer le contexte** : il est plus facile de ne plus grignoter devant la télévision si l'on change de place ou de rituel. Ensuite, **remplacer plutôt que supprimer** : le cerveau abandonne mal un vide, mais il accepte un échange — une marche de dix minutes à la place de la cigarette de la pause, par exemple. Enfin, **commencer ridiculement petit** : deux minutes de lecture plutôt qu'un chapitre. Un geste minuscule répété vaut mieux qu'un grand geste abandonné.",
+      "Changer une habitude n'est donc pas une question de caractère. C'est une question de méthode — et de patience envers soi-même.",
+      "**Sources :**\n[1] Lally, P., van Jaarsveld, C. H. M., Potts, H. W. W., & Wardle, J. (2010). « How are habits formed: Modelling habit formation in the real world », *European Journal of Social Psychology*, 40(6), 998-1009.\n[2] Wood, W., & Neal, D. T. (2009). « The habitual consumer », *Journal of Consumer Psychology*, 19(4), 579-592."
+    ],
+    titre_en: "Why It Is So Hard to Change a Habit",
+    resume_en: "We know what we ought to do, yet we still fall back into old routines. That is not a lack of willpower: it is simply how the brain saves energy.",
+    contenu_en: [
+      "A habit is a shortcut. When a behavior repeats in the same setting — morning coffee, checking your phone before sleep — the brain automates it to conserve energy. Eventually, it is no longer a conscious choice: the cue triggers the action on its own.",
+      "## Why willpower alone wears out",
+      "That is why willpower fails so often. Willpower demands continuous effort, whereas a habit costs nothing. Research shows that a new behavior takes on average several weeks of regular repetition to become automatic — anywhere from 18 to 254 days depending on complexity. Consistency, not intensity, builds the shortcut.",
+      "## Three levers stronger than motivation",
+      "First, **change the context**: breaking a snacking habit is easier when you alter your seat or evening routine. Second, **replace rather than erase**: the brain dislikes a blank space, so swap a habit instead of leaving a void. Third, **start tiny**: read two pages instead of a chapter. A small action repeated beats an ambitious plan abandoned.",
+      "Changing a habit is not a test of character — it is a question of design and patience.",
+      "**Sources :**\n[1] Lally, P., van Jaarsveld, C. H. M., Potts, H. W. W., & Wardle, J. (2010). « How are habits formed: Modelling habit formation in the real world », *European Journal of Social Psychology*, 40(6), 998-1009.\n[2] Wood, W., & Neal, D. T. (2009). « The habitual consumer », *Journal of Consumer Psychology*, 19(4), 579-592."
+    ],
+    titre_ht: "Poukisa li tèlman difisil pou chanje yon abitid",
+    resume_ht: "Nou konnen sa nou ta dwe fè, men nou pa fè l. Sa pa vle di nou manke volonte : se fason nòmal sèvo a fonksyone.",
+    contenu_ht: [
+      "Yon abitid se yon chemen kout. Lè yon jès repete nan menm sitiyasyon an — kafe maten oswa telefòn anvan dòmi — sèvo a otomatize l pou l ekonomize enèji.",
+      "## Poukisa volonte sèl pa sifi",
+      "Volonte mande efò tout tan, alòske abitid la pa mande anyen. Etid nan sikoloji montre yon nouvo konpòtman pran plizyè semèn repetisyon regilye pou l vin otomatik : se regilarite a ki kreye l.",
+      "## Twa mwayen ki mache pi byen pase motivasyon",
+      "Premyèman, **chanje kontèks la**. Dezyèmman, **ranplase olye ou retire toutafè**. Twazyèmman, **kòmanse tou piti** : de minit lekti chak jou pi itil pase yon gwo pwojè ou lage apre twa jou.",
+      "Chanje yon abitid se yon kesyon metòd ak pasyans.",
+      "**Sources :**\n[1] Lally, P. et al. (2010). *European Journal of Social Psychology*, 40(6), 998-1009.\n[2] Wood, W., & Neal, D. T. (2009). *Journal of Consumer Psychology*, 19(4), 579-592."
+    ],
+    titre_es: "Por qué cuesta tanto cambiar un hábito",
+    resume_es: "Sabemos lo que deberíamos hacer, pero no lo hacemos. No es falta de voluntad: es la forma natural en que el cerebro ahorra energía.",
+    contenu_es: [
+      "Un hábito es un atajo mental. Cuando una conducta se repite en el mismo contexto, el cerebro la automatiza para ahorrar energía y el entorno pasa a disparar el gesto sin deliberación.",
+      "## Por qué la fuerza de voluntad se agota",
+      "La fuerza de voluntad exige esfuerzo continuo, mientras que el hábito funciona solo. La investigación muestra que automatizar una conducta requiere semanas de repetición constante.",
+      "## Tres palancas más eficaces que la motivación",
+      "Primero, **cambiar el contexto**. Segundo, **sustituir en lugar de suprimir**. Tercero, **empezar muy pequeño**: dos minutos al día superan a un gran propósito abandonado.",
+      "Cambiar un hábito es cuestión de método y paciencia con uno mismo.",
+      "**Sources :**\n[1] Lally, P. et al. (2010). *European Journal of Social Psychology*, 40(6), 998-1009.\n[2] Wood, W., & Neal, D. T. (2009). *Journal of Consumer Psychology*, 19(4), 579-592."
+    ]
+  },
+  {
+    id: "stress-pas-toujours-ennemi",
+    urlStatique: "stress-pas-toujours-ennemi.html",
+    categorie: "Psychologie",
+    aLaUne: false,
+    auteur: "Stanley Mazile",
+    date: "2026-11-25T14:00:00Z",
+    dateModif: "2026-11-25T14:00:00Z",
+    image: "/images/stress-energie.webp",
+    imageWidth: 1280,
+    imageHeight: 853,
+    imageAlt: "Athlète concentré sur la ligne de départ prêt à s'élancer sur une piste (CC0 / William Stitt)",
+    articlesSimilairesIds: ["dormir-pour-apprendre-sommeil-memoire", "pourquoi-difficile-changer-habitude"],
+    motsCles: "stress, eustress, cortisol, stress chronique, psychologie, récupération, santé mentale, Educa-Psy",
+    titre: "Le stress n'est pas toujours un ennemi",
+    resume: "Le stress a mauvaise réputation. Pourtant, sans lui, nous ne passerions ni un examen, ni un entretien, ni même le seuil d'une scène.",
+    contenu: [
+      "Le stress est d'abord une réaction d'adaptation. Face à un défi, le corps libère de l'adrénaline et du cortisol : le cœur accélère, l'attention se resserre, l'énergie se mobilise. À dose modérée et pour une durée limitée, cette réaction améliore la performance. Les psychologues parlent d'une courbe en cloche : trop peu de stress, et l'on s'ennuie ; trop, et l'on sature ; entre les deux, une zone où l'on est concentré et efficace.",
+      "## Le vrai danger : la durée sans répit",
+      "Le problème n'est donc pas le stress lui-même, mais sa durée. Un stress qui ne retombe jamais — soucis financiers permanents, surcharge continue, insécurité — épuise l'organisme : troubles du sommeil, irritabilité, difficultés de concentration, baisse des défenses. C'est le stress chronique, pas le stress ponctuel, qui rend malade.",
+      "## Changer de regard et apprendre à récupérer",
+      "Autre découverte importante : la manière de percevoir le stress compte. Des études montrent que les personnes qui considèrent le stress comme un signal utile — « mon corps se prépare » — récupèrent mieux que celles qui le vivent uniquement comme une menace. Cela ne supprime pas les situations difficiles, mais cela change la réponse du corps.",
+      "La bonne question n'est donc pas « comment ne plus jamais stresser ? », mais « comment récupérer entre deux efforts ? ». Le sommeil, l'activité physique, les pauses réelles et le soutien des proches sont les véritables antidotes.",
+      "**Sources :**\n[1] Yerkes, R. M., & Dodson, J. D. (1908). « The relation of strength of stimulus to rapidity of habit-formation », *Journal of Comparative Neurology and Psychology*, 18(5), 459-482.\n[2] McEwen, B. S. (1998). « Stress, adaptation, and disease: Allostasis and allostatic load », *Annals of the New York Academy of Sciences*, 840, 33-44.\n[3] Jamieson, J. P., et al. (2010). « Turning the knots in your stomach into bows: Reappraising arousal improves performance on the GRE », *Journal of Experimental Psychology: General*, 139(2), 208-212."
+    ],
+    titre_en: "Why Stress Is Not Always Your Enemy",
+    resume_en: "Stress has a bad reputation. Yet without a healthy dose of it, we would struggle to get through an exam, a job interview, or stepping onto a stage.",
+    contenu_en: [
+      "Stress is first an adaptive response. Faced with a challenge, the body releases adrenaline and cortisol, sharpening attention and mobilizing energy. In moderate, short bursts, stress actually improves focus and performance.",
+      "## The real risk: chronic, unrelenting pressure",
+      "The issue is not stress itself, but duration without recovery. Constant pressure with no off-switch wears down sleep, mood, concentration, and immunity. Chronic stress — not brief challenge — is what harms health.",
+      "## Reframing stress and prioritizing recovery",
+      "Research shows that viewing stress cues as the body preparing for action helps people recover faster than seeing them purely as a threat. The goal is never zero stress, but real recovery in between: sleep, movement, genuine breaks, and social support.",
+      "**Sources :**\n[1] Yerkes, R. M., & Dodson, J. D. (1908). *Journal of Comparative Neurology and Psychology*, 18(5), 459-482.\n[2] McEwen, B. S. (1998). *Annals of the New York Academy of Sciences*, 840, 33-44.\n[3] Jamieson, J. P., et al. (2010). *Journal of Experimental Psychology: General*, 139(2), 208-212."
+    ],
+    titre_ht: "Estrès pa toujou yon lènmi",
+    resume_ht: "Estrès gen move repitasyon. Poutan, san li, nou pa t ap ka ni pase yon egzamen, ni fè yon antretyen travay ak konsantrasyon.",
+    contenu_ht: [
+      "Estrès se dabò yon reaksyon adaptasyon kò a. Lè gen yon defi, adrenalin ak kòtizòl ede kè a ak lespri a mobilize enèji pou yon ti moman.",
+      "## Vrè pwoblèm nan : lè estrès la pa janm desann",
+      "Sa ki fatige kò a, se pa ti estrès kout la, men estrès kwonik ki dire san rete. Sa ka bay pwoblèm dòmi, enèvasyon ak fatig mantal.",
+      "## Aprann rekipere ant de efò",
+      "Wè estrès la kòm yon siy kò a ap prepare l ede n jere l pi byen. Dòmi, mouvman fizik, ti poz reyèl ak sipò fanmi oswa zanmi se pi bon remèd yo.",
+      "**Sources :**\n[1] Yerkes, R. M., & Dodson, J. D. (1908).\n[2] McEwen, B. S. (1998).\n[3] Jamieson, J. P., et al. (2010)."
+    ],
+    titre_es: "El estrés no siempre es un enemigo",
+    resume_es: "El estrés tiene mala fama. Sin embargo, en dosis moderadas y breves nos ayuda a concentrarnos ante un examen, una entrevista o un reto importante.",
+    contenu_es: [
+      "El estrés es ante todo una respuesta de adaptación: adrenalina y cortisol enfocan la atención y movilizan energía.",
+      "## El verdadero peligro: la duración sin descanso",
+      "Lo perjudicial no es el pico puntual de tensión, sino el estrés crónico mantenido sin pausas, que desgasta el sueño y las defensas.",
+      "## Cómo percibirlo y recuperarse",
+      "Entender las señales físicas como preparación y cuidar el descanso — sueño, ejercicio, pausas reales y apoyo social — marca la diferencia.",
+      "**Sources :**\n[1] Yerkes, R. M., & Dodson, J. D. (1908).\n[2] McEwen, B. S. (1998).\n[3] Jamieson, J. P., et al. (2010)."
+    ]
+  },
+  {
+    id: "devoirs-utiles-ou-pas-recherches",
+    urlStatique: "devoirs-utiles-ou-pas.html",
+    categorie: "Éducation",
+    aLaUne: false,
+    auteur: "Stanley Mazile",
+    date: "2026-11-25T12:00:00Z",
+    dateModif: "2026-11-25T12:00:00Z",
+    image: "/images/devoirs-ecole.webp",
+    imageWidth: 1280,
+    imageHeight: 961,
+    imageAlt: "Sac d'école, cahier ouvert et stylo posés sur une table pour les devoirs (CC0 / Aaron Burden)",
+    articlesSimilairesIds: ["dormir-pour-apprendre-sommeil-memoire", "pourquoi-difficile-changer-habitude"],
+    motsCles: "devoirs scolaires, éducation, pédagogie, réussite scolaire, primaire, collège, lycée, autonomie élève, Educa-Psy",
+    titre: "Les devoirs : utiles ou pas ? Ce que montrent les recherches",
+    resume: "C'est le débat qui revient chaque année à la maison comme à l'école. La recherche, elle, donne une réponse nuancée : tout dépend de l'âge.",
+    contenu: [
+      "## Au primaire : peu d'effet sur les notes, un vrai coût si la charge déborde",
+      "Au primaire, les études convergent : l'effet des devoirs sur les résultats scolaires est faible, parfois nul. Ce qui compte le plus à cet âge, c'est la lecture — même libre, même pour le plaisir — et le sommeil. Des devoirs longs et répétitifs peuvent même produire l'effet inverse : fatigue, conflits familiaux et dégoût précoce de l'école.",
+      "## Au collège et au lycée : la qualité bat la quantité",
+      "Au collège et au lycée, le tableau change. Les devoirs ont un effet positif mesurable, à condition qu'ils soient courts, ciblés et corrigés. Un exercice qui prolonge la leçon du jour consolide la mémoire ; dix exercices identiques n'ajoutent rien. La qualité bat la quantité, et le retour de l'enseignant — savoir ce qu'on a réussi et ce qu'on a manqué — est plus important que le devoir lui-même.",
+      "## Trois repères simples pour les parents",
+      "Pour les parents, trois repères simples. **Un cadre régulier** vaut mieux qu'une surveillance constante : un créneau calme, toujours à peu près à la même heure et loin des écrans, installe une routine sans bataille quotidienne. **Encourager l'autonomie** vaut mieux que faire à la place de l'enfant : aider à comprendre la consigne, puis laisser chercher, même s'il reste une erreur. Enfin, **protéger le temps de jeu et de sommeil** : un élève reposé apprend le lendemain en classe bien plus vite qu'un enfant épuisé le soir sur son cahier.",
+      "**Sources :**\n[1] Cooper, H., Robinson, J. C., & Patall, E. A. (2006). « Does homework improve academic achievement? A synthesis of research, 1987–2003 », *Review of Educational Research*, 76(1), 1-62.\n[2] Hattie, J. (2009). *Visible Learning*, Routledge."
+    ],
+    titre_en: "Homework: Helpful or Pointless? What Research Actually Shows",
+    resume_en: "Every school year brings the same debate home. Educational research points to a nuanced answer: it largely depends on age and feedback quality.",
+    contenu_en: [
+      "## In elementary school: minimal grade gains, real fatigue risk",
+      "In early grades, studies consistently find little to no direct effect of homework on test scores. Reading for pleasure and getting enough sleep matter far more. Long, repetitive worksheets often spark family conflict and early school burnout.",
+      "## In middle and high school: quality beats volume",
+      "For older students, homework shows measurable benefits when it is brief, focused, and reviewed with clear teacher feedback. One thoughtful problem deepens memory; ten identical drills add little.",
+      "## Three practical guideposts for parents",
+      "**Keep a steady routine** in a quiet, screen-free spot rather than hovering constantly. **Support autonomy** by clarifying instructions without doing the work for them. And **protect sleep and play** so students arrive in class rested and ready to learn.",
+      "**Sources :**\n[1] Cooper, H., Robinson, J. C., & Patall, E. A. (2006). *Review of Educational Research*, 76(1), 1-62.\n[2] Hattie, J. (2009). *Visible Learning*, Routledge."
+    ],
+    titre_ht: "Devwa lekòl : èske yo itil toutbon ? Sa rechèch yo montre",
+    resume_ht: "Chak ane se menm deba a lakay ak lekòl. Rechèch nan edikasyon bay yon repons klè : tout bagay depann de laj elèv la ak kalite egzèsis la.",
+    contenu_ht: [
+      "## Nan klas primè : efè a fèb sou nòt yo",
+      "Pou timoun piti yo, lekti lib ak bon dòmi pi enpòtan anpil pase pil devwa ki long ak repetitif ki fatige timoun nan.",
+      "## Nan segondè : kalite pi enpòtan pase kantite",
+      "Pou pi gran yo, devwa ki kout, presi epi pwofesè a korije toutbon ede memwa a kenbe leson jounen an.",
+      "## Twa konsèy senp pou paran yo",
+      "**Mete yon lè regilye** lwen ekran, **ankouraje otonomi** san fè devwa a nan plas timoun nan, epi **pwoteje tan jwèt ak dòmi**.",
+      "**Sources :**\n[1] Cooper, H., Robinson, J. C., & Patall, E. A. (2006).\n[2] Hattie, J. (2009). *Visible Learning*, Routledge."
+    ],
+    titre_es: "¿Sirven las tareas escolares? Lo que muestran las investigaciones",
+    resume_es: "El debate vuelve cada curso escolar. La investigación educativa ofrece una respuesta matizada: depende de la edad y de la calidad de la corrección.",
+    contenu_es: [
+      "## En primaria: poco efecto académico y riesgo de fatiga",
+      "En los primeros años, la lectura por placer y el descanso pesan mucho más que las tareas largas y repetitivas.",
+      "## En secundaria: la calidad supera a la cantidad",
+      "En etapas superiores, las tareas breves, bien enfocadas y corregidas con retroalimentación docente sí consolidan lo aprendido.",
+      "## Tres pautas sencillas para las familias",
+      "**Mantener una rutina tranquila**, **fomentar la autonomía** sin sustituir al estudiante y **proteger las horas de juego y sueño**.",
+      "**Sources :**\n[1] Cooper, H., Robinson, J. C., & Patall, E. A. (2006).\n[2] Hattie, J. (2009). *Visible Learning*, Routledge."
+    ]
+  },
+  {
+    id: "dormir-pour-apprendre-sommeil-memoire",
+    urlStatique: "dormir-pour-apprendre.html",
+    categorie: "Psychologie",
+    aLaUne: false,
+    auteur: "Stanley Mazile",
+    date: "2026-11-25T10:00:00Z",
+    dateModif: "2026-11-25T10:00:00Z",
+    image: "/images/sommeil-memoire.webp",
+    imageWidth: 1280,
+    imageHeight: 853,
+    imageAlt: "Chat paisiblement endormi sur des draps rayés, illustrant le repos et la récupération nocturne (CC0 / Alexander Possingham)",
+    articlesSimilairesIds: ["devoirs-utiles-ou-pas-recherches", "stress-pas-toujours-ennemi"],
+    motsCles: "sommeil, mémoire, apprentissage, consolidation mnésique, sommeil profond, sommeil paradoxal, psychologie, Educa-Psy",
+    titre: "Dormir pour apprendre : le rôle du sommeil dans la mémoire",
+    resume: "Sacrifier quelques heures de sommeil pour réviser semble rentable sur le moment. Les neurosciences montrent pourtant l'inverse : la mémoire se consolide surtout la nuit.",
+    contenu: [
+      "On croit souvent que le sommeil met le cerveau « en pause ». En réalité, une fois les paupières fermées, l'activité cérébrale reste intense : elle change simplement de tâche. Au lieu d'absorber de nouvelles informations, le cerveau rejoue, trie et range ce qui a été vécu dans la journée.",
+      "## Deux phases complémentaires pour fixer les souvenirs",
+      "Pendant le **sommeil lent profond**, qui domine en début de nuit, les souvenirs récents stockés provisoirement dans l'hippocampe sont transférés vers le néocortex, notre mémoire à long terme. Les connexions inutiles sont élaguées pour libérer de la place. Plus tard, lors du **sommeil paradoxal**, le cerveau tisse des liens entre les connaissances anciennes et nouvelles — ce qui consolide les gestes, les langues et la compréhension globale.",
+      "## Pourquoi une nuit blanche saborde les révisions",
+      "Les expériences montrent qu'après une privation de sommeil, la capacité à retenir de nouvelles notions chute nettement le lendemain : sans nuit complète, l'hippocampe sature avant même d'enregistrer. À l'inverse, dormir après avoir étudié réduit l'oubli et rend l'information plus facile à retrouver sous pression, par exemple lors d'un examen.",
+      "## Trois habitudes simples pour aider sa mémoire la nuit",
+      "Pour tirer parti de ce mécanisme naturel, la régularité prime. Se coucher et se lever à des heures proches aide l'horloge biologique à installer un sommeil profond de qualité. Réviser une notion difficile en fin d'après-midi ou en soirée — sans écran lumineux dans la dernière demi-heure — facilite son tri nocturne. Quant aux enfants et adolescents, protéger leurs heures de sommeil reste l'un des soutiens scolaires les plus efficaces et les plus sous-estimés.",
+      "**Sources :**\n[1] Diekelmann, S., & Born, J. (2010). « The memory function of sleep », *Nature Reviews Neuroscience*, 11(2), 114-126.\n[2] Rasch, B., & Born, J. (2013). « About sleep's role in memory », *Physiological Reviews*, 93(2), 681-766."
+    ],
+    titre_en: "Sleeping to Learn: How Sleep Builds Long-Term Memory",
+    resume_en: "Cutting sleep short to cram seems productive in the moment. Neuroscience reveals the opposite: the brain consolidates most memories overnight.",
+    contenu_en: [
+      "Far from shutting down, a sleeping brain stays remarkably active — it simply switches from intake mode to filing mode, replaying and sorting what we learned during the day.",
+      "## Two complementary stages of memory consolidation",
+      "During **deep slow-wave sleep**, fresh traces move from the hippocampus to long-term storage in the cortex. Later, during **REM sleep**, the brain links new lessons with prior knowledge.",
+      "## Why pulling an all-nighter backfires",
+      "Without sleep, the brain's short-term inbox fills up quickly and recall drops the next day. Regular bedtimes, screen-free evenings, and protected sleep hours are some of the strongest allies for learners of every age.",
+      "**Sources :**\n[1] Diekelmann, S., & Born, J. (2010). *Nature Reviews Neuroscience*, 11(2), 114-126.\n[2] Rasch, B., & Born, J. (2013). *Physiological Reviews*, 93(2), 681-766."
+    ],
+    titre_ht: "Dòmi pou aprann : wòl dòmi jwe nan memwa nou",
+    resume_ht: "Retire kèk èdtan dòmi pou etidye sanble yon bon lide, men nerosyans montre se lannuit sèvo a klase ak fikse tout sa nou aprann.",
+    contenu_ht: [
+      "Lè nou dòmi, sèvo a pa kanpe travay : li triye epi li ranje enfòmasyon jounen an nan memwa alontèm.",
+      "## Poukisa pase nuit blan fè plis mal pase byen",
+      "San bon dòmi, konsantrasyon desann vit epi leson yo bliye pi fasil. Kenbe yon lè dòmi regilye san ekran anvan kouche ede elèv yo sonje pi byen.",
+      "**Sources :**\n[1] Diekelmann, S., & Born, J. (2010).\n[2] Rasch, B., & Born, J. (2013)."
+    ],
+    titre_es: "Dormir para aprender: el papel del sueño en la memoria",
+    resume_es: "Recortar horas de sueño para repasar parece rentable, pero la neurociencia demuestra que el cerebro consolida los recuerdos principalmente mientras dormimos.",
+    contenu_es: [
+      "Lejos de apagarse, el cerebro dormido reorganiza lo aprendido: el sueño profundo fija datos recientes y el sueño REM conecta ideas entre sí.",
+      "## Por qué trasnochar perjudica el estudio",
+      "La falta de sueño satura la memoria a corto plazo. Mantener horarios regulares y alejar pantallas antes de dormir mejora el aprendizaje.",
+      "**Sources :**\n[1] Diekelmann, S., & Born, J. (2010).\n[2] Rasch, B., & Born, J. (2013)."
+    ]
+  },
+  {
+    id: "baillement-contagieux-insolite",
+    urlStatique: "baillement-contagieux.html",
+    categorie: "Psychologie",
+    aLaUne: false,
+    auteur: "Stanley Mazile",
+    date: "2026-11-25T08:00:00Z",
+    dateModif: "2026-11-25T08:00:00Z",
+    image: "/images/baillement-contagieux.webp",
+    imageWidth: 1280,
+    imageHeight: 853,
+    imageAlt: "Nourrisson en train de bâiller largement sur une couverture jaune (CC BY-SA 4.0 / Martin Falbisoner)",
+    articlesSimilairesIds: ["biais-psychologiques-cerveau", "dormir-pour-apprendre-sommeil-memoire"],
+    motsCles: "bâillement contagieux, neurones miroirs, empathie, insolite, psychologie sociale, vigilance cérébrale, Educa-Psy",
+    titre: "Pourquoi bâillons-nous quand les autres bâillent ?",
+    resume: "Il suffit parfois de voir un inconnu bâiller — ou simplement de lire ces quelques lignes — pour sentir sa propre mâchoire s'ouvrir. Ce réflexe banal cache un fascinant mécanisme social.",
+    contenu: [
+      "Contrairement à une idée tenace, nous ne bâillons pas d'abord pour « manquer d'oxygène ». Les expériences ont montré que modifier le taux d'oxygène dans l'air ne change presque rien au phénomène. Pour les chercheurs, le bâillement sert plutôt à stimuler la vigilance et à refroidir légèrement le cerveau lorsque l'attention baisse ou lors des transitions entre veille et sommeil.",
+      "## Un réflexe de résonance entre cerveaux",
+      "Reste le mystère de la « contagion ». Chez l'humain, près d'une personne sur deux répond par un bâillement dans les minutes qui suivent celui d'un autre. Ce réflexe apparaît progressivement chez l'enfant après quatre ans, à l'âge où se développent les capacités à se représenter ce que ressent autrui. En observant quelqu'un bâiller, nos réseaux moteurs s'activent automatiquement par imitation — et il suffit parfois d'y penser pour déclencher la réponse.",
+      "## Plus fréquent entre proches, et partagé avec certains animaux",
+      "Plusieurs études d'éthologie montrent que la contagion du bâillement est encore plus rapide et fréquente entre membres d'une même famille ou amis proches qu'entre inconnus. Elle ne nous est même pas réservée : les chimpanzés, les bonobos et même les chiens domestiques peuvent « attraper » le bâillement de leur humain. À l'échelle d'un groupe, se synchroniser ainsi aurait aidé nos ancêtres à ajuster ensemble leur niveau d'éveil.",
+      "Bâiller en même temps qu'un proche n'est donc ni de l'impolitesse ni un hasard : c'est un minuscule rappel de la façon dont notre cerveau reste accordé à ceux qui nous entourent.",
+      "**Sources :**\n[1] Palagi, E., Leone, A., Mancini, G., & Ferrari, P. F. (2009). « Contagious yawning in gelada baboons as a possible expression of empathy », *Proceedings of the Royal Society B*, 276, 3331-3336 ; Norscia, I., & Palagi, E. (2011). « Yawn Contagion and Empathy in Homo sapiens », *PLoS ONE*, 6(12), e28472.\n[2] Gallup, A. C., & Gallup, G. G. Jr. (2007). « Yawning as a brain cooling mechanism », *Evolutionary Psychology*, 5(1), 92-101.\n[3] Millen, A., & Anderson, J. R. (2016) ; Helt, M. S., et al. (2010), *Child Development* (développement du bâillement contagieux chez l'enfant vers 4-5 ans)."
+    ],
+    titre_en: "Why Do We Yawn When Other People Yawn?",
+    resume_en: "Simply seeing someone yawn — or reading the word itself — can trigger your own jaw to open. This everyday reflex opens a window onto social resonance.",
+    contenu_en: [
+      "Contrary to popular myth, yawning is not primarily caused by a lack of oxygen. Researchers link it instead to regulating alertness and slightly cooling the brain during transitions in attention.",
+      "## A brain-to-brain resonance reflex",
+      "Roughly half of adults yawn within minutes of seeing someone else do so — a contagious response that emerges in childhood around age four alongside social perspective-taking.",
+      "## Stronger with loved ones, and shared across species",
+      "Contagious yawning happens more quickly between family members and close friends than strangers, and is even observed in chimpanzees and family dogs, helping groups stay attuned to one another.",
+      "**Sources :**\n[1] Palagi, E., Leone, A., Mancini, G., & Ferrari, P. F. (2009). *Proceedings of the Royal Society B*, 276 ; Norscia, I., & Palagi, E. (2011). *PLoS ONE*, 6(12).\n[2] Gallup, A. C., & Gallup, G. G. Jr. (2007). *Evolutionary Psychology*, 5(1), 92-101.\n[3] Millen, A., & Anderson, J. R. (2016) ; Helt, M. S., et al. (2010), *Child Development* (contagious yawning emerging around ages 4-5)."
+    ],
+    titre_ht: "Poukisa nou baye lè lòt moun ap baye ?",
+    resume_ht: "Sèlman wè yon moun ap baye — oswa li mo sa a — souvan fè nou baye tou. Ti reflèks sa a montre kijan sèvo nou konekte ak lòt moun.",
+    contenu_ht: [
+      "Kontrèman ak sa moun konn panse, baye ede sèvo a refwadi yon ti kras epi kenbe vijilans lè atansyon ap desann.",
+      "## Yon reflèks ki kontajye pi vit ant moun ki pwòch",
+      "Etid montre nou baye pi fasil lè se yon zanmi oswa yon manm fanmi ki baye devan nou, yon siy ki lye ak anpati ak lavi an gwoup.",
+      "**Sources :**\n[1] Palagi, E. et al. (2009) ; Norscia, I., & Palagi, E. (2011).\n[2] Gallup, A. C., & Gallup, G. G. Jr. (2007).\n[3] Millen, A., & Anderson, J. R. (2016) ; Helt, M. S., et al. (2010), *Child Development*."
+    ],
+    titre_es: "¿Por qué bostezamos cuando otros bostezan?",
+    resume_es: "Basta ver bostezar a alguien — o leer estas líneas — para sentir el impulso de imitarlo. Este reflejo cotidiano revela cómo se sincroniza nuestro cerebro social.",
+    contenu_es: [
+      "Lejos de deberse a falta de oxígeno, el bostezo ayuda a regular la temperatura cerebral y la atención, y su contagio refleja circuitos de resonancia motora y empatía.",
+      "## Más frecuente entre personas cercanas",
+      "Diversos estudios muestran que el bostezo se contagia más rápido entre familiares y amigos, e incluso en chimpancés y perros.",
+      "**Sources :**\n[1] Palagi, E. et al. (2009) ; Norscia, I., & Palagi, E. (2011).\n[2] Gallup, A. C., & Gallup, G. G. Jr. (2007).\n[3] Millen, A., & Anderson, J. R. (2016) ; Helt, M. S., et al. (2010), *Child Development*."
     ]
   }
 ];
@@ -1115,7 +1399,7 @@ function carteArticleHTML(article, featured = false) {
   const estImageSvg = /\.svg(?:[?#].*)?$/i.test(imageUrl || "");
   const image = imageUrl ? `
     <a href="${hrefArticle}" class="article-card-media${estImageSvg ? " article-card-media--svg" : ""}" aria-label="${titre || ''}">
-      <img class="article-card-image" src="${imageUrl}" alt="${titre || ''}" loading="lazy" onerror="this.onerror=null;this.src='images/logo.webp'">
+      <img class="article-card-image" src="${imageUrl}" alt="${titre || ''}" loading="lazy" decoding="async" width="1280" height="720" onerror="this.onerror=null;this.src='images/logo.webp'">
     </a>` : "";
   return `
     <article class="article-card ${featured ? "article-card--featured" : ""} cat-${slug}">

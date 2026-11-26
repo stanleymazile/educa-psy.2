@@ -497,6 +497,9 @@ function initLangue() {
 }
 
 window.EducaPsyI18n = {
+  langue() {
+    return localStorage.getItem("educapsy-langue") || document.documentElement.lang || "fr";
+  },
   texte(cle) {
     const langue = localStorage.getItem("educapsy-langue") || "fr";
     const dico = TRADUCTIONS[langue] || TRADUCTIONS.fr;

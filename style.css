@@ -29,6 +29,18 @@
   --couleur-psychologie-texte: #7A3B4A;
   --couleur-emploi-fond: #F5EEDA;
 
+  /* --- Charte SVG minimaliste (bleu profond & blanc, sans arrière-plan) --- */
+  --ep-bleu-profond: #0E2A4D;
+  --ep-bleu-moyen: #1B4B85;
+  --ep-bleu-accent: #2E3192;
+  --ep-svg-blanc: #FFFFFF;
+  --ep-svg-encre: #0E2A4D;
+  --ep-svg-encre-douce: #2B4C73;
+  --ep-svg-trait: #1B4B85;
+  --ep-svg-ligne: rgba(14, 42, 77, 0.24);
+  --ep-svg-halo: rgba(14, 42, 77, 0.12);
+  --ep-svg-contour-forme: #0E2A4D;
+
   /* --- Typographie : 3 rôles distincts --- */
   --police-affichage: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;   /* titres, logo */
   --police-lecture: 'Source Serif 4', Georgia, 'Palatino Linotype', serif;       /* corps des articles */
@@ -487,7 +499,42 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .job-card.type-savoir { border-top-color: var(--couleur-or-fonce); }
 .job-card.type-insolite { border-top-color: var(--couleur-emotions-texte); }
 
-.job-card-title { font-size: 1.25rem; margin: var(--e2) 0 var(--e2); }
+.job-card-media {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--rayon);
+  margin: calc(-1 * var(--e2)) 0 var(--e3);
+  background: linear-gradient(135deg, var(--couleur-fond-alt), var(--couleur-ligne));
+  aspect-ratio: 16 / 9;
+  text-decoration: none;
+}
+.job-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.job-card-media:hover .job-card-image { transform: scale(1.03); }
+
+.job-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e2);
+  margin-bottom: var(--e2);
+}
+.job-card-top .tag { margin-bottom: 0; }
+.job-card-svg-mini {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  color: var(--ep-svg-trait);
+  opacity: 0.92;
+}
+.job-card.type-insolite .job-card-svg-mini { color: var(--ep-bleu-profond); }
+
+.job-card-title { font-size: 1.25rem; margin: var(--e1) 0 var(--e2); }
 .job-card-title a { color: var(--couleur-texte); text-decoration: none; }
 .job-card-title a:hover { color: var(--couleur-or-fonce); }
 .job-card-meta { font-size: 0.83rem; color: var(--couleur-texte-attenue); margin-bottom: var(--e3); }
@@ -1077,24 +1124,89 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .emploi-actions { display: flex; gap: var(--e3); flex-wrap: wrap; margin: var(--e5) 0; }
 .savoir-schema-figure {
   margin: var(--e6) auto;
-  max-width: 540px;
+  max-width: 680px;
+  width: 100%;
   background: transparent;
   border: none;
   border-radius: 0;
   padding: 0;
   box-shadow: none;
 }
+.savoir-animated-figure {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: var(--e2) 0;
+}
 .savoir-schema-figure svg {
   display: block;
   width: 100%;
   height: auto;
+  background: transparent;
+  overflow: visible;
 }
 .savoir-schema-caption {
   font-family: var(--police-interface);
-  font-size: 0.82rem;
-  color: #5F5E5A;
+  font-size: 0.84rem;
+  color: var(--couleur-texte-attenue);
   text-align: center;
   margin-top: var(--e3);
+  font-style: italic;
+}
+
+/* Animations SVG simples (transform / opacity uniquement) */
+@keyframes svgWaveOsc {
+  0%, 100% { transform: scaleY(0.45); opacity: 0.65; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+@keyframes svgNodeBreath {
+  0%, 100% { transform: scale(0.92); opacity: 0.7; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+@keyframes svgSignalTravel {
+  0% { transform: translateX(0); opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { transform: translateX(232px); opacity: 0; }
+}
+@keyframes svgVesselWave {
+  0%, 100% { transform: scale(0.94); opacity: 0.72; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+@keyframes svgFlowSlide {
+  0% { transform: translateX(-18px); opacity: 0; }
+  25% { opacity: 0.95; }
+  75% { opacity: 0.95; }
+  100% { transform: translateX(32px); opacity: 0; }
+}
+@keyframes svgBarHighlight {
+  0%, 100% { opacity: 0.88; }
+  50% { opacity: 1; }
+}
+
+.svg-wave-bar {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: svgWaveOsc 1.8s ease-in-out infinite;
+}
+.svg-pulse-node {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: svgNodeBreath 2.6s ease-in-out infinite;
+}
+.svg-travel-dot {
+  animation: svgSignalTravel 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.svg-vessel-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: svgVesselWave 3.2s ease-in-out infinite;
+}
+.svg-flow-particle {
+  animation: svgFlowSlide 2.8s ease-in-out infinite;
+}
+.svg-bar-focus {
+  animation: svgBarHighlight 2.8s ease-in-out infinite;
 }
 
 .similaires-section { margin-top: var(--e8); padding-top: var(--e6); border-top: 1px solid var(--couleur-ligne); }
@@ -1966,19 +2078,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
   .mobile-quicknav {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 10px 16px;
     padding: var(--e3) 0;
     font-family: var(--police-interface);
   }
-  .mobile-site-label {
-    color: var(--couleur-texte-attenue);
-    font-weight: 600;
-    font-size: 0.85rem;
-    letter-spacing: 0.02em;
-  }
-  .mobile-quicknav a { text-decoration: none; color: var(--couleur-texte); font-weight: 600; font-size: 0.85rem; }
+  .mobile-quicknav a { text-decoration: none; color: var(--couleur-texte); font-weight: 600; font-size: 0.85rem; white-space: nowrap; }
   .mobile-quicknav a:hover { color: var(--couleur-or-fonce); }
   .newsletter-mini-btn {
     background: var(--couleur-or);
@@ -2033,6 +2140,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .ticker-track { animation: none; padding-left: var(--e4); }
   .ticker-label::before { animation: none; }
   .carousel-track { transition: none; }
+  .savoir-animated-figure *,
+  .job-card-svg-mini * { animation: none !important; }
 }
 
 /* ============================================================
@@ -2058,6 +2167,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   --couleur-psychologie-fond: #3E202A;
   --couleur-psychologie-texte: #E3AFBC;
   --couleur-emploi-fond: #3A2E14;
+
+  --ep-bleu-profond: #153B6B;
+  --ep-bleu-moyen: #7DB4F5;
+  --ep-bleu-accent: #93C5FD;
+  --ep-svg-blanc: #FFFFFF;
+  --ep-svg-encre: #F4F7FC;
+  --ep-svg-encre-douce: #C7DBF4;
+  --ep-svg-trait: #A9CCF7;
+  --ep-svg-ligne: rgba(255, 255, 255, 0.34);
+  --ep-svg-halo: rgba(147, 197, 253, 0.22);
+  --ep-svg-contour-forme: #DCE9F8;
 
   --ombre-douce: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
@@ -2092,11 +2212,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 [data-theme="sombre"] .article-author-badge .author-avatar { background: var(--couleur-fond-alt); color: var(--couleur-or); }
 [data-theme="sombre"] .article-svg-figure,
 [data-theme="sombre"] .article-hero.article-hero--svg,
-[data-theme="sombre"] .savoir-schema-figure {
+[data-theme="sombre"] .savoir-schema-figure,
+[data-theme="sombre"] .savoir-animated-figure {
   background: transparent;
   border: none;
   box-shadow: none;
 }
+[data-theme="sombre"] .job-card.type-insolite .job-card-svg-mini { color: var(--ep-svg-trait); }
 [data-theme="sombre"] .article-svg-figure .article-inline-svg,
 [data-theme="sombre"] .article-hero.article-hero--svg .article-image,
 [data-theme="sombre"] .article-card-media--svg .article-card-image {

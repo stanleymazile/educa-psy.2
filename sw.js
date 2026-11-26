@@ -2,15 +2,25 @@
    EDUCA-PSY — sw.js (Service Worker PWA)
    ============================================================ */
 
-const CACHE_NAME = 'educapsy-v16';
+const CACHE_NAME = 'educapsy-v18';
 const ASSETS_A_METTRE_EN_CACHE = [
   '/',
   '/index.html',
   '/article.html',
   '/articles.html',
+  '/changer-une-habitude.html',
+  '/stress-pas-toujours-ennemi.html',
+  '/devoirs-utiles-ou-pas.html',
+  '/dormir-pour-apprendre.html',
+  '/baillement-contagieux.html',
   '/gta-6-psychologie.html',
   '/biais-psychologiques.html',
   '/emplois.html',
+  '/ia-voix-depression.html',
+  '/parole-par-la-pensee.html',
+  '/tuteur-ia-harvard.html',
+  '/cerveau-lavage-sommeil.html',
+  '/rejoyn-application-depression.html',
   '/dissonance-cognitive.html',
   '/a-propos.html',
   '/contact.html',
@@ -22,6 +32,16 @@ const ASSETS_A_METTRE_EN_CACHE = [
   '/favicon.ico',
   '/favicon-48.png',
   '/icon-192.png',
+  '/images/changer-habitude.webp',
+  '/images/stress-energie.webp',
+  '/images/devoirs-ecole.webp',
+  '/images/sommeil-memoire.webp',
+  '/images/baillement-contagieux.webp',
+  '/images/ia-voix-depression.webp',
+  '/images/parole-pensee-bci.webp',
+  '/images/tuteur-ia-harvard.webp',
+  '/images/cerveau-lavage-sommeil.webp',
+  '/images/rejoyn-therapie-numerique.webp',
   '/images/gta6-lancement.webp',
   '/images/gta6-vice-city-miami.webp',
   '/images/gta6-manette-ps5.webp',

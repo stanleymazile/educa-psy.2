@@ -3,6 +3,166 @@
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
+    <loc>https://educa-psy.web.app/ia-voix-depression.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Educa-Psy</news:name>
+        <news:language>fr</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-25T17:00:00Z</news:publication_date>
+      <news:title>Une IA peut détecter la dépression dans ta voix</news:title>
+      <news:keywords>biomarqueurs vocaux, intelligence artificielle, dépression, anxiété, dépistage précoce, NYU Langone Health</news:keywords>
+    </news:news>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/ia-voix-depression.webp</image:loc>
+      <image:title>Personne parlant devant un microphone lors d'une analyse acoustique de la voix</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/parole-par-la-pensee.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Educa-Psy</news:name>
+        <news:language>fr</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-25T15:30:00Z</news:publication_date>
+      <news:title>Un homme paralysé « parle » par la pensée, avec 97 % de précision</news:title>
+      <news:keywords>interface cerveau-machine, neuroprothèse vocale, maladie de Charcot, SLA, UC Davis, NEJM</news:keywords>
+    </news:news>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/parole-pensee-bci.webp</image:loc>
+      <image:title>Échange entre un patient et un neuroscientifique dans un laboratoire de neuroprothèse</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/tuteur-ia-harvard.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Educa-Psy</news:name>
+        <news:language>fr</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-25T14:00:00Z</news:publication_date>
+      <news:title>Un tuteur IA a fait mieux qu'un cours en classe</news:title>
+      <news:keywords>tuteur IA, Harvard, pédagogie active, apprentissage socratique, éducation, Scientific Reports</news:keywords>
+    </news:news>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/tuteur-ia-harvard.webp</image:loc>
+      <image:title>Étudiant résolvant des équations de physique avec un tuteur IA</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/cerveau-lavage-sommeil.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Educa-Psy</news:name>
+        <news:language>fr</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-25T12:30:00Z</news:publication_date>
+      <news:title>Pendant que tu dors, ton cerveau se « lave »</news:title>
+      <news:keywords>système glymphatique, sommeil profond, noradrénaline, nettoyage cérébral, zolpidem, Cell</news:keywords>
+    </news:news>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/cerveau-lavage-sommeil.webp</image:loc>
+      <image:title>Illustration scientifique de la circulation du liquide cérébral pendant le sommeil profond</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/rejoyn-application-depression.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Educa-Psy</news:name>
+        <news:language>fr</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-25T11:00:00Z</news:publication_date>
+      <news:title>La première application sur ordonnance contre la dépression</news:title>
+      <news:keywords>Rejoyn, thérapie numérique, dépression, FDA, exercices cognitifs et émotionnels, santé mentale</news:keywords>
+    </news:news>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/rejoyn-therapie-numerique.webp</image:loc>
+      <image:title>Smartphone affichant des exercices de thérapie numérique sur un bureau lumineux</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/changer-une-habitude.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Educa-Psy</news:name>
+        <news:language>fr</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-25T16:00:00Z</news:publication_date>
+      <news:title>Pourquoi il est si difficile de changer une habitude</news:title>
+      <news:keywords>habitudes, psychologie comportementale, changer une habitude, automatisme, cerveau, motivation</news:keywords>
+    </news:news>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/changer-habitude.webp</image:loc>
+      <image:title>Carnet d'habitudes et café du matin sur un bureau en bois</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/stress-pas-toujours-ennemi.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Educa-Psy</news:name>
+        <news:language>fr</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-25T14:00:00Z</news:publication_date>
+      <news:title>Le stress n'est pas toujours un ennemi</news:title>
+      <news:keywords>stress, eustress, cortisol, stress chronique, psychologie, récupération, santé mentale</news:keywords>
+    </news:news>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/stress-energie.webp</image:loc>
+      <image:title>Athlète concentré sur la ligne de départ prêt à s'élancer</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/devoirs-utiles-ou-pas.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Educa-Psy</news:name>
+        <news:language>fr</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-25T12:00:00Z</news:publication_date>
+      <news:title>Les devoirs : utiles ou pas ? Ce que montrent les recherches</news:title>
+      <news:keywords>devoirs scolaires, éducation, pédagogie, réussite scolaire, primaire, collège, lycée</news:keywords>
+    </news:news>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/devoirs-ecole.webp</image:loc>
+      <image:title>Sac d'école, cahier ouvert et stylo posés pour les devoirs</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/dormir-pour-apprendre.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Educa-Psy</news:name>
+        <news:language>fr</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-25T10:00:00Z</news:publication_date>
+      <news:title>Dormir pour apprendre : le rôle du sommeil dans la mémoire</news:title>
+      <news:keywords>sommeil, mémoire, apprentissage, consolidation mnésique, sommeil profond, sommeil paradoxal, psychologie</news:keywords>
+    </news:news>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/sommeil-memoire.webp</image:loc>
+      <image:title>Repos et récupération nocturne pour la consolidation de la mémoire</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://educa-psy.web.app/baillement-contagieux.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Educa-Psy</news:name>
+        <news:language>fr</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-25T08:00:00Z</news:publication_date>
+      <news:title>Pourquoi bâillons-nous quand les autres bâillent ?</news:title>
+      <news:keywords>bâillement contagieux, neurones miroirs, empathie, insolite, psychologie sociale, vigilance cérébrale</news:keywords>
+    </news:news>
+    <image:image>
+      <image:loc>https://educa-psy.web.app/images/baillement-contagieux.webp</image:loc>
+      <image:title>Nourrisson en train de bâiller largement</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://educa-psy.web.app/gta-6-psychologie.html</loc>
     <news:news>
       <news:publication>

@@ -6,12 +6,67 @@
     <description>Actualités et ressources en éducation et psychologie.</description>
     <language>fr</language>
     <atom:link href="https://educa-psy.web.app/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Tue, 24 Nov 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 25 Nov 2026 16:00:00 GMT</lastBuildDate>
     <image>
       <url>https://educa-psy.web.app/logo.png</url>
       <title>Educa-Psy</title>
       <link>https://educa-psy.web.app/</link>
     </image>
+
+    <item>
+      <title>Pourquoi il est si difficile de changer une habitude</title>
+      <link>https://educa-psy.web.app/changer-une-habitude.html</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/changer-une-habitude.html</guid>
+      <pubDate>Wed, 25 Nov 2026 16:00:00 GMT</pubDate>
+      <dc:creator>Stanley Mazile</dc:creator>
+      <category>Psychologie</category>
+      <enclosure url="https://educa-psy.web.app/images/changer-habitude.webp" length="54738" type="image/webp" />
+      <description><![CDATA[On sait ce qu'il faudrait faire. On ne le fait pas. Ce n'est pas un manque de volonté : c'est le fonctionnement normal du cerveau. Voici ce que dit la psychologie et trois leviers qui fonctionnent.]]></description>
+    </item>
+
+    <item>
+      <title>Le stress n'est pas toujours un ennemi</title>
+      <link>https://educa-psy.web.app/stress-pas-toujours-ennemi.html</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/stress-pas-toujours-ennemi.html</guid>
+      <pubDate>Wed, 25 Nov 2026 14:00:00 GMT</pubDate>
+      <dc:creator>Stanley Mazile</dc:creator>
+      <category>Psychologie</category>
+      <enclosure url="https://educa-psy.web.app/images/stress-energie.webp" length="61478" type="image/webp" />
+      <description><![CDATA[Le stress a mauvaise réputation. Pourtant, sans lui, nous ne passerions ni un examen, ni un entretien, ni même le seuil d'une scène. Le vrai problème n'est pas le stress ponctuel, mais sa durée sans récupération.]]></description>
+    </item>
+
+    <item>
+      <title>Les devoirs : utiles ou pas ? Ce que montrent les recherches</title>
+      <link>https://educa-psy.web.app/devoirs-utiles-ou-pas.html</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/devoirs-utiles-ou-pas.html</guid>
+      <pubDate>Wed, 25 Nov 2026 12:00:00 GMT</pubDate>
+      <dc:creator>Stanley Mazile</dc:creator>
+      <category>Éducation</category>
+      <enclosure url="https://educa-psy.web.app/images/devoirs-ecole.webp" length="45792" type="image/webp" />
+      <description><![CDATA[C'est le débat qui revient chaque année à la maison comme à l'école. La recherche, elle, donne une réponse nuancée : tout dépend de l'âge et de la qualité du retour.]]></description>
+    </item>
+
+    <item>
+      <title>Dormir pour apprendre : le rôle du sommeil dans la mémoire</title>
+      <link>https://educa-psy.web.app/dormir-pour-apprendre.html</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/dormir-pour-apprendre.html</guid>
+      <pubDate>Wed, 25 Nov 2026 10:00:00 GMT</pubDate>
+      <dc:creator>Stanley Mazile</dc:creator>
+      <category>Psychologie</category>
+      <enclosure url="https://educa-psy.web.app/images/sommeil-memoire.webp" length="32458" type="image/webp" />
+      <description><![CDATA[Sacrifier quelques heures de sommeil pour réviser semble rentable sur le moment. Les neurosciences montrent pourtant l'inverse : la mémoire se consolide surtout la nuit.]]></description>
+    </item>
+
+    <item>
+      <title>Pourquoi bâillons-nous quand les autres bâillent ?</title>
+      <link>https://educa-psy.web.app/baillement-contagieux.html</link>
+      <guid isPermaLink="true">https://educa-psy.web.app/baillement-contagieux.html</guid>
+      <pubDate>Wed, 25 Nov 2026 08:00:00 GMT</pubDate>
+      <dc:creator>Stanley Mazile</dc:creator>
+      <category>Psychologie</category>
+      <enclosure url="https://educa-psy.web.app/images/baillement-contagieux.webp" length="36900" type="image/webp" />
+      <description><![CDATA[Il suffit parfois de voir un inconnu bâiller — ou simplement de lire ces quelques lignes — pour sentir sa propre mâchoire s'ouvrir. Ce réflexe banal cache un fascinant mécanisme social.]]></description>
+    </item>
 
     <item>
       <title>GTA 6 : pourquoi le monde entier a attendu 13 ans — et ce que la psychologie nous dit de cette fièvre</title>
@@ -33,76 +88,6 @@
       <category>Psychologie</category>
       <enclosure url="https://educa-psy.web.app/images/biais-psychologiques-couverture.webp" length="52762" type="image/webp" />
       <description><![CDATA[Nous pensons décider en toute logique. La psychologie montre pourtant que notre cerveau prend des raccourcis — et que ces raccourcis faussent nos jugements, nos relations et nos décisions, chaque jour, sans que nous nous en rendions compte.]]></description>
-    </item>
-
-    <item>
-      <title>Reconnaître les signes de détresse psychologique chez un proche</title>
-      <link>https://educa-psy.web.app/article.html?id=12</link>
-      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=12</guid>
-      <pubDate>Mon, 10 Aug 2026 09:00:00 GMT</pubDate>
-      <dc:creator>Équipe Educa-Psy</dc:creator>
-      <category>Psychologie</category>
-      <description><![CDATA[Repli sur soi, changements d'humeur, perte d'intérêt : certains signes peuvent alerter sur une détresse psychologique chez une personne de notre entourage.]]></description>
-    </item>
-
-    <item>
-      <title>Ce que les neurosciences nous apprennent sur le stress</title>
-      <link>https://educa-psy.web.app/article.html?id=11</link>
-      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=11</guid>
-      <pubDate>Sun, 09 Aug 2026 09:00:00 GMT</pubDate>
-      <dc:creator>Équipe Educa-Psy</dc:creator>
-      <category>Psychologie</category>
-      <description><![CDATA[Le stress n'est pas seulement « dans la tête » : il déclenche des réactions physiologiques précises, que la recherche en neurosciences permet aujourd'hui de mieux comprendre.]]></description>
-    </item>
-
-    <item>
-      <title>Le soutien psychosocial à l'école : un pilier trop souvent oublié</title>
-      <link>https://educa-psy.web.app/article.html?id=10</link>
-      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=10</guid>
-      <pubDate>Sat, 08 Aug 2026 09:00:00 GMT</pubDate>
-      <dc:creator>Équipe Educa-Psy</dc:creator>
-      <category>Éducation</category>
-      <description><![CDATA[Au-delà des apprentissages académiques, le bien-être émotionnel des élèves conditionne leur réussite scolaire. Comment les établissements peuvent-ils mieux intégrer le soutien psychosocial ?]]></description>
-    </item>
-
-    <item>
-      <title>La résilience communautaire : se relever ensemble face à l'adversité</title>
-      <link>https://educa-psy.web.app/article.html?id=8</link>
-      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=8</guid>
-      <pubDate>Sat, 25 Jul 2026 09:00:00 GMT</pubDate>
-      <dc:creator>Équipe Educa-Psy</dc:creator>
-      <category>Psychologie</category>
-      <description><![CDATA[Face aux crises, ce sont souvent les liens communautaires qui permettent aux individus de tenir et de se reconstruire. Un regard sur la résilience collective.]]></description>
-    </item>
-
-    <item>
-      <title>Apprendre par l'art : ce que la créativité change dans l'éducation</title>
-      <link>https://educa-psy.web.app/article.html?id=7</link>
-      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=7</guid>
-      <pubDate>Wed, 22 Jul 2026 09:00:00 GMT</pubDate>
-      <dc:creator>Équipe Educa-Psy</dc:creator>
-      <category>Éducation</category>
-      <description><![CDATA[Dessiner, jouer, raconter des histoires : les approches créatives ouvrent des chemins d'apprentissage différents, en particulier pour les enfants en difficulté.]]></description>
-    </item>
-
-    <item>
-      <title>L'art-thérapie expliquée : quand créer devient soigner</title>
-      <link>https://educa-psy.web.app/article.html?id=6</link>
-      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=6</guid>
-      <pubDate>Wed, 08 Jul 2026 09:00:00 GMT</pubDate>
-      <dc:creator>Équipe Educa-Psy</dc:creator>
-      <category>Psychologie</category>
-      <description><![CDATA[Peinture, théâtre, musique, écriture : l'art-thérapie utilise la création comme outil d'expression et de reconstruction psychologique.]]></description>
-    </item>
-
-    <item>
-      <title>Réduire la fracture numérique : l'éducation face au défi du tout-numérique</title>
-      <link>https://educa-psy.web.app/article.html?id=3</link>
-      <guid isPermaLink="true">https://educa-psy.web.app/article.html?id=3</guid>
-      <pubDate>Thu, 02 Jul 2026 09:00:00 GMT</pubDate>
-      <dc:creator>Équipe Educa-Psy</dc:creator>
-      <category>Éducation</category>
-      <description><![CDATA[Accès inégal à internet, au matériel informatique, aux compétences numériques : la fracture numérique continue de creuser les inégalités éducatives.]]></description>
     </item>
   </channel>
 </rss>
